@@ -13,5 +13,10 @@
   { "id": "service-management", "name": "サービスマネジメント・システム監査", "examType": "科目A", "parent": "マネジメント系", "weight": 0.20 },
   { "id": "system-strategy", "name": "システム戦略", "examType": "科目A", "parent": "ストラテジ系", "weight": 0.25 },
   { "id": "business-strategy", "name": "経営戦略", "examType": "科目A", "parent": "ストラテジ系", "weight": 0.25 },
-  { "id": "corporate-law", "name": "企業と法務", "examType": "科目A", "parent": "ストラテジ系", "weight": 0.25 }
+  { "id": "corporate-law", "name": "企業と法務", "examType": "科目A", "parent": "ストラテジ系", "weight": 0.25 },
+  { "id": "programming-basics", "name": "プログラミング基礎", "examType": "科目B", "parent": "科目B", "weight": 1.0 },
+  { "id": "data-structures", "name": "データ構造", "examType": "科目B", "parent": "科目B", "weight": 1.0 },
+  { "id": "algorithm-sort-search", "name": "アルゴリズム", "examType": "科目B", "parent": "科目B", "weight": 1.0 },
+  { "id": "pseudo-language-trace", "name": "擬似言語トレース", "examType": "科目B", "parent": "科目B", "weight": 1.0 },
+  { "id": "security-b", "name": "情報セキュリティ", "examType": "科目B", "parent": "科目B", "weight": 1.0 }
 ]

@@ -57,6 +57,11 @@ walkDir('data/questions', (fp) => {
       if (!q.overallExplanation) {
         errors.push(fp + ': missing overallExplanation in ' + q.questionId)
       }
+      // 科目B: 擬似言語・アルゴリズム・データ構造カテゴリは traceTable チェック
+      const traceRequiredCategories = ['pseudo-language-trace', 'algorithm-sort-search', 'data-structures']
+      if (traceRequiredCategories.includes(q.subcategory) && q.pseudoCode && !q.traceTable) {
+        errors.push(fp + ': missing traceTable for pseudoCode question ' + q.questionId)
+      }
     }
   } catch (e) {
     errors.push(fp + ': parse error - ' + e.message)

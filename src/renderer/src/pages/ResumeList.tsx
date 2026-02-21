@@ -28,7 +28,7 @@ const difficultyLabels: Record<string, { text: string; color: string }> = {
 }
 
 // カテゴリの表示順序
-const categoryOrder = ['テクノロジ系', 'マネジメント系', 'ストラテジ系']
+const categoryOrder = ['テクノロジ系', 'マネジメント系', 'ストラテジ系', '科目B']
 
 export default function ResumeList(): React.JSX.Element {
   const { data: sections, loading, error } = useApi(
