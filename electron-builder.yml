@@ -1,0 +1,29 @@
+appId: com.femaster.app
+productName: FE Master
+directories:
+  buildResources: build
+files:
+  - '!**/.vscode/*'
+  - '!src/*'
+  - '!electron.vite.config.{js,ts,mjs,cjs}'
+  - '!{.eslintcache,eslint.config.mjs,.prettierignore,.prettierrc.yaml,dev-app-update.yml,CHANGELOG.md,README.md}'
+  - '!{.env,.env.*,.npmrc,pnpm-lock.yaml}'
+  - '!{tsconfig.json,tsconfig.node.json,tsconfig.web.json}'
+extraResources:
+  - from: data/
+    to: data/
+    filter:
+      - '**/*'
+asarUnpack:
+  - resources/**
+mac:
+  entitlementsInherit: build/entitlements.mac.plist
+  extendInfo:
+    - NSDocumentsFolderUsageDescription: Application requests access to the user's Documents folder.
+  notarize: false
+  target:
+    - dmg
+    - dir
+dmg:
+  artifactName: FE-Master-${version}.${ext}
+npmRebuild: false

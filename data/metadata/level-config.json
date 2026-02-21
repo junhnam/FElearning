@@ -1,0 +1,12 @@
+{
+  "minLevel": 1,
+  "maxLevel": 10,
+  "initialLevel": 1,
+  "levelUpThreshold": 3,
+  "levelDownThreshold": 3,
+  "categoryWeights": {
+    "テクノロジ系": 0.55,
+    "マネジメント系": 0.20,
+    "ストラテジ系": 0.25
+  }
+}

@@ -1,0 +1,17 @@
+[
+  { "id": "basic-theory", "name": "基礎理論", "examType": "科目A", "parent": "テクノロジ系", "weight": 0.55 },
+  { "id": "algorithm-programming", "name": "アルゴリズムとプログラミング", "examType": "科目A", "parent": "テクノロジ系", "weight": 0.55 },
+  { "id": "computer-components", "name": "コンピュータ構成要素", "examType": "科目A", "parent": "テクノロジ系", "weight": 0.55 },
+  { "id": "system-components", "name": "システム構成要素", "examType": "科目A", "parent": "テクノロジ系", "weight": 0.55 },
+  { "id": "software-hardware", "name": "ソフトウェア・ハードウェア", "examType": "科目A", "parent": "テクノロジ系", "weight": 0.55 },
+  { "id": "human-interface-multimedia", "name": "ヒューマンインタフェース・マルチメディア", "examType": "科目A", "parent": "テクノロジ系", "weight": 0.55 },
+  { "id": "database", "name": "データベース", "examType": "科目A", "parent": "テクノロジ系", "weight": 0.55 },
+  { "id": "network", "name": "ネットワーク", "examType": "科目A", "parent": "テクノロジ系", "weight": 0.55 },
+  { "id": "security", "name": "セキュリティ", "examType": "科目A", "parent": "テクノロジ系", "weight": 0.55 },
+  { "id": "development", "name": "開発技術", "examType": "科目A", "parent": "マネジメント系", "weight": 0.20 },
+  { "id": "project-management", "name": "プロジェクトマネジメント", "examType": "科目A", "parent": "マネジメント系", "weight": 0.20 },
+  { "id": "service-management", "name": "サービスマネジメント・システム監査", "examType": "科目A", "parent": "マネジメント系", "weight": 0.20 },
+  { "id": "system-strategy", "name": "システム戦略", "examType": "科目A", "parent": "ストラテジ系", "weight": 0.25 },
+  { "id": "business-strategy", "name": "経営戦略", "examType": "科目A", "parent": "ストラテジ系", "weight": 0.25 },
+  { "id": "corporate-law", "name": "企業と法務", "examType": "科目A", "parent": "ストラテジ系", "weight": 0.25 }
+]
