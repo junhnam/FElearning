@@ -1,0 +1,394 @@
+[
+  {
+    "questionId": "q-algo-055",
+    "examType": "科目B",
+    "category": "アルゴリズム",
+    "subcategory": "アルゴリズム（ソート・探索）",
+    "topic": "基数木（Radix Tree）の探索と挿入",
+    "level": 10,
+    "question": "次の擬似言語プログラムは、基数木（Radix Tree、パトリシア木）に文字列を挿入・探索する処理の一部である。既に \"test\" と \"team\" の2語だけが挿入された基数木に対して search(\"tear\") を実行したとき、関数が返す値はどれか。なお、基数木の構造は root→辺\"te\"→ノードA、ノードA→辺\"st\"→(test終端)、ノードA→辺\"am\"→(team終端) である。",
+    "pseudoCode": "○構造体: RadixNode\n  ○文字列型の配列: edgeLabels   /* 子へ向かう辺のラベル */\n  ○RadixNode型の配列: children   /* 子ノードの参照 */\n  ○論理型: isTerminal            /* この位置で単語が終端するか */\n\n○関数: search(○文字列型: key)\n  ○RadixNode型: current ← root\n  ○整数型: pos ← 0\n\n  pos < keyの長さ の間繰り返す\n    ○論理型: found ← false\n    current の各辺 i について繰り返す\n      ○文字列型: label ← current.edgeLabels[i]\n      ○整数型: matchLen ← commonPrefixLength(key, pos, label)\n      もし matchLen = 0 ならば\n        次の辺へ\n      そうでなくもし matchLen < labelの長さ ならば\n        /* 辺ラベルの途中で不一致 → 存在しない */\n        \"PREFIX_MISMATCH\" を返す\n      そうでなければ\n        /* 辺ラベル全体が一致 */\n        pos ← pos + matchLen\n        current ← current.children[i]\n        found ← true\n        ループを抜ける\n      を実行する\n    を繰り返す\n    もし found = false ならば\n      \"NOT_FOUND\" を返す\n    を実行する\n  を繰り返す\n  もし current.isTerminal = true ならば\n    \"FOUND\" を返す\n  そうでなければ\n    \"NOT_TERMINAL\" を返す\n  を実行する",
+    "choices": [
+      {
+        "id": "a",
+        "text": "\"FOUND\"",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "\"FOUND\" が返るのは、キー文字列を全て消費し、到達したノードの isTerminal が true の場合です。\"tear\" は挿入されていないため、終端フラグは設定されていません。",
+          "analogy": "辞書で「tear」のページにたどり着いたが、そのページに見出し語として登録されていない状態です。ページは存在するが単語としては未登録。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "\"PREFIX_MISMATCH\"",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "基数木の構造: root→辺\"te\"→ノードA。ノードA→辺\"st\"→(test終端)、辺\"am\"→(team終端)。search(\"tear\")の実行: pos=0でrootの辺\"te\"と一致しpos=2、ノードAへ移動。pos=2でノードAの辺を調べる。辺\"st\": commonPrefixLength(\"tear\",2,\"st\")=0（key[2]='a'とlabel[0]='s'が不一致）→次の辺。辺\"am\": commonPrefixLength(\"tear\",2,\"am\")=1（key[2]='a'とlabel[0]='a'は一致、key[3]='r'とlabel[1]='m'が不一致）。matchLen=1 < labelの長さ2 → \"PREFIX_MISMATCH\" を返す。",
+          "analogy": "図書館の書架が圧縮されていて、\"te\"の棚に行き、そこから\"am\"というラベルの引き出しを見つけます。「tear」の残り「ar」と「am」を比較すると、最初の「a」は合うが2文字目の「r」と「m」が食い違います。引き出しのラベルの途中で不一致が起きたので、「その先に進めません」と返されます。",
+          "deepDive": "基数木では辺ラベルが複数文字を圧縮して持つため、探索時に「辺ラベルの途中で不一致」が起こり得ます。これはトライ木にはない基数木特有の状況です。この部分一致の検出により、挿入時に辺を分割する位置が決まります。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "\"NOT_FOUND\"",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "\"NOT_FOUND\" が返るのは、現在のノードから一致する辺が全く見つからない（commonPrefixLength が全て 0）場合です。今回は辺 \"am\" と部分一致（\"a\" が共通）するため、完全な不一致ではなく途中不一致です。",
+          "analogy": "書架に「am」ラベルの引き出しがあり、探している「ar」と最初の1文字「a」は一致します。全く手がかりがない「NOT_FOUND」ではなく、途中まで合ったが分岐した「PREFIX_MISMATCH」です。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "\"NOT_TERMINAL\"",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "\"NOT_TERMINAL\" が返るのは、キー文字列を全て消費して到達したノードの isTerminal が false の場合です。今回はキー \"tear\" を全て消費する前に辺ラベルの途中で不一致が発生するため、この分岐には到達しません。",
+          "analogy": "目的地までの道を全て歩き終えたが看板がない状態ではなく、途中の分岐点で道が途切れている状態です。ゴールまで到達していません。"
+        }
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"current": "root", "pos": 0, "key残り": "tear"}, "action": "探索開始。rootの辺を調べる"},
+      {"step": 2, "variables": {"辺ラベル": "te", "matchLen": 2}, "action": "commonPrefixLength(\"tear\",0,\"te\")=2。辺全体一致。pos=2、ノードAへ移動"},
+      {"step": 3, "variables": {"current": "ノードA", "pos": 2, "key残り": "ar"}, "action": "ノードAの辺を調べる。辺\"st\"と辺\"am\"がある"},
+      {"step": 4, "variables": {"辺ラベル": "st", "matchLen": 0}, "action": "commonPrefixLength(\"tear\",2,\"st\")=0。key[2]='a'とlabel[0]='s'が不一致。次の辺へ"},
+      {"step": 5, "variables": {"辺ラベル": "am", "matchLen": 1}, "action": "commonPrefixLength(\"tear\",2,\"am\")=1。key[2]='a'とlabel[0]='a'が一致、key[3]='r'とlabel[1]='m'が不一致"},
+      {"step": 6, "variables": {"matchLen": 1, "labelの長さ": 2}, "action": "matchLen(1) < labelの長さ(2)。辺ラベル途中で不一致 → \"PREFIX_MISMATCH\" を返す"}
+    ],
+    "traceAnalogy": "住所検索に例えます。「tear」という住所を探しています。まず「te」通りを見つけて進みます（pos=2）。次の交差点で「st」小路と「am」小路があります。「st」は方向が違う（s≠a）のでスキップ。「am」小路は最初の「a」は合いますが、2文字目で「m」と「r」が食い違います。「am」小路の途中で道が分かれてしまい、「ar」方面への道は存在しません。これが PREFIX_MISMATCH です。",
+    "overallExplanation": {
+      "summary": "基数木（Radix Tree）は、トライ木の辺を圧縮して分岐のないパスを1つの辺にまとめたデータ構造です。探索時に辺ラベルの途中で不一致が起こるケースを正しく処理する必要があります。",
+      "keyPoint": "commonPrefixLength の戻り値により3パターンに分岐する: (1)一致なし→次の辺、(2)部分一致→PREFIX_MISMATCH、(3)完全一致→子ノードへ進む。トライ木と異なり辺ラベルが複数文字なので部分一致の処理が必要。",
+      "relatedTopics": ["トライ木", "パトリシア木", "文字列探索", "接尾辞木"],
+      "studyTip": "基数木のポイントは「辺ラベルの圧縮」です。トライ木では1文字ずつ辺を辿りますが、基数木では複数文字をまとめた辺を辿ります。そのため「途中で不一致」という状態が生じることを理解しましょう。"
+    },
+    "tags": ["基数木", "Radix Tree", "パトリシア木", "文字列探索"]
+  },
+  {
+    "questionId": "q-algo-056",
+    "examType": "科目B",
+    "category": "アルゴリズム",
+    "subcategory": "アルゴリズム（ソート・探索）",
+    "topic": "外部ソート（多方向マージソート）",
+    "level": 10,
+    "question": "次の擬似言語プログラムは、メモリに一度に最大3レコードしか読み込めない環境で、9レコードのファイルを外部ソート（多方向マージソート）で昇順に並べ替える処理の概要である。初期データが {7,2,9,4,1,8,3,6,5} のとき、ランの生成フェーズで作られるソート済みランの内容と、2方向マージの1パス目終了後のラン構成はどれか。",
+    "pseudoCode": "/* フェーズ1: ラン生成（内部ソートでソート済みランを作る） */\n○手続き: generateRuns(○ファイル型: input, ○整数型: memSize)\n  ○整数型: runCount ← 0\n  input が空でない間繰り返す\n    ○整数型の配列: buffer ← inputから最大memSize個読み込む\n    bufferを内部ソート（昇順）\n    bufferをランファイル[runCount]に書き出す\n    runCount ← runCount + 1\n  を繰り返す\n  runCount を返す\n\n/* フェーズ2: 2方向マージ */\n○手続き: mergePass(○ファイル型の配列: runs)\n  ○ファイル型の配列: newRuns ← 空\n  ○整数型: i ← 0\n  i < runsの個数 の間繰り返す\n    もし i + 1 < runsの個数 ならば\n      /* 2つのランをマージ */\n      ○ファイル型: merged ← merge(runs[i], runs[i+1])\n      newRuns に merged を追加\n      i ← i + 2\n    そうでなければ\n      /* 奇数個の場合、最後のランはそのまま */\n      newRuns に runs[i] を追加\n      i ← i + 1\n    を実行する\n  を繰り返す\n  newRuns を返す",
+    "choices": [
+      {
+        "id": "a",
+        "text": "ラン生成: {2,7,9}, {1,4,8}, {3,5,6}。1パス目後: {1,2,4,7,8,9}, {3,5,6}",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "メモリ容量3で9レコードを処理: (1) {7,2,9}を読み込み内部ソート→{2,7,9}。(2) {4,1,8}を読み込み内部ソート→{1,4,8}。(3) {3,6,5}を読み込み内部ソート→{3,5,6}。3つのランが生成される。2方向マージ1パス目: runs[0]={2,7,9}とruns[1]={1,4,8}をマージ→{1,2,4,7,8,9}。runs[2]={3,5,6}は奇数番目で相手がないのでそのまま。結果: {1,2,4,7,8,9}, {3,5,6}。",
+          "analogy": "書類の山を整理します。机の上に3枚しか置けません。9枚の書類を3枚ずつ取り出し、それぞれを番号順に並べます。3つの山ができます。次に2つの山を1組にして、カードゲームの「戦争」のように先頭から比較しながら1つの山にまとめます。3つ目の山は相手がいないので待機です。",
+          "deepDive": "外部ソートの総マージパス数は ceil(log2(ラン数)) です。3ランの場合、2パスで完了します。I/O回数を最小化するために、初期ラン生成時に replacement selection を使うとランサイズを平均2倍にできます。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "ラン生成: {2,7,9}, {1,4,8}, {3,5,6}。1パス目後: {1,2,3,4,5,6,7,8,9}",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "ラン生成は正しいですが、2方向マージの1パスでは2つのランしかマージしません。3つのランを全てマージするには2パス必要です。1パス目では最初の2ラン {2,7,9} と {1,4,8} がマージされ、3番目の {3,5,6} はそのまま残ります。",
+          "analogy": "2人一組でトーナメント戦をするとき、3チームあれば1チームは1回戦免除（bye）です。全チームが一度に戦うわけではありません。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "ラン生成: {2,7,9}, {1,4,8}, {3,5,6}。1パス目後: {2,7,9}, {1,3,4,5,6,8}",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "2方向マージは先頭から順にペアを組みます。runs[0] と runs[1] がまずマージされ、runs[2] が残ります。runs[1] と runs[2] がマージされるのではありません。",
+          "analogy": "トーナメント表で1番と2番が最初に対戦し、3番が不戦勝となります。2番と3番が先に対戦するのではありません。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "ラン生成: {7,2,9}, {4,1,8}, {3,6,5}。1パス目後: {1,2,4,7,8,9}, {3,5,6}",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "ラン生成フェーズでは、メモリに読み込んだレコードを内部ソートしてからファイルに書き出します。{7,2,9} はソートされて {2,7,9} になります。ソートせずにそのまま書き出すのは誤りです。",
+          "analogy": "机の上に置いた3枚のカードを並べ替えずにそのまま山にするのは、整理整頓になっていません。各山は必ず番号順に並べてから積みます。"
+        }
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"入力": "{7,2,9,4,1,8,3,6,5}", "memSize": 3}, "action": "ラン生成フェーズ開始"},
+      {"step": 2, "variables": {"buffer": "{7,2,9}", "ソート後": "{2,7,9}", "runCount": 1}, "action": "最初の3レコードを読み込みソート→ラン0={2,7,9}"},
+      {"step": 3, "variables": {"buffer": "{4,1,8}", "ソート後": "{1,4,8}", "runCount": 2}, "action": "次の3レコードを読み込みソート→ラン1={1,4,8}"},
+      {"step": 4, "variables": {"buffer": "{3,6,5}", "ソート後": "{3,5,6}", "runCount": 3}, "action": "最後の3レコードを読み込みソート→ラン2={3,5,6}"},
+      {"step": 5, "variables": {"ラン一覧": "[{2,7,9}, {1,4,8}, {3,5,6}]"}, "action": "ラン生成完了。3ラン。2方向マージ開始"},
+      {"step": 6, "variables": {"マージ対象": "ラン0とラン1", "比較": "2vs1→1, 2vs4→2, 7vs4→4, 7vs8→7, 9vs8→8, 9→9"}, "action": "{2,7,9}と{1,4,8}をマージ→{1,2,4,7,8,9}"},
+      {"step": 7, "variables": {"残りラン": "ラン2={3,5,6}"}, "action": "奇数番目のラン2はそのまま持ち越し"},
+      {"step": 8, "variables": {"1パス目結果": "[{1,2,4,7,8,9}, {3,5,6}]"}, "action": "1パス目完了。2ランに削減"}
+    ],
+    "traceAnalogy": "大量の荷物を小さなトラック（容量3個）で運ぶ引っ越し作業です。まず3個ずつ運んで、各グループを整理整頓して3つの収納箱に詰めます（ラン生成）。次に、2つの収納箱を開けて中身を番号順に1つの大きな箱にまとめます（マージ）。3つ目の箱は相手がいないのでそのまま次のラウンドに持ち越します。最終的にもう1回マージすれば全て1つにまとまります。",
+    "overallExplanation": {
+      "summary": "外部ソートは、メモリに収まりきらない大量データをソートするアルゴリズムです。内部ソートでランを生成し、マージパスで統合していきます。",
+      "keyPoint": "ラン生成時の内部ソートを忘れないこと。2方向マージでは1パスでラン数が約半分に減る。奇数個のランがある場合、最後のランは次のパスに持ち越される。総パス数は ceil(log2(初期ラン数))。",
+      "relatedTopics": ["マージソート", "外部メモリアルゴリズム", "B木"],
+      "studyTip": "外部ソートは「トーナメント方式の統合」と覚えましょう。各試合(マージ)で2チーム(ラン)が1チームに統合され、奇数チームは不戦勝(持ち越し)です。"
+    },
+    "tags": ["外部ソート", "多方向マージ", "ラン生成", "外部メモリ"]
+  },
+  {
+    "questionId": "q-algo-057",
+    "examType": "科目B",
+    "category": "アルゴリズム",
+    "subcategory": "アルゴリズム（ソート・探索）",
+    "topic": "イントロソート（IntroSort）の分岐制御",
+    "level": 10,
+    "question": "次の擬似言語プログラムは、イントロソート（IntroSort）の実装である。イントロソートは、クイックソートの再帰深度が閾値を超えた場合にヒープソートに切り替え、部分配列が小さくなったら挿入ソートに切り替えるハイブリッドソートである。配列 data = {8,3,1,5,9,2,7,4,6} に対して introsort(data, 0, 8, 2) を実行したとき、最初にヒープソートが呼び出される時点での部分配列の範囲として正しいものはどれか。ピボットは部分配列の先頭・中央・末尾の中央値（median-of-three）で選ぶものとする。",
+    "pseudoCode": "○整数型の定数: INSERTION_THRESHOLD ← 2\n\n○手続き: introsort(○整数型の配列: data, ○整数型: left, ○整数型: right, ○整数型: depthLimit)\n  ○整数型: size ← right - left + 1\n  もし size <= INSERTION_THRESHOLD ならば\n    insertionSort(data, left, right)\n    戻る\n  を実行する\n  もし depthLimit = 0 ならば\n    heapSort(data, left, right)\n    戻る\n  を実行する\n  ○整数型: pivot ← medianOfThree(data, left, (left+right)÷2, right)\n  ○整数型: p ← partition(data, left, right, pivot)\n  introsort(data, left, p - 1, depthLimit - 1)\n  introsort(data, p + 1, right, depthLimit - 1)\n\n○関数: medianOfThree(○整数型の配列: data, ○整数型: a, ○整数型: b, ○整数型: c)\n  /* data[a], data[b], data[c] の中央値を返す */\n  もし data[a] > data[b] ならば swap(data, a, b)\n  もし data[a] > data[c] ならば swap(data, a, c)\n  もし data[b] > data[c] ならば swap(data, b, c)\n  data[b] を返す\n\n○関数: partition(○整数型の配列: data, ○整数型: left, ○整数型: right, ○整数型: pivot)\n  /* ピボット以下を左、ピボットより大を右に分割し、ピボットの最終位置を返す */",
+    "choices": [
+      {
+        "id": "a",
+        "text": "最初の再帰の左側部分配列（depthLimit=0 で呼び出される部分）",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "introsort(data,0,8,2) の実行を追跡する。size=9>INSERTION_THRESHOLD=2。depthLimit=2≠0。medianOfThree(data,0,4,8): data[0]=8,data[4]=9,data[8]=6。ソート後6,8,9。中央値=8。pivot=8でpartition。partition後（仮定）: [3,1,5,2,7,4,6] 8 [9]。ピボット8が位置7。左部分introsort(data,0,6,1): size=7>2、depthLimit=1≠0。medianOfThree(data,0,3,6)で中央値を選びpartition。仮にpivot=3でpartition→[2,1] 3 [5,7,4,6]。左部分introsort(data,0,1,0): size=2<=INSERTION_THRESHOLD=2 → insertionSort。右部分introsort(data,4,6,0): size=3>2、depthLimit=0 → heapSort呼び出し。これが最初のheapSort。左側再帰パスで最も早くdepthLimit=0かつsize>2となる部分配列でヒープソートが発動する。",
+          "analogy": "会社の問題解決で、まず部長（クイックソート）が全体を2チームに分けます。次にチームリーダーがさらに分割します。しかし分割の深さ制限（depthLimit=2）に達したら、「もうこれ以上分割せず、別の方法（ヒープソート）で解決しろ」と指示が出ます。最初にこの指示を受けるのは、最も早く深さ制限に到達する左端のチームです。",
+          "deepDive": "イントロソートの深度制限は通常 2*floor(log2(n)) に設定されます。この問題では depthLimit=2 と小さく設定しているため、すぐにヒープソートへの切り替えが発生します。実際の実装（C++ STLのstd::sortなど）では、深度制限が十分大きいためヒープソートへの切り替えは稀で、最悪ケースのO(n^2)を防ぐ安全弁として機能します。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "最初の再帰の右側部分配列（depthLimit=0 で呼び出される部分）",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "再帰は左側部分配列を先に処理します（introsort(data,left,p-1,depthLimit-1) が先に呼ばれる）。depthLimit=0 に最初に到達するのは左側の再帰パスです。右側部分配列が処理されるのは左側が完了した後です。",
+          "analogy": "二股の道を左から探索するルールなので、左の道で行き止まり（深度制限）に達するのが先です。右の道はまだ歩いていません。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "配列全体（depthLimit=2 のため最初の呼び出しでヒープソートが実行される）",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "最初の呼び出し introsort(data,0,8,2) では depthLimit=2≠0 なので、ヒープソートは実行されません。depthLimit=0 になるのは2回再帰した後です。",
+          "analogy": "回数券が2枚あるとき、最初の乗車で使い切るわけではありません。1回乗るたびに1枚ずつ消費し、0枚になったときに別の交通手段に切り替えます。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "size <= 2 となる部分配列（挿入ソートが先に呼ばれる）",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "INSERTION_THRESHOLD=2 なので、size<=2 の部分配列は挿入ソートで処理されます。しかし、depthLimit=0 かつ size>2 の部分配列ではヒープソートが呼ばれます。最初にヒープソートが発動するのはそのようなケースであり、挿入ソートが「先に」呼ばれるとは限りません。再帰の進行順序を正確に追跡する必要があります。",
+          "analogy": "小さい問題（2個以下）は簡単な方法（挿入ソート）で解けますが、3個以上で深度制限に達した場合はヒープソートが使われます。どちらが先に呼ばれるかは再帰の進行経路次第です。"
+        }
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"呼び出し": "introsort(0,8,2)", "size": 9, "depthLimit": 2}, "action": "size=9>INSERTION_THRESHOLD=2。depthLimit=2≠0。medianOfThree: data[0]=8,data[4]=9,data[8]=6→中央値8。pivot=8"},
+      {"step": 2, "variables": {"partition結果": "p=7(仮)", "左": "data[0..6]", "右": "data[8..8]"}, "action": "partition後、ピボット8が位置7に。左部分[0..6]と右部分[8..8]に分割"},
+      {"step": 3, "variables": {"呼び出し": "introsort(0,6,1)", "size": 7, "depthLimit": 1}, "action": "左部分を再帰処理。size=7>2、depthLimit=1≠0。medianOfThreeでピボット選択"},
+      {"step": 4, "variables": {"partition結果": "p=2(仮)", "左": "data[0..1]", "右": "data[3..6]"}, "action": "partition後、左部分[0..1]と右部分[3..6]に分割"},
+      {"step": 5, "variables": {"呼び出し": "introsort(0,1,0)", "size": 2, "depthLimit": 0}, "action": "size=2<=INSERTION_THRESHOLD=2 → insertionSort。ヒープソートではない"},
+      {"step": 6, "variables": {"呼び出し": "introsort(3,6,0)", "size": 4, "depthLimit": 0}, "action": "size=4>2、depthLimit=0 → heapSort(data,3,6)。ここが最初のヒープソート"}
+    ],
+    "traceAnalogy": "組織のエスカレーション制度に例えます。社長（depth=2）が問題を2チームに分け、部長（depth=1）がさらに分割します。課長レベル（depth=0）に達したら「これ以上分割するな、ヒープソート方式で解決しろ」と命令が出ます。左から順に処理するので、最初に課長レベルに達するのは左端のチームです。クイックソートが深すぎる再帰に陥るのを防ぐ安全装置がイントロソートの核心です。",
+    "overallExplanation": {
+      "summary": "イントロソートは、クイックソート・ヒープソート・挿入ソートの3つを組み合わせたハイブリッドアルゴリズムです。クイックソートの最悪ケースO(n^2)をヒープソートで回避し、小規模データは挿入ソートで高速処理します。",
+      "keyPoint": "depthLimit の減少を追跡することが鍵。再帰のたびに depthLimit が1減り、0になった時点でヒープソートに切り替わる。左側の再帰が先に処理されるため、最も左の深い部分配列が最初にヒープソートされる。",
+      "relatedTopics": ["クイックソート", "ヒープソート", "挿入ソート", "STLのstd::sort"],
+      "studyTip": "イントロソートは「保険付きクイックソート」と覚えましょう。通常はクイックソートの高速性を活かし、最悪ケースではヒープソートの保証を使い、小さい部分では挿入ソートの効率を使います。"
+    },
+    "tags": ["イントロソート", "ハイブリッドソート", "クイックソート", "ヒープソート"]
+  },
+  {
+    "questionId": "q-algo-058",
+    "examType": "科目B",
+    "category": "アルゴリズム",
+    "subcategory": "アルゴリズム（ソート・探索）",
+    "topic": "Timsortの実行フロー（ラン検出とマージ）",
+    "level": 10,
+    "question": "次の擬似言語プログラムは、Timsort のランスタック管理とマージ判定の処理である。配列 data = {1,3,5,7,9,8,6,4,2,10,11,12,13,14,15,20,18,16} に対してラン検出を行ったとき、検出されるランの一覧と、マージが最初にトリガーされる条件はどれか。最小ラン長 minRun=4 とする。",
+    "pseudoCode": "○整数型の定数: MIN_RUN ← 4\n\n○手続き: timsort(○整数型の配列: data)\n  ○スタック型: runStack ← 空のスタック\n  ○整数型: pos ← 0\n\n  pos < dataの長さ の間繰り返す\n    ○整数型: runStart ← pos\n    ○整数型: runEnd ← pos + 1\n    /* 自然なランを検出 */\n    もし runEnd < dataの長さ かつ data[runEnd] >= data[runEnd-1] ならば\n      /* 昇順ラン */\n      runEnd < dataの長さ かつ data[runEnd] >= data[runEnd-1] の間繰り返す\n        runEnd ← runEnd + 1\n      を繰り返す\n    そうでなくもし runEnd < dataの長さ かつ data[runEnd] < data[runEnd-1] ならば\n      /* 降順ラン（後で反転する） */\n      runEnd < dataの長さ かつ data[runEnd] < data[runEnd-1] の間繰り返す\n        runEnd ← runEnd + 1\n      を繰り返す\n      reverse(data, runStart, runEnd - 1)  /* 昇順に反転 */\n    を実行する\n    /* minRun に満たない場合、挿入ソートで拡張 */\n    もし runEnd - runStart < MIN_RUN ならば\n      ○整数型: extend ← min(runStart + MIN_RUN, dataの長さ)\n      insertionSort(data, runStart, extend - 1)\n      runEnd ← extend\n    を実行する\n    runStack に (runStart, runEnd - runStart) を push\n    mergeCollapse(runStack, data)\n    pos ← runEnd\n  を繰り返す\n  /* 残りのランを全てマージ */\n  mergeForce(runStack, data)\n\n○手続き: mergeCollapse(○スタック型: stack, ○整数型の配列: data)\n  stackの要素数 >= 2 の間繰り返す\n    ○整数型: n ← stackの要素数 - 1  /* トップのインデックス */\n    もし n >= 2 かつ stack[n-2].len <= stack[n-1].len + stack[n].len ならば\n      もし stack[n-2].len < stack[n].len ならば\n        stack[n-2] と stack[n-1] をマージ\n      そうでなければ\n        stack[n-1] と stack[n] をマージ\n      を実行する\n    そうでなくもし stack[n-1].len <= stack[n].len ならば\n      stack[n-1] と stack[n] をマージ\n    そうでなければ\n      ループを抜ける\n    を実行する\n  を繰り返す",
+    "choices": [
+      {
+        "id": "a",
+        "text": "ラン: [1,3,5,7,9](長さ5), [2,4,6,8](長さ4), [10,11,12,13,14,15](長さ6), [16,18,20](長さ3→拡張4)。条件: stack[n-1].len <= stack[n].len",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "ラン検出過程: (1) pos=0: data[0..4]={1,3,5,7,9}は昇順ラン、長さ5(>=MIN_RUN)。push(0,5)。stack=[(0,5)]。mergeCollapse: 要素1個なのでスキップ。(2) pos=5: data[5..8]={8,6,4,2}は降順ラン、長さ4。反転→{2,4,6,8}。push(5,4)。stack=[(0,5),(5,4)]。mergeCollapse: n=1。stack[0].len=5 > stack[1].len=4 なのでスキップ。(3) pos=9: data[9..14]={10,11,12,13,14,15}は昇順ラン、長さ6。push(9,6)。stack=[(0,5),(5,4),(9,6)]。mergeCollapse: n=2。条件1: stack[0].len=5 <= stack[1].len+stack[2].len=4+6=10 が真。stack[0].len=5 < stack[2].len=6 なので stack[0]とstack[1]をマージ。もしくは条件2: stack[1].len=4 <= stack[2].len=6 が真 → stack[1]とstack[2]をマージ。条件1が先に評価されるためstack[0]とstack[1]がマージ対象。(4) pos=15: data[15..17]={20,18,16}は降順ラン、長さ3<4。反転→{16,18,20}。挿入ソートで拡張(既にソート済み)。ここでは配列末尾なのでextend=min(15+4,18)=18。長さ3→拡張で長さ3のまま(データが足りない)。最初のmergeトリガーは3番目のランpush後の条件 stack[n-1].len <= stack[n].len (4<=6)。",
+          "analogy": "本棚の整理です。本を「既に並んでいるグループ」ごとにまとめ、棚に積みます。棚の積み方には規則があり、下の本の束は上の束より厚くなければなりません（フィボナッチ数列的な増加）。薄い束の上に厚い束を置こうとすると、ルール違反なので隣接する束を合冊してから積み直します。",
+          "deepDive": "Timsortのマージ不変条件は: (1) stack[n-2].len > stack[n-1].len + stack[n].len、(2) stack[n-1].len > stack[n].len。この不変条件によりスタックサイズはO(log n)に抑えられ、マージの計算量がO(n log n)に保証されます。PythonやJavaのArrays.sortで使われている実用的なアルゴリズムです。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "ラン: [1,3,5,7,9](長さ5), [8,6,4,2](長さ4), [10,11,12,13,14,15](長さ6), [20,18,16](長さ3)。マージなし",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "降順ラン {8,6,4,2} と {20,18,16} は検出後に反転（reverse）されて昇順になります。また、ランスタックの不変条件に違反した時点でマージが発生するため「マージなし」は誤りです。",
+          "analogy": "降順に並んだカードはひっくり返して昇順にしてからスタックに積みます。また、スタックの積み方ルールに違反すれば必ず整理（マージ）が入ります。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "ラン: [1,3,5,7,9,8,6,4](長さ8), [2,10,11,12](長さ4), [13,14,15,20](長さ4), [18,16](長さ2→拡張4)。条件: stack[n-2].len <= stack[n-1].len + stack[n].len",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "ランの検出は「自然なラン」を見つけます。{1,3,5,7,9} は昇順ですが、9の次の8で昇順が崩れるため、ここでランが区切られます。{1,3,5,7,9,8,6,4} を1つのランとするのは誤りです。",
+          "analogy": "坂道を登っていて下り始めたら、それは別の坂です。上り坂と下り坂を1つの坂として扱うことはできません。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "ラン: [1,3,5,7](長さ4), [9,8,6,4](長さ4), [2,10,11,12](長さ4), [13,14,15,20](長さ4), [18,16](長さ2→拡張4)。条件: 全ランが同じ長さなのでマージ不要",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "Timsortはランの長さをMIN_RUNで区切るのではなく、自然な昇順・降順の連続を検出します。{1,3,5,7,9} は5要素の昇順ランとして一度に検出されます。また、全ランが同じ長さでも不変条件違反があればマージは発生します。",
+          "analogy": "川の流れを一定間隔で区切るのではなく、自然な流れの向きが変わる地点で区切ります。上流→下流の切り替わりポイントがランの境界です。"
+        }
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"pos": 0, "検出": "data[0..4]={1,3,5,7,9}", "種別": "昇順"}, "action": "昇順ラン検出。長さ5>=MIN_RUN。push(0,5)。stack=[(0,5)]"},
+      {"step": 2, "variables": {"pos": 5, "検出": "data[5..8]={8,6,4,2}", "種別": "降順"}, "action": "降順ラン検出。reverse→{2,4,6,8}。長さ4>=MIN_RUN。push(5,4)。stack=[(0,5),(5,4)]"},
+      {"step": 3, "variables": {"stack": "[(0,5),(5,4)]", "n": 1}, "action": "mergeCollapse: stack[0].len=5 > stack[1].len=4 → 不変条件OK。マージなし"},
+      {"step": 4, "variables": {"pos": 9, "検出": "data[9..14]={10,11,12,13,14,15}", "種別": "昇順"}, "action": "昇順ラン検出。長さ6>=MIN_RUN。push(9,6)。stack=[(0,5),(5,4),(9,6)]"},
+      {"step": 5, "variables": {"stack": "[(0,5),(5,4),(9,6)]", "n": 2}, "action": "mergeCollapse: stack[0].len=5 <= stack[1].len+stack[2].len=10 → 不変条件違反！マージ発動"},
+      {"step": 6, "variables": {"比較": "stack[0].len=5 < stack[2].len=6"}, "action": "stack[0].len < stack[2].len なので stack[0]とstack[1]をマージ → 長さ9のランに統合"}
+    ],
+    "traceAnalogy": "皿洗いの効率化に例えます。洗い終わった皿を大きさ順にスタックに積みます。ルールは「下の束ほど大きい」こと。5枚の束、4枚の束と積んで、次に6枚の束が来ると「5 <= 4+6=10」でルール違反。下の2束（5枚と4枚）を合わせて9枚の束にしてから6枚の束を上に置きます。これでスタックの成長がフィボナッチ数列的に制御され、効率的なマージが保証されます。",
+    "overallExplanation": {
+      "summary": "Timsortは、データの既存の秩序（自然なラン）を活用するハイブリッドソートです。降順ランの反転、最小ラン長の保証、スタック不変条件によるマージタイミングの制御が特徴です。",
+      "keyPoint": "ラン検出は昇順・降順を自然に判別する。降順ランは反転して昇順にする。スタックの不変条件（2つの条件）に違反したらマージ。この制御によりマージの総回数がO(n log n)に抑えられる。",
+      "relatedTopics": ["マージソート", "挿入ソート", "自然マージソート", "Python sort"],
+      "studyTip": "Timsortは「実データに強いソート」です。ほぼソート済みのデータでは大きな自然ランが検出されるため、マージ回数が激減します。PythonのsortやJavaのArrays.sortで採用されている実用的なアルゴリズムです。"
+    },
+    "tags": ["Timsort", "ハイブリッドソート", "自然ラン", "マージ不変条件"]
+  },
+  {
+    "questionId": "q-algo-059",
+    "examType": "科目B",
+    "category": "アルゴリズム",
+    "subcategory": "アルゴリズム（ソート・探索）",
+    "topic": "局所性鋭敏型ハッシュ（LSH）による近似最近傍探索",
+    "level": 10,
+    "question": "次の擬似言語プログラムは、局所性鋭敏型ハッシュ（LSH: Locality-Sensitive Hashing）を用いた近似最近傍探索の処理である。3つのハッシュ関数 h1, h2, h3 を使い、ハッシュテーブル数 L=2、各テーブルのバンド幅 b=2 とする。データ点 A=(1,2), B=(3,4), C=(10,11), D=(2,3) が登録された状態でクエリ点 Q=(2,2) の近似最近傍を探索するとき、候補集合に含まれる点の組み合わせとして正しいものはどれか。\n\nハッシュ値は以下の通りとする:\nh1(A)=0, h2(A)=1, h3(A)=0\nh1(B)=1, h2(B)=1, h3(B)=1\nh1(C)=3, h2(C)=3, h3(C)=2\nh1(D)=0, h2(D)=1, h3(D)=1\nh1(Q)=0, h2(Q)=1, h3(Q)=0",
+    "pseudoCode": "○構造体: LSHIndex\n  ○ハッシュテーブル型の配列: tables  /* L個のハッシュテーブル */\n  ○整数型: L                        /* テーブル数 */\n  ○整数型: b                        /* バンド幅（各テーブルで使うハッシュ関数の数） */\n\n○手続き: buildIndex(○点型の配列: points, ○整数型: L, ○整数型: b)\n  ○LSHIndex型: index\n  index.L ← L\n  index.b ← b\n  /* テーブル1: h1, h2 を使用。テーブル2: h2, h3 を使用 */\n  各データ点 p について繰り返す\n    /* テーブル1のキー: (h1(p), h2(p)) の連結 */\n    ○文字列型: key1 ← h1(p) と h2(p) を連結\n    index.tables[0][key1] に p を追加\n    /* テーブル2のキー: (h2(p), h3(p)) の連結 */\n    ○文字列型: key2 ← h2(p) と h3(p) を連結\n    index.tables[1][key2] に p を追加\n  を繰り返す\n\n○関数: query(○LSHIndex型: index, ○点型: q)\n  ○集合型: candidates ← 空集合\n  ○文字列型: key1 ← h1(q) と h2(q) を連結\n  candidates に index.tables[0][key1] の全要素を追加\n  ○文字列型: key2 ← h2(q) と h3(q) を連結\n  candidates に index.tables[1][key2] の全要素を追加\n  /* 候補の中から実際の距離が最小の点を返す */\n  ○点型: nearest ← null\n  ○実数型: minDist ← 無限大\n  candidates の各点 c について繰り返す\n    ○実数型: d ← distance(q, c)\n    もし d < minDist ならば\n      minDist ← d\n      nearest ← c\n    を実行する\n  を繰り返す\n  nearest を返す",
+    "choices": [
+      {
+        "id": "a",
+        "text": "候補集合 = {A, D}",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "これはテーブル1のみの結果です。テーブル2の候補も加える必要があります。テーブル2では Q のキー \"10\" と一致する点も候補になります。",
+          "analogy": "2つの網で魚を捕るのに、1つ目の網の結果だけ見ているようなものです。2つ目の網にかかった魚も含めなければなりません。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "候補集合 = {A, D, B}",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "テーブル2のQ のキーは h2(Q)とh3(Q)の連結=\"10\"です。B のテーブル2キーは h2(B)とh3(B)の連結=\"11\"で、Q のキー\"10\"とは一致しません。B は候補に含まれません。",
+          "analogy": "指紋照合で、2つの指紋パターンが「1番目の模様は同じだが2番目が違う」場合、一致とは見なされません。バンド内の全ハッシュが一致する必要があります。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "候補集合 = {A, D, A, D} = {A, D}（重複除去後）",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "テーブル1（h1,h2使用）: Q のキー=h1(Q)とh2(Q)の連結=\"01\"。各点のキー: A=\"01\", B=\"11\", C=\"33\", D=\"01\"。Q と一致: A, D。テーブル2（h2,h3使用）: Q のキー=h2(Q)とh3(Q)の連結=\"10\"。各点のキー: A=\"10\", B=\"11\", C=\"32\", D=\"11\"。Q と一致: A。候補集合={A,D}∪{A}={A,D}。最終的に distance(Q,A)=sqrt((2-1)^2+(2-2)^2)=1、distance(Q,D)=sqrt((2-2)^2+(2-3)^2)=1。同距離だが最近傍として A か D が返る。",
+          "analogy": "2つの異なる色のフィルタ（テーブル1、テーブル2）を通して写真を見ます。フィルタ1では A と D が Q と同じ色に見え、フィルタ2では A だけが Q と同じ色に見えます。両方のフィルタで見つかった点を全て集めると候補は {A, D} です。この候補の中から実際に距離を測って最も近い点を選びます。",
+          "deepDive": "LSH の精度はテーブル数 L とバンド幅 b で制御します。L を増やすと候補が増えて再現率（recall）が上がりますが計算コストも増えます。b を増やすとバンド内の全ハッシュが一致する確率が下がり、精度（precision）が上がりますが再現率が下がります。この問題では L=2, b=2 という小さな設定なので、近い点でもハッシュの偶然の不一致で候補から漏れる可能性があります。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "候補集合 = {A, B, C, D}（全点が候補）",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "LSH の目的は全点を調べずに候補を絞り込むことです。Q と遠い C（キーが全く異なる）は候補に含まれません。B もハッシュキーが Q と一致しないため含まれません。",
+          "analogy": "全員を面接するのではなく、書類選考（ハッシュ一致判定）で候補を絞るのが LSH の意義です。書類が合わない応募者は面接（距離計算）に進みません。"
+        }
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"テーブル1ハッシュ関数": "h1,h2"}, "action": "各点のテーブル1キーを計算: A=\"01\", B=\"11\", C=\"33\", D=\"01\""},
+      {"step": 2, "variables": {"テーブル2ハッシュ関数": "h2,h3"}, "action": "各点のテーブル2キーを計算: A=\"10\", B=\"11\", C=\"32\", D=\"11\""},
+      {"step": 3, "variables": {"Qのテーブル1キー": "01", "Qのテーブル2キー": "10"}, "action": "Q のハッシュキーを計算"},
+      {"step": 4, "variables": {"テーブル1一致": "{A,D}", "テーブル2一致": "{A}"}, "action": "各テーブルでキーが一致する点を取得"},
+      {"step": 5, "variables": {"候補集合": "{A,D}"}, "action": "和集合を取り重複除去: {A,D}∪{A}={A,D}"},
+      {"step": 6, "variables": {"dist(Q,A)": 1.0, "dist(Q,D)": 1.0}, "action": "候補内で実際の距離を計算し最近傍を決定"}
+    ],
+    "traceAnalogy": "犯人捜索に例えます。目撃情報を2種類のフィルタ（テーブル）で絞ります。フィルタ1（身長と髪色）: Qの特徴\"01\"と一致→A,Dが該当。フィルタ2（髪色と服装）: Qの特徴\"10\"と一致→Aのみ該当。両方のフィルタ結果を合わせて容疑者リスト={A,D}。最終的にこの2人を直接確認（距離計算）して犯人（最近傍）を特定します。全住民を調べるより圧倒的に効率的です。",
+    "overallExplanation": {
+      "summary": "局所性鋭敏型ハッシュ（LSH）は、高次元データの近似最近傍探索を効率化するデータ構造です。近い点が同じハッシュバケットに入る確率が高くなるハッシュ関数を用いて候補を絞り込みます。",
+      "keyPoint": "各テーブルで複数のハッシュ関数を AND 条件（バンド）で組み合わせ、テーブル間は OR 条件で候補を統合する。バンド幅 b とテーブル数 L のトレードオフが精度と計算コストを決定する。",
+      "relatedTopics": ["k近傍法", "ハッシュ関数", "高次元探索", "コサイン類似度"],
+      "studyTip": "LSH は「似たものを同じ箱に入れるハッシュ」です。通常のハッシュは衝突を避けますが、LSH は逆に似たデータの衝突を積極的に起こします。"
+    },
+    "tags": ["LSH", "近似最近傍探索", "ハッシュ", "高次元データ"]
+  },
+  {
+    "questionId": "q-algo-060",
+    "examType": "科目B",
+    "category": "アルゴリズム",
+    "subcategory": "アルゴリズム（ソート・探索）",
+    "topic": "並列マージソート（Fork-Join モデル）",
+    "level": 10,
+    "question": "次の擬似言語プログラムは、Fork-Join モデルによる並列マージソートの実装である。配列 data = {8,3,1,5,9,2,7,4} に対して parallelMergeSort(data, 0, 7, 1) を実行するとき、並列実行の深さ閾値 depthThreshold=1 の場合、並列に fork される最大タスク数と、逐次処理に切り替わる部分配列のサイズの組み合わせとして正しいものはどれか。",
+    "pseudoCode": "○整数型の定数: SEQ_THRESHOLD ← 4  /* 逐次処理に切り替えるサイズ */\n\n○手続き: parallelMergeSort(○整数型の配列: data, ○整数型: left, ○整数型: right, ○整数型: depth)\n  もし left >= right ならば\n    戻る\n  を実行する\n  ○整数型: size ← right - left + 1\n  もし size <= SEQ_THRESHOLD ならば\n    sequentialSort(data, left, right)  /* 逐次ソート */\n    戻る\n  を実行する\n  ○整数型: mid ← (left + right) ÷ 2\n  もし depth > 0 ならば\n    /* 並列実行: 左右を別タスクとして fork */\n    ○タスク型: leftTask ← fork( parallelMergeSort(data, left, mid, depth - 1) )\n    ○タスク型: rightTask ← fork( parallelMergeSort(data, mid+1, right, depth - 1) )\n    leftTask を join\n    rightTask を join\n  そうでなければ\n    /* 逐次実行 */\n    parallelMergeSort(data, left, mid, 0)\n    parallelMergeSort(data, mid+1, right, 0)\n  を実行する\n  merge(data, left, mid, right)\n\n○手続き: merge(○整数型の配列: data, ○整数型: left, ○整数型: mid, ○整数型: right)\n  ○整数型の配列: temp ← data[left..right] のコピー\n  ○整数型: i ← left, j ← mid + 1, k ← left\n  i <= mid かつ j <= right の間繰り返す\n    もし temp[i - left] <= temp[j - left] ならば\n      data[k] ← temp[i - left]\n      i ← i + 1\n    そうでなければ\n      data[k] ← temp[j - left]\n      j ← j + 1\n    を実行する\n    k ← k + 1\n  を繰り返す\n  /* 残り要素のコピー（省略） */",
+    "choices": [
+      {
+        "id": "a",
+        "text": "最大 fork タスク数: 2、逐次処理に切り替わる部分配列サイズ: 4",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "実行を追跡する。parallelMergeSort(data,0,7,1): size=8>4。depth=1>0 なので fork。leftTask=parallelMergeSort(data,0,3,0)、rightTask=parallelMergeSort(data,4,7,0) を並列 fork。これで2タスクが fork される。各タスク内: parallelMergeSort(data,0,3,0): size=4<=SEQ_THRESHOLD=4 → sequentialSort。parallelMergeSort(data,4,7,0): size=4<=SEQ_THRESHOLD=4 → sequentialSort。depth=0 以降は fork しないため、最大 fork タスク数は2。逐次処理に切り替わるサイズは4。",
+          "analogy": "工場の組立ラインで、部長（depth=1）が作業を左半分と右半分に分けて2人の課長に同時に任せます（2タスクfork）。各課長は4個の部品を受け持ちますが、4個以下なので「分割せず一人でやる」と判断します（逐次処理）。部長以下にはさらに分割する権限がないため、並列タスクは2つで打ち止めです。",
+          "deepDive": "並列マージソートの実用的な depthThreshold は log2(プロセッサ数) 程度に設定します。4コアなら depth=2 で最大4タスク、8コアなら depth=3 で最大8タスクです。深すぎる並列化はタスク生成・同期のオーバーヘッドが支配的になるため逆効果です。SEQ_THRESHOLD も重要で、小さすぎるとスレッド生成コストが無視できなくなります。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "最大 fork タスク数: 6、逐次処理に切り替わる部分配列サイズ: 1",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "depthThreshold=1 では depth>0 の条件が最初の呼び出しでのみ真になります。fork されるのは2タスクだけです。それ以降は depth=0 なので逐次実行に切り替わります。また SEQ_THRESHOLD=4 なのでサイズ1まで分割される前に逐次ソートに切り替わります。",
+          "analogy": "並列化の権限が1段階しかないのに、全段階で並列化するのは権限の越権行為です。1段目で2つに分けたら、2段目以降は逐次処理です。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "最大 fork タスク数: 4、逐次処理に切り替わる部分配列サイズ: 2",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "4タスク fork されるのは depthThreshold=2 の場合です。depthThreshold=1 では最初の分割（depth=1→0）でのみ fork され、2タスクです。fork された各タスクでは depth=0 なので逐次実行となり、size=4<=SEQ_THRESHOLD でさらに sequentialSort が呼ばれます。",
+          "analogy": "2段階の委任権限があれば4人に分担できますが、1段階しかなければ2人までです。深さ1の委任で4人に仕事を振ることはできません。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "最大 fork タスク数: 2、逐次処理に切り替わる部分配列サイズ: 2",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "fork タスク数2は正しいですが、逐次処理への切り替えサイズが違います。fork された各タスクは size=4 の部分配列を処理しますが、SEQ_THRESHOLD=4 なので size=4 の時点で sequentialSort が呼ばれます。size=2 まで再帰的に分割されることはありません。",
+          "analogy": "4人分の仕事を引き受けたとき、「4人以下ならまとめて処理」というルールなので、さらに2人ずつに分けたりしません。"
+        }
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"呼び出し": "parallelMergeSort(0,7,1)", "size": 8, "depth": 1}, "action": "size=8>SEQ_THRESHOLD=4。depth=1>0 → 並列 fork"},
+      {"step": 2, "variables": {"mid": 3, "leftTask": "pMS(0,3,0)", "rightTask": "pMS(4,7,0)"}, "action": "2タスクを並列 fork。左半分 data[0..3]={8,3,1,5}、右半分 data[4..7]={9,2,7,4}"},
+      {"step": 3, "variables": {"タスクL": "pMS(0,3,0)", "size": 4, "depth": 0}, "action": "左タスク: size=4<=SEQ_THRESHOLD=4 → sequentialSort(data,0,3) で {8,3,1,5}→{1,3,5,8}"},
+      {"step": 4, "variables": {"タスクR": "pMS(4,7,0)", "size": 4, "depth": 0}, "action": "右タスク（並列実行）: size=4<=SEQ_THRESHOLD=4 → sequentialSort(data,4,7) で {9,2,7,4}→{2,4,7,9}"},
+      {"step": 5, "variables": {"状態": "join待ち"}, "action": "両タスクの完了を待つ（join）"},
+      {"step": 6, "variables": {"マージ対象": "{1,3,5,8}と{2,4,7,9}"}, "action": "merge(data,0,3,7): 二つのソート済み半分をマージ→{1,2,3,4,5,7,8,9}"}
+    ],
+    "traceAnalogy": "料理コンテストに例えます。シェフ長（depth=1）が8品の料理を左4品と右4品に分け、2人の副シェフに同時に調理を任せます（fork）。各副シェフは4品以下なので「もう分担せず自分で全部作る」と判断します（逐次処理）。2人の副シェフが同時に並行して料理し、両方完成したら（join）、シェフ長が8品を美しく並べ替えます（merge）。並列化の効果で、逐次処理なら4+4=8ステップかかるところが、最大4ステップ+マージで済みます。",
+    "overallExplanation": {
+      "summary": "並列マージソートは、分割統治の独立した部分問題を別スレッド/タスクで並列実行するアルゴリズムです。Fork-Join モデルにより、分割(fork)→並列処理→合流(join)→マージの流れで動作します。",
+      "keyPoint": "depthThreshold は並列化の深さを制限し、最大 2^depthThreshold 個のタスクが生成される。SEQ_THRESHOLD は逐次処理への切り替え閾値。両方のパラメータがオーバーヘッドと並列度のバランスを決定する。",
+      "relatedTopics": ["マージソート", "並列アルゴリズム", "Fork-Joinフレームワーク", "Amdahlの法則"],
+      "studyTip": "並列マージソートは「チーム分けの深さ」がポイントです。depth=k なら最大 2^k チームに分かれます。チームが多すぎると連絡コスト（オーバーヘッド）が増え、少なすぎるとCPUが遊びます。"
+    },
+    "tags": ["並列マージソート", "Fork-Join", "並列アルゴリズム", "分割統治"]
+  }
+]
