@@ -1,0 +1,1377 @@
+[
+  {
+    "questionId": "q-net-026",
+    "examType": "科目A",
+    "category": "テクノロジ系",
+    "subcategory": "network",
+    "topic": "ネットワーク基礎",
+    "level": 1,
+    "question": "コンピュータネットワークにおいて、データの送受信先を識別するために各機器に割り当てられる番号を何と呼ぶか。",
+    "choices": [
+      {
+        "id": "a",
+        "text": "IPアドレス",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "IPアドレスはネットワーク上の各機器を識別するための一意の番号です。IPv4では32ビット（例: 192.168.1.1）、IPv6では128ビットのアドレスが使われます。",
+          "analogy": "家に届く郵便物の「住所」と同じです。住所がないと郵便物が届かないように、IPアドレスがないとデータが届きません。",
+          "deepDive": "IPアドレスはネットワーク部とホスト部に分かれます。ネットワーク部は「町名」、ホスト部は「番地」に相当します。サブネットマスクでこの境界を決定します。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "MACアドレス",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "MACアドレスはネットワーク機器のハードウェアに固有の物理アドレスです。ネットワーク上の論理的な識別にはIPアドレスが使われます。",
+          "analogy": "MACアドレスは人の「指紋」のように生まれつき決まっているもので、IPアドレスのように自由に変更して割り当てるものではありません。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "ポート番号",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "ポート番号は機器そのものではなく、機器上で動作するアプリケーションやサービスを識別する番号です。",
+          "analogy": "IPアドレスが建物の住所なら、ポート番号は建物内の部屋番号です。データは住所（IP）と部屋番号（ポート）の両方で届けられます。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "ドメイン名",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "ドメイン名はIPアドレスを人間にわかりやすい名前で表したもので、識別番号そのものではありません。",
+          "analogy": "ドメイン名は「ニックネーム」のようなもので、実際の住所（IPアドレス）とは別の呼び名です。"
+        }
+      }
+    ],
+    "overallExplanation": {
+      "summary": "IPアドレスはネットワーク上の各機器を一意に識別するための論理アドレスです。IPv4では32ビット、IPv6では128ビットで表されます。",
+      "keyPoint": "IPアドレス＝ネットワーク上の機器の「住所」",
+      "relatedTopics": ["サブネットマスク", "IPv4", "IPv6", "DHCP"],
+      "studyTip": "IPアドレス（論理アドレス）とMACアドレス（物理アドレス）の違いを押さえましょう。"
+    },
+    "tags": ["ネットワーク基礎", "IPアドレス"]
+  },
+  {
+    "questionId": "q-net-027",
+    "examType": "科目A",
+    "category": "テクノロジ系",
+    "subcategory": "network",
+    "topic": "ネットワーク基礎",
+    "level": 1,
+    "question": "インターネット上でWebページを閲覧するときに使われるプロトコルはどれか。",
+    "choices": [
+      {
+        "id": "a",
+        "text": "FTP",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "FTP（File Transfer Protocol）はファイル転送に使われるプロトコルで、Webページの閲覧には使用しません。",
+          "analogy": "FTPは「宅配便」のようにファイルを送受信する仕組みで、本を読む（Webを見る）のとは違います。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "SMTP",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "SMTP（Simple Mail Transfer Protocol）は電子メールを送信するためのプロトコルです。",
+          "analogy": "SMTPは「郵便ポスト」のように手紙（メール）を送る仕組みで、Webブラウザとは関係ありません。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "HTTP",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "HTTP（HyperText Transfer Protocol）は、Webサーバとブラウザの間でWebページのデータをやり取りするためのプロトコルです。暗号化版のHTTPSもあります。",
+          "analogy": "HTTPは「図書館の窓口」のようなものです。「この本を見せてください」とリクエストすると、図書館員（サーバ）が本（Webページ）を持ってきてくれます。",
+          "deepDive": "HTTPはリクエスト-レスポンス型のプロトコルで、GETメソッド（取得）、POSTメソッド（送信）などがあります。HTTPSはSSL/TLSで通信を暗号化したHTTPです。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "DNS",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "DNS（Domain Name System）はドメイン名とIPアドレスを変換するシステムであり、Webページの転送プロトコルではありません。",
+          "analogy": "DNSは「電話帳」のようなもので、名前（ドメイン名）から電話番号（IPアドレス）を調べます。電話帳で通話はできません。"
+        }
+      }
+    ],
+    "overallExplanation": {
+      "summary": "HTTP（HyperText Transfer Protocol）はWebページを閲覧するための通信プロトコルです。暗号化版のHTTPSが現在の主流です。",
+      "keyPoint": "Web閲覧＝HTTP/HTTPS、メール送信＝SMTP、ファイル転送＝FTP",
+      "relatedTopics": ["HTTPS", "SSL/TLS", "プロトコル", "TCP/IP"],
+      "studyTip": "主要なプロトコルと用途の対応を覚えましょう。HTTP→Web、SMTP→メール送信、POP3/IMAP→メール受信、FTP→ファイル転送。"
+    },
+    "tags": ["ネットワーク基礎", "HTTP", "プロトコル"]
+  },
+  {
+    "questionId": "q-net-028",
+    "examType": "科目A",
+    "category": "テクノロジ系",
+    "subcategory": "network",
+    "topic": "TCP/IP",
+    "level": 2,
+    "question": "TCP/IPモデルにおいて、信頼性のある通信を提供するトランスポート層のプロトコルはどれか。",
+    "choices": [
+      {
+        "id": "a",
+        "text": "IP",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "IPはインターネット層（ネットワーク層）のプロトコルで、パケットの経路制御を行いますが、信頼性の保証は行いません。",
+          "analogy": "IPは「道案内」のようなもので、荷物をどの道を通って届けるかを決めますが、届いたかどうかの確認はしません。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "TCP",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "TCP（Transmission Control Protocol）はトランスポート層で動作し、3ウェイハンドシェイクによるコネクション確立、データの順序制御、再送制御を行い、信頼性のある通信を提供します。",
+          "analogy": "TCPは「書留郵便」のようなものです。送ったものが届いたか確認し、届かなければ再送します。順番も保証されます。",
+          "deepDive": "TCPは3ウェイハンドシェイク（SYN→SYN/ACK→ACK）でコネクションを確立します。ウィンドウ制御によりフロー制御も行います。HTTPやSMTPなど多くの上位プロトコルがTCPを利用しています。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "UDP",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "UDPはトランスポート層のプロトコルですが、信頼性ではなく速度を重視するプロトコルです。再送制御は行いません。",
+          "analogy": "UDPは「はがき」のようなもので、届いたかどうか確認しないけれど手軽で速い通信です。動画配信やオンラインゲームで使われます。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "ARP",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "ARP（Address Resolution Protocol）はIPアドレスからMACアドレスを解決するプロトコルで、トランスポート層ではありません。",
+          "analogy": "ARPは「電話帳」のようなもので、名前（IP）から電話番号（MAC）を調べるのに使いますが、通信の信頼性とは関係ありません。"
+        }
+      }
+    ],
+    "overallExplanation": {
+      "summary": "TCPはトランスポート層で信頼性のある通信を提供するプロトコルです。コネクション指向で、順序保証と再送制御を行います。",
+      "keyPoint": "TCP＝信頼性あり（書留）、UDP＝速度重視（はがき）",
+      "relatedTopics": ["UDP", "3ウェイハンドシェイク", "ポート番号", "TCP/IPモデル"],
+      "studyTip": "TCPとUDPの違いを比較して覚えましょう。Webやメール→TCP、動画や音声のリアルタイム配信→UDP。"
+    },
+    "tags": ["TCP/IP", "TCP", "トランスポート層"]
+  },
+  {
+    "questionId": "q-net-029",
+    "examType": "科目A",
+    "category": "テクノロジ系",
+    "subcategory": "network",
+    "topic": "IPアドレス",
+    "level": 2,
+    "question": "IPv4のプライベートIPアドレスとして正しいものはどれか。",
+    "choices": [
+      {
+        "id": "a",
+        "text": "172.16.0.1",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "172.16.0.0〜172.31.255.255はクラスBのプライベートIPアドレス範囲です。この範囲のアドレスはインターネット上では使用されず、組織内のネットワークで自由に使えます。",
+          "analogy": "プライベートIPアドレスは「社内の内線番号」のようなもので、社内では通用しますが、外部には直接つながりません。",
+          "deepDive": "プライベートIPアドレスの範囲は3つ：10.0.0.0/8（クラスA）、172.16.0.0/12（クラスB）、192.168.0.0/16（クラスC）です。NATやNAPTでグローバルIPに変換してインターネットに接続します。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "8.8.8.8",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "8.8.8.8はGoogleのパブリックDNSサーバのグローバルIPアドレスであり、プライベートIPアドレスではありません。",
+          "analogy": "グローバルIPは「固定電話の外線番号」のようなもので、世界中どこからでも直接アクセスできます。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "200.100.50.1",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "200.100.50.1はクラスCのグローバルIPアドレスの範囲にあり、プライベートIPアドレスではありません。",
+          "analogy": "この番号は「公共の電話番号」のようなもので、インターネット上で一意に割り当てられています。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "127.0.0.1",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "127.0.0.1はループバックアドレス（localhost）で、自分自身を指す特殊なアドレスです。プライベートIPアドレスとは別の概念です。",
+          "analogy": "127.0.0.1は「鏡を見ている」ようなもので、自分自身にデータを送るためのアドレスです。"
+        }
+      }
+    ],
+    "overallExplanation": {
+      "summary": "プライベートIPアドレスはインターネット上で使われない、組織内ネットワーク専用のアドレスです。10.x.x.x、172.16〜31.x.x、192.168.x.xの3つの範囲があります。",
+      "keyPoint": "プライベートIP：10.x.x.x / 172.16-31.x.x / 192.168.x.x",
+      "relatedTopics": ["グローバルIPアドレス", "NAT", "NAPT", "サブネットマスク"],
+      "studyTip": "プライベートIPの3つの範囲を暗記しましょう。家庭のルータは192.168で始まるアドレスを使っていることが多いです。"
+    },
+    "tags": ["IPアドレス", "プライベートIP", "IPv4"]
+  },
+  {
+    "questionId": "q-net-030",
+    "examType": "科目A",
+    "category": "テクノロジ系",
+    "subcategory": "network",
+    "topic": "DNS",
+    "level": 3,
+    "question": "DNSの役割として最も適切なものはどれか。",
+    "choices": [
+      {
+        "id": "a",
+        "text": "IPアドレスを自動的に割り当てる",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "IPアドレスの自動割り当てはDHCP（Dynamic Host Configuration Protocol）の役割です。DNSはアドレスの割り当てではなく名前解決を行います。",
+          "analogy": "DHCPは「受付で部屋番号を割り振る係」、DNSは「名前から部屋番号を教えてくれる案内人」です。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "ドメイン名とIPアドレスを相互に変換する",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "DNS（Domain Name System）は、ドメイン名（例: www.example.com）とIPアドレス（例: 93.184.216.34）を相互に変換するシステムです。正引き（ドメイン名→IP）と逆引き（IP→ドメイン名）があります。",
+          "analogy": "DNSは「電話帳」のようなものです。「田中さん」という名前から電話番号を調べたり、電話番号から名前を調べたりできます。",
+          "deepDive": "DNSはルートサーバ→TLDサーバ→権威サーバという階層構造で名前解決を行います。キャッシュ機構により応答速度を向上させています。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "ネットワーク上のパケットを最適な経路で転送する",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "パケットの経路選択はルータの役割であり、ルーティングプロトコル（OSPF、BGPなど）が使われます。DNSは名前解決のみを行います。",
+          "analogy": "ルーティングは「カーナビが最適な道を案内する」こと、DNSは「目的地の住所を教えてもらう」ことです。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "電子メールの送受信を中継する",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "電子メールの中継はメールサーバ（SMTPサーバ）の役割です。ただしDNSのMXレコードでメールサーバの情報を管理しています。",
+          "analogy": "メールの中継は「郵便局」の仕事であり、DNSの「電話帳」とは別の役割です。"
+        }
+      }
+    ],
+    "overallExplanation": {
+      "summary": "DNSはドメイン名とIPアドレスを相互変換する名前解決サービスです。ユーザーが覚えやすいドメイン名で通信先を指定できるようにします。",
+      "keyPoint": "DNS＝ドメイン名⇔IPアドレスの変換（名前解決）",
+      "relatedTopics": ["DHCP", "ドメイン名", "正引き", "逆引き"],
+      "studyTip": "DNS＝名前解決、DHCP＝IPアドレス自動割り当てをセットで覚えましょう。"
+    },
+    "tags": ["DNS", "名前解決", "ネットワークサービス"]
+  },
+  {
+    "questionId": "q-net-031",
+    "examType": "科目A",
+    "category": "テクノロジ系",
+    "subcategory": "network",
+    "topic": "サブネットマスク",
+    "level": 3,
+    "question": "サブネットマスクが 255.255.255.0 のネットワークにおいて、1つのサブネット内で使用できるホストアドレスの最大数はいくつか。",
+    "choices": [
+      {
+        "id": "a",
+        "text": "256",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "ホスト部が8ビットなので2^8=256個のアドレスがありますが、ネットワークアドレスとブロードキャストアドレスの2つは使えないため、256ではありません。",
+          "analogy": "マンションの部屋が256室あっても、「管理人室」と「共用ルーム」を引くと住める部屋は254室です。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "254",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "サブネットマスク255.255.255.0（/24）ではホスト部が8ビットで2^8=256個のアドレスがありますが、ネットワークアドレス（ホスト部が全て0）とブロードキャストアドレス（ホスト部が全て1）を除くため、使用可能なホスト数は254です。",
+          "analogy": "100号室まであるマンションで、0号室（エントランス＝ネットワークアドレス）と255号室（全員宛放送＝ブロードキャスト）は使えないので、住める部屋は254室です。",
+          "deepDive": "一般式は 2^n - 2 です（nはホスト部のビット数）。/24なら2^8-2=254、/25なら2^7-2=126、/30なら2^2-2=2です。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "255",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "ブロードキャストアドレスのみ除いて255と考えるのは誤りです。ネットワークアドレスも使用できないため、2つ引く必要があります。",
+          "analogy": "「放送室」だけでなく「玄関」も住む場所ではないので、2つ除かなければなりません。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "128",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "128は/25サブネットでの全アドレス数（2^7）であり、/24サブネットの使用可能ホスト数ではありません。",
+          "analogy": "これは「半分のフロアの部屋数」にあたり、マンション全体の部屋数ではありません。"
+        }
+      }
+    ],
+    "overallExplanation": {
+      "summary": "/24サブネットでは使用可能なホストアドレスは254個です。計算式は2^(ホスト部ビット数)-2です。",
+      "keyPoint": "使用可能ホスト数＝2^n - 2（ネットワークアドレスとブロードキャストを除く）",
+      "relatedTopics": ["CIDR表記", "ネットワークアドレス", "ブロードキャスト", "サブネッティング"],
+      "studyTip": "サブネット計算は頻出です。2^n-2の公式を覚え、/24=254、/25=126、/26=62を暗記しましょう。"
+    },
+    "tags": ["サブネットマスク", "IPアドレス", "ネットワーク設計"]
+  },
+  {
+    "questionId": "q-net-032",
+    "examType": "科目A",
+    "category": "テクノロジ系",
+    "subcategory": "network",
+    "topic": "DHCP",
+    "level": 4,
+    "question": "DHCPの機能として適切なものはどれか。",
+    "choices": [
+      {
+        "id": "a",
+        "text": "ドメイン名からIPアドレスを検索する",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "ドメイン名からIPアドレスを検索するのはDNSの機能です。DHCPは名前解決ではなくアドレスの割り当てを行います。",
+          "analogy": "名前から住所を調べるのは「電話帳（DNS）」、住所を自動で決めてくれるのは「受付（DHCP）」です。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "ネットワーク機器にIPアドレスなどの設定情報を自動的に割り当てる",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "DHCP（Dynamic Host Configuration Protocol）は、ネットワークに接続した機器にIPアドレス、サブネットマスク、デフォルトゲートウェイ、DNSサーバアドレスなどを自動的に割り当てます。",
+          "analogy": "DHCPは「ホテルのフロント」のようなものです。チェックイン（接続）すると自動的に部屋番号（IPアドレス）が割り当てられ、館内の案内情報（ゲートウェイやDNS）ももらえます。",
+          "deepDive": "DHCPは DISCOVER→OFFER→REQUEST→ACK の4ステップ（DORA）で動作します。リース期間を設定し、期間満了前に更新要求を送信します。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "電子メールをサーバに送信する",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "電子メールの送信はSMTP（Simple Mail Transfer Protocol）の役割であり、DHCPとは関係ありません。",
+          "analogy": "手紙を郵便局に持っていくのは「SMTP」、住所を決めてもらうのが「DHCP」で、全く別の仕事です。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "Webサーバからコンテンツを取得する",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "WebコンテンツはHTTP/HTTPSで取得します。DHCPはネットワーク設定の自動割り当てであり、コンテンツの取得には関与しません。",
+          "analogy": "ホテルのフロント（DHCP）で部屋を案内してもらうことと、ルームサービス（HTTP）で食事を注文することは別の話です。"
+        }
+      }
+    ],
+    "overallExplanation": {
+      "summary": "DHCPはIPアドレスなどのネットワーク設定を自動的に割り当てるプロトコルです。手動設定の手間を省き、管理を効率化します。",
+      "keyPoint": "DHCP＝IPアドレスなどの自動割り当て（ホテルのフロント）",
+      "relatedTopics": ["DNS", "IPアドレス", "デフォルトゲートウェイ", "サブネットマスク"],
+      "studyTip": "DHCPの4ステップ「DORA」（Discover, Offer, Request, Acknowledge）を覚えましょう。"
+    },
+    "tags": ["DHCP", "ネットワーク管理", "自動設定"]
+  },
+  {
+    "questionId": "q-net-033",
+    "examType": "科目A",
+    "category": "テクノロジ系",
+    "subcategory": "network",
+    "topic": "NAT/NAPT",
+    "level": 4,
+    "question": "1つのグローバルIPアドレスを複数の端末で共有してインターネットに接続するために使用される技術はどれか。",
+    "choices": [
+      {
+        "id": "a",
+        "text": "NAPT（IPマスカレード）",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "NAPT（Network Address Port Translation）は、IPアドレスに加えてポート番号も変換することで、1つのグローバルIPアドレスを複数の端末で共有できる技術です。IPマスカレードとも呼ばれます。",
+          "analogy": "NAPTは「代表電話」のようなものです。外からは1つの電話番号（グローバルIP）にかけますが、内線番号（ポート番号）で個々の社員（端末）を区別できます。",
+          "deepDive": "NATは1対1のアドレス変換、NAPTは1対多のアドレス＋ポート変換です。家庭用ルータのほとんどはNAPTを使用しています。IPv4アドレス枯渇問題の対策の一つです。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "VLAN",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "VLAN（Virtual LAN）はスイッチ上でネットワークを論理的に分割する技術であり、IPアドレスの共有とは関係ありません。",
+          "analogy": "VLANは「オフィスのフロア分け」のようなもので、グループを分けますが、外部との接続方法とは関係ありません。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "VPN",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "VPN（Virtual Private Network）はインターネット上に仮想的な専用回線を構築する技術であり、IPアドレスの共有技術ではありません。",
+          "analogy": "VPNは「トンネル」を掘って安全な通り道を作ることで、IPアドレスを共有するのとは目的が異なります。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "DNS",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "DNSはドメイン名とIPアドレスの変換を行うシステムであり、IPアドレスの共有技術ではありません。",
+          "analogy": "DNSは「電話帳」であり、電話番号を共有する仕組みではありません。"
+        }
+      }
+    ],
+    "overallExplanation": {
+      "summary": "NAPTは1つのグローバルIPアドレスをポート番号で区別することで、複数端末がインターネット接続を共有できる技術です。",
+      "keyPoint": "NAPT＝1つのグローバルIP＋ポート番号で複数端末を区別",
+      "relatedTopics": ["NAT", "グローバルIPアドレス", "プライベートIPアドレス", "IPv4アドレス枯渇"],
+      "studyTip": "NAT（1対1変換）とNAPT（1対多変換）の違いを押さえましょう。家庭のルータはNAPTを使っています。"
+    },
+    "tags": ["NAT", "NAPT", "アドレス変換"]
+  },
+  {
+    "questionId": "q-net-034",
+    "examType": "科目A",
+    "category": "テクノロジ系",
+    "subcategory": "network",
+    "topic": "無線LAN",
+    "level": 5,
+    "question": "無線LANのセキュリティ規格において、WPA2で使用される暗号化方式はどれか。",
+    "choices": [
+      {
+        "id": "a",
+        "text": "WEP",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "WEPは最初期の無線LAN暗号化方式ですが、深刻な脆弱性が発見され、現在は使用すべきではありません。WPA2とは別の規格です。",
+          "analogy": "WEPは「簡単に開けられる錠前」のようなもので、すでに安全ではありません。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "TKIP",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "TKIPはWPA（WPA1）で使われる暗号化方式で、WEPの改良版です。WPA2ではTKIPではなくAES（CCMP）が使われます。",
+          "analogy": "TKIPは「改良された錠前」ですが、WPA2の「最新式の電子ロック（AES）」には及びません。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "AES（CCMP）",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "WPA2ではAES（Advanced Encryption Standard）をベースとしたCCMP（Counter mode with CBC-MAC Protocol）が暗号化方式として使用されます。AESは現在最も安全な共通鍵暗号の一つです。",
+          "analogy": "AESは「銀行の金庫室」のような強固な暗号で、解読は事実上不可能です。WEPが「南京錠」、TKIPが「シリンダー錠」なら、AESは「最新の電子ロック」です。",
+          "deepDive": "AESは鍵長128/192/256ビットをサポートし、米国政府の標準暗号として採用されています。WPA3ではさらにSAE（Simultaneous Authentication of Equals）が追加されています。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "RC4",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "RC4はWEPやTKIPで使われるストリーム暗号ですが、脆弱性が知られており、WPA2では使用されません。",
+          "analogy": "RC4は古い型の鍵穴で、すでにピッキング技術が広まっています。新しい金庫（WPA2）には使えません。"
+        }
+      }
+    ],
+    "overallExplanation": {
+      "summary": "WPA2はAES（CCMP）を使用する無線LANセキュリティ規格です。WEP→WPA（TKIP）→WPA2（AES）→WPA3の順に安全性が向上しています。",
+      "keyPoint": "WPA2＝AES暗号（安全）、WPA＝TKIP（改良版）、WEP＝RC4（危険）",
+      "relatedTopics": ["WPA3", "暗号化", "無線LANセキュリティ", "IEEE 802.11"],
+      "studyTip": "WEP→WPA→WPA2→WPA3の進化と各暗号方式の対応を覚えましょう。"
+    },
+    "tags": ["無線LAN", "WPA2", "AES", "暗号化"]
+  },
+  {
+    "questionId": "q-net-035",
+    "examType": "科目A",
+    "category": "テクノロジ系",
+    "subcategory": "network",
+    "topic": "OSI参照モデル",
+    "level": 5,
+    "question": "OSI参照モデルの第3層（ネットワーク層）で動作する機器はどれか。",
+    "choices": [
+      {
+        "id": "a",
+        "text": "リピータ",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "リピータは第1層（物理層）で動作する機器で、電気信号を増幅・再生して中継します。IPアドレスを理解しません。",
+          "analogy": "リピータは「拡声器」のようなもので、声（信号）を大きくするだけで、中身は見ません。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "スイッチングハブ（L2スイッチ）",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "L2スイッチは第2層（データリンク層）で動作し、MACアドレスに基づいてフレームを転送します。IPアドレスは認識しません。",
+          "analogy": "L2スイッチは「社内の受付」で、名札（MACアドレス）を見て部署に案内しますが、住所（IPアドレス）は気にしません。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "ルータ",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "ルータは第3層（ネットワーク層）で動作し、IPアドレスに基づいてパケットの経路選択（ルーティング）を行います。異なるネットワーク間でのデータ転送を担います。",
+          "analogy": "ルータは「交差点の信号係」のようなもので、行き先（IPアドレス）を見て、正しい道（ネットワーク）にパケットを送ります。",
+          "deepDive": "ルータはルーティングテーブルを持ち、静的ルーティング（手動設定）と動的ルーティング（OSPF、RIPなどのプロトコルで自動学習）があります。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "アクセスポイント",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "無線LANアクセスポイントは主に第1〜2層で動作し、無線と有線の橋渡しを行います。ネットワーク層のルーティング機能は持ちません。",
+          "analogy": "アクセスポイントは「無線電波と有線ケーブルの通訳」のようなもので、経路の判断はしません。"
+        }
+      }
+    ],
+    "overallExplanation": {
+      "summary": "ルータはOSI参照モデルの第3層（ネットワーク層）で動作し、IPアドレスに基づいてパケットのルーティングを行います。",
+      "keyPoint": "L1＝リピータ/ハブ、L2＝スイッチ/ブリッジ、L3＝ルータ",
+      "relatedTopics": ["OSI参照モデル", "ルーティング", "L3スイッチ", "ネットワーク機器"],
+      "studyTip": "各層と対応機器を覚えましょう。物理層→リピータ、データリンク層→スイッチ、ネットワーク層→ルータ。"
+    },
+    "tags": ["OSI参照モデル", "ルータ", "ネットワーク機器"]
+  },
+  {
+    "questionId": "q-net-036",
+    "examType": "科目A",
+    "category": "テクノロジ系",
+    "subcategory": "network",
+    "topic": "VLAN",
+    "level": 6,
+    "question": "VLANを使用する主な目的として最も適切なものはどれか。",
+    "choices": [
+      {
+        "id": "a",
+        "text": "物理的なネットワーク構成を変更せずに、論理的にネットワークを分割する",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "VLAN（Virtual LAN）は、スイッチ上で論理的にネットワークを分割する技術です。物理的な配線を変更せずに、部署ごとやセキュリティレベルごとにネットワークを分離できます。",
+          "analogy": "VLANは「同じオフィスビル内でフロアを仮想的に区切る」ようなもので、壁を作り直さなくても部署ごとに区画を分けられます。",
+          "deepDive": "VLANにはポートベースVLAN（ポートごとに割り当て）とタグベースVLAN（IEEE 802.1Qタグで識別）があります。VLAN間の通信にはL3スイッチやルータが必要です。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "インターネット上に暗号化された仮想回線を構築する",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "インターネット上の仮想回線はVPN（Virtual Private Network）の役割です。VLANはLAN内部の論理分割を行うもので、暗号化トンネルとは異なります。",
+          "analogy": "VPNは「公道にトンネルを掘る」こと、VLANは「社内のフロアを区切る」ことで、目的が異なります。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "複数のサーバの負荷を分散する",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "負荷分散はロードバランサの役割であり、VLANの目的ではありません。",
+          "analogy": "ロードバランサは「行列を複数のレジに振り分ける」こと、VLANは「売り場を区切る」ことです。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "無線LANの通信範囲を拡大する",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "通信範囲の拡大にはリピータやメッシュネットワークが使われます。VLANは通信範囲ではなくネットワークの論理分割を行います。",
+          "analogy": "VLANは部屋を区切ることで、声（通信）が届く範囲を広げることとは関係ありません。"
+        }
+      }
+    ],
+    "overallExplanation": {
+      "summary": "VLANは物理配線を変えずにスイッチ上でネットワークを論理的に分割する技術です。セキュリティ向上やブロードキャストドメインの縮小に効果があります。",
+      "keyPoint": "VLAN＝物理構成を変えずに論理的にネットワークを分割",
+      "relatedTopics": ["L2スイッチ", "IEEE 802.1Q", "ブロードキャストドメイン", "L3スイッチ"],
+      "studyTip": "VLANとVPNの違いを明確にしましょう。VLAN＝LAN内の分割、VPN＝WAN上の暗号化トンネル。"
+    },
+    "tags": ["VLAN", "ネットワーク設計", "スイッチ"]
+  },
+  {
+    "questionId": "q-net-037",
+    "examType": "科目A",
+    "category": "テクノロジ系",
+    "subcategory": "network",
+    "topic": "ルーティング",
+    "level": 6,
+    "question": "動的ルーティングプロトコルの一つで、リンク状態型に分類され、大規模ネットワークで使用されるものはどれか。",
+    "choices": [
+      {
+        "id": "a",
+        "text": "RIP",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "RIP（Routing Information Protocol）は距離ベクトル型のプロトコルで、ホップ数で経路を決定します。最大15ホップの制限があり、大規模ネットワークには不向きです。",
+          "analogy": "RIPは「何回乗り換えるか」だけで経路を決める路線案内で、小さな町には十分ですが大都市には向きません。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "OSPF",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "OSPF（Open Shortest Path First）はリンク状態型のルーティングプロトコルで、各ルータがネットワーク全体のトポロジマップを持ち、最短経路を計算します。大規模ネットワークにも対応できます。",
+          "analogy": "OSPFは「全体の地図を持って最短ルートを計算するカーナビ」のようなもので、道路の混雑状況も考慮して最適な経路を見つけます。",
+          "deepDive": "OSPFはダイクストラのアルゴリズム（SPFアルゴリズム）を使って最短経路を計算します。エリアという概念で大規模ネットワークを階層化して管理します。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "ARP",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "ARP（Address Resolution Protocol）はIPアドレスからMACアドレスを解決するプロトコルで、ルーティングプロトコルではありません。",
+          "analogy": "ARPは「相手の顔（MAC）を名前（IP）から思い出す」ためのもので、道案内（ルーティング）とは別です。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "ICMP",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "ICMP（Internet Control Message Protocol）はネットワークのエラー通知や診断（ping等）に使われるプロトコルで、ルーティングプロトコルではありません。",
+          "analogy": "ICMPは「道路の故障を知らせる標識」のようなもので、道案内（ルーティング）自体は行いません。"
+        }
+      }
+    ],
+    "overallExplanation": {
+      "summary": "OSPFはリンク状態型の動的ルーティングプロトコルで、ネットワーク全体のトポロジ情報から最短経路を計算します。大規模ネットワークに適しています。",
+      "keyPoint": "OSPF＝リンク状態型（全体地図で最短経路計算）、RIP＝距離ベクトル型（ホップ数で判断）",
+      "relatedTopics": ["RIP", "BGP", "ダイクストラアルゴリズム", "ルーティングテーブル"],
+      "studyTip": "ルーティングプロトコルは「距離ベクトル型（RIP）」と「リンク状態型（OSPF）」の違いを押さえましょう。"
+    },
+    "tags": ["ルーティング", "OSPF", "動的ルーティング"]
+  },
+  {
+    "questionId": "q-net-038",
+    "examType": "科目A",
+    "category": "テクノロジ系",
+    "subcategory": "network",
+    "topic": "ファイアウォール",
+    "level": 6,
+    "question": "パケットフィルタリング型ファイアウォールにおいて、フィルタリングの判断基準として使用されないものはどれか。",
+    "choices": [
+      {
+        "id": "a",
+        "text": "送信元IPアドレス",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "送信元IPアドレスはパケットフィルタリングの基本的な判断基準の一つです。特定のIPからの通信を許可・拒否できます。",
+          "analogy": "手紙の「差出人の住所」を見て受け取るかどうか判断するのと同じです。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "宛先ポート番号",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "宛先ポート番号はパケットフィルタリングの基本的な判断基準です。例えば80番ポート（HTTP）のみ許可する設定ができます。",
+          "analogy": "建物のどの入り口（ポート）から入ろうとしているかを確認するのと同じです。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "通信データの内容（ペイロード）",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "パケットフィルタリング型ファイアウォールはIPヘッダやTCP/UDPヘッダの情報（IPアドレス、ポート番号、プロトコル種別）で判断し、データの中身（ペイロード）は検査しません。データ内容の検査にはアプリケーションゲートウェイ型やWAFが必要です。",
+          "analogy": "パケットフィルタリングは「封筒の宛名」だけを見る郵便検査で、「手紙の中身」は読みません。中身を検査するのはアプリケーションゲートウェイ型です。",
+          "deepDive": "ファイアウォールの種類には、パケットフィルタリング型、ステートフルインスペクション型、アプリケーションゲートウェイ型（プロキシ型）、次世代ファイアウォール（NGFW）があり、高度なものほどデータ内容まで検査できます。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "プロトコル種別",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "プロトコル種別（TCP、UDP、ICMPなど）はパケットフィルタリングの判断基準です。特定のプロトコルのみ許可する設定ができます。",
+          "analogy": "手紙の配送方法（書留、速達など）を確認するのと同じです。"
+        }
+      }
+    ],
+    "overallExplanation": {
+      "summary": "パケットフィルタリング型ファイアウォールはヘッダ情報（IP、ポート、プロトコル）で通信を制御しますが、データの中身は検査しません。",
+      "keyPoint": "パケットフィルタリング＝ヘッダ情報のみ検査（封筒の宛名だけ見る）",
+      "relatedTopics": ["ステートフルインスペクション", "WAF", "プロキシサーバ", "DMZ"],
+      "studyTip": "ファイアウォールの種類と検査範囲の違いを表にまとめて覚えましょう。"
+    },
+    "tags": ["ファイアウォール", "パケットフィルタリング", "セキュリティ"]
+  },
+  {
+    "questionId": "q-net-039",
+    "examType": "科目A",
+    "category": "テクノロジ系",
+    "subcategory": "network",
+    "topic": "VPN",
+    "level": 7,
+    "question": "IPsecによるVPN接続において、データの暗号化と認証を行うプロトコルはどれか。",
+    "choices": [
+      {
+        "id": "a",
+        "text": "AH（Authentication Header）のみ",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "AHは認証（改ざん検知）のみを提供し、データの暗号化は行いません。暗号化と認証の両方を行うにはESPが必要です。",
+          "analogy": "AHは「封筒に封印シール」を貼るようなもので、中身は見えてしまいます（暗号化されない）。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "ESP（Encapsulating Security Payload）",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "ESPはIPsecで暗号化と認証の両方を提供するプロトコルです。ペイロードを暗号化してデータの機密性を保ち、同時にデータの完全性も検証します。",
+          "analogy": "ESPは「中身が見えない暗号化された封筒に封印シール」を貼るようなもので、盗み見（盗聴）も改ざんも防ぎます。",
+          "deepDive": "IPsecにはトランスポートモード（ペイロードのみ暗号化）とトンネルモード（IPヘッダごと暗号化）の2つの動作モードがあります。VPN接続ではトンネルモードが一般的です。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "IKE（Internet Key Exchange）",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "IKEは暗号化に使う鍵の交換を安全に行うためのプロトコルで、データそのものの暗号化・認証は行いません。",
+          "analogy": "IKEは「金庫の鍵を安全に受け渡す仕組み」であり、金庫そのもの（ESP）とは別です。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "SSL/TLS",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "SSL/TLSはIPsecとは異なるプロトコルで、主にHTTPSなどのアプリケーション層の暗号化に使用されます。IPsecはネットワーク層で動作します。",
+          "analogy": "SSL/TLSは「Webサイト用の暗号化トンネル」で、IPsecの「ネットワーク全体のトンネル」とは使い方が異なります。"
+        }
+      }
+    ],
+    "overallExplanation": {
+      "summary": "IPsecのESPはデータの暗号化と認証の両方を提供するプロトコルです。AHは認証のみ、IKEは鍵交換を担当します。",
+      "keyPoint": "ESP＝暗号化＋認証、AH＝認証のみ、IKE＝鍵交換",
+      "relatedTopics": ["IPsec", "トンネルモード", "SSL-VPN", "暗号化"],
+      "studyTip": "IPsecの3つの構成要素（ESP、AH、IKE）の役割を整理して覚えましょう。"
+    },
+    "tags": ["VPN", "IPsec", "ESP", "暗号化"]
+  },
+  {
+    "questionId": "q-net-040",
+    "examType": "科目A",
+    "category": "テクノロジ系",
+    "subcategory": "network",
+    "topic": "QoS",
+    "level": 7,
+    "question": "ネットワークのQoS（Quality of Service）において、特定の種類のパケットを他のパケットより優先して転送する制御方式はどれか。",
+    "choices": [
+      {
+        "id": "a",
+        "text": "ベストエフォート",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "ベストエフォートは「最善を尽くすが保証しない」方式で、優先制御は行いません。一般的なインターネット接続はベストエフォート方式です。",
+          "analogy": "ベストエフォートは「先着順の普通郵便」で、重要な手紙もそうでない手紙も同じ扱いです。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "優先制御（プライオリティキューイング）",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "優先制御（プライオリティキューイング）は、パケットに優先度を設定し、高優先度のパケットを先に転送する方式です。音声や映像などリアルタイム性が求められるトラフィックに高い優先度を与えます。",
+          "analogy": "優先制御は「遊園地のファストパス」のようなもので、VIPチケット（高優先パケット）を持っている人は列に並ばずに先に乗れます。",
+          "deepDive": "QoSの実現方式にはIntServ（帯域予約型）とDiffServ（差別化サービス型）があります。DiffServではIPヘッダのDSCPフィールドで優先度を設定します。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "ポーリング",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "ポーリングは端末を順番に確認して送信権を与える方式で、QoSの優先制御とは異なる概念です。",
+          "analogy": "ポーリングは「先生が生徒を順番に指名する」方式で、優先度に関係なく順番に回します。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "CSMA/CD",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "CSMA/CDは有線Ethernetのアクセス制御方式で、衝突検知と再送を行います。QoSの優先制御とは目的が異なります。",
+          "analogy": "CSMA/CDは「話し始めてから他の人と被ったら一旦やめて再度話す」という会話ルールで、優先順位の仕組みではありません。"
+        }
+      }
+    ],
+    "overallExplanation": {
+      "summary": "QoSの優先制御は特定のトラフィックに高い優先度を設定して優先転送する方式です。VoIPや動画配信など遅延に敏感なサービスで重要です。",
+      "keyPoint": "QoS＝通信品質の保証。優先制御で重要なパケットを先に送る",
+      "relatedTopics": ["DiffServ", "IntServ", "帯域制御", "VoIP"],
+      "studyTip": "QoSの3つの制御（優先制御・帯域制御・シェーピング）を押さえましょう。"
+    },
+    "tags": ["QoS", "優先制御", "ネットワーク管理"]
+  },
+  {
+    "questionId": "q-net-041",
+    "examType": "科目A",
+    "category": "テクノロジ系",
+    "subcategory": "network",
+    "topic": "負荷分散",
+    "level": 7,
+    "question": "Webサーバの負荷分散を行う機器として、クライアントからのリクエストを複数のサーバに振り分ける装置を何と呼ぶか。",
+    "choices": [
+      {
+        "id": "a",
+        "text": "ロードバランサ",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "ロードバランサ（負荷分散装置）はクライアントからのリクエストを複数のサーバに振り分けることで、処理負荷を分散し、可用性と性能を向上させます。",
+          "analogy": "ロードバランサは「スーパーのレジ誘導係」のようなもので、空いているレジにお客さんを案内して、特定のレジに行列ができないようにします。",
+          "deepDive": "負荷分散方式にはラウンドロビン（順番に振り分け）、最少接続数方式（接続が少ないサーバ優先）、重み付け方式（サーバ能力に応じて配分）などがあります。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "プロキシサーバ",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "プロキシサーバはクライアントの代理としてサーバにアクセスする中継サーバです。負荷分散が主目的ではありません。",
+          "analogy": "プロキシは「秘書が代わりに電話をかける」ようなもので、仕事を分配する係（ロードバランサ）とは別の役割です。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "CDN",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "CDN（Content Delivery Network）はコンテンツを地理的に分散配置して高速配信するネットワークで、ロードバランサとは異なる概念です。",
+          "analogy": "CDNは「全国に支店を置く」ことで近くの支店から商品を届ける仕組みです。本社内の仕事を分担する（ロードバランサ）のとは異なります。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "DNSサーバ",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "DNSサーバは名前解決を行うサーバです。DNS ラウンドロビンで簡易的な負荷分散は可能ですが、専用の負荷分散装置はロードバランサです。",
+          "analogy": "DNSは「電話帳」で、電話を代わりにかける仕組みではありません。"
+        }
+      }
+    ],
+    "overallExplanation": {
+      "summary": "ロードバランサはリクエストを複数のサーバに振り分けて負荷を分散する装置です。可用性と性能の向上に貢献します。",
+      "keyPoint": "ロードバランサ＝複数サーバへのリクエスト振り分け装置",
+      "relatedTopics": ["冗長化", "可用性", "ラウンドロビン", "CDN"],
+      "studyTip": "ロードバランサの振り分け方式（ラウンドロビン、最少接続数等）を覚えましょう。"
+    },
+    "tags": ["負荷分散", "ロードバランサ", "サーバ管理"]
+  },
+  {
+    "questionId": "q-net-042",
+    "examType": "科目A",
+    "category": "テクノロジ系",
+    "subcategory": "network",
+    "topic": "IPv6",
+    "level": 8,
+    "question": "IPv6のアドレス長として正しいものはどれか。",
+    "choices": [
+      {
+        "id": "a",
+        "text": "32ビット",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "32ビットはIPv4のアドレス長です。IPv4は約43億個のアドレスしか持てず、枯渇問題が発生しています。",
+          "analogy": "32ビットは「4桁の電話番号」のようなもので、世界中の人に割り当てるには足りません。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "64ビット",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "64ビットはIPv6のアドレスの半分（ネットワーク部またはインターフェース部）に相当しますが、アドレス全体の長さではありません。",
+          "analogy": "住所の「市区町村まで」は分かっても、「番地まで」を含めないと完全な住所にはなりません。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "128ビット",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "IPv6のアドレス長は128ビットです。これにより約3.4×10^38個のアドレスを使用でき、IPv4の枯渇問題を根本的に解決します。表記は16進数をコロンで区切ります（例: 2001:0db8::1）。",
+          "analogy": "IPv4が「4桁の電話番号」なら、IPv6は「32桁の電話番号」のようなもので、地球上の砂粒一つ一つにアドレスを割り振ってもまだ余裕があるほど膨大な数です。",
+          "deepDive": "IPv6ではNATが不要になり、エンドツーエンドの通信が可能になります。IPsecの実装が必須で、自動設定機能（SLAAC）も標準搭載されています。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "256ビット",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "256ビットはIPv6のアドレス長ではありません。暗号化の鍵長（AES-256など）と混同しないようにしましょう。",
+          "analogy": "256ビットは「暗号の鍵の長さ」で使われる数字で、住所（IPアドレス）の桁数とは関係ありません。"
+        }
+      }
+    ],
+    "overallExplanation": {
+      "summary": "IPv6は128ビットのアドレス空間を持ち、IPv4（32ビット）の枯渇問題を解決するために開発されました。",
+      "keyPoint": "IPv4＝32ビット（約43億個）、IPv6＝128ビット（約3.4×10^38個）",
+      "relatedTopics": ["IPv4", "アドレス枯渇", "SLAAC", "デュアルスタック"],
+      "studyTip": "IPv4とIPv6のアドレス長の違いは頻出です。32ビットと128ビットをセットで覚えましょう。"
+    },
+    "tags": ["IPv6", "IPアドレス", "次世代ネットワーク"]
+  },
+  {
+    "questionId": "q-net-043",
+    "examType": "科目A",
+    "category": "テクノロジ系",
+    "subcategory": "network",
+    "topic": "DMZ",
+    "level": 8,
+    "question": "DMZ（非武装地帯）の設置目的として最も適切なものはどれか。",
+    "choices": [
+      {
+        "id": "a",
+        "text": "インターネットに公開するサーバを内部ネットワークから分離し、セキュリティを確保する",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "DMZはファイアウォールで区切られた中間ネットワークで、Webサーバやメールサーバなどの公開サーバを配置します。外部からDMZへのアクセスは許可しつつ、DMZから内部ネットワークへのアクセスを制限することで内部を保護します。",
+          "analogy": "DMZは「城の外堀と内堀の間の区域」のようなものです。来客（外部ユーザー）は外堀の中まで入れますが、内堀の中（社内ネットワーク）には入れません。",
+          "deepDive": "DMZは2台のファイアウォールで構成するのが理想的です（外側FW＝インターネット⇔DMZ、内側FW＝DMZ⇔内部LAN）。万が一DMZのサーバが攻撃されても、内部ネットワークは内側FWで守られます。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "社内ネットワーク内の通信を暗号化する",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "通信の暗号化はVPNやSSL/TLSの役割です。DMZはネットワークセグメントの分離を目的としており、暗号化機能は持ちません。",
+          "analogy": "DMZは「区域を分ける壁」であり、「手紙を暗号化する仕組み」ではありません。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "無線LANの電波範囲を制限する",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "電波範囲の制限は物理的な設計の問題であり、DMZとは関係ありません。",
+          "analogy": "DMZはネットワークの「区画分け」であり、電波の届く範囲とは別の話です。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "社内のIPアドレスを外部に隠蔽する",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "IPアドレスの隠蔽はNAT/NAPTの機能です。DMZはネットワークの分離を行いますが、アドレス変換機能はファイアウォールやNAT装置が担います。",
+          "analogy": "住所を隠すのは「仲介人（NAT）」の仕事であり、区域の柵（DMZ）とは別の仕事です。"
+        }
+      }
+    ],
+    "overallExplanation": {
+      "summary": "DMZは外部公開サーバを内部ネットワークから分離する中間ネットワークです。万が一公開サーバが侵害されても内部への被害を防ぎます。",
+      "keyPoint": "DMZ＝公開サーバ用の隔離ネットワーク（城の外堀と内堀の間）",
+      "relatedTopics": ["ファイアウォール", "ネットワークセグメント", "セキュリティ設計", "多層防御"],
+      "studyTip": "DMZの構成図を描いて理解しましょう。インターネット⇔FW⇔DMZ⇔FW⇔内部LAN。"
+    },
+    "tags": ["DMZ", "ネットワークセキュリティ", "ファイアウォール"]
+  },
+  {
+    "questionId": "q-net-044",
+    "examType": "科目A",
+    "category": "テクノロジ系",
+    "subcategory": "network",
+    "topic": "プロキシサーバ",
+    "level": 8,
+    "question": "リバースプロキシの機能として適切なものはどれか。",
+    "choices": [
+      {
+        "id": "a",
+        "text": "社内クライアントの代わりに外部Webサイトにアクセスする",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "これはフォワードプロキシ（通常のプロキシ）の機能です。クライアント側に設置され、クライアントの代理でインターネットにアクセスします。",
+          "analogy": "フォワードプロキシは「秘書がお使いに行ってくれる」仕組みで、リバースプロキシの「受付が来客を案内する」のとは方向が逆です。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "外部からのリクエストを受けて、背後のWebサーバに転送する",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "リバースプロキシはWebサーバの前面に配置され、外部クライアントからのリクエストを代理で受け付け、背後の実際のサーバに転送します。負荷分散、キャッシュ、SSL終端、セキュリティ向上などの効果があります。",
+          "analogy": "リバースプロキシは「会社の受付」のようなものです。来客（外部リクエスト）はまず受付に行き、受付が適切な担当者（サーバ）に取り次ぎます。来客は担当者の名前や場所を知る必要がありません。",
+          "deepDive": "代表的なリバースプロキシソフトウェアにはNginx、Apache、HAProxyがあります。SSL/TLSの暗号化・復号をリバースプロキシで行う（SSL終端）ことで、バックエンドサーバの負荷を軽減できます。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "ドメイン名からIPアドレスを解決する",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "名前解決はDNSサーバの機能であり、リバースプロキシの役割ではありません。",
+          "analogy": "DNSは「電話帳」、リバースプロキシは「受付」で、まったく異なる役割です。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "VPN接続のトンネルを確立する",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "VPNトンネルの確立はVPNゲートウェイの機能です。リバースプロキシはHTTPリクエストの中継を行うもので、VPN機能は持ちません。",
+          "analogy": "VPNは「秘密のトンネルを掘る」こと、リバースプロキシは「入口で来客を案内する」ことで、目的が異なります。"
+        }
+      }
+    ],
+    "overallExplanation": {
+      "summary": "リバースプロキシは外部からのリクエストを受けて背後のサーバに転送する仕組みです。負荷分散、キャッシュ、セキュリティ向上に活用されます。",
+      "keyPoint": "フォワードプロキシ＝クライアント側、リバースプロキシ＝サーバ側",
+      "relatedTopics": ["フォワードプロキシ", "ロードバランサ", "SSL終端", "CDN"],
+      "studyTip": "プロキシの方向を覚えましょう。フォワード＝内→外（クライアント代理）、リバース＝外→内（サーバ代理）。"
+    },
+    "tags": ["プロキシサーバ", "リバースプロキシ", "Webサーバ"]
+  },
+  {
+    "questionId": "q-net-045",
+    "examType": "科目A",
+    "category": "テクノロジ系",
+    "subcategory": "network",
+    "topic": "SDN",
+    "level": 9,
+    "question": "SDN（Software-Defined Networking）の特徴として最も適切なものはどれか。",
+    "choices": [
+      {
+        "id": "a",
+        "text": "ネットワーク機器の制御をソフトウェアで一元管理し、柔軟にネットワークを構成変更できる",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "SDNはネットワーク機器のデータ転送機能（データプレーン）と制御機能（コントロールプレーン）を分離し、ソフトウェアベースのコントローラで一元的にネットワークを管理します。これにより物理的な設定変更なしに柔軟なネットワーク制御が可能になります。",
+          "analogy": "SDNは「交通管制センター」のようなもので、各交差点の信号機（ネットワーク機器）を中央から一括制御できます。従来は各信号機を個別に設定する必要がありました。",
+          "deepDive": "SDNの代表的なプロトコルはOpenFlowです。コントローラがフローテーブルを各スイッチに配信し、パケットの転送ルールを動的に制御します。クラウド環境やデータセンターで広く採用されています。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "全ての通信を暗号化して安全性を高める",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "通信の暗号化はSDNの主要な特徴ではありません。SDNはネットワーク制御の柔軟性と効率化を目的とした技術です。",
+          "analogy": "SDNは「交通管制の仕組み」であり、「車を防弾仕様にする（暗号化）」こととは目的が異なります。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "無線LANの電波を自動的に最適化する",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "無線LANの電波最適化はSDNの直接的な機能ではありません。SDNは主に有線・仮想ネットワークの制御に使用されます。",
+          "analogy": "SDNは「道路網の交通管制」であり、「電波（空中の通路）の調整」とは異なるレイヤーの話です。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "ネットワーク帯域を物理的に増設する",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "帯域の物理的な増設はケーブルや機器のアップグレードであり、ソフトウェアで行うSDNの範囲外です。",
+          "analogy": "SDNは「既存の道路の信号制御を改善する」ことで、「新しい道路を建設する（帯域増設）」こととは異なります。"
+        }
+      }
+    ],
+    "overallExplanation": {
+      "summary": "SDNはネットワーク機器の制御をソフトウェアで一元管理する技術です。柔軟な構成変更と効率的な運用が可能になります。",
+      "keyPoint": "SDN＝データプレーンとコントロールプレーンの分離、ソフトウェアによる一元制御",
+      "relatedTopics": ["OpenFlow", "NFV", "クラウドネットワーク", "仮想化"],
+      "studyTip": "SDNの「データプレーン（転送）とコントロールプレーン（制御）の分離」という基本概念を理解しましょう。"
+    },
+    "tags": ["SDN", "ネットワーク仮想化", "OpenFlow"]
+  },
+  {
+    "questionId": "q-net-046",
+    "examType": "科目A",
+    "category": "テクノロジ系",
+    "subcategory": "network",
+    "topic": "クラウドネットワーク",
+    "level": 9,
+    "question": "クラウドサービスにおいて、仮想的なプライベートネットワーク空間を提供し、利用者がIPアドレス範囲やサブネット構成を自由に設計できるサービスはどれか。",
+    "choices": [
+      {
+        "id": "a",
+        "text": "CDN（Content Delivery Network）",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "CDNはコンテンツを地理的に分散配置して高速配信するサービスです。ネットワーク空間の設計機能は提供しません。",
+          "analogy": "CDNは「全国の配送拠点」から商品を届けるサービスで、自分の「私有地（ネットワーク）を設計する」サービスではありません。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "VPC（Virtual Private Cloud）",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "VPCはクラウド上に論理的に隔離されたプライベートネットワーク空間を提供するサービスです。利用者はIPアドレス範囲、サブネット、ルーティング、セキュリティグループを自由に設計できます。",
+          "analogy": "VPCは「クラウド上にある自分専用の土地」のようなもので、そこに建物（サーバ）を建て、道路（ネットワーク）や門（セキュリティ）を自由に設計できます。",
+          "deepDive": "主要クラウドではAWS VPC、Azure VNet、Google Cloud VPCとして提供されています。パブリックサブネットとプライベートサブネットを使い分け、NATゲートウェイやインターネットゲートウェイで外部接続を制御します。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "DNS（Domain Name System）",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "DNSはドメイン名とIPアドレスの変換サービスであり、ネットワーク空間の設計サービスではありません。",
+          "analogy": "DNSは「住所録サービス」であり、「土地の区画整理」をするサービスではありません。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "WAF（Web Application Firewall）",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "WAFはWebアプリケーションへの攻撃（SQLインジェクション、XSSなど）を防ぐセキュリティサービスであり、ネットワーク設計機能はありません。",
+          "analogy": "WAFは「Webサイトの警備員」であり、「土地を整備する（ネットワーク設計）」役割ではありません。"
+        }
+      }
+    ],
+    "overallExplanation": {
+      "summary": "VPCはクラウド上に利用者専用のプライベートネットワーク空間を構築できるサービスです。IPアドレスやサブネットを自由に設計できます。",
+      "keyPoint": "VPC＝クラウド上の自分専用ネットワーク空間（自由に設計可能）",
+      "relatedTopics": ["サブネット", "セキュリティグループ", "NATゲートウェイ", "クラウドアーキテクチャ"],
+      "studyTip": "VPCはクラウドの基盤サービスです。パブリック/プライベートサブネットの使い分けを理解しましょう。"
+    },
+    "tags": ["VPC", "クラウド", "仮想ネットワーク"]
+  },
+  {
+    "questionId": "q-net-047",
+    "examType": "科目A",
+    "category": "テクノロジ系",
+    "subcategory": "network",
+    "topic": "BGP",
+    "level": 9,
+    "question": "インターネット上のAS（自律システム）間で経路情報を交換するために使用されるルーティングプロトコルはどれか。",
+    "choices": [
+      {
+        "id": "a",
+        "text": "OSPF",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "OSPFはAS内部で使用されるIGP（Interior Gateway Protocol）であり、AS間の経路交換には使用されません。",
+          "analogy": "OSPFは「市内の道案内」で、OSPFだけでは「都道府県をまたぐルート」は案内できません。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "RIP",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "RIPもAS内部で使用されるIGPです。ホップ数最大15の制限があり、大規模なAS間ルーティングには使用できません。",
+          "analogy": "RIPは「小さな町の道案内」で、全国規模の交通管制には向きません。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "BGP",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "BGP（Border Gateway Protocol）はAS間の経路交換に使用されるEGP（Exterior Gateway Protocol）です。インターネット全体の経路制御を担う最も重要なプロトコルの一つで、パスベクトル型に分類されます。",
+          "analogy": "BGPは「国際線の航空路を決める管制塔」のようなもので、各国（AS）の空港をどうつなぐかを調整します。OSPFやRIPが国内線の路線を決めるのとは規模が異なります。",
+          "deepDive": "BGPはTCPポート179で通信し、AS_PATHなどの属性に基づいて最適経路を選択します。iBGP（同一AS内）とeBGP（異なるAS間）があります。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "IGMP",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "IGMP（Internet Group Management Protocol）はマルチキャストグループの管理に使用されるプロトコルで、ルーティングプロトコルではありません。",
+          "analogy": "IGMPは「グループチャットの参加管理」であり、道案内（ルーティング）とは別の仕組みです。"
+        }
+      }
+    ],
+    "overallExplanation": {
+      "summary": "BGPはAS（自律システム）間の経路交換に使用されるEGPで、インターネットの基幹ルーティングを担います。",
+      "keyPoint": "IGP（AS内部）：OSPF/RIP ↔ EGP（AS間）：BGP",
+      "relatedTopics": ["AS", "OSPF", "パスベクトル型", "インターネットバックボーン"],
+      "studyTip": "IGP（内部）とEGP（外部）の違い、そしてBGPがインターネットの「骨格」であることを理解しましょう。"
+    },
+    "tags": ["BGP", "ルーティング", "AS", "EGP"]
+  },
+  {
+    "questionId": "q-net-048",
+    "examType": "科目A",
+    "category": "テクノロジ系",
+    "subcategory": "network",
+    "topic": "ゼロトラスト",
+    "level": 10,
+    "question": "ゼロトラストネットワークの基本的な考え方として最も適切なものはどれか。",
+    "choices": [
+      {
+        "id": "a",
+        "text": "社内ネットワークからのアクセスは信頼し、社外からのアクセスのみ検証する",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "これは従来の境界型セキュリティの考え方です。ゼロトラストでは社内からの通信も信頼しません。",
+          "analogy": "これは「城壁の中にいる人は全員味方」という古い考え方で、内部犯行に弱い欠点があります。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "ネットワークの内部・外部を問わず、全てのアクセスを検証し、最小権限の原則で制御する",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "ゼロトラストは「何も信頼しない（Never Trust, Always Verify）」を原則とし、ネットワークの内部外部を問わず全アクセスの認証・認可・検証を行います。最小権限の原則により必要最小限のアクセス権のみ付与します。",
+          "analogy": "ゼロトラストは「全員がIDカードを持ち、部屋に入るたびに毎回認証を受ける」ビルのようなものです。社員でも来客でも同じように毎回チェックされます。従来型は「ビルに入ったら中は自由」でした。",
+          "deepDive": "ゼロトラストの実現にはIAM（ID管理）、MFA（多要素認証）、マイクロセグメンテーション、SASE（Secure Access Service Edge）などの技術が使われます。NISTのSP 800-207がゼロトラストアーキテクチャの標準文書です。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "ファイアウォールを多重化して防御の層を増やす",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "ファイアウォールの多重化は多層防御（Defense in Depth）の手法であり、ゼロトラストの本質とは異なります。ゼロトラストは「境界ではなくアイデンティティで制御する」考え方です。",
+          "analogy": "城壁を何重にしても「中に入ったら自由」なら内部犯行は防げません。ゼロトラストは城壁に頼らず「全員を常に確認する」方式です。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "VPNで全ての通信を暗号化する",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "VPNによる暗号化は通信の機密性を守る手段ですが、ゼロトラストの本質は「全アクセスの検証」であり、暗号化だけでは不十分です。",
+          "analogy": "暗号化は「封筒を使う」ことですが、そもそも「誰が手紙を送っているか毎回確認する」ことがゼロトラストの本質です。"
+        }
+      }
+    ],
+    "overallExplanation": {
+      "summary": "ゼロトラストは内部外部を問わず全アクセスを検証する考え方です。従来の境界型セキュリティ（城壁モデル）に代わる新しいアプローチです。",
+      "keyPoint": "ゼロトラスト＝「Never Trust, Always Verify」＝全アクセスを検証、最小権限",
+      "relatedTopics": ["IAM", "多要素認証", "マイクロセグメンテーション", "SASE"],
+      "studyTip": "ゼロトラストと境界型セキュリティの違いを比較して理解しましょう。テレワークの普及で注目されています。"
+    },
+    "tags": ["ゼロトラスト", "ネットワークセキュリティ", "最新技術"]
+  },
+  {
+    "questionId": "q-net-049",
+    "examType": "科目A",
+    "category": "テクノロジ系",
+    "subcategory": "network",
+    "topic": "NFV",
+    "level": 10,
+    "question": "NFV（Network Functions Virtualization）に関する記述として最も適切なものはどれか。",
+    "choices": [
+      {
+        "id": "a",
+        "text": "物理的な専用機器で実現していたネットワーク機能を、汎用サーバ上の仮想マシンとしてソフトウェアで実現する技術",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "NFVは従来専用ハードウェアで実現していたルータ、ファイアウォール、ロードバランサなどのネットワーク機能を、汎用サーバ上の仮想マシンとしてソフトウェアで実現する技術です。導入コスト削減と柔軟な展開が可能になります。",
+          "analogy": "NFVは「専用の機械（家電）を全部スマートフォンのアプリに置き換える」ようなもので、カメラもラジオも電卓も一台のスマホ（汎用サーバ）で動かせます。",
+          "deepDive": "NFVはETSIが標準化を推進しています。SDNと組み合わせて使われることが多く、SDNが「制御の一元化」、NFVが「機能の仮想化」を担います。通信事業者のネットワーク効率化に大きく貢献しています。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "ネットワーク全体の帯域幅を物理的に増やす技術",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "帯域幅を物理的に増やすのはケーブルや回線のアップグレードであり、NFVの目的とは異なります。NFVは既存の機能をソフトウェアで実現する技術です。",
+          "analogy": "道路を拡張する（帯域増加）のではなく、交通管理の仕組みをデジタル化する（NFV）のです。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "IPv4アドレスをIPv6アドレスに自動変換する技術",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "IPv4/IPv6の変換はデュアルスタックやトンネリングなどの移行技術であり、NFVとは直接関係ありません。",
+          "analogy": "住所の形式を変える（IP変換）のと、郵便局の業務をデジタル化する（NFV）のは別の話です。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "ネットワークケーブルを無線に置き換える技術",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "有線から無線への置き換えは無線LAN技術であり、NFVとは関係ありません。NFVは機能の仮想化であり、伝送媒体の変更ではありません。",
+          "analogy": "ケーブルを電波に変えるのではなく、専用機器をソフトウェアに変えるのがNFVです。"
+        }
+      }
+    ],
+    "overallExplanation": {
+      "summary": "NFVは専用ハードウェアで実現していたネットワーク機能を汎用サーバ上のソフトウェアで仮想的に実現する技術です。",
+      "keyPoint": "NFV＝ネットワーク機能の仮想化（専用機→汎用サーバのソフトウェア）",
+      "relatedTopics": ["SDN", "仮想化", "クラウド", "ETSI"],
+      "studyTip": "SDN（制御の一元化）とNFV（機能の仮想化）をセットで理解しましょう。両者は補完関係にあります。"
+    },
+    "tags": ["NFV", "仮想化", "ネットワーク最新技術"]
+  },
+  {
+    "questionId": "q-net-050",
+    "examType": "科目A",
+    "category": "テクノロジ系",
+    "subcategory": "network",
+    "topic": "ネットワーク冗長化",
+    "level": 10,
+    "question": "ネットワークスイッチの冗長化において、ループを防止しつつ冗長経路を確保するためのプロトコルはどれか。",
+    "choices": [
+      {
+        "id": "a",
+        "text": "STP（Spanning Tree Protocol）",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "STP（スパニングツリープロトコル）は、冗長化されたネットワークでループ（無限循環）を防止するために論理的にポートをブロックし、障害時には自動的に迂回経路を有効化するプロトコルです。",
+          "analogy": "STPは「迷路で行き止まりを作って一本道にする」ようなもので、通常は最短ルートだけ使い、その道が壊れたら別の道を開通させます。",
+          "deepDive": "STPはIEEE 802.1Dで標準化されています。収束時間（経路切替時間）が30〜50秒と長いため、高速版のRSTP（Rapid STP、802.1w）やMSTP（802.1s）が開発されています。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "OSPF",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "OSPFはL3のルーティングプロトコルであり、L2スイッチのループ防止には使用されません。",
+          "analogy": "OSPFは「道路の経路を決めるカーナビ」であり、「交差点でグルグル回る（ループ）を止める」のはSTPの仕事です。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "SNMP",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "SNMP（Simple Network Management Protocol）はネットワーク機器の監視・管理に使うプロトコルで、ループ防止機能はありません。",
+          "analogy": "SNMPは「道路の交通量を監視するカメラ」であり、交通整理（ループ防止）はしません。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "VRRP",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "VRRP（Virtual Router Redundancy Protocol）はデフォルトゲートウェイ（ルータ）の冗長化プロトコルであり、スイッチのループ防止とは異なります。",
+          "analogy": "VRRPは「正門の警備員を2人配置して、1人が倒れたらもう1人が代わる」仕組みで、通路のループを防ぐ仕組みとは異なります。"
+        }
+      }
+    ],
+    "overallExplanation": {
+      "summary": "STPはL2スイッチの冗長構成においてループを防止しつつ、障害時に迂回経路を提供するプロトコルです。",
+      "keyPoint": "STP＝スイッチのループ防止（論理的にポートをブロック）、VRRP＝ルータの冗長化",
+      "relatedTopics": ["RSTP", "VRRP", "リンクアグリゲーション", "ネットワーク冗長化"],
+      "studyTip": "L2冗長化＝STP、L3冗長化＝VRRPと層別に整理して覚えましょう。"
+    },
+    "tags": ["STP", "冗長化", "ループ防止", "スイッチ"]
+  }
+]
