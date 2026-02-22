@@ -1,0 +1,607 @@
+[
+  {
+    "questionId": "q-cl-023",
+    "examType": "科目A",
+    "category": "ストラテジ系",
+    "subcategory": "企業と法務",
+    "topic": "下請法",
+    "level": 3,
+    "question": "下請代金支払遅延等防止法（下請法）において、親事業者に義務付けられているものはどれか。",
+    "choices": [
+      {
+        "id": "a",
+        "text": "下請事業者に対する発注書面の交付",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "下請法では、親事業者に対して発注の際に書面（3条書面）を交付する義務を課しています。これにより、下請取引の透明性を確保し、下請事業者を保護します。",
+          "analogy": "口約束だけでは「言った言わない」のトラブルになるので、必ず書面で発注内容を明確にしなければなりません。",
+          "deepDive": "親事業者の4つの義務：①書面の交付義務、②書類の作成・保存義務（2年間）、③下請代金の支払期日を定める義務、④遅延利息の支払義務。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "下請事業者の経営状態の監査",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "下請事業者の経営監査は下請法の義務ではありません。下請法は取引の公正さを確保する法律です。",
+          "analogy": "親事業者は「公正な取引」をする義務があるのであり、下請けの経営を監査する義務はありません。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "下請事業者への利益保証",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "利益保証は下請法の義務ではありません。下請法は不公正な取引（不当な値引き、支払い遅延等）を防止する法律です。",
+          "analogy": "「儲かるように保証する」義務はなく、「不当に搾取しない」義務があります。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "下請事業者の従業員の福利厚生",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "従業員の福利厚生は下請事業者自身の責任であり、親事業者の義務ではありません。",
+          "analogy": "取引先の従業員の福利厚生は、その会社が自分で管理すべきことです。"
+        }
+      }
+    ],
+    "overallExplanation": {
+      "summary": "下請法は、親事業者と下請事業者の取引を公正にするための法律です。親事業者には書面交付義務、支払期日設定義務などが課されています。",
+      "keyPoint": "下請法の親事業者の4義務：書面交付、書類保存、支払期日設定、遅延利息支払",
+      "relatedTopics": ["独占禁止法", "公正取引", "契約"],
+      "studyTip": "下請法＝「弱い立場の下請けを守る法律」。親事業者の義務と禁止行為を覚えましょう。"
+    },
+    "tags": ["下請法", "親事業者義務", "法務"]
+  },
+  {
+    "questionId": "q-cl-024",
+    "examType": "科目A",
+    "category": "ストラテジ系",
+    "subcategory": "企業と法務",
+    "topic": "製造物責任法（PL法）",
+    "level": 4,
+    "question": "製造物責任法（PL法）の説明として、最も適切なものはどれか。",
+    "choices": [
+      {
+        "id": "a",
+        "text": "製造物の欠陥により損害が生じた場合、製造者の過失を立証しなくても損害賠償を請求できる",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "PL法は無過失責任主義を採用しており、被害者は製造者の過失を証明する必要がなく、製品に欠陥があったこと、損害が生じたこと、欠陥と損害の因果関係を証明すれば賠償請求できます。",
+          "analogy": "「メーカーが注意していたか」は問わず、「製品に欠陥があって怪我をした」という事実だけで賠償請求できるので、消費者の保護が厚くなります。",
+          "deepDive": "ソフトウェア単体はPL法の「製造物」（動産）に該当しませんが、ソフトウェアが組み込まれた製品（自動車、家電等）はPL法の対象となります。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "ソフトウェアの不具合による損害は全てPL法の対象となる",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "PL法の「製造物」は「動産」に限定されており、ソフトウェア単体は対象外です。ただしハードウェアに組み込まれた場合は対象になりえます。",
+          "analogy": "パッケージソフト自体はPL法の対象外ですが、そのソフトで制御される機械が暴走した場合は対象になりえます。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "製造者の過失を被害者が証明する必要がある",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "PL法の最大のポイントは過失の証明が不要な点です。欠陥と損害の因果関係を証明すれば足ります。",
+          "analogy": "「メーカーが手を抜いたことの証明」は不要で、「製品に欠陥があった証明」だけでOKです。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "サービスの提供による損害もPL法の対象となる",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "PL法の対象は「製造物（動産）」であり、サービスは対象外です。サービスによる損害は一般の不法行為法で対処します。",
+          "analogy": "PL法は「モノ」の欠陥を対象としており、「サービス」の不備は別の法律で扱います。"
+        }
+      }
+    ],
+    "overallExplanation": {
+      "summary": "PL法は製造物の欠陥による損害について、無過失責任の原則に基づき、消費者の保護を図る法律です。ソフトウェア単体は対象外ですがハードウェア組込みは対象です。",
+      "keyPoint": "PL法＝無過失責任（欠陥の証明のみで賠償請求可能）。対象は動産（製造物）のみ",
+      "relatedTopics": ["消費者保護", "製品安全", "損害賠償"],
+      "studyTip": "PL法のポイントは「過失の証明不要」と「動産のみ対象（ソフト単体は対象外）」の2つです。"
+    },
+    "tags": ["PL法", "製造物責任", "消費者保護"]
+  },
+  {
+    "questionId": "q-cl-025",
+    "examType": "科目A",
+    "category": "ストラテジ系",
+    "subcategory": "企業と法務",
+    "topic": "会計指標（ROE）",
+    "level": 6,
+    "question": "ROE（自己資本利益率）が15%、自己資本が2,000万円の企業の当期純利益はいくらか。",
+    "choices": [
+      {
+        "id": "a",
+        "text": "300万円",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "ROE = 当期純利益 / 自己資本 × 100 なので、当期純利益 = ROE × 自己資本 / 100 = 15% × 2,000万 = 300万円です。",
+          "analogy": "自分のお金（自己資本）2,000万円を使って、15%分の300万円を稼いだということです。",
+          "deepDive": "ROEは株主の視点から見た投資効率の指標です。一般にROE 8%以上が投資家に求められる水準とされています。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "200万円",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "200万円は2,000万×10%の計算結果です。ROEが15%なら300万円です。",
+          "analogy": "15%を正確に掛ける必要があります。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "133万円",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "133万円は2,000万/15の計算ですが、これはROEの計算式と異なります。ROE=利益/自己資本なので、利益=ROE×自己資本です。",
+          "analogy": "割り算ではなく掛け算で求めます。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "3,000万円",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "3,000万円は2,000万×1.5の計算結果です。15%は0.15であり、1.5ではありません。",
+          "analogy": "15%は0.15と小数に変換して計算しましょう。"
+        }
+      }
+    ],
+    "overallExplanation": {
+      "summary": "ROE（Return on Equity）は自己資本に対する利益の割合を示す指標で、株主の投資効率を評価します。当期純利益 = ROE × 自己資本で計算できます。",
+      "keyPoint": "ROE(%) = 当期純利益 / 自己資本 × 100",
+      "relatedTopics": ["ROI", "ROA", "財務分析"],
+      "studyTip": "ROE＝Return on Equity（自己資本利益率）。「自分のお金でどれだけ稼いだか」の指標です。"
+    },
+    "tags": ["ROE", "財務指標", "計算問題"]
+  },
+  {
+    "questionId": "q-cl-026",
+    "examType": "科目A",
+    "category": "ストラテジ系",
+    "subcategory": "企業と法務",
+    "topic": "情報公開制度",
+    "level": 5,
+    "question": "企業が投資家向けに経営情報を積極的に開示する活動を表す用語はどれか。",
+    "choices": [
+      {
+        "id": "a",
+        "text": "IR（Investor Relations）",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "IR（Investor Relations）は、企業が投資家や株主に対して、経営状態や財務情報、将来の見通しなどを積極的に情報開示する活動です。企業の透明性と信頼性を高めます。",
+          "analogy": "企業が投資家に対して「うちの会社はこうなっています」と定期的に報告する活動です。成績を親に報告するようなものです。",
+          "deepDive": "IR活動には、決算説明会、アニュアルレポート、統合報告書、投資家向け説明会などがあります。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "PR（Public Relations）",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "PRは一般社会・メディア向けの広報活動です。投資家に限定した情報開示活動であるIRとは対象が異なります。",
+          "analogy": "PRは「世間一般への広報」、IRは「投資家への情報開示」と対象が異なります。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "CSR",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "CSRは企業の社会的責任であり、情報開示活動そのものではありません。",
+          "analogy": "CSRは「社会への責任」、IRは「投資家への情報開示」です。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "BPR",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "BPR（Business Process Reengineering）は業務プロセスの根本的な再構築です。情報開示活動ではありません。",
+          "analogy": "BPRは業務改革の手法であり、投資家への情報開示とは全く異なります。"
+        }
+      }
+    ],
+    "overallExplanation": {
+      "summary": "IRは企業と投資家・株主の間のコミュニケーション活動です。適時・適切な情報開示により、企業の信頼性向上と適正な株価形成に寄与します。",
+      "keyPoint": "IR＝Investor Relations（投資家向け情報開示活動）",
+      "relatedTopics": ["コーポレートガバナンス", "ディスクロージャー", "企業経営"],
+      "studyTip": "IR＝「投資家との関係づくり」。会社の情報を投資家に積極的に公開する活動です。"
+    },
+    "tags": ["IR", "情報開示", "企業経営"]
+  },
+  {
+    "questionId": "q-cl-027",
+    "examType": "科目A",
+    "category": "ストラテジ系",
+    "subcategory": "企業と法務",
+    "topic": "ABC分析",
+    "level": 5,
+    "question": "在庫管理において、商品を売上高の大きい順に並べ、上位70%をA群、次の20%をB群、残りの10%をC群として管理する手法はどれか。",
+    "choices": [
+      {
+        "id": "a",
+        "text": "ABC分析",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "ABC分析は、パレートの法則（80:20の法則）に基づき、管理対象を重要度の高い順にA・B・Cの3グループに分類して、それぞれに適した管理レベルを適用する手法です。",
+          "analogy": "クローゼットの服を「よく着る服（A）」「たまに着る服（B）」「ほとんど着ない服（C）」に分けて、よく着る服は手前に置く整理術のようなものです。",
+          "deepDive": "A群は重点管理（細かい在庫管理）、B群は中程度の管理、C群は簡易管理とすることで、管理コストと在庫切れリスクのバランスを最適化します。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "FIFO（先入先出法）",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "FIFOは先に仕入れた在庫を先に出す在庫の評価方法です。商品をランク分けする手法ではありません。",
+          "analogy": "FIFOは「古い在庫から使う」ルールであり、重要度の分類ではありません。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "JIT（ジャストインタイム）",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "JITは必要なものを必要な時に必要な量だけ調達する生産方式です。商品のランク分けとは異なります。",
+          "analogy": "JITは「必要な時に必要なだけ」の調達方法で、分類手法ではありません。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "EOQ（経済的発注量）",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "EOQは発注コストと在庫保管コストを最小化する最適な1回の発注量を求める手法です。商品の分類ではありません。",
+          "analogy": "EOQは「何個ずつ注文するのが一番お得か」を計算する手法です。"
+        }
+      }
+    ],
+    "overallExplanation": {
+      "summary": "ABC分析はパレートの法則に基づく重要度分類手法です。少数の重要品目（A群）に管理資源を集中し、効率的な在庫管理を実現します。",
+      "keyPoint": "ABC分析＝売上等の重要度でA・B・Cにランク分けし、管理レベルを変える手法",
+      "relatedTopics": ["パレート図", "在庫管理", "経営分析"],
+      "studyTip": "ABC分析は「パレートの法則」（少数が大部分を占める）を活用した分類手法です。"
+    },
+    "tags": ["ABC分析", "在庫管理", "経営分析"]
+  },
+  {
+    "questionId": "q-str-033",
+    "examType": "科目A",
+    "category": "ストラテジ系",
+    "subcategory": "経営戦略マネジメント",
+    "topic": "PEST分析",
+    "level": 6,
+    "question": "PEST分析の4つの観点として正しい組合せはどれか。",
+    "choices": [
+      {
+        "id": "a",
+        "text": "政治（Political）、経済（Economic）、社会（Social）、技術（Technological）",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "PEST分析は、マクロ環境を政治（Political）、経済（Economic）、社会（Social）、技術（Technological）の4つの観点から分析するフレームワークです。",
+          "analogy": "ビジネスを取り巻く「大きな風」を4方向から分析する方法です。法律の変更（P）、景気動向（E）、人口変化（S）、技術革新（T）が企業に与える影響を分析します。",
+          "deepDive": "PEST分析はSWOT分析の外部環境（O:機会、T:脅威）を特定する際の入力情報として活用されることが多いです。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "製品（Product）、環境（Environment）、戦略（Strategy）、技術（Technology）",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "この組合せはPEST分析ではありません。PESTの各文字は政治・経済・社会・技術を表します。",
+          "analogy": "PESTの正確な英語を覚えましょう。P=Political, E=Economic, S=Social, T=Technological。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "人材（People）、経済（Economic）、安全（Safety）、時間（Time）",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "この組合せはPEST分析の正しい要素ではありません。",
+          "analogy": "PEST分析はマクロ環境の4つの側面を分析するものです。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "計画（Plan）、実行（Execute）、標準化（Standardize）、テスト（Test）",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "この組合せはPEST分析とは全く異なります。業務プロセスの手順のようになっています。",
+          "analogy": "PEST分析は「分析のフレームワーク」であり、業務手順ではありません。"
+        }
+      }
+    ],
+    "overallExplanation": {
+      "summary": "PEST分析は、企業を取り巻くマクロ環境を4つの観点で分析するフレームワークです。経営戦略の立案において、外部環境の変化を把握するために使われます。",
+      "keyPoint": "PEST＝Political（政治）、Economic（経済）、Social（社会）、Technological（技術）",
+      "relatedTopics": ["SWOT分析", "3C分析", "経営戦略"],
+      "studyTip": "PESTは「マクロ環境の4つの風」。法律・景気・社会変化・技術革新が企業にどう影響するかを分析します。"
+    },
+    "tags": ["PEST分析", "マクロ環境", "経営戦略"]
+  },
+  {
+    "questionId": "q-str-034",
+    "examType": "科目A",
+    "category": "ストラテジ系",
+    "subcategory": "経営戦略マネジメント",
+    "topic": "3C分析",
+    "level": 2,
+    "question": "3C分析の3つのCに含まれないものはどれか。",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Cost（コスト）",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "3C分析の3つのCは、Customer（顧客）、Competitor（競合）、Company（自社）です。Cost（コスト）は含まれません。",
+          "analogy": "3C分析は「誰に売る（顧客）」「ライバルは誰（競合）」「自分の強みは何（自社）」の3つの視点で市場を分析します。",
+          "deepDive": "3C分析は大前研一が提唱したフレームワークで、戦略策定の基本として広く使われています。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "Customer（顧客）",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "Customerは3Cの1つです。顧客のニーズ、市場規模、購買行動などを分析します。",
+          "analogy": "「お客さんは何を求めているか」を分析する視点です。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "Competitor（競合）",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "Competitorは3Cの1つです。競合企業の戦略、強み・弱み、市場シェアなどを分析します。",
+          "analogy": "「ライバルはどんな存在か」を分析する視点です。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "Company（自社）",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "Companyは3Cの1つです。自社の強み・弱み、経営資源、技術力などを分析します。",
+          "analogy": "「自分たちの強みは何か」を分析する視点です。"
+        }
+      }
+    ],
+    "overallExplanation": {
+      "summary": "3C分析は、Customer（顧客）、Competitor（競合）、Company（自社）の3つの視点から市場環境を分析するフレームワークです。",
+      "keyPoint": "3C＝Customer（顧客）、Competitor（競合）、Company（自社）",
+      "relatedTopics": ["SWOT分析", "PEST分析", "経営戦略"],
+      "studyTip": "3Cは「お客さん（C）・ライバル（C）・自分（C）」の3者で覚えましょう。"
+    },
+    "tags": ["3C分析", "経営戦略", "フレームワーク"]
+  },
+  {
+    "questionId": "q-str-035",
+    "examType": "科目A",
+    "category": "ストラテジ系",
+    "subcategory": "経営戦略マネジメント",
+    "topic": "ERP",
+    "level": 4,
+    "question": "ERP（Enterprise Resource Planning）の説明として、最も適切なものはどれか。",
+    "choices": [
+      {
+        "id": "a",
+        "text": "企業の経営資源（販売・生産・会計・人事等）を統合的に管理する情報システム",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "ERPは、企業の基幹業務（販売管理、生産管理、財務会計、人事管理等）を統合的に管理する情報システムです。部門間のデータ連携を実現し、経営情報のリアルタイムな把握を可能にします。",
+          "analogy": "会社の全部門が1つのノートに記録するようなものです。営業・製造・経理・人事の情報が全て連携して見られるので、「営業が受注した分の材料を製造が調達し、経理が支払いを処理する」流れがスムーズになります。",
+          "deepDive": "代表的なERPパッケージとして、SAP、Oracle ERP Cloud、Microsoft Dynamics 365などがあります。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "顧客との関係を管理するシステム",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "顧客関係管理はCRM（Customer Relationship Management）です。ERPは企業の基幹業務全体を統合管理するシステムです。",
+          "analogy": "CRMは「お客さんとの関係管理」、ERPは「会社全体の業務管理」です。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "サプライチェーン全体を最適化するシステム",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "サプライチェーン全体の最適化はSCMの領域です。ERPは主に企業内部の基幹業務の統合管理に焦点を当てています。",
+          "analogy": "SCMは「取引先を含む供給の流れ」、ERPは「社内の業務全体」の管理です。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "企業の意思決定を支援する分析システム",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "意思決定支援はBI（Business Intelligence）やDSS（意思決定支援システム）の役割です。ERPは業務の実行と管理が主目的です。",
+          "analogy": "ERPは「日々の業務を動かすシステム」、BIは「データを分析して判断するシステム」です。"
+        }
+      }
+    ],
+    "overallExplanation": {
+      "summary": "ERPは企業の基幹業務を統合管理するシステムです。部門間のデータ連携により業務効率を向上させ、経営情報のリアルタイム把握を実現します。",
+      "keyPoint": "ERP＝企業の基幹業務（販売・生産・会計・人事等）を統合管理するシステム",
+      "relatedTopics": ["CRM", "SCM", "BI"],
+      "studyTip": "ERP＝Enterprise（企業の）Resource（経営資源を）Planning（計画的に管理）。会社全体の「基幹システム」です。"
+    },
+    "tags": ["ERP", "基幹システム", "経営情報"]
+  },
+  {
+    "questionId": "q-cl-028",
+    "examType": "科目A",
+    "category": "ストラテジ系",
+    "subcategory": "企業と法務",
+    "topic": "BCP（事業継続計画）",
+    "level": 7,
+    "question": "BCP（事業継続計画）の策定において、最初に実施すべき活動はどれか。",
+    "choices": [
+      {
+        "id": "a",
+        "text": "事業影響度分析（BIA）による重要業務の特定",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "BCP策定では、まず事業影響度分析（BIA: Business Impact Analysis）を実施し、災害時に優先して復旧すべき重要業務を特定します。これがBCPの基盤となります。",
+          "analogy": "避難計画を立てる前に「何を一番先に守るべきか」を決めるのが最優先です。全てを同時に守ることはできないので、優先順位が重要です。",
+          "deepDive": "BIAでは、業務停止による影響度（財務的損失、法的影響、顧客影響等）を評価し、RTO（目標復旧時間）やRPO（目標復旧時点）を設定します。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "代替拠点の確保",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "代替拠点の確保はBCPの重要な要素ですが、まず「何を守るべきか」を決めてから「どう守るか」を考える順序が正しいです。",
+          "analogy": "守るべきものを決める前に避難場所を探しても、適切な計画にはなりません。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "訓練・演習の実施",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "訓練・演習はBCP策定後に実施します。計画がないまま訓練はできません。",
+          "analogy": "避難訓練は避難計画を作ってから行うものです。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "保険の契約",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "保険はリスク転嫁の手段であり、BCPの最初に実施すべき活動ではありません。",
+          "analogy": "保険に入るだけでは事業の継続はできません。まず何を守るかを決める必要があります。"
+        }
+      }
+    ],
+    "overallExplanation": {
+      "summary": "BCP策定の流れは、BIA（重要業務の特定）→リスク分析→戦略の策定→計画の文書化→訓練・演習→見直しです。BIAが全ての基盤になります。",
+      "keyPoint": "BCP策定の第一歩＝BIA（事業影響度分析）による重要業務の特定",
+      "relatedTopics": ["RTO", "RPO", "災害復旧"],
+      "studyTip": "BCP策定は「何を守るか」（BIA）が最初。その後に「どう守るか」を考えます。"
+    },
+    "tags": ["BCP", "BIA", "事業継続"]
+  },
+  {
+    "questionId": "q-str-036",
+    "examType": "科目A",
+    "category": "ストラテジ系",
+    "subcategory": "経営戦略マネジメント",
+    "topic": "STP分析",
+    "level": 8,
+    "question": "マーケティングのSTP分析における3つの要素の正しい組合せはどれか。",
+    "choices": [
+      {
+        "id": "a",
+        "text": "セグメンテーション、ターゲティング、ポジショニング",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "STP分析は、Segmentation（市場細分化）、Targeting（ターゲット市場の選定）、Positioning（自社の立ち位置の明確化）の3ステップで構成されるマーケティング戦略のフレームワークです。",
+          "analogy": "「お客さんをグループ分けし（S）」「どのグループを狙うか決め（T）」「ライバルとの違いを打ち出す（P）」という3段階です。",
+          "deepDive": "STPはフィリップ・コトラーが提唱したフレームワークで、4Pを決める前に実施すべき戦略的な意思決定プロセスです。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "戦略（Strategy）、戦術（Tactics）、計画（Planning）",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "この組合せはSTP分析の要素ではありません。STPはマーケティング戦略のフレームワークです。",
+          "analogy": "STPの各文字はマーケティング特有の用語を表しています。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "強み（Strength）、脅威（Threat）、パフォーマンス（Performance）",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "強みと脅威はSWOT分析の要素であり、STP分析とは異なります。",
+          "analogy": "SWOT分析とSTP分析は別のフレームワークです。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "サービス（Service）、テクノロジー（Technology）、プラットフォーム（Platform）",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "この組合せはSTP分析の要素ではありません。",
+          "analogy": "STPはマーケティングの「S=セグメンテーション、T=ターゲティング、P=ポジショニング」です。"
+        }
+      }
+    ],
+    "overallExplanation": {
+      "summary": "STP分析はマーケティング戦略の基本フレームワークで、市場を分割し、狙う市場を選び、差別化ポイントを決める3つのプロセスです。",
+      "keyPoint": "STP＝Segmentation（細分化）→Targeting（選定）→Positioning（位置づけ）",
+      "relatedTopics": ["4P", "マーケティング", "差別化"],
+      "studyTip": "STP→4Pの順序を覚えましょう。「誰に何をどう売るか」を決めてから、具体的な4Pを決めます。"
+    },
+    "tags": ["STP", "マーケティング", "フレームワーク"]
+  },
+  {
+    "questionId": "q-str-037",
+    "examType": "科目A",
+    "category": "ストラテジ系",
+    "subcategory": "経営戦略マネジメント",
+    "topic": "サブスクリプション",
+    "level": 3,
+    "question": "サブスクリプションモデルの説明として、最も適切なものはどれか。",
+    "choices": [
+      {
+        "id": "a",
+        "text": "定額の利用料を定期的に支払い、サービスや製品を一定期間利用できるビジネスモデル",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "サブスクリプションは、月額や年額などの定額料金を支払うことで、サービスや製品を継続的に利用できるビジネスモデルです。NetflixやSpotifyが代表例です。",
+          "analogy": "新聞の定期購読と同じ仕組みです。月々の料金を払えば好きなだけ読める（使える）。ソフトウェアのMicrosoft 365なども同様です。",
+          "deepDive": "サブスクリプションはLTV（顧客生涯価値）、チャーンレート（解約率）、MRR（月次経常収益）が重要なKPIとなります。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "商品を一度購入すれば永続的に使用できるビジネスモデル",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "一度の購入で永続利用できるのは「買い切りモデル」であり、サブスクリプションではありません。",
+          "analogy": "本を1冊買えば永遠に読める「買い切り」と、月額で読み放題の「サブスク」は異なります。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "広告収入で運営し、利用者は無料でサービスを利用できるビジネスモデル",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "広告モデル（フリーミアムモデル）はサブスクリプションとは異なる収益モデルです。",
+          "analogy": "無料で使えてCMが出るのは広告モデル。毎月お金を払って使うのがサブスクです。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "使用量に応じて料金が変動する従量課金モデル",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "従量課金は使った分だけ支払うモデルで、定額のサブスクリプションとは異なります。",
+          "analogy": "電気代のように使った分だけ払うのが従量課金、Netflix のように月額固定がサブスクです。"
+        }
+      }
+    ],
+    "overallExplanation": {
+      "summary": "サブスクリプションは定額料金で継続利用できるビジネスモデルです。安定した収益が見込める一方、顧客の解約防止（リテンション）が重要な課題となります。",
+      "keyPoint": "サブスクリプション＝定額料金×継続利用のビジネスモデル",
+      "relatedTopics": ["SaaS", "LTV", "チャーンレート"],
+      "studyTip": "サブスク＝「定額使い放題」。Netflix、Spotify、Microsoft 365などが代表例です。"
+    },
+    "tags": ["サブスクリプション", "ビジネスモデル", "SaaS"]
+  }
+]
