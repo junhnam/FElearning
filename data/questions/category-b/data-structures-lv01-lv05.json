@@ -1,0 +1,1045 @@
+[
+  {
+    "questionId": "q-ds-001",
+    "examType": "科目B",
+    "category": "データ構造",
+    "subcategory": "data-structures",
+    "topic": "配列の基本（要素の参照・代入）",
+    "level": 1,
+    "question": "次の擬似言語プログラムを実行したとき、表示される値はどれか。",
+    "pseudoCode": "○整数型の配列: data = {10, 20, 30, 40, 50}\n○整数型: x\nx ← data[2] + data[4]\n表示(x)",
+    "choices": [
+      {
+        "id": "a",
+        "text": "30",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "data[2]は30ですが、data[4]の50を加える必要があります。30はdata[2]の値だけを取った場合の答えです。",
+          "analogy": "ロッカーの2番と4番の中身を合計するのに、2番の中身だけを答えてしまったようなものです。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "50",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "50はdata[4]の値です。問題ではdata[2]+data[4]の合計を求めているため、30+50=80が正解です。",
+          "analogy": "ロッカーの2番と4番の中身を合計するのに、4番の中身だけを答えてしまったようなものです。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "70",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "70はdata[1]+data[4]=20+50の計算結果です。配列の添字は0から始まるため、data[2]は3番目の要素(30)であり、2番目の要素(20)ではありません。ただし本問ではdata[2]=30, data[4]=50で合計80が正解です。",
+          "analogy": "ロッカーの番号を読み間違えて、隣のロッカーの中身を取り出してしまったようなものです。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "80",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "配列dataの添字は0から始まります。data[0]=10, data[1]=20, data[2]=30, data[3]=40, data[4]=50です。したがってdata[2]+data[4]=30+50=80となります。",
+          "analogy": "5つのロッカーに番号0〜4が振られていて、2番ロッカーの中身(30)と4番ロッカーの中身(50)を取り出して合計するイメージです。",
+          "deepDive": "配列の添字（インデックス）は0から始まるのが基本です。要素数がnの配列では、有効な添字は0からn-1までです。添字の範囲外にアクセスするとエラーになります。"
+        }
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"data": "{10,20,30,40,50}"}, "action": "配列dataを初期化"},
+      {"step": 2, "variables": {"data[2]": "30", "data[4]": "50"}, "action": "data[2]とdata[4]を参照"},
+      {"step": 3, "variables": {"x": "80"}, "action": "x ← 30 + 50 = 80"},
+      {"step": 4, "variables": {"出力": "80"}, "action": "xの値80を表示"}
+    ],
+    "traceAnalogy": "5つのロッカーに荷物が入っています。0番ロッカーに10kg、1番に20kg、2番に30kg、3番に40kg、4番に50kgの荷物。2番と4番のロッカーから荷物を取り出して重さを合計すると80kgです。",
+    "overallExplanation": {
+      "summary": "配列の添字は0から始まります。data[2]は3番目の要素(30)、data[4]は5番目の要素(50)を指し、合計は80です。",
+      "keyPoint": "配列の添字は0始まり。data = {10,20,30,40,50} のとき data[0]=10, data[4]=50。",
+      "relatedTopics": ["配列の走査", "添字と要素数の関係"],
+      "studyTip": "配列の添字は「0番目から数え始める」と覚えましょう。要素数5の配列なら添字は0〜4です。"
+    },
+    "tags": ["配列", "添字", "要素参照", "基本操作"]
+  },
+  {
+    "questionId": "q-ds-002",
+    "examType": "科目B",
+    "category": "データ構造",
+    "subcategory": "data-structures",
+    "topic": "配列の走査",
+    "level": 1,
+    "question": "次の擬似言語プログラムを実行したとき、表示される値はどれか。",
+    "pseudoCode": "○整数型の配列: nums = {3, 7, 2, 9, 5}\n○整数型: total ← 0\n○整数型: i\ni を 0 から 4 まで 1 ずつ増やしながら繰り返す\n  total ← total + nums[i]\nを繰り返す\n表示(total)",
+    "choices": [
+      {
+        "id": "a",
+        "text": "21",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "21は一部の要素だけを合計した値です。全要素3+7+2+9+5=26が正解です。ループは添字0から4まで全要素を走査します。",
+          "analogy": "買い物かごの全商品の合計を出すのに、一部の商品を数え忘れたようなものです。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "26",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "ループでi=0から4まで順にnums[i]をtotalに加算します。total=0+3+7+2+9+5=26となります。配列の全要素を先頭から末尾まで順に処理する操作を「走査」と呼びます。",
+          "analogy": "買い物かごに入った5つの商品（3円、7円、2円、9円、5円）の値段を1つずつレジに通して合計を出すイメージです。全商品を通し終えると合計26円です。",
+          "deepDive": "配列の走査は最も基本的な操作の1つで、全要素に同じ処理を適用します。合計・最大値・最小値の算出、検索など多くのアルゴリズムの基礎になります。計算量はO(n)です。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "24",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "24はどの要素の組み合わせでも得られない値です。全要素の合計3+7+2+9+5=26が正解です。",
+          "analogy": "買い物かごの合計を電卓で計算するとき、数字を打ち間違えたようなものです。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "9",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "9は配列の最大値(nums[3])です。このプログラムは合計を求めるものであり、最大値を求めるものではありません。",
+          "analogy": "買い物かごの中で一番高い商品の値段だけを見て、合計だと勘違いしたようなものです。"
+        }
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"nums": "{3,7,2,9,5}", "total": "0"}, "action": "配列と合計変数を初期化"},
+      {"step": 2, "variables": {"i": "0", "total": "3"}, "action": "total ← 0 + nums[0] = 0 + 3 = 3"},
+      {"step": 3, "variables": {"i": "1", "total": "10"}, "action": "total ← 3 + nums[1] = 3 + 7 = 10"},
+      {"step": 4, "variables": {"i": "2", "total": "12"}, "action": "total ← 10 + nums[2] = 10 + 2 = 12"},
+      {"step": 5, "variables": {"i": "3", "total": "21"}, "action": "total ← 12 + nums[3] = 12 + 9 = 21"},
+      {"step": 6, "variables": {"i": "4", "total": "26"}, "action": "total ← 21 + nums[4] = 21 + 5 = 26"},
+      {"step": 7, "variables": {"出力": "26"}, "action": "totalの値26を表示"}
+    ],
+    "traceAnalogy": "買い物かごの5つの商品をレジに1つずつ通します。最初は合計0円。3円の商品→合計3円、7円→合計10円、2円→合計12円、9円→合計21円、5円→合計26円。",
+    "overallExplanation": {
+      "summary": "配列の全要素をfor文で走査し、合計を求めるプログラムです。3+7+2+9+5=26が正解です。",
+      "keyPoint": "配列の走査は添字を0から要素数-1まで1ずつ増やしながらループする。",
+      "relatedTopics": ["配列の合計", "線形探索", "最大値・最小値の探索"],
+      "studyTip": "配列の走査パターンは多くの問題で使われる基本形です。ループ変数iが添字として配列の各要素にアクセスする流れを確実に理解しましょう。"
+    },
+    "tags": ["配列", "走査", "合計", "ループ"]
+  },
+  {
+    "questionId": "q-ds-003",
+    "examType": "科目B",
+    "category": "データ構造",
+    "subcategory": "data-structures",
+    "topic": "配列の要素数",
+    "level": 1,
+    "question": "次の擬似言語プログラムを実行したとき、変数countに格納される値はどれか。",
+    "pseudoCode": "○整数型の配列: scores = {85, 72, 90, 60, 95, 78, 88}\n○整数型: count ← 0\n○整数型: i\ni を 0 から 6 まで 1 ずつ増やしながら繰り返す\n  もし scores[i] >= 80 ならば\n    count ← count + 1\n  を実行する\nを繰り返す\n表示(count)",
+    "choices": [
+      {
+        "id": "a",
+        "text": "3",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "80点以上の要素は85, 90, 95, 88の4つです。3つではありません。すべての要素を丁寧に確認する必要があります。",
+          "analogy": "テストの答案を確認するとき、1枚見落としてしまったようなものです。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "4",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "scores配列の各要素を順に80以上かどうか判定します。85(○), 72(×), 90(○), 60(×), 95(○), 78(×), 88(○)の4つが条件を満たすため、count=4です。",
+          "analogy": "7人の生徒のテスト答案を1枚ずつ確認し、80点以上の答案を別の山に分けていくイメージです。最終的に4枚の答案が「合格」の山に入ります。",
+          "deepDive": "条件に合致する要素を数えるパターンは「条件付きカウント」と呼ばれ、配列走査の基本応用です。走査+条件分岐の組み合わせは、フィルタリングや検索の基礎になります。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "5",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "80点以上は4つです。78は80未満なので条件を満たしません。境界値(80ちょうど)を含む「>=」の判定に注意が必要です。",
+          "analogy": "テスト答案の確認で、79点の答案を「80点以上」に間違えて分類してしまったようなものです。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "7",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "7は配列の要素数です。条件判定をせずに全要素を数えた場合の値であり、80点以上という条件を無視しています。",
+          "analogy": "テスト答案を点数に関係なく全部まとめて数えてしまったようなものです。"
+        }
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"scores": "{85,72,90,60,95,78,88}", "count": "0"}, "action": "配列とカウンタを初期化"},
+      {"step": 2, "variables": {"i": "0", "scores[0]": "85", "count": "1"}, "action": "85>=80 → 真 → count=1"},
+      {"step": 3, "variables": {"i": "1", "scores[1]": "72", "count": "1"}, "action": "72>=80 → 偽 → countは変化なし"},
+      {"step": 4, "variables": {"i": "2", "scores[2]": "90", "count": "2"}, "action": "90>=80 → 真 → count=2"},
+      {"step": 5, "variables": {"i": "3", "scores[3]": "60", "count": "2"}, "action": "60>=80 → 偽 → countは変化なし"},
+      {"step": 6, "variables": {"i": "4", "scores[4]": "95", "count": "3"}, "action": "95>=80 → 真 → count=3"},
+      {"step": 7, "variables": {"i": "5", "scores[5]": "78", "count": "3"}, "action": "78>=80 → 偽 → countは変化なし"},
+      {"step": 8, "variables": {"i": "6", "scores[6]": "88", "count": "4"}, "action": "88>=80 → 真 → count=4"}
+    ],
+    "traceAnalogy": "先生が7人分のテスト答案を順に確認します。85点→合格(1枚目)、72点→不合格、90点→合格(2枚目)、60点→不合格、95点→合格(3枚目)、78点→不合格、88点→合格(4枚目)。合格は4枚。",
+    "overallExplanation": {
+      "summary": "配列を走査しながら条件(80点以上)に合致する要素を数えるプログラムです。該当する要素は85,90,95,88の4つです。",
+      "keyPoint": "条件付きカウント = 走査 + 条件分岐 + カウンタ加算のパターン。",
+      "relatedTopics": ["線形探索", "フィルタリング", "条件分岐"],
+      "studyTip": "走査+条件分岐のパターンは非常に頻出です。各要素について条件が真か偽かを丁寧にトレースする習慣をつけましょう。"
+    },
+    "tags": ["配列", "条件付きカウント", "走査", "条件分岐"]
+  },
+  {
+    "questionId": "q-ds-004",
+    "examType": "科目B",
+    "category": "データ構造",
+    "subcategory": "data-structures",
+    "topic": "配列の初期化",
+    "level": 1,
+    "question": "次の擬似言語プログラムを実行したとき、配列dataの内容はどれか。",
+    "pseudoCode": "○整数型の配列: data = {0, 0, 0, 0, 0}\n○整数型: i\ni を 0 から 4 まで 1 ずつ増やしながら繰り返す\n  data[i] ← (i + 1) × 2\nを繰り返す",
+    "choices": [
+      {
+        "id": "a",
+        "text": "{2, 4, 6, 8, 10}",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "ループでi=0のときdata[0]=(0+1)×2=2、i=1のときdata[1]=(1+1)×2=4、i=2のときdata[2]=(2+1)×2=6、i=3のときdata[3]=(3+1)×2=8、i=4のときdata[4]=(4+1)×2=10となります。",
+          "analogy": "5つの空の箱に、順番に「箱の番号+1を2倍した数」のボールを入れていくイメージです。1番目の箱には(0+1)×2=2個、2番目には(1+1)×2=4個、と増えていきます。",
+          "deepDive": "添字を使った計算式で配列を初期化するパターンは頻出です。(i+1)×2は添字iに対して偶数列(2,4,6,8,10)を生成します。添字と値の関係を式で表すことで、規則的なデータを効率的に作れます。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "{0, 2, 4, 6, 8}",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "これはi×2で計算した場合の結果です。問題の式は(i+1)×2なので、iに1を加えてから2倍する必要があります。",
+          "analogy": "箱の番号に1を足すのを忘れて、番号そのものを2倍してしまったようなものです。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "{1, 2, 3, 4, 5}",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "これはi+1で計算した場合の結果です。問題の式では(i+1)に×2を掛ける必要があります。",
+          "analogy": "計算の途中で2倍する手順を忘れてしまったようなものです。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "{2, 6, 10, 14, 18}",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "これは(i×4+2)のような別の式の結果です。(i+1)×2を正しく計算するとi=0で2、i=1で4となり、4ずつではなく2ずつ増加します。",
+          "analogy": "レシピの分量を間違えて、必要以上に材料を入れてしまったようなものです。"
+        }
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"data": "{0,0,0,0,0}"}, "action": "配列を0で初期化"},
+      {"step": 2, "variables": {"i": "0", "data[0]": "2"}, "action": "data[0] ← (0+1)×2 = 2"},
+      {"step": 3, "variables": {"i": "1", "data[1]": "4"}, "action": "data[1] ← (1+1)×2 = 4"},
+      {"step": 4, "variables": {"i": "2", "data[2]": "6"}, "action": "data[2] ← (2+1)×2 = 6"},
+      {"step": 5, "variables": {"i": "3", "data[3]": "8"}, "action": "data[3] ← (3+1)×2 = 8"},
+      {"step": 6, "variables": {"i": "4", "data[4]": "10"}, "action": "data[4] ← (4+1)×2 = 10"}
+    ],
+    "traceAnalogy": "5つの空の箱を用意し、1番目の箱から順にボールを入れます。1番目:(0+1)×2=2個、2番目:(1+1)×2=4個、3番目:6個、4番目:8個、5番目:10個。",
+    "overallExplanation": {
+      "summary": "ループ変数iを使った式(i+1)×2で配列の各要素を初期化するプログラムです。結果は{2,4,6,8,10}です。",
+      "keyPoint": "添字iを使った計算式による配列初期化。(i+1)×2は偶数列2,4,6,8,10を生成する。",
+      "relatedTopics": ["数列の生成", "配列の代入", "ループと配列"],
+      "studyTip": "添字iを含む式の計算は、i=0,1,2,...と順に代入して結果を確認するのが確実です。"
+    },
+    "tags": ["配列", "初期化", "ループ", "式の計算"]
+  },
+  {
+    "questionId": "q-ds-005",
+    "examType": "科目B",
+    "category": "データ構造",
+    "subcategory": "data-structures",
+    "topic": "スタック(push/pop操作)",
+    "level": 2,
+    "question": "次の擬似言語プログラムを実行したとき、最後に表示される値はどれか。スタックは後入れ先出し(LIFO)のデータ構造とする。",
+    "pseudoCode": "○整数型の配列: stack = {}\n○整数型: top ← -1\n\n○手続き push(○整数型: val)\n  top ← top + 1\n  stack[top] ← val\n\n○整数型 関数 pop()\n  ○整数型: val ← stack[top]\n  top ← top - 1\n  return val\n\npush(10)\npush(20)\npush(30)\npop()\npush(40)\n○整数型: result ← pop()\n表示(result)",
+    "choices": [
+      {
+        "id": "a",
+        "text": "10",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "10はスタックの一番下にある要素です。スタックはLIFO(後入れ先出し)なので、最後にpopされるのは一番上の要素です。",
+          "analogy": "皿の山の一番下の皿を取ろうとしていますが、実際に取れるのは一番上の皿です。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "20",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "最初のpop()で30が取り出され、push(40)で40が積まれます。2回目のpop()では40が取り出されます。20はスタック内に残ったままです。",
+          "analogy": "皿の山で、上から2枚目の皿を取ろうとしていますが、取れるのは一番上の皿だけです。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "30",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "30は最初のpop()で既に取り出されています。その後push(40)が行われるため、2回目のpop()で取り出されるのは40です。",
+          "analogy": "既に山から取り除いた皿をもう一度取ろうとしていますが、その皿はもうありません。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "40",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "push(10)→push(20)→push(30)でスタックは[10,20,30]。pop()で30を取り出し[10,20]。push(40)で[10,20,40]。最後のpop()で一番上の40が取り出されます。",
+          "analogy": "皿を順に積みます。皿10→皿20→皿30。一番上の皿30を取り除き、新しい皿40を載せます。次に取れるのは一番上の皿40です。",
+          "deepDive": "スタックのtop変数は「現在の一番上の位置」を示します。push時にtopを+1してから格納、pop時に値を取得してからtopを-1します。topが-1のとき空スタックです。"
+        }
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"stack": "{}", "top": "-1"}, "action": "スタックを初期化（空）"},
+      {"step": 2, "variables": {"stack": "{10}", "top": "0"}, "action": "push(10): top=0, stack[0]=10"},
+      {"step": 3, "variables": {"stack": "{10,20}", "top": "1"}, "action": "push(20): top=1, stack[1]=20"},
+      {"step": 4, "variables": {"stack": "{10,20,30}", "top": "2"}, "action": "push(30): top=2, stack[2]=30"},
+      {"step": 5, "variables": {"stack": "{10,20}", "top": "1", "戻り値": "30"}, "action": "pop(): stack[2]=30を取り出し、top=1"},
+      {"step": 6, "variables": {"stack": "{10,20,40}", "top": "2"}, "action": "push(40): top=2, stack[2]=40"},
+      {"step": 7, "variables": {"stack": "{10,20}", "top": "1", "result": "40"}, "action": "pop(): stack[2]=40を取り出し、top=1"},
+      {"step": 8, "variables": {"出力": "40"}, "action": "resultの値40を表示"}
+    ],
+    "traceAnalogy": "カフェテリアの皿置き場です。皿10を置く→皿20を置く→皿30を置く→一番上の皿30を取る→皿40を置く→一番上の皿40を取る。最後に手にしているのは皿40。",
+    "overallExplanation": {
+      "summary": "スタックのpush/pop操作をトレースする問題です。LIFOの原則により、最後にpushした要素が最初にpopされます。",
+      "keyPoint": "スタックはLIFO（後入れ先出し）。popは常に一番上（最後にpushした要素）を取り出す。",
+      "relatedTopics": ["スタックの応用", "逆ポーランド記法", "関数呼び出しスタック"],
+      "studyTip": "スタックの操作は「皿を積む・取る」でイメージしましょう。常に一番上しか操作できません。"
+    },
+    "tags": ["スタック", "push", "pop", "LIFO"]
+  },
+  {
+    "questionId": "q-ds-006",
+    "examType": "科目B",
+    "category": "データ構造",
+    "subcategory": "data-structures",
+    "topic": "キュー(enqueue/dequeue操作)",
+    "level": 2,
+    "question": "次の擬似言語プログラムを実行したとき、最後に表示される値はどれか。キューは先入れ先出し(FIFO)のデータ構造とする。",
+    "pseudoCode": "○整数型の配列: queue = {}\n○整数型: head ← 0\n○整数型: tail ← 0\n\n○手続き enqueue(○整数型: val)\n  queue[tail] ← val\n  tail ← tail + 1\n\n○整数型 関数 dequeue()\n  ○整数型: val ← queue[head]\n  head ← head + 1\n  return val\n\nenqueue(5)\nenqueue(10)\nenqueue(15)\ndequeue()\n○整数型: result ← dequeue()\n表示(result)",
+    "choices": [
+      {
+        "id": "a",
+        "text": "5",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "5は最初のdequeue()で既に取り出されています。2回目のdequeue()で取り出されるのは次に並んでいた10です。",
+          "analogy": "行列の先頭の人はすでに窓口を通過しました。次に通過するのは2番目に並んでいた人です。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "10",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "enqueue(5)→enqueue(10)→enqueue(15)でキューは[5,10,15]。1回目のdequeue()で先頭の5を取り出し[10,15]。2回目のdequeue()で先頭の10を取り出します。FIFOにより先に入れた要素が先に出ます。",
+          "analogy": "レジの行列に5番さん→10番さん→15番さんが並びます。5番さんが会計を済ませて去り、次は10番さんの番です。",
+          "deepDive": "キューの実装ではhead(先頭位置)とtail(末尾の次の位置)の2つのポインタを管理します。enqueueはtail位置に追加してtailを+1、dequeueはhead位置から取り出してheadを+1します。循環キューでは配列を使い回すことでメモリ効率を上げます。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "15",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "15はキューの末尾にある要素です。キューはFIFO(先入れ先出し)なので、先に入れた要素から順に取り出します。15が取り出されるのは3回目のdequeue()です。",
+          "analogy": "行列の一番後ろの人が先に通過することはありません。前の人から順番に通過します。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "0",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "0はキューに入れられていない値です。enqueueされた値は5, 10, 15の3つです。",
+          "analogy": "行列に並んでいない人が窓口を通過することはありません。"
+        }
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"queue": "{}", "head": "0", "tail": "0"}, "action": "キューを初期化（空）"},
+      {"step": 2, "variables": {"queue": "{5}", "head": "0", "tail": "1"}, "action": "enqueue(5): queue[0]=5, tail=1"},
+      {"step": 3, "variables": {"queue": "{5,10}", "head": "0", "tail": "2"}, "action": "enqueue(10): queue[1]=10, tail=2"},
+      {"step": 4, "variables": {"queue": "{5,10,15}", "head": "0", "tail": "3"}, "action": "enqueue(15): queue[2]=15, tail=3"},
+      {"step": 5, "variables": {"queue": "{_,10,15}", "head": "1", "tail": "3", "戻り値": "5"}, "action": "dequeue(): queue[0]=5を取り出し、head=1"},
+      {"step": 6, "variables": {"queue": "{_,_,15}", "head": "2", "tail": "3", "result": "10"}, "action": "dequeue(): queue[1]=10を取り出し、head=2"},
+      {"step": 7, "variables": {"出力": "10"}, "action": "resultの値10を表示"}
+    ],
+    "traceAnalogy": "レジの行列です。5番→10番→15番の順に並びます。5番が会計を済ませて去り、次の10番が会計します。手にしているのは10番の情報です。",
+    "overallExplanation": {
+      "summary": "キューのenqueue/dequeue操作をトレースする問題です。FIFOの原則により、先に入れた要素が先に取り出されます。",
+      "keyPoint": "キューはFIFO（先入れ先出し）。dequeueは常に先頭（最初にenqueueした要素）を取り出す。",
+      "relatedTopics": ["循環キュー", "優先度キュー", "BFS"],
+      "studyTip": "キューの操作は「レジの行列」でイメージしましょう。先に並んだ人が先にサービスを受けます。"
+    },
+    "tags": ["キュー", "enqueue", "dequeue", "FIFO"]
+  },
+  {
+    "questionId": "q-ds-007",
+    "examType": "科目B",
+    "category": "データ構造",
+    "subcategory": "data-structures",
+    "topic": "スタックを使った逆順処理",
+    "level": 2,
+    "question": "次の擬似言語プログラムを実行したとき、表示される出力はどれか。",
+    "pseudoCode": "○文字型の配列: chars = {'A', 'B', 'C', 'D'}\n○文字型の配列: stack = {}\n○整数型: top ← -1\n○整数型: i\n\n/* スタックに全要素をpush */\ni を 0 から 3 まで 1 ずつ増やしながら繰り返す\n  top ← top + 1\n  stack[top] ← chars[i]\nを繰り返す\n\n/* スタックから全要素をpop して表示 */\ntop >= 0 の間繰り返す\n  表示(stack[top])\n  top ← top - 1\nを繰り返す",
+    "choices": [
+      {
+        "id": "a",
+        "text": "A B C D",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "ABCDは元の配列の順序です。スタックを通すとLIFOの性質により逆順になります。",
+          "analogy": "本を1冊ずつ積み上げてから上から取ると、最後に積んだ本が最初に来ます。同じ順序にはなりません。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "D C B A",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "A→B→C→Dの順にpushすると、スタックは下からA,B,C,Dと積まれます。popすると上から順にD,C,B,Aの順で取り出されます。スタックのLIFO特性により入力の逆順が得られます。",
+          "analogy": "本をA→B→C→Dの順に積み上げます。上から1冊ずつ取り出すとD→C→B→Aの順になります。これがスタックによる逆順処理です。",
+          "deepDive": "スタックを使った逆順処理は多くの場面で活用されます。文字列の反転、ブラウザの「戻る」ボタンの履歴管理、逆ポーランド記法の計算、括弧の対応チェックなどがスタックの代表的な応用です。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "D A B C",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "最初にDが出るのは正しいですが、その後はC,B,Aの順です。スタックは完全に逆順を生成します。",
+          "analogy": "本の山から一番上のDを取った後、残りの本も上から順に取っていきます。途中から順番が変わることはありません。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "A D B C",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "スタックのpop操作は常に一番上の要素を取り出します。途中の要素を飛ばして取り出すことはできません。",
+          "analogy": "本の山から好きな本を抜き取ることはできません。常に一番上の本しか取れません。"
+        }
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"stack": "{}", "top": "-1"}, "action": "スタック初期化"},
+      {"step": 2, "variables": {"stack": "{A}", "top": "0"}, "action": "push(A): stack[0]='A'"},
+      {"step": 3, "variables": {"stack": "{A,B}", "top": "1"}, "action": "push(B): stack[1]='B'"},
+      {"step": 4, "variables": {"stack": "{A,B,C}", "top": "2"}, "action": "push(C): stack[2]='C'"},
+      {"step": 5, "variables": {"stack": "{A,B,C,D}", "top": "3"}, "action": "push(D): stack[3]='D'"},
+      {"step": 6, "variables": {"出力": "D", "top": "2"}, "action": "pop: stack[3]='D'を表示、top=2"},
+      {"step": 7, "variables": {"出力": "C", "top": "1"}, "action": "pop: stack[2]='C'を表示、top=1"},
+      {"step": 8, "variables": {"出力": "B", "top": "0"}, "action": "pop: stack[1]='B'を表示、top=0"},
+      {"step": 9, "variables": {"出力": "A", "top": "-1"}, "action": "pop: stack[0]='A'を表示、top=-1（空）"}
+    ],
+    "traceAnalogy": "本をA,B,C,Dの順に机に積みます。そして上から1冊ずつ取り出すと、D→C→B→Aの順に手に取ります。最後に積んだ本が最初に手に取れるのがスタックの特徴です。",
+    "overallExplanation": {
+      "summary": "配列の全要素をスタックにpushしてからpopすると、元の逆順で取り出されます。これはスタックのLIFO特性の典型的な応用です。",
+      "keyPoint": "スタックに順番に入れて取り出すと逆順になる。これを利用して文字列反転などができる。",
+      "relatedTopics": ["文字列の反転", "括弧の対応チェック", "逆ポーランド記法"],
+      "studyTip": "「スタック＝逆順にする装置」と覚えておくと、応用問題でも対応しやすくなります。"
+    },
+    "tags": ["スタック", "逆順", "LIFO", "応用"]
+  },
+  {
+    "questionId": "q-ds-008",
+    "examType": "科目B",
+    "category": "データ構造",
+    "subcategory": "data-structures",
+    "topic": "キューを使った待ち行列シミュレーション",
+    "level": 2,
+    "question": "次の擬似言語プログラムは、受付窓口のシミュレーションである。プログラム実行後、変数servedに格納される値はどれか。",
+    "pseudoCode": "○整数型の配列: queue = {}\n○整数型: head ← 0, tail ← 0\n○整数型: served ← 0\n\n○手続き enqueue(○整数型: val)\n  queue[tail] ← val\n  tail ← tail + 1\n\n○整数型 関数 dequeue()\n  ○整数型: val ← queue[head]\n  head ← head + 1\n  return val\n\n/* 来客: 客番号を順に追加 */\nenqueue(1)\nenqueue(2)\nenqueue(3)\n\n/* 1人目の対応完了 */\ndequeue()\nserved ← served + 1\n\n/* さらに来客 */\nenqueue(4)\nenqueue(5)\n\n/* 2人分の対応完了 */\ndequeue()\nserved ← served + 1\ndequeue()\nserved ← served + 1\n\n表示(served)",
+    "choices": [
+      {
+        "id": "a",
+        "text": "1",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "servedは対応完了するたびに1ずつ増えます。dequeue()は3回呼ばれ、そのたびにservedが加算されるので、最終的には3です。",
+          "analogy": "窓口で対応した人数を数えるカウンターです。1人だけ対応して終わりではなく、3回カチッと押しています。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "2",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "dequeue()とservedの加算は合計3回行われます。最初に1回、後半で2回の計3回です。",
+          "analogy": "窓口のカウンターを2回しか押していないと思いましたが、よく見ると3回押されています。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "3",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "dequeue()は合計3回呼ばれ、そのたびにservedが+1されます。1回目:客1を対応(served=1)、2回目:客2を対応(served=2)、3回目:客3を対応(served=3)。キューには客4,5が残っています。",
+          "analogy": "病院の受付窓口で、待合室の椅子(キュー)から順番に患者を呼びます。3人対応した時点で「対応済み3人」とカウントされます。残り2人はまだ待合室にいます。",
+          "deepDive": "キューは待ち行列のシミュレーションに最適なデータ構造です。先に来た人(enqueue)が先にサービスを受ける(dequeue)というFIFOの性質が、現実の行列と同じだからです。OSのプロセススケジューリングやネットワークのパケット処理でも使われます。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "5",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "5はenqueueされた客の総数です。しかしdequeue(対応完了)は3回しか行われていないので、対応済みは3人です。",
+          "analogy": "受付に来た人数と対応が完了した人数は異なります。5人が来ても、3人しか対応が終わっていません。"
+        }
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"queue": "{}", "head": "0", "tail": "0", "served": "0"}, "action": "初期化"},
+      {"step": 2, "variables": {"queue": "{1,2,3}", "tail": "3"}, "action": "客1,2,3がキューに並ぶ"},
+      {"step": 3, "variables": {"queue": "{_,2,3}", "head": "1", "served": "1"}, "action": "客1を対応 → served=1"},
+      {"step": 4, "variables": {"queue": "{_,2,3,4,5}", "tail": "5"}, "action": "客4,5がキューに並ぶ"},
+      {"step": 5, "variables": {"queue": "{_,_,3,4,5}", "head": "2", "served": "2"}, "action": "客2を対応 → served=2"},
+      {"step": 6, "variables": {"queue": "{_,_,_,4,5}", "head": "3", "served": "3"}, "action": "客3を対応 → served=3"}
+    ],
+    "traceAnalogy": "病院の待合室。客1,2,3が順番に座ります。客1が呼ばれて対応完了(1人目)。その間に客4,5が到着。次に客2が呼ばれて対応完了(2人目)、続いて客3も対応完了(3人目)。客4,5はまだ待っています。",
+    "overallExplanation": {
+      "summary": "キューを使った待ち行列シミュレーションです。enqueue(並ぶ)とdequeue(対応)を追跡し、対応済み人数を数えます。3回dequeueしたのでserved=3です。",
+      "keyPoint": "キューはFIFO。enqueue=行列に並ぶ、dequeue=対応完了。途中で新たな来客があっても順序は保たれる。",
+      "relatedTopics": ["待ち行列理論", "プロセススケジューリング", "バッファ管理"],
+      "studyTip": "キューの問題では「何回enqueueし、何回dequeueしたか」を正確に数えることが重要です。"
+    },
+    "tags": ["キュー", "シミュレーション", "FIFO", "待ち行列"]
+  },
+  {
+    "questionId": "q-ds-009",
+    "examType": "科目B",
+    "category": "データ構造",
+    "subcategory": "data-structures",
+    "topic": "連結リストの基本操作（挿入）",
+    "level": 3,
+    "question": "単方向連結リストにおいて、ノードBとノードCの間に新しいノードXを挿入する擬似言語プログラムがある。空欄【　】に入る処理はどれか。リストの初期状態は A→B→C→null である。",
+    "pseudoCode": "○構造体 Node\n  ○整数型: data\n  ○Node型: next\n\n/* 初期リスト: A→B→C→null */\n○Node型: nodeA, nodeB, nodeC, nodeX\nnodeA.data ← 'A', nodeA.next ← nodeB\nnodeB.data ← 'B', nodeB.next ← nodeC\nnodeC.data ← 'C', nodeC.next ← null\n\n/* ノードXをBとCの間に挿入 */\nnodeX.data ← 'X'\n【　　】",
+    "choices": [
+      {
+        "id": "a",
+        "text": "nodeX.next ← nodeC\nnodeB.next ← nodeX",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "まずnodeX.nextにnodeC(次のノード)を設定し、次にnodeB.nextをnodeXに変更します。これでB→X→Cとなります。順序が重要で、先にXの次を設定しないとCへの参照が失われます。",
+          "analogy": "電車の連結です。新しい車両Xをまず後ろの車両Cに連結し、それから前の車両BをXに繋ぎ替えます。先にBの連結を外すとCが迷子になってしまいます。",
+          "deepDive": "連結リストの挿入では、ポインタの付け替え順序が極めて重要です。①新ノードの次ポインタを設定→②前ノードの次ポインタを新ノードに変更、の順序を守らないとリストが切断されます。この操作の計算量はO(1)（挿入位置が分かっている場合）です。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "nodeB.next ← nodeX\nnodeX.next ← nodeC",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "この順序だと、nodeB.nextをnodeXに変更した時点でnodeCへの参照が失われます。結果的にはこの例ではnodeCを直接参照しているため動作しますが、一般的な実装ではnodeB.nextを辿ってnodeCを見つけるため、先にnodeB.nextを上書きするとnodeCにアクセスできなくなります。正しい手順は逆順です。",
+          "analogy": "電車の連結で、先にBとCの連結を外してからXをつなごうとすると、車両Cがどこにあるか分からなくなる危険があります。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "nodeA.next ← nodeX\nnodeX.next ← nodeB",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "この操作ではXがAとBの間に挿入されてしまい、A→X→B→C→nullとなります。BとCの間ではなくAとBの間に入ってしまいます。",
+          "analogy": "新しい車両を2号車と3号車の間に入れたいのに、1号車と2号車の間に入れてしまったようなものです。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "nodeX.next ← nodeB\nnodeC.next ← nodeX",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "nodeX.nextにBを設定するとX→Bとなり循環が発生します。またnodeC.nextにXを設定するとC→Xとなり、リストの構造がA→B→C→X→B→C→...の無限ループになります。",
+          "analogy": "電車の連結を間違えて、線路が円形になってしまい、永遠に同じ区間を回り続けるようなものです。"
+        }
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"リスト": "A→B→C→null"}, "action": "初期状態"},
+      {"step": 2, "variables": {"nodeX.next": "nodeC"}, "action": "Xの次ポインタをCに設定: X→C"},
+      {"step": 3, "variables": {"nodeB.next": "nodeX"}, "action": "Bの次ポインタをXに変更: B→X"},
+      {"step": 4, "variables": {"リスト": "A→B→X→C→null"}, "action": "挿入完了"}
+    ],
+    "traceAnalogy": "電車の連結作業です。新車両Xを用意し、①まずXの後ろに車両Cを連結、②次にBの後ろをXに繋ぎ替え。これでA-B-X-C の順番に連結されます。",
+    "overallExplanation": {
+      "summary": "連結リストへの挿入は、新ノードの次ポインタを先に設定してから、前ノードの次ポインタを更新する順序が重要です。",
+      "keyPoint": "挿入の手順: ①新ノード.next ← 次ノード → ②前ノード.next ← 新ノード。順序を間違えるとリストが壊れる。",
+      "relatedTopics": ["連結リストの削除", "双方向リスト", "番兵ノード"],
+      "studyTip": "連結リストの操作は「電車の連結」でイメージ。必ず先に新車両を後ろにつなぎ、それから前の車両を繋ぎ替えます。"
+    },
+    "tags": ["連結リスト", "挿入", "ポインタ操作", "単方向"]
+  },
+  {
+    "questionId": "q-ds-010",
+    "examType": "科目B",
+    "category": "データ構造",
+    "subcategory": "data-structures",
+    "topic": "連結リストの走査",
+    "level": 3,
+    "question": "次の擬似言語プログラムは単方向連結リストの全要素を先頭から順に表示する。リストは 10→20→30→null の状態である。表示される出力はどれか。",
+    "pseudoCode": "○構造体 Node\n  ○整数型: data\n  ○Node型: next\n\n/* リスト: 10→20→30→null */\n○Node型: head  /* 先頭ノード(data=10) */\n○Node型: current ← head\n\ncurrent ≠ null の間繰り返す\n  表示(current.data)\n  current ← current.next\nを繰り返す",
+    "choices": [
+      {
+        "id": "a",
+        "text": "10 20 30",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "currentは先頭ノード(10)から開始し、次のノードへ順に移動します。current=10を表示→current=20を表示→current=30を表示→current=null でループ終了。先頭から末尾まで順に全要素が表示されます。",
+          "analogy": "電車の先頭車両から順に乗客を確認していくイメージです。1両目(10)→2両目(20)→3両目(30)→最後尾を過ぎたら終了。",
+          "deepDive": "連結リストの走査はcurrentポインタを使って各ノードを訪問します。終了条件は「current ≠ null」で、nullは末尾を示す番兵値です。走査の計算量はO(n)です。配列と異なり添字でアクセスできないため、先頭から順にたどる必要があります。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "30 20 10",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "これは逆順の出力です。単方向連結リストは先頭から末尾への一方向にしかたどれません。逆順にするにはスタックなど別の仕組みが必要です。",
+          "analogy": "一方通行の道路を逆走することはできません。先頭から末尾へ順にたどります。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "10",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "先頭の要素だけが表示されるのではありません。ループ内でcurrent ← current.nextにより次のノードへ移動するため、nullに達するまで全要素が表示されます。",
+          "analogy": "電車の先頭車両だけ確認して終わるのではなく、全車両を順に確認します。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "10 20 30 null",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "nullは表示されません。ループ条件「current ≠ null」により、currentがnullになった時点でループを抜けるため、nullに対してdata表示は実行されません。",
+          "analogy": "電車の最後尾の先にはもう車両がないので、確認するものがありません。「車両なし」は表示対象ではありません。"
+        }
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"current": "head(data=10)"}, "action": "currentを先頭ノードに設定"},
+      {"step": 2, "variables": {"current.data": "10", "出力": "10"}, "action": "10を表示、current ← current.next(data=20)"},
+      {"step": 3, "variables": {"current.data": "20", "出力": "20"}, "action": "20を表示、current ← current.next(data=30)"},
+      {"step": 4, "variables": {"current.data": "30", "出力": "30"}, "action": "30を表示、current ← current.next(null)"},
+      {"step": 5, "variables": {"current": "null"}, "action": "current=nullのためループ終了"}
+    ],
+    "traceAnalogy": "ガイドさんが美術館の展示を案内します。1番目の絵(10)を紹介→次の絵へ移動→2番目の絵(20)を紹介→次の絵へ移動→3番目の絵(30)を紹介→次の絵はない→ツアー終了。",
+    "overallExplanation": {
+      "summary": "連結リストの走査は、先頭ノードからcurrent.nextを辿って各ノードを順に訪問する基本操作です。nullに達したら走査終了です。",
+      "keyPoint": "走査パターン: current ← head → current ≠ null の間 → 処理 → current ← current.next。",
+      "relatedTopics": ["連結リストの探索", "連結リストの要素数カウント", "リストの末尾追加"],
+      "studyTip": "連結リストの走査は「current ← current.next」でノードを1つ進めるパターンを覚えましょう。配列の添字+1と同じ役割です。"
+    },
+    "tags": ["連結リスト", "走査", "ポインタ", "null判定"]
+  },
+  {
+    "questionId": "q-ds-011",
+    "examType": "科目B",
+    "category": "データ構造",
+    "subcategory": "data-structures",
+    "topic": "双方向リスト",
+    "level": 3,
+    "question": "双方向連結リストにおいて、ノードBを削除する擬似言語プログラムがある。リストの初期状態は A⇔B⇔C（各ノードはprevとnextを持つ）である。ノードBを正しく削除する処理はどれか。",
+    "pseudoCode": "○構造体 DNode\n  ○文字型: data\n  ○DNode型: prev\n  ○DNode型: next\n\n/* 初期リスト: null←A⇔B⇔C→null */\n○DNode型: nodeA, nodeB, nodeC\nnodeA.data ← 'A', nodeA.prev ← null, nodeA.next ← nodeB\nnodeB.data ← 'B', nodeB.prev ← nodeA, nodeB.next ← nodeC\nnodeC.data ← 'C', nodeC.prev ← nodeB, nodeC.next ← null\n\n/* ノードBを削除する処理: 【　】 */",
+    "choices": [
+      {
+        "id": "a",
+        "text": "nodeA.next ← nodeC\nnodeC.prev ← nodeA",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "ノードBを削除するには、Bの前のノード(A)の次ポインタをBの次のノード(C)に、Bの次のノード(C)の前ポインタをBの前のノード(A)に設定します。これでAとCが直接つながり、Bはリストから外れます。",
+          "analogy": "3人が手をつないで並んでいます(A-B-C)。Bが列から抜けるとき、AはCと手をつなぎ、CはAと手をつなぎ直します。Bは両方の手が離れて列から外れます。",
+          "deepDive": "双方向リストの削除では前後2つのポインタを更新する必要があります。単方向リストと異なり、削除対象のprevポインタから前のノードに直接アクセスできるため、削除対象さえ分かればO(1)で削除できます。先頭・末尾のノードを削除する場合はnullチェックが必要です。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "nodeA.next ← nodeC",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "nodeA.nextの更新だけでは不十分です。nodeC.prevがまだnodeBを指しているため、Cから前方向にたどるとBに到達してしまいます。双方向リストでは前後両方のポインタを更新する必要があります。",
+          "analogy": "AはCと手をつなぎましたが、CはまだBと手をつないだままです。片手だけ繋ぎ替えても、列は正しくつながりません。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "nodeC.prev ← nodeA\nnodeB.next ← null\nnodeB.prev ← null",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "nodeA.nextの更新が欠けています。nodeA.nextがまだnodeBを指しているため、Aから次をたどるとBに到達してしまいます。Bのポインタをnullにするだけでは不十分です。",
+          "analogy": "BはAとCから手を離しましたが、Aはまだ手を伸ばしたままです。Aの手をCに繋ぎ替える必要があります。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "nodeB.prev ← null\nnodeB.next ← null",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "Bのポインタをnullにしただけでは、AのnextはまだBを、CのprevもまだBを指しています。A→B→Cの接続が残ったままなので、リストの構造は修正されていません。",
+          "analogy": "Bが両手を離しても、AとCがまだBに手を伸ばしています。AとCが直接手をつなぎ直さないと列は正しくなりません。"
+        }
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"リスト": "null←A⇔B⇔C→null"}, "action": "初期状態"},
+      {"step": 2, "variables": {"nodeA.next": "nodeC"}, "action": "AのnextをC(Bの次)に変更"},
+      {"step": 3, "variables": {"nodeC.prev": "nodeA"}, "action": "CのprevをA(Bの前)に変更"},
+      {"step": 4, "variables": {"リスト": "null←A⇔C→null"}, "action": "Bが削除されA⇔Cの直接接続が完成"}
+    ],
+    "traceAnalogy": "3人の子供A,B,Cが手をつないで輪になる遊び（の一列版）。Bが抜けるとき、AはBの代わりにCと右手をつなぎ、CはBの代わりにAと左手をつなぎます。",
+    "overallExplanation": {
+      "summary": "双方向リストからノードを削除するには、前のノードのnextと後のノードのprevの両方を更新して、削除ノードをバイパスする必要があります。",
+      "keyPoint": "双方向リストの削除: 前.next ← 削除ノード.next、後.prev ← 削除ノード.prev の2つを更新。",
+      "relatedTopics": ["双方向リストの挿入", "番兵ノード", "循環リスト"],
+      "studyTip": "双方向リストは「前後2つの手をつないでいる」とイメージし、削除・挿入時は必ず両方の手(ポインタ)を更新することを忘れないようにしましょう。"
+    },
+    "tags": ["双方向リスト", "削除", "ポインタ操作", "prev/next"]
+  },
+  {
+    "questionId": "q-ds-012",
+    "examType": "科目B",
+    "category": "データ構造",
+    "subcategory": "data-structures",
+    "topic": "リストを使った実装",
+    "level": 3,
+    "question": "次の擬似言語プログラムは、単方向連結リストの要素数を数える関数である。リストが 5→3→8→1→null のとき、関数countNodes(head)の戻り値はどれか。",
+    "pseudoCode": "○構造体 Node\n  ○整数型: data\n  ○Node型: next\n\n○整数型 関数 countNodes(○Node型: head)\n  ○整数型: count ← 0\n  ○Node型: current ← head\n  current ≠ null の間繰り返す\n    count ← count + 1\n    current ← current.next\n  を繰り返す\n  return count\n\n/* リスト: 5→3→8→1→null */\n表示(countNodes(head))",
+    "choices": [
+      {
+        "id": "a",
+        "text": "3",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "リストには5,3,8,1の4つのノードがあります。3つではありません。全ノードをnullまで辿って数える必要があります。",
+          "analogy": "連なった電車の車両数を数えるとき、3両目で数え終わったと思ったら、まだ4両目がありました。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "4",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "currentがheadから始まり、nullになるまでcountを+1しながら次のノードへ移動します。5(count=1)→3(count=2)→8(count=3)→1(count=4)→null(ループ終了)。戻り値は4です。",
+          "analogy": "連結された電車の先頭から順に車両を数えていきます。1両目(5)→2両目(3)→3両目(8)→4両目(1)→もう車両なし。合計4両です。",
+          "deepDive": "連結リストの要素数を求めるにはO(n)の走査が必要です。配列のようにlengthプロパティで即座に要素数が分かるわけではありません。そのため、頻繁に要素数を参照する場合は、別途カウント変数を管理する設計も検討されます。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "5",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "5は先頭ノードのデータ値(data=5)です。要素数ではありません。ノードの数は4つです。",
+          "analogy": "先頭車両の座席番号と車両の総数を混同しているようなものです。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "17",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "17は全要素の合計値(5+3+8+1=17)です。この関数はcountを+1して要素数を数えており、dataの値を加算しているのではありません。",
+          "analogy": "電車の車両数を数えたいのに、各車両の乗客数を合計してしまったようなものです。"
+        }
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"current": "head(5)", "count": "0"}, "action": "初期化: currentを先頭に設定"},
+      {"step": 2, "variables": {"current": "5", "count": "1"}, "action": "count=1、current→次(3)へ移動"},
+      {"step": 3, "variables": {"current": "3", "count": "2"}, "action": "count=2、current→次(8)へ移動"},
+      {"step": 4, "variables": {"current": "8", "count": "3"}, "action": "count=3、current→次(1)へ移動"},
+      {"step": 5, "variables": {"current": "1", "count": "4"}, "action": "count=4、current→次(null)へ移動"},
+      {"step": 6, "variables": {"current": "null"}, "action": "current=null → ループ終了、return 4"}
+    ],
+    "traceAnalogy": "連結された電車の先頭から点検員が歩いて車両数を数えます。1両目(カウント1)→2両目(カウント2)→3両目(カウント3)→4両目(カウント4)→もう車両がない→報告:4両。",
+    "overallExplanation": {
+      "summary": "連結リストの要素数を数える関数です。先頭からnullまで走査し、通過したノード数をカウントします。4ノードなので戻り値は4です。",
+      "keyPoint": "リストの要素数 = nullに達するまでにカウントした回数。走査パターンの応用。",
+      "relatedTopics": ["リストの走査", "リストの末尾検出", "リストの合計値計算"],
+      "studyTip": "リストの走査中に「何を数えるか」を正確に読み取ることが重要です。countに何を加算しているかに注目しましょう。"
+    },
+    "tags": ["連結リスト", "要素数", "走査", "関数"]
+  },
+  {
+    "questionId": "q-ds-013",
+    "examType": "科目B",
+    "category": "データ構造",
+    "subcategory": "data-structures",
+    "topic": "二分木の走査（前順・中順・後順）",
+    "level": 4,
+    "question": "次の二分木に対して中順(中間順)走査を行ったとき、ノードの訪問順序はどれか。\n\n木構造:\n        4\n       / \\\n      2   6\n     / \\ / \\\n    1  3 5  7",
+    "pseudoCode": "○構造体 TreeNode\n  ○整数型: data\n  ○TreeNode型: left\n  ○TreeNode型: right\n\n○手続き inorder(○TreeNode型: node)\n  もし node ≠ null ならば\n    inorder(node.left)\n    表示(node.data)\n    inorder(node.right)\n  を実行する\n\n/* 木: 4(2(1,3), 6(5,7)) */\ninorder(root)  /* rootはノード4 */",
+    "choices": [
+      {
+        "id": "a",
+        "text": "4 2 1 3 6 5 7",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "これは前順(先行順/preorder)走査の結果です。前順は「根→左→右」の順ですが、中順は「左→根→右」の順に訪問します。",
+          "analogy": "家の中を「まず玄関で記録→左の部屋へ→右の部屋へ」と回るのが前順。中順は「左の部屋→玄関で記録→右の部屋」です。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "1 2 3 4 5 6 7",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "中順走査は「左部分木→根→右部分木」の順に再帰的に訪問します。この二分探索木では中順走査により昇順(ソート済み)で出力されます。左端の1から始まり、1→2→3→4→5→6→7の順になります。",
+          "analogy": "図書館の本棚を左端から右端へ順番に読んでいくイメージです。各棚(部分木)でも左の本から読み、中央の仕切り(根)を確認し、右の本へ進みます。結果的に全ての本が番号順に読まれます。",
+          "deepDive": "中順走査は二分探索木(BST)に対して行うと、要素が昇順に得られるという重要な性質があります。これはBSTの「左 < 根 < 右」という性質と中順の「左→根→右」という訪問順序が一致するためです。前順(根→左→右)は木の複製、後順(左→右→根)は木の削除に使われます。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "1 3 2 5 7 6 4",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "これは後順(後行順/postorder)走査の結果です。後順は「左→右→根」の順ですが、中順は「左→根→右」の順に訪問します。",
+          "analogy": "家の中を「左の部屋→右の部屋→最後に玄関で記録」と回るのが後順。中順は「左の部屋→玄関で記録→右の部屋」です。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "7 6 5 4 3 2 1",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "これは降順の並びで、中順走査の逆順です。中順走査を「右→根→左」の逆順で行えばこの結果になりますが、標準の中順は「左→根→右」です。",
+          "analogy": "本棚を右端から左端へ逆方向に読んでしまったようなものです。"
+        }
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"node": "4"}, "action": "inorder(4): まず左部分木inorder(2)へ"},
+      {"step": 2, "variables": {"node": "2"}, "action": "inorder(2): まず左部分木inorder(1)へ"},
+      {"step": 3, "variables": {"node": "1"}, "action": "inorder(1): 左=null、表示(1)、右=null"},
+      {"step": 4, "variables": {"出力": "1", "node": "2"}, "action": "inorder(2)に戻る: 表示(2)"},
+      {"step": 5, "variables": {"出力": "1,2", "node": "3"}, "action": "inorder(3): 左=null、表示(3)、右=null"},
+      {"step": 6, "variables": {"出力": "1,2,3", "node": "4"}, "action": "inorder(4)に戻る: 表示(4)"},
+      {"step": 7, "variables": {"出力": "1,2,3,4", "node": "6"}, "action": "右部分木inorder(6)へ: まずinorder(5)"},
+      {"step": 8, "variables": {"出力": "1,2,3,4,5", "node": "6"}, "action": "表示(5)後、inorder(6)に戻り表示(6)"},
+      {"step": 9, "variables": {"出力": "1,2,3,4,5,6,7"}, "action": "inorder(7): 表示(7)。走査完了"}
+    ],
+    "traceAnalogy": "家の中を探検するルールです。各部屋に入ったら「左のドア→自分の名前を叫ぶ→右のドア」の順で行動します。一番左の部屋(1)から始まり、最終的に1,2,3,4,5,6,7の順になります。",
+    "overallExplanation": {
+      "summary": "中順走査は「左→根→右」の順で二分木を再帰的に訪問します。二分探索木に対して中順走査を行うと、要素が昇順に得られます。",
+      "keyPoint": "中順走査 = 左→根→右。二分探索木では昇順に出力される。前順=根→左→右、後順=左→右→根。",
+      "relatedTopics": ["前順走査", "後順走査", "二分探索木", "再帰"],
+      "studyTip": "3種類の走査は「根をどこで訪問するか」で区別します。前順=最初、中順=中間、後順=最後。"
+    },
+    "tags": ["二分木", "中順走査", "再帰", "二分探索木"]
+  },
+  {
+    "questionId": "q-ds-014",
+    "examType": "科目B",
+    "category": "データ構造",
+    "subcategory": "data-structures",
+    "topic": "二分探索木の探索",
+    "level": 4,
+    "question": "次の擬似言語プログラムは二分探索木から値を探索する関数である。木構造が下図のとき、search(root, 7) を呼び出した場合の比較回数はどれか。\n\n木構造:\n        5\n       / \\\n      3   8\n     / \\ / \\\n    1  4 6  9\n            \\\n             7",
+    "pseudoCode": "○構造体 TreeNode\n  ○整数型: data\n  ○TreeNode型: left\n  ○TreeNode型: right\n\n○論理型 関数 search(○TreeNode型: node, ○整数型: target)\n  もし node = null ならば\n    return false\n  を実行する\n  もし target = node.data ならば\n    return true\n  そうでなくもし target < node.data ならば\n    return search(node.left, target)\n  そうでなければ\n    return search(node.right, target)\n  を実行する\n\nsearch(root, 7)  /* rootはノード5 */",
+    "choices": [
+      {
+        "id": "a",
+        "text": "2回",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "2回の比較ではノード5→ノード8までしか辿れません。7はノード8の左部分木のさらに下にあるため、もっと多くの比較が必要です。",
+          "analogy": "辞書で「た」行を探すのに、最初の見出しを2回確認しただけでは目的のページにたどり着けないようなものです。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "3回",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "3回の比較ではノード5→8→6まで辿れますが、7はノード6の右子です。もう1回の比較が必要です。",
+          "analogy": "道案内で3つの分岐を曲がりましたが、目的地はもう1つ先の角にあります。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "4回",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "探索経路: ①root(5)と比較→7>5で右へ ②ノード8と比較→7<8で左へ ③ノード6と比較→7>6で右へ ④ノード7と比較→7=7で発見。合計4回の比較で目標値を見つけます。",
+          "analogy": "辞書を引くイメージです。①まず真ん中(5)を開く→7は後半だ ②後半の真ん中(8)を開く→7は前だ ③その前半(6)を開く→7はもう少し後 ④ぴったり7を発見！4回ページをめくりました。",
+          "deepDive": "二分探索木の探索は、各ノードで1回の比較を行い、左か右の部分木に進みます。平衡木の場合、探索の計算量はO(log n)です。この木は完全に平衡ではないため、最悪の場合は深さ分の比較が必要です。ノード数9の完全平衡木なら最大4回(⌈log₂9⌉=4)の比較で済みます。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "5回",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "5回は多すぎます。7はノード5→8→6→7の経路で4回の比較で見つかります。二分探索木は毎回半分に絞り込むため、効率的に探索できます。",
+          "analogy": "辞書引きで余計なページを確認してしまったようなものです。正しい経路なら4回で済みます。"
+        }
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"node": "5", "target": "7"}, "action": "7と5を比較: 7>5 → 右部分木へ(比較1回目)"},
+      {"step": 2, "variables": {"node": "8", "target": "7"}, "action": "7と8を比較: 7<8 → 左部分木へ(比較2回目)"},
+      {"step": 3, "variables": {"node": "6", "target": "7"}, "action": "7と6を比較: 7>6 → 右部分木へ(比較3回目)"},
+      {"step": 4, "variables": {"node": "7", "target": "7"}, "action": "7と7を比較: 一致 → return true(比較4回目)"}
+    ],
+    "traceAnalogy": "図書館で本を探します。①中央の棚(5番)を確認→目的の7番はもっと右→②右エリアの中央(8番)→7番は少し左→③6番の棚→7番はもう少し右→④7番を発見！4回棚を確認しました。",
+    "overallExplanation": {
+      "summary": "二分探索木の探索は各ノードで値を比較し、小さければ左、大きければ右に進みます。5→8→6→7の経路で4回の比較が必要です。",
+      "keyPoint": "二分探索木の探索: target<node.dataなら左、target>node.dataなら右。比較回数=探索パスの深さ。",
+      "relatedTopics": ["二分探索", "平衡木(AVL木)", "探索の計算量"],
+      "studyTip": "二分探索木の探索は「辞書引き」と同じ要領です。毎回半分に絞り込むので、効率的に目的の値を見つけられます。"
+    },
+    "tags": ["二分探索木", "探索", "比較回数", "再帰"]
+  },
+  {
+    "questionId": "q-ds-015",
+    "examType": "科目B",
+    "category": "データ構造",
+    "subcategory": "data-structures",
+    "topic": "ヒープの基本",
+    "level": 4,
+    "question": "最大ヒープ(親ノードの値が子ノードの値以上)に値3を追加する擬似言語プログラムがある。追加後のヒープの根(先頭要素)の値はどれか。追加前のヒープは配列 {9, 7, 5, 4, 6} で表現されている。",
+    "pseudoCode": "○整数型の配列: heap = {9, 7, 5, 4, 6}\n○整数型: size ← 5\n\n○手続き insert(○整数型: val)\n  heap[size] ← val\n  size ← size + 1\n  ○整数型: i ← size - 1\n  /* 上方向への修復(アップヒープ) */\n  i > 0 の間繰り返す\n    ○整数型: parent ← (i - 1) ÷ 2  /* 整数除算 */\n    もし heap[i] > heap[parent] ならば\n      /* 親子を交換 */\n      ○整数型: temp ← heap[i]\n      heap[i] ← heap[parent]\n      heap[parent] ← temp\n      i ← parent\n    そうでなければ\n      繰り返しを抜ける\n    を実行する\n  を繰り返す\n\ninsert(3)",
+    "choices": [
+      {
+        "id": "a",
+        "text": "3",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "3は追加した値ですが、最大ヒープでは最大値が根になります。3は全要素の中で最小なので根にはなりません。",
+          "analogy": "会社の組織図で、新入社員が直接社長の座につくことはありません。能力(値)が既存の全員より低いためです。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "7",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "7は根ではなく根の左の子です。根は最大値の9のままです。3の追加は根に影響しません。",
+          "analogy": "新入社員の加入で部長(7)が社長(9)に昇進するわけではありません。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "9",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "3をheap[5]に追加し、アップヒープを試みます。3の親はheap[(5-1)÷2]=heap[2]=5です。3<5なので交換は発生せず、ヒープの根は9のまま変わりません。追加後のヒープは{9,7,5,4,6,3}です。",
+          "analogy": "会社の組織図に新入社員(3)が入ります。上司(5)より能力が低いので、そのまま最下層に配属されます。社長(9)の座は変わりません。",
+          "deepDive": "最大ヒープのinsert操作は、①末尾に追加→②アップヒープ(親と比較して大きければ交換を繰り返す)の2ステップです。今回は追加値3が親5より小さいため交換なしで完了します。計算量は最悪O(log n)ですが、今回はO(1)で完了。配列でのヒープ表現では、ノードiの親=(i-1)÷2、左子=2i+1、右子=2i+2です。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "6",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "6は根ではなく他のノードの値です。3の追加によってヒープの上部構造は変化しません。根は最大値の9です。",
+          "analogy": "一般社員(6)が社長の座につくことはありません。社長(9)が最も能力が高いままです。"
+        }
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"heap": "{9,7,5,4,6}", "size": "5"}, "action": "初期ヒープ(最大ヒープ)"},
+      {"step": 2, "variables": {"heap": "{9,7,5,4,6,3}", "size": "6", "i": "5"}, "action": "heap[5]に3を追加"},
+      {"step": 3, "variables": {"parent": "2", "heap[5]": "3", "heap[2]": "5"}, "action": "親(i=2)の値5と比較: 3<5なので交換しない"},
+      {"step": 4, "variables": {"heap": "{9,7,5,4,6,3}"}, "action": "アップヒープ終了。根は9のまま"}
+    ],
+    "traceAnalogy": "会社に新入社員(能力3)が入社します。配属先の上司(能力5)より能力が低いので、その部署の末端に配属されます。組織のトップ(能力9)は変わりません。",
+    "overallExplanation": {
+      "summary": "最大ヒープに値3を追加すると末尾に配置されますが、親(5)より小さいため交換は発生せず、根は9のままです。",
+      "keyPoint": "最大ヒープのinsert: 末尾追加→アップヒープ(親より大きければ交換)。根は常に最大値。",
+      "relatedTopics": ["ヒープソート", "優先度キュー", "ダウンヒープ"],
+      "studyTip": "ヒープの配列表現では、親=(i-1)÷2、左子=2i+1、右子=2i+2を覚えておけば、木構造を配列で追跡できます。"
+    },
+    "tags": ["ヒープ", "最大ヒープ", "挿入", "アップヒープ"]
+  },
+  {
+    "questionId": "q-ds-016",
+    "examType": "科目B",
+    "category": "データ構造",
+    "subcategory": "data-structures",
+    "topic": "木構造のノード数",
+    "level": 4,
+    "question": "次の擬似言語プログラムは二分木のノード数を再帰的に数える関数である。下図の二分木に対してcountNodes(root)を呼び出したとき、戻り値はどれか。\n\n木構造:\n      A\n     / \\\n    B   C\n   /   / \\\n  D   E   F",
+    "pseudoCode": "○構造体 TreeNode\n  ○文字型: data\n  ○TreeNode型: left\n  ○TreeNode型: right\n\n○整数型 関数 countNodes(○TreeNode型: node)\n  もし node = null ならば\n    return 0\n  を実行する\n  return 1 + countNodes(node.left) + countNodes(node.right)",
+    "choices": [
+      {
+        "id": "a",
+        "text": "3",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "3は葉ノード(D,E,F)の数です。この関数は葉だけでなく全ノードを数えます。内部ノード(A,B,C)を含めて合計6です。",
+          "analogy": "家族の人数を数えるとき、子供(葉)だけ数えて親(内部ノード)を数え忘れたようなものです。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "5",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "ノードは全部で6つあります(A,B,C,D,E,F)。5つではありません。木の全ノードを数え漏れなく確認する必要があります。",
+          "analogy": "家族写真を撮るとき、1人が写っていなかったようなものです。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "6",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "再帰的にcountNodes(A) = 1 + countNodes(B) + countNodes(C)を計算します。countNodes(B) = 1+countNodes(D)+countNodes(null) = 1+1+0 = 2。countNodes(C) = 1+countNodes(E)+countNodes(F) = 1+1+1 = 3。よってcountNodes(A) = 1+2+3 = 6。",
+          "analogy": "家族の人数を数えます。おじいちゃんA(1人)が「私の家族は何人？」と聞くと、左の子B(自分+子D=2人)と右の子C(自分+子E+子F=3人)の答えを合計して、1+2+3=6人です。",
+          "deepDive": "この再帰関数は分割統治法の典型例です。各ノードで「自分(1) + 左部分木のノード数 + 右部分木のノード数」を返します。nullの場合に0を返すのが再帰の基底条件(ベースケース)です。計算量はO(n)で全ノードを1回ずつ訪問します。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "7",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "ノードはA,B,C,D,E,Fの6つです。7はnullノードも数えてしまった可能性があります。nullの場合は0を返すため、数に含まれません。",
+          "analogy": "家族の人数を数えるとき、空いている椅子(null)も人数に入れてしまったようなものです。"
+        }
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"node": "A"}, "action": "countNodes(A): 1 + countNodes(B) + countNodes(C)"},
+      {"step": 2, "variables": {"node": "B"}, "action": "countNodes(B): 1 + countNodes(D) + countNodes(null)"},
+      {"step": 3, "variables": {"node": "D"}, "action": "countNodes(D): 1 + countNodes(null) + countNodes(null) = 1+0+0 = 1"},
+      {"step": 4, "variables": {"countNodes(B)": "2"}, "action": "countNodes(B) = 1 + 1 + 0 = 2"},
+      {"step": 5, "variables": {"node": "C"}, "action": "countNodes(C): 1 + countNodes(E) + countNodes(F)"},
+      {"step": 6, "variables": {"countNodes(E)": "1", "countNodes(F)": "1"}, "action": "EもFも葉なのでそれぞれ1"},
+      {"step": 7, "variables": {"countNodes(C)": "3"}, "action": "countNodes(C) = 1 + 1 + 1 = 3"},
+      {"step": 8, "variables": {"countNodes(A)": "6"}, "action": "countNodes(A) = 1 + 2 + 3 = 6"}
+    ],
+    "traceAnalogy": "家族の人数調査です。Aさんに「家族は何人？」と聞くと、Aさんは左の子Bと右の子Cに同じ質問をします。B:「私と子供Dで2人」C:「私と子供E,Fで3人」。A:「私を入れて1+2+3=6人です」。",
+    "overallExplanation": {
+      "summary": "二分木のノード数を再帰で数える関数です。各ノードで「1+左部分木+右部分木」を返し、nullで0を返します。A(1)+B部分木(2)+C部分木(3)=6です。",
+      "keyPoint": "再帰でのノード数カウント: null→0を返す、それ以外→1+左+右を返す。",
+      "relatedTopics": ["木の高さ計算", "分割統治法", "再帰の基底条件"],
+      "studyTip": "再帰関数のトレースは、最も深いところ(葉やnull)から計算を積み上げていくのがコツです。"
+    },
+    "tags": ["二分木", "ノード数", "再帰", "分割統治"]
+  }
+]

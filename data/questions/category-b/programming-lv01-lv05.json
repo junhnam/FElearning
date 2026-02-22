@@ -1,0 +1,1174 @@
+[
+  {
+    "questionId": "q-prog-001",
+    "examType": "科目B",
+    "category": "プログラミング基礎",
+    "subcategory": "プログラミング基礎",
+    "topic": "変数と代入",
+    "level": 1,
+    "question": "次のプログラムを実行したとき、表示される値はどれか。",
+    "pseudoCode": "○整数型: x\nx ← 5\nx ← x + 3\n表示(x)",
+    "choices": [
+      {
+        "text": "8",
+        "isCorrect": true,
+        "whyCorrect": "xに5を代入し、次にx+3=8をxに代入するため、最終的にxは8になります。代入演算子←は右辺を計算してから左辺の変数に格納します。",
+        "analogy": "貯金箱に5円入れ、さらに3円追加すると合計8円になるのと同じです。",
+        "deepDive": "代入文「x ← x + 3」では、まず右辺の「x + 3」を現在のxの値（5）で計算し、結果の8を左辺のxに格納します。右辺の評価が先、左辺への格納が後という順序が重要です。"
+      },
+      {
+        "text": "5",
+        "isCorrect": false,
+        "whyWrong": "5は最初にxに代入された値ですが、2行目の代入で値が更新されています。変数は上書きされるため、最終値は5ではありません。",
+        "analogy": "貯金箱の中身が更新されたのに、最初に入れた額だけを見ているようなものです。"
+      },
+      {
+        "text": "3",
+        "isCorrect": false,
+        "whyWrong": "3は加算される値ですが、x+3の結果ではありません。元の値5に3を足した8が正しい結果です。",
+        "analogy": "追加で入れた3円だけを見て、もともとあった5円を忘れているようなものです。"
+      },
+      {
+        "text": "53",
+        "isCorrect": false,
+        "whyWrong": "53は文字列連結の結果です。整数型の変数では+は算術演算（足し算）なので、5と3を連結するのではなく5+3=8と計算されます。",
+        "analogy": "数字の5と3を横に並べて「53」にするのは文字の結合であり、数学の足し算5+3=8とは異なります。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"x": 5}, "action": "xに5を代入"},
+      {"step": 2, "variables": {"x": 8}, "action": "x+3=5+3=8をxに代入"},
+      {"step": 3, "variables": {"x": 8}, "action": "xの値8を表示"}
+    ],
+    "traceAnalogy": "貯金箱にまず5円を入れ（ステップ1）、そこに3円を追加して8円にし（ステップ2）、最後に中身を確認すると8円でした（ステップ3）。",
+    "overallExplanation": "変数への代入は「箱に値を入れる」操作です。同じ変数に再度代入すると前の値は上書きされます。x←x+3のような式では、右辺を先に計算してから結果を左辺に格納します。"
+  },
+  {
+    "questionId": "q-prog-002",
+    "examType": "科目B",
+    "category": "プログラミング基礎",
+    "subcategory": "プログラミング基礎",
+    "topic": "四則演算",
+    "level": 1,
+    "question": "次のプログラムを実行したとき、表示される値はどれか。",
+    "pseudoCode": "○整数型: a, b, c\na ← 10\nb ← 3\nc ← a ÷ b\n表示(c)",
+    "choices": [
+      {
+        "text": "3",
+        "isCorrect": true,
+        "whyCorrect": "整数型同士の除算では小数点以下が切り捨てられます。10÷3=3.333...ですが、整数型なので結果は3になります。",
+        "analogy": "10個のりんごを3人で等しく分けると、1人あたり3個もらえて1個余ります。整数の割り算では余りは無視されます。",
+        "deepDive": "整数型の除算（整数除算）では、商の小数部分が切り捨てられます。余りを求めたい場合は剰余演算子（mod）を使います。10 mod 3 = 1です。"
+      },
+      {
+        "text": "3.33",
+        "isCorrect": false,
+        "whyWrong": "3.33は実数型の除算結果です。変数cは整数型として宣言されているため、小数点以下は切り捨てられ3になります。",
+        "analogy": "整数型は「整数しか入らない箱」なので、小数点以下は箱に入りきらず切り捨てられます。"
+      },
+      {
+        "text": "1",
+        "isCorrect": false,
+        "whyWrong": "1は10÷3の余り（10 mod 3）です。除算（÷）の結果は商である3であり、余りではありません。",
+        "analogy": "割り算の答えと余りを混同しています。10÷3は「商3あまり1」で、÷は商の部分を返します。"
+      },
+      {
+        "text": "30",
+        "isCorrect": false,
+        "whyWrong": "30は10×3の結果であり、除算（÷）ではなく乗算（×）の結果です。",
+        "analogy": "割り算と掛け算を取り違えています。÷は分ける操作、×は増やす操作です。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"a": 10}, "action": "aに10を代入"},
+      {"step": 2, "variables": {"a": 10, "b": 3}, "action": "bに3を代入"},
+      {"step": 3, "variables": {"a": 10, "b": 3, "c": 3}, "action": "a÷b=10÷3=3（整数除算）をcに代入"},
+      {"step": 4, "variables": {"a": 10, "b": 3, "c": 3}, "action": "cの値3を表示"}
+    ],
+    "traceAnalogy": "10個のりんご（a）を3人（b）で分ける計算です。1人あたり3個（c）になり、余りの1個は整数除算では無視されます。",
+    "overallExplanation": "整数型同士の除算では、結果の小数部分が切り捨てられます。これを整数除算（truncated division）と呼びます。10÷3の数学的な答えは3.333...ですが、整数型では3になります。"
+  },
+  {
+    "questionId": "q-prog-003",
+    "examType": "科目B",
+    "category": "プログラミング基礎",
+    "subcategory": "プログラミング基礎",
+    "topic": "文字列の連結",
+    "level": 1,
+    "question": "次のプログラムを実行したとき、表示される文字列はどれか。",
+    "pseudoCode": "○文字列型: s1, s2, result\ns1 ← \"Hello\"\ns2 ← \"World\"\nresult ← s1 + \" \" + s2\n表示(result)",
+    "choices": [
+      {
+        "text": "Hello World",
+        "isCorrect": true,
+        "whyCorrect": "文字列型の+演算子は文字列連結を行います。\"Hello\"と\" \"（半角スペース）と\"World\"を連結すると\"Hello World\"になります。",
+        "analogy": "3枚のカードを横に並べるイメージです。「Hello」カード＋「 」カード＋「World」カード＝「Hello World」になります。",
+        "deepDive": "文字列連結は左から右へ順に行われます。s1+\" \"で\"Hello \"が作られ、さらに+s2で\"Hello World\"になります。数値の+（加算）と文字列の+（連結）は型によって動作が異なります。"
+      },
+      {
+        "text": "HelloWorld",
+        "isCorrect": false,
+        "whyWrong": "間に\" \"（半角スペース）を連結しているため、HelloとWorldの間にスペースが入ります。スペースを見落としています。",
+        "analogy": "3枚のカードのうち真ん中のスペースカードを見落として、2枚だけ並べたようなものです。"
+      },
+      {
+        "text": "Hello+World",
+        "isCorrect": false,
+        "whyWrong": "+は文字列連結演算子であり、+記号そのものが結果に含まれるわけではありません。",
+        "analogy": "のりで紙を貼り合わせるとき、のり自体は作品の一部にはなりません。+は「つなげる道具」です。"
+      },
+      {
+        "text": "s1 s2",
+        "isCorrect": false,
+        "whyWrong": "s1やs2は変数名です。表示されるのは変数名ではなく、変数に格納されている値（\"Hello\"と\"World\"）です。",
+        "analogy": "ラベル（s1, s2）ではなく、箱の中身（Hello, World）が表示されます。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"s1": "Hello"}, "action": "s1に\"Hello\"を代入"},
+      {"step": 2, "variables": {"s1": "Hello", "s2": "World"}, "action": "s2に\"World\"を代入"},
+      {"step": 3, "variables": {"s1": "Hello", "s2": "World", "result": "Hello World"}, "action": "s1+\" \"+s2=\"Hello\"+\" \"+\"World\"=\"Hello World\"をresultに代入"},
+      {"step": 4, "variables": {"s1": "Hello", "s2": "World", "result": "Hello World"}, "action": "resultの値\"Hello World\"を表示"}
+    ],
+    "traceAnalogy": "2つの名札カード「Hello」と「World」の間にスペースカードを挟んで並べ、できた文字列を読み上げるイメージです。",
+    "overallExplanation": "文字列型の+演算子は連結（つなぎ合わせ）を行います。整数型の+が足し算をするのとは異なり、文字列同士をそのまま前後に繋げます。スペースなどの空白文字も1つの文字列として連結できます。"
+  },
+  {
+    "questionId": "q-prog-004",
+    "examType": "科目B",
+    "category": "プログラミング基礎",
+    "subcategory": "プログラミング基礎",
+    "topic": "論理演算(AND/OR/NOT)",
+    "level": 1,
+    "question": "次のプログラムを実行したとき、表示される値はどれか。",
+    "pseudoCode": "○論理型: a, b, result\na ← true\nb ← false\nresult ← a AND b\n表示(result)",
+    "choices": [
+      {
+        "text": "false",
+        "isCorrect": true,
+        "whyCorrect": "AND演算は両方がtrueのときだけtrueになります。a=true、b=falseなので、true AND false = falseです。",
+        "analogy": "AND演算は「両方の条件を満たさないと合格しない」入試のようなものです。筆記試験（true）に受かっても面接（false）に落ちたら不合格（false）です。",
+        "deepDive": "AND（論理積）の真理値表: true AND true = true, true AND false = false, false AND true = false, false AND false = false。一方、OR（論理和）はどちらか一方がtrueなら結果はtrueになります。"
+      },
+      {
+        "text": "true",
+        "isCorrect": false,
+        "whyWrong": "AND演算は両方trueのときだけtrueです。bがfalseなので、結果はtrueにはなりません。OR演算であればtrue OR false = trueになります。",
+        "analogy": "ANDは「両方合格」が条件です。片方だけ合格では不十分です。"
+      },
+      {
+        "text": "1",
+        "isCorrect": false,
+        "whyWrong": "論理型の演算結果はtrue/falseで表され、1や0ではありません。一部のプログラミング言語ではtrueを1で表しますが、擬似言語ではtrue/falseを使います。",
+        "analogy": "日本語の試験で「合格/不合格」と表記するのに、「1/0」と書いてしまったようなものです。"
+      },
+      {
+        "text": "エラー",
+        "isCorrect": false,
+        "whyWrong": "論理型同士のAND演算は正しい操作であり、エラーにはなりません。型が一致した正当な演算です。",
+        "analogy": "同じ形のブロック同士は問題なく組み合わせられます。エラーが起きるのは形の合わないブロックを無理に組み合わせようとしたときです。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"a": true}, "action": "aにtrueを代入"},
+      {"step": 2, "variables": {"a": true, "b": false}, "action": "bにfalseを代入"},
+      {"step": 3, "variables": {"a": true, "b": false, "result": false}, "action": "a AND b = true AND false = falseをresultに代入"},
+      {"step": 4, "variables": {"a": true, "b": false, "result": false}, "action": "resultの値falseを表示"}
+    ],
+    "traceAnalogy": "2つのスイッチがあり、1つ目はON（true）、2つ目はOFF（false）です。AND回路は両方ONのときだけ電気が通るので、結果はOFF（false）です。",
+    "overallExplanation": "AND演算（論理積）は2つの値が両方trueのときだけtrueを返します。一方でもfalseがあればfalseになります。OR演算（論理和）はどちらか一方がtrueならtrue、NOT演算（否定）はtrue/falseを反転させます。"
+  },
+  {
+    "questionId": "q-prog-005",
+    "examType": "科目B",
+    "category": "プログラミング基礎",
+    "subcategory": "プログラミング基礎",
+    "topic": "型変換",
+    "level": 1,
+    "question": "次のプログラムを実行したとき、変数resultに格納される値はどれか。",
+    "pseudoCode": "○整数型: a\n○実数型: b, result\na ← 7\nb ← 2.5\nresult ← a + b\n表示(result)",
+    "choices": [
+      {
+        "text": "9.5",
+        "isCorrect": true,
+        "whyCorrect": "整数型aの値7は実数型bとの演算時に自動的に実数型7.0に変換されます。7.0+2.5=9.5がresultに格納されます。",
+        "analogy": "整数は実数の一部なので、実数と混ぜると自動的に実数として扱われます。100円玉が両替されて100.0円として計算されるようなイメージです。",
+        "deepDive": "整数型と実数型の演算では、暗黙の型変換（implicit type conversion）により整数型が実数型に拡張されます。これは情報の損失がない安全な変換です。逆に実数→整数の変換は小数部が失われるため、明示的な変換が必要です。"
+      },
+      {
+        "text": "9",
+        "isCorrect": false,
+        "whyWrong": "resultは実数型として宣言されているため、小数部分は切り捨てられません。9は整数型に格納する場合の結果です。",
+        "analogy": "実数型の箱は小数も入る大きな箱なので、0.5を落とすことはありません。"
+      },
+      {
+        "text": "10",
+        "isCorrect": false,
+        "whyWrong": "7+2.5=9.5であり、10ではありません。四捨五入は自動的には行われません。",
+        "analogy": "計算結果を勝手に四捨五入して丸めてはいけません。正確な計算結果をそのまま保持します。"
+      },
+      {
+        "text": "エラー",
+        "isCorrect": false,
+        "whyWrong": "整数型と実数型の演算は暗黙の型変換によって可能です。整数型が自動的に実数型に変換されてから演算が行われます。",
+        "analogy": "100円玉と50円玉は単位が同じ「円」なので一緒に計算できます。型が異なっても互換性がある場合は自動変換されます。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"a": 7}, "action": "aに整数7を代入"},
+      {"step": 2, "variables": {"a": 7, "b": 2.5}, "action": "bに実数2.5を代入"},
+      {"step": 3, "variables": {"a": 7, "b": 2.5, "result": 9.5}, "action": "aが実数7.0に変換され、7.0+2.5=9.5をresultに代入"},
+      {"step": 4, "variables": {"a": 7, "b": 2.5, "result": 9.5}, "action": "resultの値9.5を表示"}
+    ],
+    "traceAnalogy": "整数の7が実数の世界に引っ越して7.0になり、実数の2.5と合流して9.5になるイメージです。",
+    "overallExplanation": "異なる数値型同士の演算では、情報が失われない方向に暗黙の型変換が行われます。整数型は実数型に自動変換されます（7→7.0）。これにより整数と実数の混合計算が可能になります。"
+  },
+  {
+    "questionId": "q-prog-006",
+    "examType": "科目B",
+    "category": "プログラミング基礎",
+    "subcategory": "プログラミング基礎",
+    "topic": "if文の基本",
+    "level": 2,
+    "question": "次のプログラムを実行したとき、表示される文字列はどれか。",
+    "pseudoCode": "○整数型: score\nscore ← 75\nもし score ≧ 60 ならば\n  表示(\"合格\")\nそうでなければ\n  表示(\"不合格\")\nを実行する",
+    "choices": [
+      {
+        "text": "合格",
+        "isCorrect": true,
+        "whyCorrect": "scoreの値75は60以上なので、条件「score≧60」はtrueとなり、「合格」が表示されます。",
+        "analogy": "テストで75点を取りました。合格ラインが60点なので、75≧60は合格です。",
+        "deepDive": "≧は「以上」を意味する比較演算子です。「score > 60」（60より大きい）とは異なり、「score ≧ 60」はscoreが60の場合もtrueになります。境界値（この場合60点ちょうど）の扱いに注意しましょう。"
+      },
+      {
+        "text": "不合格",
+        "isCorrect": false,
+        "whyWrong": "75は60以上なので条件はtrueとなり、「そうでなければ」の分岐（不合格）には進みません。",
+        "analogy": "75点は合格ライン（60点）を超えているので、不合格にはなりません。"
+      },
+      {
+        "text": "75",
+        "isCorrect": false,
+        "whyWrong": "このプログラムはscoreの値を表示するのではなく、条件判定の結果に応じて「合格」か「不合格」の文字列を表示します。",
+        "analogy": "点数そのものではなく、合否の判定結果を伝えるプログラムです。"
+      },
+      {
+        "text": "何も表示されない",
+        "isCorrect": false,
+        "whyWrong": "if-else文は必ずどちらかの分岐に進むため、必ず何かが表示されます。条件がtrueなら「合格」、falseなら「不合格」が表示されます。",
+        "analogy": "二股の分かれ道のようなもので、必ずどちらかの道に進みます。立ち止まることはありません。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"score": 75}, "action": "scoreに75を代入"},
+      {"step": 2, "variables": {"score": 75}, "action": "条件判定: score≧60 → 75≧60 → true"},
+      {"step": 3, "variables": {"score": 75}, "action": "条件がtrueなので「合格」を表示"}
+    ],
+    "traceAnalogy": "テストの答案（75点）を受け取り、合格ライン（60点）と比較して、合格証を渡す流れです。",
+    "overallExplanation": "if-else文は条件の真偽によって実行する処理を切り替えます。条件がtrueなら「ならば」側、falseなら「そうでなければ」側が実行されます。比較演算子≧は「以上」を意味し、等しい場合もtrueになります。"
+  },
+  {
+    "questionId": "q-prog-007",
+    "examType": "科目B",
+    "category": "プログラミング基礎",
+    "subcategory": "プログラミング基礎",
+    "topic": "if-else文",
+    "level": 2,
+    "question": "次のプログラムを実行したとき、表示される文字列はどれか。",
+    "pseudoCode": "○整数型: x\nx ← 15\nもし x > 20 ならば\n  表示(\"大\")\nそうでなくもし x > 10 ならば\n  表示(\"中\")\nそうでなければ\n  表示(\"小\")\nを実行する",
+    "choices": [
+      {
+        "text": "中",
+        "isCorrect": true,
+        "whyCorrect": "x=15で、最初の条件「x>20」は15>20でfalse。次の条件「x>10」は15>10でtrueなので「中」が表示されます。",
+        "analogy": "身長測定で「180cm以上→大」「150cm以上→中」「それ以外→小」のとき、165cmなら「中」に分類されます。条件は上から順に評価されます。",
+        "deepDive": "多段のif-else文（else if）は上の条件から順に評価され、最初にtrueになった分岐が実行されます。一度分岐が決まると、残りの条件は評価されません。このため条件の記述順序が重要です。"
+      },
+      {
+        "text": "大",
+        "isCorrect": false,
+        "whyWrong": "x=15は20より大きくないため、最初の条件「x>20」はfalseです。「大」は表示されません。",
+        "analogy": "15は20という基準に届いていないので、「大」のグループには入れません。"
+      },
+      {
+        "text": "小",
+        "isCorrect": false,
+        "whyWrong": "x=15は10より大きいため、2番目の条件「x>10」がtrueになり「中」が表示されます。「そうでなければ」の「小」には到達しません。",
+        "analogy": "15は10を超えているので「中」に該当し、「小」にはなりません。"
+      },
+      {
+        "text": "中小",
+        "isCorrect": false,
+        "whyWrong": "if-else文では条件に合致した最初の分岐だけが実行されます。複数の分岐が同時に実行されることはありません。",
+        "analogy": "信号は青か黄か赤の1つだけが点灯します。2つ同時に点くことはありません。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"x": 15}, "action": "xに15を代入"},
+      {"step": 2, "variables": {"x": 15}, "action": "条件判定: x>20 → 15>20 → false"},
+      {"step": 3, "variables": {"x": 15}, "action": "条件判定: x>10 → 15>10 → true"},
+      {"step": 4, "variables": {"x": 15}, "action": "条件がtrueなので「中」を表示"}
+    ],
+    "traceAnalogy": "関所を3つ通るイメージです。最初の関所「20より大きい？」→通れない。次の関所「10より大きい？」→通れる！ここで「中」の札をもらいます。",
+    "overallExplanation": "多段if-else文は上から順に条件を評価し、最初にtrueになった分岐だけを実行します。どの条件にも当てはまらない場合は「そうでなければ」が実行されます。条件を上から狭い範囲→広い範囲の順に書くのが一般的です。"
+  },
+  {
+    "questionId": "q-prog-008",
+    "examType": "科目B",
+    "category": "プログラミング基礎",
+    "subcategory": "プログラミング基礎",
+    "topic": "ネストしたif文",
+    "level": 2,
+    "question": "次のプログラムを実行したとき、表示される文字列はどれか。",
+    "pseudoCode": "○整数型: age\n○論理型: isStudent\nage ← 20\nisStudent ← true\nもし age ≧ 18 ならば\n  もし isStudent = true ならば\n    表示(\"学生割引\")\n  そうでなければ\n    表示(\"一般料金\")\n  を実行する\nそうでなければ\n  表示(\"子供料金\")\nを実行する",
+    "choices": [
+      {
+        "text": "学生割引",
+        "isCorrect": true,
+        "whyCorrect": "age=20で18以上なので外側の条件はtrue。次にisStudent=trueなので内側の条件もtrue。よって「学生割引」が表示されます。",
+        "analogy": "映画館の料金体系で、まず「大人か子供か」を判定し、大人なら次に「学生証を持っているか」を確認する2段階チェックです。",
+        "deepDive": "ネストしたif文では外側の条件が先に評価され、trueの場合のみ内側のif文が評価されます。この2段階の条件判定は「a≧18 AND isStudent=true」という1つの条件にまとめることもできますが、ネストした方が判定の流れが明確になる場合があります。"
+      },
+      {
+        "text": "一般料金",
+        "isCorrect": false,
+        "whyWrong": "isStudentがtrueなので内側の条件もtrueになり、「そうでなければ」の「一般料金」には進みません。",
+        "analogy": "学生証を持っているので、一般料金ではなく学生割引が適用されます。"
+      },
+      {
+        "text": "子供料金",
+        "isCorrect": false,
+        "whyWrong": "age=20は18以上なので外側の条件はtrueです。「そうでなければ」の「子供料金」には進みません。",
+        "analogy": "20歳は18歳以上なので大人扱いです。子供料金にはなりません。"
+      },
+      {
+        "text": "学生割引 と 一般料金 の両方",
+        "isCorrect": false,
+        "whyWrong": "ネストしたif-else文でも、条件に合致した1つの分岐だけが実行されます。内側のif-elseでどちらか一方だけが表示されます。",
+        "analogy": "映画チケットは1枚だけです。学生割引か一般料金か、どちらか一方の価格しか適用されません。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"age": 20}, "action": "ageに20を代入"},
+      {"step": 2, "variables": {"age": 20, "isStudent": true}, "action": "isStudentにtrueを代入"},
+      {"step": 3, "variables": {"age": 20, "isStudent": true}, "action": "外側の条件判定: age≧18 → 20≧18 → true"},
+      {"step": 4, "variables": {"age": 20, "isStudent": true}, "action": "内側の条件判定: isStudent=true → true=true → true"},
+      {"step": 5, "variables": {"age": 20, "isStudent": true}, "action": "両方の条件がtrueなので「学生割引」を表示"}
+    ],
+    "traceAnalogy": "映画館の入口で2つのチェックポイントがあります。第1チェック「18歳以上ですか？」→はい（20歳）→第2チェック「学生ですか？」→はい→学生割引チケットを発行。",
+    "overallExplanation": "ネストしたif文は、条件を階層的に判定する仕組みです。外側の条件がtrueのときだけ内側の条件が評価されます。複数の条件を組み合わせた複雑な判定に使用されます。"
+  },
+  {
+    "questionId": "q-prog-009",
+    "examType": "科目B",
+    "category": "プログラミング基礎",
+    "subcategory": "プログラミング基礎",
+    "topic": "比較演算子の組み合わせ",
+    "level": 2,
+    "question": "次のプログラムを実行したとき、表示される文字列はどれか。",
+    "pseudoCode": "○整数型: x\nx ← 5\nもし (x ≧ 1) AND (x ≦ 10) ならば\n  表示(\"範囲内\")\nそうでなければ\n  表示(\"範囲外\")\nを実行する",
+    "choices": [
+      {
+        "text": "範囲内",
+        "isCorrect": true,
+        "whyCorrect": "x=5のとき、x≧1は5≧1でtrue、x≦10は5≦10でtrue。true AND true = trueなので「範囲内」が表示されます。",
+        "analogy": "1から10までの部屋番号が割り当てられたホテルで、5号室は範囲内（1以上かつ10以下）です。",
+        "deepDive": "複合条件「(x≧1) AND (x≦10)」は「xが1以上10以下」という範囲チェックを表します。AND条件では両方の条件がtrueでなければ全体がtrueになりません。この範囲チェックは基本情報技術者試験で頻出のパターンです。"
+      },
+      {
+        "text": "範囲外",
+        "isCorrect": false,
+        "whyWrong": "x=5は1以上かつ10以下を満たすため、AND条件はtrueです。「範囲外」にはなりません。",
+        "analogy": "5号室はホテルの1〜10号室の範囲にしっかり収まっています。"
+      },
+      {
+        "text": "true",
+        "isCorrect": false,
+        "whyWrong": "条件の評価結果はtrueですが、表示されるのは条件式の結果ではなく、分岐先の表示文「範囲内」です。",
+        "analogy": "「合格ですか？」と聞かれて「true」と答えるのではなく、「合格です」と答えるイメージです。"
+      },
+      {
+        "text": "エラー",
+        "isCorrect": false,
+        "whyWrong": "比較演算子とAND演算子の組み合わせは正しい構文であり、エラーにはなりません。",
+        "analogy": "2つの質問を「かつ」でつなげるのは日本語でも普通のことであり、文法エラーではありません。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"x": 5}, "action": "xに5を代入"},
+      {"step": 2, "variables": {"x": 5}, "action": "条件評価: x≧1 → 5≧1 → true"},
+      {"step": 3, "variables": {"x": 5}, "action": "条件評価: x≦10 → 5≦10 → true"},
+      {"step": 4, "variables": {"x": 5}, "action": "AND演算: true AND true → true"},
+      {"step": 5, "variables": {"x": 5}, "action": "条件がtrueなので「範囲内」を表示"}
+    ],
+    "traceAnalogy": "入場チェックで「身長120cm以上？」→はい、「身長200cm以下？」→はい、両方OKなので入場許可（範囲内）です。",
+    "overallExplanation": "AND演算子で複数の比較条件を組み合わせることで、範囲チェック（a以上b以下）などの複合条件を表現できます。AND条件は全ての条件がtrueのときだけtrueになります。"
+  },
+  {
+    "questionId": "q-prog-010",
+    "examType": "科目B",
+    "category": "プログラミング基礎",
+    "subcategory": "プログラミング基礎",
+    "topic": "条件式の評価順序",
+    "level": 2,
+    "question": "次のプログラムを実行したとき、表示される値はどれか。",
+    "pseudoCode": "○整数型: a, b\n○文字列型: result\na ← 3\nb ← 0\nもし (b ≠ 0) AND (a ÷ b > 1) ならば\n  result ← \"OK\"\nそうでなければ\n  result ← \"NG\"\nを実行する\n表示(result)",
+    "choices": [
+      {
+        "text": "NG",
+        "isCorrect": true,
+        "whyCorrect": "b=0なので最初の条件「b≠0」はfalseです。AND演算は最初の条件がfalseなら全体がfalseと確定するため（短絡評価）、「a÷b>1」は評価されず、「NG」が表示されます。",
+        "analogy": "面接の第1関門（b≠0）で不合格なら、第2関門（a÷b>1）を受ける必要はなく、即不合格（NG）となります。",
+        "deepDive": "短絡評価（short-circuit evaluation）では、AND演算の左辺がfalseなら右辺を評価しません。これにより「b≠0」でガードしてからb除算を行うというパターンが可能になります。もし短絡評価がなければ、a÷bでゼロ除算エラーが発生する可能性があります。"
+      },
+      {
+        "text": "OK",
+        "isCorrect": false,
+        "whyWrong": "b=0なので「b≠0」はfalseです。AND条件の一方がfalseなので全体はfalseとなり、「OK」にはなりません。",
+        "analogy": "第1関門を突破できていないので、OKにはなれません。"
+      },
+      {
+        "text": "エラー（ゼロ除算）",
+        "isCorrect": false,
+        "whyWrong": "短絡評価により、「b≠0」がfalseの時点でAND全体がfalseと確定するため、「a÷b」の計算は行われません。ゼロ除算エラーは発生しません。",
+        "analogy": "最初のチェックで「割り算してはいけない状況」と判明したので、割り算自体を実行しません。"
+      },
+      {
+        "text": "0",
+        "isCorrect": false,
+        "whyWrong": "このプログラムが表示するのは文字列\"OK\"か\"NG\"のどちらかです。数値0が表示されることはありません。",
+        "analogy": "プログラムの出力は「OK」か「NG」の2択であり、数値を出力する処理はありません。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"a": 3}, "action": "aに3を代入"},
+      {"step": 2, "variables": {"a": 3, "b": 0}, "action": "bに0を代入"},
+      {"step": 3, "variables": {"a": 3, "b": 0}, "action": "条件評価: b≠0 → 0≠0 → false（短絡評価でAND全体がfalse確定）"},
+      {"step": 4, "variables": {"a": 3, "b": 0, "result": "NG"}, "action": "条件がfalseなのでresultに\"NG\"を代入"},
+      {"step": 5, "variables": {"a": 3, "b": 0, "result": "NG"}, "action": "resultの値\"NG\"を表示"}
+    ],
+    "traceAnalogy": "銀行の融資審査で、第1条件「収入がゼロでないか」→ゼロ（false）→この時点で融資不可（NG）が確定し、第2条件の審査は省略されます。",
+    "overallExplanation": "AND演算の短絡評価では、左辺がfalseなら右辺を評価せずに結果をfalseと確定します。これはゼロ除算などのエラーを事前に防ぐガード条件として活用されます。条件を書く順序が重要です。"
+  },
+  {
+    "questionId": "q-prog-011",
+    "examType": "科目B",
+    "category": "プログラミング基礎",
+    "subcategory": "プログラミング基礎",
+    "topic": "for文の基本",
+    "level": 3,
+    "question": "次のプログラムを実行したとき、表示される値はどれか。",
+    "pseudoCode": "○整数型: i, sum\nsum ← 0\ni を 1 から 5 まで 1 ずつ増やしながら繰り返す\n  sum ← sum + i\nを繰り返す\n表示(sum)",
+    "choices": [
+      {
+        "text": "15",
+        "isCorrect": true,
+        "whyCorrect": "ループでi=1,2,3,4,5の各値をsumに加算します。0+1+2+3+4+5=15が最終的なsumの値です。",
+        "analogy": "階段を1段目から5段目まで上りながら、各段の番号を足していくイメージです。1+2+3+4+5=15段分です。",
+        "deepDive": "1からnまでの合計はn×(n+1)÷2の公式で求められます。n=5のとき5×6÷2=15です。この公式を知っていると、ループの結果を素早く検算できます。"
+      },
+      {
+        "text": "10",
+        "isCorrect": false,
+        "whyWrong": "1+2+3+4=10はi=4までの合計です。ループはi=5まで続くので、5も加算されて合計は15になります。",
+        "analogy": "5段目まで上るのに4段目で止まってしまったようなものです。最後の1段を忘れています。"
+      },
+      {
+        "text": "5",
+        "isCorrect": false,
+        "whyWrong": "5はループの最終回のiの値です。sumには各回のiを累積加算しているため、最終回の値だけではなく全体の合計15になります。",
+        "analogy": "貯金箱に毎日お金を入れているのに、最後に入れた額だけを見ているようなものです。"
+      },
+      {
+        "text": "6",
+        "isCorrect": false,
+        "whyWrong": "6はループの回数（i=1～5の5回）と最後のiの値（5）を足した値かもしれませんが、そのような計算は行われていません。正しくは1+2+3+4+5=15です。",
+        "analogy": "計算の仕方が違います。各段の番号を1つずつ足し合わせる必要があります。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"sum": 0}, "action": "sumに0を代入（初期化）"},
+      {"step": 2, "variables": {"i": 1, "sum": 1}, "action": "i=1: sum←0+1=1"},
+      {"step": 3, "variables": {"i": 2, "sum": 3}, "action": "i=2: sum←1+2=3"},
+      {"step": 4, "variables": {"i": 3, "sum": 6}, "action": "i=3: sum←3+3=6"},
+      {"step": 5, "variables": {"i": 4, "sum": 10}, "action": "i=4: sum←6+4=10"},
+      {"step": 6, "variables": {"i": 5, "sum": 15}, "action": "i=5: sum←10+5=15"},
+      {"step": 7, "variables": {"i": 5, "sum": 15}, "action": "ループ終了、sumの値15を表示"}
+    ],
+    "traceAnalogy": "貯金箱に1日目に1円、2日目に2円...5日目に5円と入れていきます。1+2+3+4+5=15円が貯まります。",
+    "overallExplanation": "for文は指定した範囲でカウンタ変数を増減させながら処理を繰り返します。累計計算では、ループ変数の値を毎回加算用の変数に足していくパターンが基本です。"
+  },
+  {
+    "questionId": "q-prog-012",
+    "examType": "科目B",
+    "category": "プログラミング基礎",
+    "subcategory": "プログラミング基礎",
+    "topic": "while文",
+    "level": 3,
+    "question": "次のプログラムを実行したとき、表示される値はどれか。",
+    "pseudoCode": "○整数型: n\nn ← 1\nn < 10 の間繰り返す\n  n ← n × 2\nを繰り返す\n表示(n)",
+    "choices": [
+      {
+        "text": "16",
+        "isCorrect": true,
+        "whyCorrect": "n=1→2→4→8→16と倍々になります。n=8のとき条件8<10はtrueなので8×2=16。n=16のとき16<10はfalseなのでループ終了。表示は16です。",
+        "analogy": "1匹の細菌が2倍ずつ増殖し、10匹を超えたら増殖停止します。1→2→4→8→16で、16匹の時点で10を超えているので停止します。",
+        "deepDive": "while文の条件はループの先頭で毎回チェックされます。n=16になった時点で条件「n<10」がfalseになりループを抜けます。ループを抜けた直後のnの値が表示されるため、最後にn<10を満たさなくなった値（16）が出力されます。"
+      },
+      {
+        "text": "8",
+        "isCorrect": false,
+        "whyWrong": "n=8のとき条件8<10はまだtrueなので、もう1回ループが実行されn=16になります。ループが終了するのはn=16のときです。",
+        "analogy": "8匹ではまだ10匹未満なので、もう1回増殖して16匹になります。"
+      },
+      {
+        "text": "10",
+        "isCorrect": false,
+        "whyWrong": "nは倍々（2のべき乗）で増えるため、10になることはありません。1→2→4→8→16と推移します。",
+        "analogy": "2倍ずつジャンプするので、ちょうど10のマスに着地することはありません。"
+      },
+      {
+        "text": "32",
+        "isCorrect": false,
+        "whyWrong": "n=16のとき条件16<10はfalseなのでループは終了します。n=32になる前にループを抜けています。",
+        "analogy": "16匹の時点ですでに10匹を超えているので、それ以上増殖しません。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"n": 1}, "action": "nに1を代入"},
+      {"step": 2, "variables": {"n": 1}, "action": "条件判定: n<10 → 1<10 → true（ループ継続）"},
+      {"step": 3, "variables": {"n": 2}, "action": "n←1×2=2"},
+      {"step": 4, "variables": {"n": 2}, "action": "条件判定: n<10 → 2<10 → true（ループ継続）"},
+      {"step": 5, "variables": {"n": 4}, "action": "n←2×2=4"},
+      {"step": 6, "variables": {"n": 4}, "action": "条件判定: n<10 → 4<10 → true（ループ継続）"},
+      {"step": 7, "variables": {"n": 8}, "action": "n←4×2=8"},
+      {"step": 8, "variables": {"n": 8}, "action": "条件判定: n<10 → 8<10 → true（ループ継続）"},
+      {"step": 9, "variables": {"n": 16}, "action": "n←8×2=16"},
+      {"step": 10, "variables": {"n": 16}, "action": "条件判定: n<10 → 16<10 → false（ループ終了）"},
+      {"step": 11, "variables": {"n": 16}, "action": "nの値16を表示"}
+    ],
+    "traceAnalogy": "豆粒が倍々に膨らんでいき、ボウル（容量10）に収まらなくなったら膨張停止。1→2→4→8→16で、16の時点でボウルからはみ出て停止します。",
+    "overallExplanation": "while文は条件がtrueの間、処理を繰り返します。条件はループの先頭で毎回判定されるため、ループ終了時には条件がfalseになっています。2倍ずつ増える処理は指数的増加（2のべき乗）を生み出します。"
+  },
+  {
+    "questionId": "q-prog-013",
+    "examType": "科目B",
+    "category": "プログラミング基礎",
+    "subcategory": "プログラミング基礎",
+    "topic": "ループカウンタ",
+    "level": 3,
+    "question": "次のプログラムを実行したとき、表示される値はどれか。",
+    "pseudoCode": "○整数型: i, count\ncount ← 0\ni を 1 から 10 まで 1 ずつ増やしながら繰り返す\n  もし i mod 2 = 0 ならば\n    count ← count + 1\n  を実行する\nを繰り返す\n表示(count)",
+    "choices": [
+      {
+        "text": "5",
+        "isCorrect": true,
+        "whyCorrect": "i mod 2 = 0は偶数判定です。1～10の偶数は2,4,6,8,10の5個なので、countは5になります。",
+        "analogy": "1から10までの数字カードから偶数のカードだけを取り出して数えると、5枚あります。",
+        "deepDive": "mod演算子（剰余演算子）は割り算の余りを求めます。n mod 2 = 0は「2で割り切れる＝偶数」の判定に使えます。同様にn mod 3 = 0は「3の倍数」の判定になります。"
+      },
+      {
+        "text": "10",
+        "isCorrect": false,
+        "whyWrong": "10はループの総回数です。しかしcountが増えるのは偶数のときだけなので、全回数の半分の5が正しい値です。",
+        "analogy": "全部のカードの枚数ではなく、偶数のカードだけを数えます。"
+      },
+      {
+        "text": "4",
+        "isCorrect": false,
+        "whyWrong": "偶数は2,4,6,8,10の5個です。10を数え忘れている可能性があります。10 mod 2 = 0なので10も偶数に含まれます。",
+        "analogy": "10も偶数なので、最後の1枚を数え忘れないようにしましょう。"
+      },
+      {
+        "text": "55",
+        "isCorrect": false,
+        "whyWrong": "55は1から10までの合計（1+2+...+10）です。このプログラムはカウント（数える）処理であり、合計を求めているわけではありません。",
+        "analogy": "偶数の「個数を数える」のと「値を足し合わせる」のは別の操作です。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"count": 0}, "action": "countを0に初期化"},
+      {"step": 2, "variables": {"i": 1, "count": 0}, "action": "i=1: 1 mod 2=1≠0 → カウントしない"},
+      {"step": 3, "variables": {"i": 2, "count": 1}, "action": "i=2: 2 mod 2=0 → count=0+1=1"},
+      {"step": 4, "variables": {"i": 3, "count": 1}, "action": "i=3: 3 mod 2=1≠0 → カウントしない"},
+      {"step": 5, "variables": {"i": 4, "count": 2}, "action": "i=4: 4 mod 2=0 → count=1+1=2"},
+      {"step": 6, "variables": {"i": 5, "count": 2}, "action": "i=5: 5 mod 2=1≠0 → カウントしない"},
+      {"step": 7, "variables": {"i": 6, "count": 3}, "action": "i=6: 6 mod 2=0 → count=2+1=3"},
+      {"step": 8, "variables": {"i": 7, "count": 3}, "action": "i=7: 7 mod 2=1≠0 → カウントしない"},
+      {"step": 9, "variables": {"i": 8, "count": 4}, "action": "i=8: 8 mod 2=0 → count=3+1=4"},
+      {"step": 10, "variables": {"i": 9, "count": 4}, "action": "i=9: 9 mod 2=1≠0 → カウントしない"},
+      {"step": 11, "variables": {"i": 10, "count": 5}, "action": "i=10: 10 mod 2=0 → count=4+1=5"},
+      {"step": 12, "variables": {"i": 10, "count": 5}, "action": "ループ終了、countの値5を表示"}
+    ],
+    "traceAnalogy": "1から10までの番号がついた箱が並んでおり、偶数番号の箱だけにシールを貼っていきます。最後にシールの枚数を数えると5枚です。",
+    "overallExplanation": "ループ内でif文を使って条件に合う要素だけをカウントするパターンです。mod演算子は余りを求める演算子で、偶数・奇数の判定や倍数判定に頻繁に使われます。"
+  },
+  {
+    "questionId": "q-prog-014",
+    "examType": "科目B",
+    "category": "プログラミング基礎",
+    "subcategory": "プログラミング基礎",
+    "topic": "累計計算",
+    "level": 3,
+    "question": "次のプログラムを実行したとき、表示される値はどれか。",
+    "pseudoCode": "○整数型: i, factorial\nfactorial ← 1\ni を 1 から 5 まで 1 ずつ増やしながら繰り返す\n  factorial ← factorial × i\nを繰り返す\n表示(factorial)",
+    "choices": [
+      {
+        "text": "120",
+        "isCorrect": true,
+        "whyCorrect": "factorialに1から5までの各値を順に掛けます。1×1=1、1×2=2、2×3=6、6×4=24、24×5=120。5の階乗（5!）=120です。",
+        "analogy": "1×2×3×4×5は、5人が順番に握手の輪を広げていくイメージです。最初1人、次に2倍、3倍...と組み合わせが爆発的に増えます。",
+        "deepDive": "n!（nの階乗）は1からnまでの全ての正の整数の積です。階乗は組み合わせ計算や確率の計算で重要です。0!=1と定義されます。階乗は非常に速く大きくなり、10!=3,628,800、20!は約2.4×10^18になります。"
+      },
+      {
+        "text": "15",
+        "isCorrect": false,
+        "whyWrong": "15は1+2+3+4+5の結果（合計）です。このプログラムは掛け算（×）を使っているので、階乗（積）を計算しています。",
+        "analogy": "足し算ではなく掛け算です。1+2+3+4+5=15ではなく、1×2×3×4×5=120です。"
+      },
+      {
+        "text": "25",
+        "isCorrect": false,
+        "whyWrong": "25は5×5の結果ですが、このプログラムは1×2×3×4×5を計算します。最後の値だけを二乗しているわけではありません。",
+        "analogy": "5を2回掛けたのではなく、1から5まで全部を順に掛け合わせます。"
+      },
+      {
+        "text": "24",
+        "isCorrect": false,
+        "whyWrong": "24は4!（4の階乗=1×2×3×4）の値です。ループはi=5まで続くので、24×5=120が正しい最終値です。",
+        "analogy": "最後のi=5の回をやり忘れています。24にもう一度5を掛ける必要があります。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"factorial": 1}, "action": "factorialを1に初期化"},
+      {"step": 2, "variables": {"i": 1, "factorial": 1}, "action": "i=1: factorial←1×1=1"},
+      {"step": 3, "variables": {"i": 2, "factorial": 2}, "action": "i=2: factorial←1×2=2"},
+      {"step": 4, "variables": {"i": 3, "factorial": 6}, "action": "i=3: factorial←2×3=6"},
+      {"step": 5, "variables": {"i": 4, "factorial": 24}, "action": "i=4: factorial←6×4=24"},
+      {"step": 6, "variables": {"i": 5, "factorial": 120}, "action": "i=5: factorial←24×5=120"},
+      {"step": 7, "variables": {"i": 5, "factorial": 120}, "action": "ループ終了、factorialの値120を表示"}
+    ],
+    "traceAnalogy": "工場のベルトコンベアで、最初に1個の製品があり、各工程で製品数がi倍になります。工程1で1倍、工程2で2倍、工程3で3倍...最終的に120個の製品ができます。",
+    "overallExplanation": "階乗計算はループを使った累積乗算の代表例です。初期値を1にしてループ内で掛け算を繰り返します（合計計算の初期値は0）。階乗は順列・組み合わせの基礎となる重要な概念です。"
+  },
+  {
+    "questionId": "q-prog-015",
+    "examType": "科目B",
+    "category": "プログラミング基礎",
+    "subcategory": "プログラミング基礎",
+    "topic": "カウント処理",
+    "level": 3,
+    "question": "次のプログラムを実行したとき、表示される値はどれか。",
+    "pseudoCode": "○整数型: n, digitCount\nn ← 12345\ndigitCount ← 0\nn > 0 の間繰り返す\n  n ← n ÷ 10\n  digitCount ← digitCount + 1\nを繰り返す\n表示(digitCount)",
+    "choices": [
+      {
+        "text": "5",
+        "isCorrect": true,
+        "whyCorrect": "nを10で整数除算するたびに桁が1つ減ります。12345→1234→123→12→1→0で5回繰り返し、digitCount=5です。これは桁数を数えるアルゴリズムです。",
+        "analogy": "5桁の数字の右端から1桁ずつ消していくと、5回で全て消えます。消した回数＝桁数です。",
+        "deepDive": "整数を10で割ると最下位の桁が切り捨てられます。この操作を繰り返して0になるまでの回数が桁数です。このアルゴリズムは任意の正の整数の桁数を求めるのに使えます。n=0の場合は特別扱いが必要です（ループが実行されず0が返る）。"
+      },
+      {
+        "text": "12345",
+        "isCorrect": false,
+        "whyWrong": "12345は元のnの値です。表示されるのはdigitCountの値であり、nの元の値ではありません。",
+        "analogy": "元の数そのものではなく、その数が何桁あるかを答えています。"
+      },
+      {
+        "text": "4",
+        "isCorrect": false,
+        "whyWrong": "n=1のとき1÷10=0でn=0になり、その際にdigitCountが5になります。n=1→0の回も数える必要があります。",
+        "analogy": "最後の1桁を消す操作も忘れずにカウントする必要があります。"
+      },
+      {
+        "text": "0",
+        "isCorrect": false,
+        "whyWrong": "digitCountは0から始まりますが、ループ内で毎回+1されるため、ループが5回実行されてdigitCount=5になります。",
+        "analogy": "初期値の0のまま変わらないのではなく、ループのたびに1ずつ増えていきます。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"n": 12345, "digitCount": 0}, "action": "初期化: n=12345, digitCount=0"},
+      {"step": 2, "variables": {"n": 1234, "digitCount": 1}, "action": "n=12345÷10=1234, digitCount=0+1=1"},
+      {"step": 3, "variables": {"n": 123, "digitCount": 2}, "action": "n=1234÷10=123, digitCount=1+1=2"},
+      {"step": 4, "variables": {"n": 12, "digitCount": 3}, "action": "n=123÷10=12, digitCount=2+1=3"},
+      {"step": 5, "variables": {"n": 1, "digitCount": 4}, "action": "n=12÷10=1, digitCount=3+1=4"},
+      {"step": 6, "variables": {"n": 0, "digitCount": 5}, "action": "n=1÷10=0, digitCount=4+1=5"},
+      {"step": 7, "variables": {"n": 0, "digitCount": 5}, "action": "条件n>0がfalse、ループ終了、digitCount=5を表示"}
+    ],
+    "traceAnalogy": "5階建てのビルの各階を上から順に取り壊していきます。1階壊すごとにカウンタを1増やし、全て壊し終わると「5階分壊した＝5階建てだった」とわかります。",
+    "overallExplanation": "10で割る操作を繰り返して0になるまでの回数を数えることで、整数の桁数を求められます。while文は繰り返し回数が事前にわからない場合に適しています。"
+  },
+  {
+    "questionId": "q-prog-016",
+    "examType": "科目B",
+    "category": "プログラミング基礎",
+    "subcategory": "プログラミング基礎",
+    "topic": "配列の基本操作",
+    "level": 4,
+    "question": "次のプログラムを実行したとき、表示される値はどれか。",
+    "pseudoCode": "○整数型の配列: data = {10, 20, 30, 40, 50}\n○整数型: temp\ntemp ← data[0]\ndata[0] ← data[4]\ndata[4] ← temp\n表示(data[0])\n表示(data[4])",
+    "choices": [
+      {
+        "text": "50 10",
+        "isCorrect": true,
+        "whyCorrect": "tempに元のdata[0]=10を退避し、data[0]にdata[4]=50を代入し、data[4]にtemp=10を代入します。先頭と末尾の要素が入れ替わり、data[0]=50、data[4]=10になります。",
+        "analogy": "2人の席を交換するとき、まず1人目が一時的に控え室（temp）に移動し、2人目が1人目の席に座り、最後に控え室から2人目の席に移動します。",
+        "deepDive": "この処理はスワップ（交換）と呼ばれ、ソートアルゴリズムの基本操作です。一時変数（temp）を使わないと、最初の代入で元の値が上書きされて失われます。配列のインデックスは0から始まることに注意してください。"
+      },
+      {
+        "text": "10 50",
+        "isCorrect": false,
+        "whyWrong": "これは元の配列の値です。スワップ処理によってdata[0]とdata[4]は交換されるため、表示は50 10になります。",
+        "analogy": "席替えが行われたのに、元の席順を答えてしまっています。"
+      },
+      {
+        "text": "50 50",
+        "isCorrect": false,
+        "whyWrong": "tempに元のdata[0]の値10を退避しているため、data[4]にはtemp=10が代入されます。tempがなければ50 50になる可能性がありますが、退避処理があるので正しくは50 10です。",
+        "analogy": "控え室（temp）を使っているので、元の値10は失われずに保持されています。"
+      },
+      {
+        "text": "10 10",
+        "isCorrect": false,
+        "whyWrong": "この結果になるのは交換の順序が逆の場合です。プログラムの実行順序を正しくトレースすると、data[0]=50、data[4]=10になります。",
+        "analogy": "席替えの手順を間違えると正しく交換できません。手順通りに追っていく必要があります。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"data": [10, 20, 30, 40, 50]}, "action": "配列dataを初期化"},
+      {"step": 2, "variables": {"data": [10, 20, 30, 40, 50], "temp": 10}, "action": "temp←data[0]=10（退避）"},
+      {"step": 3, "variables": {"data": [50, 20, 30, 40, 50], "temp": 10}, "action": "data[0]←data[4]=50"},
+      {"step": 4, "variables": {"data": [50, 20, 30, 40, 10], "temp": 10}, "action": "data[4]←temp=10"},
+      {"step": 5, "variables": {"data": [50, 20, 30, 40, 10], "temp": 10}, "action": "data[0]=50とdata[4]=10を表示"}
+    ],
+    "traceAnalogy": "2つのコップにジュースとお茶が入っています。空のコップ（temp）にジュースを移し、ジュースのコップにお茶を移し、空のコップからお茶のコップにジュースを移します。",
+    "overallExplanation": "配列要素の交換（スワップ）は、一時変数を使って値を退避させることで実現します。配列のインデックスは0から始まり、要素数nの配列の最後の要素はdata[n-1]です。スワップはソートアルゴリズムの基礎となる重要な操作です。"
+  },
+  {
+    "questionId": "q-prog-017",
+    "examType": "科目B",
+    "category": "プログラミング基礎",
+    "subcategory": "プログラミング基礎",
+    "topic": "配列の要素の合計・平均",
+    "level": 4,
+    "question": "次のプログラムを実行したとき、表示される値はどれか。",
+    "pseudoCode": "○整数型の配列: scores = {80, 90, 70, 60, 100}\n○整数型: i, sum\n○実数型: avg\nsum ← 0\ni を 0 から 4 まで 1 ずつ増やしながら繰り返す\n  sum ← sum + scores[i]\nを繰り返す\navg ← sum ÷ 5\n表示(avg)",
+    "choices": [
+      {
+        "text": "80",
+        "isCorrect": false,
+        "whyWrong": "80は配列の最初の要素の値であり、平均値ではありません。合計400を5で割った80.0が正しいですが、整数除算により80と表示されます。実はこの場合はたまたま同じ値になりますが、理由が異なります。",
+        "analogy": "最初のテストの点数と平均点がたまたま同じ値になることはありますが、計算過程は全く異なります。"
+      },
+      {
+        "text": "80.0",
+        "isCorrect": true,
+        "whyCorrect": "合計=80+90+70+60+100=400。avgは実数型なので、400÷5=80.0が格納されます。実数型のため80.0と表示されます。",
+        "analogy": "5人のテスト点数の合計400点を5人で割ると、1人あたり80.0点が平均です。",
+        "deepDive": "平均値の計算は「合計÷要素数」です。avgが実数型で宣言されているため、結果は80.0として格納されます。もしavgが整数型なら80になります。配列の全要素を処理する場合、インデックスは0からlength-1まで繰り返すのが基本パターンです。"
+      },
+      {
+        "text": "400",
+        "isCorrect": false,
+        "whyWrong": "400は5つの要素の合計です。平均を求めるには合計を要素数（5）で割る必要があります。表示されるのはavg（平均値）であり、sum（合計）ではありません。",
+        "analogy": "クラス全体の合計点ではなく、1人あたりの平均点を求めています。"
+      },
+      {
+        "text": "100",
+        "isCorrect": false,
+        "whyWrong": "100は配列の最大値（最後の要素）ですが、平均値の計算とは関係ありません。",
+        "analogy": "最高得点と平均点は別の指標です。平均は全員の点数を均等に分配した値です。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"scores": [80, 90, 70, 60, 100], "sum": 0}, "action": "配列とsumを初期化"},
+      {"step": 2, "variables": {"i": 0, "sum": 80}, "action": "i=0: sum←0+scores[0]=0+80=80"},
+      {"step": 3, "variables": {"i": 1, "sum": 170}, "action": "i=1: sum←80+scores[1]=80+90=170"},
+      {"step": 4, "variables": {"i": 2, "sum": 240}, "action": "i=2: sum←170+scores[2]=170+70=240"},
+      {"step": 5, "variables": {"i": 3, "sum": 300}, "action": "i=3: sum←240+scores[3]=240+60=300"},
+      {"step": 6, "variables": {"i": 4, "sum": 400}, "action": "i=4: sum←300+scores[4]=300+100=400"},
+      {"step": 7, "variables": {"i": 4, "sum": 400, "avg": 80.0}, "action": "avg←400÷5=80.0"},
+      {"step": 8, "variables": {"avg": 80.0}, "action": "avgの値80.0を表示"}
+    ],
+    "traceAnalogy": "5人の生徒のテスト答案を回収し、点数を1枚ずつ合計に加え（80+90+70+60+100=400）、人数で割って平均（400÷5=80.0）を出すイメージです。",
+    "overallExplanation": "配列の平均値は「全要素の合計÷要素数」で求めます。ループで合計を計算し、最後に要素数で割るのが基本パターンです。実数型の変数に結果を格納すると小数点以下も保持されます。"
+  },
+  {
+    "questionId": "q-prog-018",
+    "examType": "科目B",
+    "category": "プログラミング基礎",
+    "subcategory": "プログラミング基礎",
+    "topic": "配列の最大値探索",
+    "level": 4,
+    "question": "次のプログラムを実行したとき、表示される値はどれか。",
+    "pseudoCode": "○整数型の配列: data = {3, 7, 2, 9, 4}\n○整数型: i, maxVal\nmaxVal ← data[0]\ni を 1 から 4 まで 1 ずつ増やしながら繰り返す\n  もし data[i] > maxVal ならば\n    maxVal ← data[i]\n  を実行する\nを繰り返す\n表示(maxVal)",
+    "choices": [
+      {
+        "text": "9",
+        "isCorrect": true,
+        "whyCorrect": "maxValを最初の要素3で初期化し、各要素と比較して大きい方を保持します。3→7→7→9→9と更新され、最終的に最大値9が表示されます。",
+        "analogy": "腕相撲のトーナメントで、チャンピオン（maxVal）が次々と挑戦者（data[i]）と勝負します。より強い挑戦者が現れたらチャンピオン交代。最後に残った最強の者が優勝者です。",
+        "deepDive": "最大値探索アルゴリズムの要点: (1)最初の要素で最大値候補を初期化、(2)2番目以降の要素と比較、(3)より大きい値があれば更新。計算量はO(n)で、全要素を1回ずつ見るだけで済みます。ループの開始がi=1であることに注意してください（i=0は初期化に使用済み）。"
+      },
+      {
+        "text": "3",
+        "isCorrect": false,
+        "whyWrong": "3はmaxValの初期値（data[0]）ですが、ループ内で7や9と比較されて更新されます。最終的な最大値は9です。",
+        "analogy": "最初のチャンピオンが必ずしも最終チャンピオンとは限りません。"
+      },
+      {
+        "text": "4",
+        "isCorrect": false,
+        "whyWrong": "4は配列の最後の要素ですが、最大値ではありません。maxValは「現在の最大値より大きい場合のみ」更新されるため、4はmaxVal=9より小さいので更新されません。",
+        "analogy": "最後の挑戦者が最強とは限りません。途中で現れたより強い人がチャンピオンになっています。"
+      },
+      {
+        "text": "7",
+        "isCorrect": false,
+        "whyWrong": "7はi=1のときにmaxValを更新しますが、i=3のときdata[3]=9>7でさらに更新されます。最終的な最大値は9です。",
+        "analogy": "途中でチャンピオンになっても、さらに強い挑戦者が現れたら交代です。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"data": [3, 7, 2, 9, 4], "maxVal": 3}, "action": "maxValをdata[0]=3で初期化"},
+      {"step": 2, "variables": {"i": 1, "maxVal": 7}, "action": "i=1: data[1]=7>3=maxVal → maxVal←7"},
+      {"step": 3, "variables": {"i": 2, "maxVal": 7}, "action": "i=2: data[2]=2>7=maxVal → false（更新なし）"},
+      {"step": 4, "variables": {"i": 3, "maxVal": 9}, "action": "i=3: data[3]=9>7=maxVal → maxVal←9"},
+      {"step": 5, "variables": {"i": 4, "maxVal": 9}, "action": "i=4: data[4]=4>9=maxVal → false（更新なし）"},
+      {"step": 6, "variables": {"maxVal": 9}, "action": "ループ終了、maxVal=9を表示"}
+    ],
+    "traceAnalogy": "身長比べで、最初の人（3cm）をチャンピオンにし、次の人（7cm）の方が高いので交代、次（2cm）は低いのでそのまま、次（9cm）はさらに高いので交代、最後（4cm）は低いのでそのまま。最終チャンピオンは9cm。",
+    "overallExplanation": "配列の最大値探索は、最初の要素を暫定最大値とし、残りの要素を順に比較して更新するアルゴリズムです。同様のロジックで最小値探索も行えます（比較の不等号を逆にするだけ）。"
+  },
+  {
+    "questionId": "q-prog-019",
+    "examType": "科目B",
+    "category": "プログラミング基礎",
+    "subcategory": "プログラミング基礎",
+    "topic": "配列の線形探索",
+    "level": 4,
+    "question": "次のプログラムを実行したとき、表示される値はどれか。",
+    "pseudoCode": "○整数型の配列: data = {5, 12, 8, 3, 15}\n○整数型: i, target, pos\ntarget ← 8\npos ← -1\ni を 0 から 4 まで 1 ずつ増やしながら繰り返す\n  もし data[i] = target ならば\n    pos ← i\n  を実行する\nを繰り返す\n表示(pos)",
+    "choices": [
+      {
+        "text": "2",
+        "isCorrect": true,
+        "whyCorrect": "target=8を配列から探します。data[0]=5≠8、data[1]=12≠8、data[2]=8=8でposに2が代入されます。最終的にpos=2が表示されます。",
+        "analogy": "5つのロッカーを順に開けて目的の品物（8）を探します。3番目のロッカー（インデックス2）で見つかり、その番号を記録します。",
+        "deepDive": "線形探索（リニアサーチ）は配列の先頭から順に目的の値を探すアルゴリズムです。見つかった場合はそのインデックスを返し、見つからなければ-1を返します。計算量はO(n)です。なお、このプログラムでは見つかった後もループが継続するため、同じ値が複数ある場合は最後のインデックスが記録されます。"
+      },
+      {
+        "text": "-1",
+        "isCorrect": false,
+        "whyWrong": "posの初期値は-1ですが、data[2]=8=targetで一致するため、posは2に更新されます。-1は「見つからなかった」場合の値です。",
+        "analogy": "-1は「どのロッカーにも見つからなかった」という意味ですが、実際には3番目で見つかっています。"
+      },
+      {
+        "text": "8",
+        "isCorrect": false,
+        "whyWrong": "8はtarget（探している値）そのものです。表示されるのはposの値（見つかった位置＝インデックス2）であり、値そのものではありません。",
+        "analogy": "探していた品物の名前ではなく、見つかったロッカーの番号を答えます。"
+      },
+      {
+        "text": "3",
+        "isCorrect": false,
+        "whyWrong": "3番目の要素で見つかったので「3」と思うかもしれませんが、配列のインデックスは0から始まるため、3番目の要素のインデックスは2です。",
+        "analogy": "ロッカーの番号が0から始まるので、3番目のロッカーは「2番」です。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"data": [5, 12, 8, 3, 15], "target": 8, "pos": -1}, "action": "初期化: target=8, pos=-1"},
+      {"step": 2, "variables": {"i": 0, "pos": -1}, "action": "i=0: data[0]=5≠8 → posは変更なし"},
+      {"step": 3, "variables": {"i": 1, "pos": -1}, "action": "i=1: data[1]=12≠8 → posは変更なし"},
+      {"step": 4, "variables": {"i": 2, "pos": 2}, "action": "i=2: data[2]=8=8 → pos←2"},
+      {"step": 5, "variables": {"i": 3, "pos": 2}, "action": "i=3: data[3]=3≠8 → posは変更なし"},
+      {"step": 6, "variables": {"i": 4, "pos": 2}, "action": "i=4: data[4]=15≠8 → posは変更なし"},
+      {"step": 7, "variables": {"pos": 2}, "action": "ループ終了、pos=2を表示"}
+    ],
+    "traceAnalogy": "本棚の本を左から順に確認して目的の本を探します。1冊目（5）→違う、2冊目（12）→違う、3冊目（8）→これだ！位置「2」をメモに記録。残りも一応確認して、最後にメモを見ると「2」。",
+    "overallExplanation": "線形探索は配列を先頭から順に走査して目的の値を探す基本的なアルゴリズムです。見つからなかった場合は初期値-1がそのまま残ります。0始まりのインデックスに注意しましょう。"
+  },
+  {
+    "questionId": "q-prog-020",
+    "examType": "科目B",
+    "category": "プログラミング基礎",
+    "subcategory": "プログラミング基礎",
+    "topic": "二次元配列",
+    "level": 4,
+    "question": "次のプログラムを実行したとき、表示される値はどれか。",
+    "pseudoCode": "○整数型の二次元配列: matrix = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}\n○整数型: i, sum\nsum ← 0\ni を 0 から 2 まで 1 ずつ増やしながら繰り返す\n  sum ← sum + matrix[i][i]\nを繰り返す\n表示(sum)",
+    "choices": [
+      {
+        "text": "15",
+        "isCorrect": true,
+        "whyCorrect": "matrix[i][i]は対角要素を指します。matrix[0][0]=1、matrix[1][1]=5、matrix[2][2]=9。合計は1+5+9=15です。",
+        "analogy": "3×3のマス目（九宮格）の左上から右下への対角線上の数字を足すイメージです。1+5+9=15になります。",
+        "deepDive": "matrix[i][i]は行番号と列番号が同じ要素、つまり主対角線（左上から右下）の要素を参照します。行列の対角成分の和はトレース（跡）と呼ばれ、線形代数で重要な概念です。3×3の魔方陣では対角線の和が15になります。"
+      },
+      {
+        "text": "45",
+        "isCorrect": false,
+        "whyWrong": "45は全要素の合計（1+2+...+9）です。このプログラムは対角要素（matrix[i][i]）のみを合計しているので、1+5+9=15です。",
+        "analogy": "マス目の全ての数字ではなく、斜め線上の数字だけを足します。"
+      },
+      {
+        "text": "6",
+        "isCorrect": false,
+        "whyWrong": "6はmatrix[1][2]の値（2行目3列目）ですが、対角要素ではありません。対角要素はmatrix[0][0]=1、matrix[1][1]=5、matrix[2][2]=9です。",
+        "analogy": "対角線上にない要素を見ています。斜めの線の上にある数字を選ぶ必要があります。"
+      },
+      {
+        "text": "12",
+        "isCorrect": false,
+        "whyWrong": "12はmatrix[0][0]+matrix[1][1]=1+5=6に何かを足した値ですが、正しい対角要素の合計は1+5+9=15です。",
+        "analogy": "対角線の要素を全て正しく拾えていません。3つの要素を漏れなく足す必要があります。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"matrix": [[1,2,3],[4,5,6],[7,8,9]], "sum": 0}, "action": "二次元配列matrixとsumを初期化"},
+      {"step": 2, "variables": {"i": 0, "sum": 1}, "action": "i=0: sum←0+matrix[0][0]=0+1=1"},
+      {"step": 3, "variables": {"i": 1, "sum": 6}, "action": "i=1: sum←1+matrix[1][1]=1+5=6"},
+      {"step": 4, "variables": {"i": 2, "sum": 15}, "action": "i=2: sum←6+matrix[2][2]=6+9=15"},
+      {"step": 5, "variables": {"sum": 15}, "action": "ループ終了、sum=15を表示"}
+    ],
+    "traceAnalogy": "九九の表のような3×3のマス目で、左上の角（1）、真ん中（5）、右下の角（9）を結ぶ斜めの線を引き、その上の数字を合計すると15です。",
+    "overallExplanation": "二次元配列はmatrix[行][列]でアクセスします。matrix[i][i]は行番号と列番号が同じ主対角要素を指します。二次元配列の操作は表形式のデータ処理で頻出です。"
+  },
+  {
+    "questionId": "q-prog-021",
+    "examType": "科目B",
+    "category": "プログラミング基礎",
+    "subcategory": "プログラミング基礎",
+    "topic": "関数の定義と呼び出し",
+    "level": 5,
+    "question": "次のプログラムを実行したとき、表示される値はどれか。",
+    "pseudoCode": "○関数 double(○整数型: n)\n  return n × 2\n\n○整数型: result\nresult ← double(7)\n表示(result)",
+    "choices": [
+      {
+        "text": "14",
+        "isCorrect": true,
+        "whyCorrect": "関数double(7)を呼び出すと、引数n=7で7×2=14が計算され、returnで14が返されます。resultに14が代入されて表示されます。",
+        "analogy": "「2倍にする機械」に7を入れると、14が出てきます。機械の中で7×2=14の計算が行われています。",
+        "deepDive": "関数は入力（引数）を受け取り、処理を行い、出力（戻り値）を返す再利用可能なコードの塊です。関数を使うことで、同じ処理を何度も書かずに済みます。double(7)、double(10)のように異なる引数で繰り返し呼び出せます。"
+      },
+      {
+        "text": "7",
+        "isCorrect": false,
+        "whyWrong": "7は関数に渡した引数の値です。関数内でn×2=14が計算されて返されるため、結果は7ではなく14です。",
+        "analogy": "機械に入れた材料（7）ではなく、加工後の製品（14）が出力されます。"
+      },
+      {
+        "text": "2",
+        "isCorrect": false,
+        "whyWrong": "2は掛ける数ですが、関数の戻り値ではありません。n×2の計算で7×2=14が戻り値になります。",
+        "analogy": "倍率（2倍）そのものではなく、計算結果（7の2倍=14）が出力です。"
+      },
+      {
+        "text": "エラー",
+        "isCorrect": false,
+        "whyWrong": "関数の定義と呼び出しは正しい構文で記述されており、エラーにはなりません。引数の型も一致しています。",
+        "analogy": "機械に正しい材料を正しく入れているので、問題なく動作します。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {}, "action": "関数doubleが定義される"},
+      {"step": 2, "variables": {"n": 7}, "action": "double(7)呼び出し: 引数n=7"},
+      {"step": 3, "variables": {"n": 7}, "action": "n×2=7×2=14を計算し、returnで14を返す"},
+      {"step": 4, "variables": {"result": 14}, "action": "戻り値14をresultに代入"},
+      {"step": 5, "variables": {"result": 14}, "action": "resultの値14を表示"}
+    ],
+    "traceAnalogy": "自動販売機（関数double）にお金（引数7）を入れると、2倍の商品（戻り値14）が出てきます。自動販売機は何度でも使えます。",
+    "overallExplanation": "関数は引数を受け取り、処理結果をreturnで返します。関数呼び出し時に引数の値が仮引数に渡され、returnの値が呼び出し元に返されます。関数を使うことで処理を部品化し、再利用できます。"
+  },
+  {
+    "questionId": "q-prog-022",
+    "examType": "科目B",
+    "category": "プログラミング基礎",
+    "subcategory": "プログラミング基礎",
+    "topic": "引数と戻り値",
+    "level": 5,
+    "question": "次のプログラムを実行したとき、表示される値はどれか。",
+    "pseudoCode": "○関数 add(○整数型: a, ○整数型: b)\n  return a + b\n\n○関数 multiply(○整数型: x, ○整数型: y)\n  return x × y\n\n○整数型: result\nresult ← add(multiply(3, 4), 5)\n表示(result)",
+    "choices": [
+      {
+        "text": "17",
+        "isCorrect": true,
+        "whyCorrect": "まず内側のmultiply(3,4)=12が計算され、次にadd(12,5)=17が計算されます。関数のネスト呼び出しでは内側から先に評価されます。",
+        "analogy": "入れ子の箱を開けるとき、内側の箱（multiply）を先に開けてから外側の箱（add）を開けます。3×4=12を先に計算し、12+5=17が最終結果です。",
+        "deepDive": "関数の引数に別の関数呼び出しを書くことができます（関数の合成）。この場合、内側の関数が先に評価され、その戻り値が外側の関数の引数として渡されます。add(multiply(3,4),5)はadd(12,5)→17と評価されます。"
+      },
+      {
+        "text": "60",
+        "isCorrect": false,
+        "whyWrong": "60はadd(3+4=7)×multiply(?)のような誤った計算です。正しくはmultiply(3,4)=12を先に計算し、add(12,5)=17です。",
+        "analogy": "計算の順序を間違えています。内側の関数から先に計算する必要があります。"
+      },
+      {
+        "text": "12",
+        "isCorrect": false,
+        "whyWrong": "12はmultiply(3,4)の戻り値ですが、これはadd関数の引数として使われます。最終結果はadd(12,5)=17です。",
+        "analogy": "中間結果（12）で止まらず、外側の計算（+5）も行う必要があります。"
+      },
+      {
+        "text": "35",
+        "isCorrect": false,
+        "whyWrong": "35はadd(3,4)=7とmultiply(7,5)=35のような誤った解釈です。正しくはmultiply(3,4)=12が先に計算され、add(12,5)=17です。",
+        "analogy": "addとmultiplyの適用順序が逆になっています。引数位置をよく確認しましょう。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {}, "action": "関数addとmultiplyが定義される"},
+      {"step": 2, "variables": {"x": 3, "y": 4}, "action": "multiply(3,4)呼び出し: x=3, y=4"},
+      {"step": 3, "variables": {"x": 3, "y": 4}, "action": "x×y=3×4=12を計算、returnで12を返す"},
+      {"step": 4, "variables": {"a": 12, "b": 5}, "action": "add(12,5)呼び出し: a=12, b=5"},
+      {"step": 5, "variables": {"a": 12, "b": 5}, "action": "a+b=12+5=17を計算、returnで17を返す"},
+      {"step": 6, "variables": {"result": 17}, "action": "戻り値17をresultに代入"},
+      {"step": 7, "variables": {"result": 17}, "action": "resultの値17を表示"}
+    ],
+    "traceAnalogy": "料理で「炒める（multiply=掛け算）」を先にやってから「味付け（add=足し算）」をするイメージ。材料3と4を炒めて12にし、調味料5を足して17の完成品にします。",
+    "overallExplanation": "関数は他の関数の引数として使用でき（関数の合成）、内側の関数から順に評価されます。multiply(3,4)の戻り値12がadd関数の第1引数になり、add(12,5)=17が最終結果です。"
+  },
+  {
+    "questionId": "q-prog-023",
+    "examType": "科目B",
+    "category": "プログラミング基礎",
+    "subcategory": "プログラミング基礎",
+    "topic": "再帰関数の基礎",
+    "level": 5,
+    "question": "次のプログラムを実行したとき、表示される値はどれか。",
+    "pseudoCode": "○関数 fact(○整数型: n)\n  もし n ≦ 1 ならば\n    return 1\n  そうでなければ\n    return n × fact(n - 1)\n  を実行する\n\n表示(fact(4))",
+    "choices": [
+      {
+        "text": "24",
+        "isCorrect": true,
+        "whyCorrect": "fact(4)=4×fact(3)=4×3×fact(2)=4×3×2×fact(1)=4×3×2×1=24。再帰呼び出しでn=1に到達すると1を返し、順に掛け算の結果が返されます。",
+        "analogy": "マトリョーシカ人形のように、大きい人形（fact(4)）の中に小さい人形（fact(3)）があり、最も小さい人形（fact(1)=1）から順に結果を組み立てていきます。",
+        "deepDive": "再帰関数は自分自身を呼び出す関数です。必ず基底条件（base case: ここではn≦1）で再帰を止める必要があります。基底条件がないと無限に呼び出しが続きスタックオーバーフローが発生します。fact(4)の呼び出し階層: fact(4)→fact(3)→fact(2)→fact(1)→1が返り→2×1=2→3×2=6→4×6=24。"
+      },
+      {
+        "text": "10",
+        "isCorrect": false,
+        "whyWrong": "10は4+3+2+1の合計であり、階乗（掛け算の積）ではありません。fact関数は掛け算（×）を使っているので、4×3×2×1=24が正しい結果です。",
+        "analogy": "足し算と掛け算を間違えています。再帰で返ってくる値は掛け算で積み上がります。"
+      },
+      {
+        "text": "4",
+        "isCorrect": false,
+        "whyWrong": "4は引数の値ですが、再帰呼び出しにより4×3×2×1=24が計算されます。関数の最終的な戻り値は24です。",
+        "analogy": "最初に渡した数だけでなく、再帰的にどんどん小さい数を掛けていく必要があります。"
+      },
+      {
+        "text": "6",
+        "isCorrect": false,
+        "whyWrong": "6は3!（3の階乗=3×2×1）の値です。fact(4)は4×fact(3)=4×6=24なので、最後のn=4の掛け算を忘れないようにしましょう。",
+        "analogy": "マトリョーシカの一番外側の人形（4の掛け算）を付け忘れています。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"n": 4}, "action": "fact(4)呼び出し: n=4, 4≦1はfalse → 4×fact(3)を計算"},
+      {"step": 2, "variables": {"n": 3}, "action": "fact(3)呼び出し: n=3, 3≦1はfalse → 3×fact(2)を計算"},
+      {"step": 3, "variables": {"n": 2}, "action": "fact(2)呼び出し: n=2, 2≦1はfalse → 2×fact(1)を計算"},
+      {"step": 4, "variables": {"n": 1}, "action": "fact(1)呼び出し: n=1, 1≦1はtrue → return 1"},
+      {"step": 5, "variables": {"n": 2}, "action": "fact(2)に戻る: 2×1=2を返す"},
+      {"step": 6, "variables": {"n": 3}, "action": "fact(3)に戻る: 3×2=6を返す"},
+      {"step": 7, "variables": {"n": 4}, "action": "fact(4)に戻る: 4×6=24を返す"},
+      {"step": 8, "variables": {}, "action": "fact(4)の戻り値24を表示"}
+    ],
+    "traceAnalogy": "「4人分の料理は？」→「まず3人分作って、それを4倍にして」→「3人分は？」→「まず2人分作って3倍にして」→...→「1人分は1皿」→2皿→6皿→24皿。最小単位から積み上げていきます。",
+    "overallExplanation": "再帰関数は自分自身を呼び出すことで問題を小さく分割して解きます。基底条件（n≦1でreturn 1）で再帰を終了し、各段階で結果を組み合わせて最終結果を得ます。階乗は再帰の典型例です。"
+  },
+  {
+    "questionId": "q-prog-024",
+    "examType": "科目B",
+    "category": "プログラミング基礎",
+    "subcategory": "プログラミング基礎",
+    "topic": "変数のスコープ",
+    "level": 5,
+    "question": "次のプログラムを実行したとき、表示される値はどれか。",
+    "pseudoCode": "○整数型: x\nx ← 10\n\n○関数 changeX()\n  ○整数型: x\n  x ← 20\n  return x\n\n○整数型: result\nresult ← changeX()\n表示(x)\n表示(result)",
+    "choices": [
+      {
+        "text": "10 20",
+        "isCorrect": true,
+        "whyCorrect": "関数内のxは局所変数（ローカル変数）であり、関数外のx（グローバル変数）とは別物です。changeX()内でx=20にしても、外のxは10のままです。resultには戻り値20が入ります。",
+        "analogy": "同じ「田中さん」でも、A社の田中さんとB社の田中さんは別人です。B社の田中さん（関数内x）の情報を変えても、A社の田中さん（関数外x）には影響しません。",
+        "deepDive": "変数のスコープ（有効範囲）は変数が参照できる範囲を定めます。関数内で宣言した変数（ローカル変数）はその関数内でのみ有効で、関数外で宣言した変数（グローバル変数）とは同名でも別の変数です。この仕組みにより、関数内の処理が外部の変数に意図しない影響を与えることを防ぎます。"
+      },
+      {
+        "text": "20 20",
+        "isCorrect": false,
+        "whyWrong": "関数内で宣言されたxはローカル変数であり、外側のxとは別物です。関数内のx=20は外側のxには影響しないため、外側のxは10のままです。",
+        "analogy": "関数という別の部屋で「x」というラベルを付けた箱に20を入れても、元の部屋の「x」の箱の中身は変わりません。"
+      },
+      {
+        "text": "20 10",
+        "isCorrect": false,
+        "whyWrong": "表示の順序はまずx（外側=10）、次にresult（関数の戻り値=20）です。10 20が正しい表示順です。",
+        "analogy": "表示の順番を逆に読んでいます。最初に外側のx、次に関数の戻り値の順です。"
+      },
+      {
+        "text": "10 10",
+        "isCorrect": false,
+        "whyWrong": "changeX()はreturn xで関数内のローカル変数x（=20）を返すので、resultは20になります。resultは10ではありません。",
+        "analogy": "関数は「20」という結果を返しています。返された結果をresultに受け取るので、resultは20です。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"x(グローバル)": 10}, "action": "グローバル変数xに10を代入"},
+      {"step": 2, "variables": {"x(グローバル)": 10, "x(ローカル)": 20}, "action": "changeX()呼び出し: ローカル変数xを宣言し20を代入"},
+      {"step": 3, "variables": {"x(グローバル)": 10}, "action": "changeX()がローカルxの値20を返す"},
+      {"step": 4, "variables": {"x(グローバル)": 10, "result": 20}, "action": "戻り値20をresultに代入"},
+      {"step": 5, "variables": {"x(グローバル)": 10, "result": 20}, "action": "グローバルx=10を表示、result=20を表示"}
+    ],
+    "traceAnalogy": "マンションの101号室（グローバル）と201号室（関数内）にそれぞれ「x」という表札の住人がいます。201号室の住人が引っ越しても、101号室の住人には影響しません。",
+    "overallExplanation": "変数のスコープにより、関数内のローカル変数と関数外のグローバル変数は同名でも別の変数として扱われます。関数内で変数を変更しても、外部の同名変数には影響しません。これをスコープの独立性と言います。"
+  },
+  {
+    "questionId": "q-prog-025",
+    "examType": "科目B",
+    "category": "プログラミング基礎",
+    "subcategory": "プログラミング基礎",
+    "topic": "関数の組み合わせ",
+    "level": 5,
+    "question": "次のプログラムを実行したとき、表示される値はどれか。",
+    "pseudoCode": "○関数 abs(○整数型: n)\n  もし n < 0 ならば\n    return -n\n  そうでなければ\n    return n\n  を実行する\n\n○関数 max2(○整数型: a, ○整数型: b)\n  もし a > b ならば\n    return a\n  そうでなければ\n    return b\n  を実行する\n\n○整数型: result\nresult ← max2(abs(-8), abs(5))\n表示(result)",
+    "choices": [
+      {
+        "text": "8",
+        "isCorrect": true,
+        "whyCorrect": "abs(-8)は|-8|=8を返し、abs(5)は|5|=5を返します。max2(8,5)は大きい方の8を返します。よってresult=8が表示されます。",
+        "analogy": "abs関数は「距離メーター」で、原点からの距離（絶対値）を測ります。-8の距離は8、5の距離は5。max2関数は「どちらが遠い？」と比較し、8の方が遠い（大きい）と判定します。",
+        "deepDive": "複数の関数を組み合わせることで、複雑な処理を段階的に構築できます。abs（絶対値）とmax（最大値）はどちらも基本的な関数で、数学的な計算で頻繁に使われます。関数の組み合わせでは、引数の関数が先に評価され、その戻り値が外側の関数に渡されます。"
+      },
+      {
+        "text": "5",
+        "isCorrect": false,
+        "whyWrong": "abs(5)=5ですが、abs(-8)=8の方が大きいため、max2(8,5)は8を返します。5ではなく8が最大値です。",
+        "analogy": "8と5を比べて大きい方を選ぶので、5は選ばれません。"
+      },
+      {
+        "text": "-8",
+        "isCorrect": false,
+        "whyWrong": "-8は元の値ですが、abs(-8)によって絶対値8に変換されています。abs関数は負の数を正の数に変換します。",
+        "analogy": "abs関数はマイナスの符号を取り除く装置です。-8は装置を通ると8になります。"
+      },
+      {
+        "text": "-3",
+        "isCorrect": false,
+        "whyWrong": "-8+5=-3という計算は行われていません。abs関数は絶対値を求め、max2関数は大きい方を選びます。足し算はどこにもありません。",
+        "analogy": "2つの値を足すのではなく、それぞれの絶対値を求めてから大きい方を選ぶ処理です。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {}, "action": "関数absとmax2が定義される"},
+      {"step": 2, "variables": {"n": -8}, "action": "abs(-8)呼び出し: n=-8, -8<0なのでreturn -(-8)=8"},
+      {"step": 3, "variables": {"n": 5}, "action": "abs(5)呼び出し: n=5, 5<0はfalseなのでreturn 5"},
+      {"step": 4, "variables": {"a": 8, "b": 5}, "action": "max2(8,5)呼び出し: a=8, b=5, 8>5はtrueなのでreturn 8"},
+      {"step": 5, "variables": {"result": 8}, "action": "戻り値8をresultに代入"},
+      {"step": 6, "variables": {"result": 8}, "action": "resultの値8を表示"}
+    ],
+    "traceAnalogy": "2つの温度計（-8度と5度）の目盛りの「振れ幅」（絶対値）を測り（8と5）、より大きく振れた方（8）を報告するイメージです。",
+    "overallExplanation": "関数の組み合わせでは、引数に渡された関数から順に評価されます。abs関数で絶対値を求め、max2関数で最大値を選ぶという2段階の処理を組み合わせることで、「絶対値が最大の値」を求めています。関数の合成は複雑な処理を小さな部品に分解する基本的な考え方です。"
+  }
+]
