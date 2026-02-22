@@ -1,0 +1,1173 @@
+[
+  {
+    "questionId": "q-prog-026",
+    "examType": "科目B",
+    "category": "プログラミング基礎",
+    "subcategory": "プログラミング基礎",
+    "topic": "多次元配列操作",
+    "level": 6,
+    "question": "次のプログラムを実行したとき、表示される値はどれか。",
+    "pseudoCode": "○整数型の二次元配列: matrix[3][3]\n○整数型: i, j, sum\n\ni を 0 から 2 まで 1 ずつ増やしながら繰り返す\n  j を 0 から 2 まで 1 ずつ増やしながら繰り返す\n    matrix[i][j] ← i × 3 + j + 1\n  を繰り返す\nを繰り返す\n\nsum ← 0\ni を 0 から 2 まで 1 ずつ増やしながら繰り返す\n  sum ← sum + matrix[i][i]\nを繰り返す\n\n表示(sum)",
+    "choices": [
+      {
+        "text": "15",
+        "isCorrect": true,
+        "whyCorrect": "二次元配列に1〜9を格納し、対角要素matrix[0][0]=1, matrix[1][1]=5, matrix[2][2]=9を合計すると1+5+9=15になります。",
+        "analogy": "3×3のマス目に左上から1〜9の番号を振り、左上から右下への斜めのライン（1, 5, 9）の数字を合計するイメージです。",
+        "deepDive": "二次元配列の対角要素とは行番号と列番号が同じ要素(matrix[i][i])のことです。正方行列の対角成分の和をトレース(trace)と呼び、線形代数で重要な概念です。"
+      },
+      {
+        "text": "45",
+        "isCorrect": false,
+        "whyWrong": "45は全要素(1+2+...+9)の合計です。このプログラムでは対角要素(i==jの要素)のみを合計しているため、全要素の合計ではありません。",
+        "analogy": "マス目の全ての数字を合計するのではなく、斜めの線上の数字だけを合計する問題です。"
+      },
+      {
+        "text": "12",
+        "isCorrect": false,
+        "whyWrong": "12はmatrix[0][0]+matrix[1][1]+matrix[2][2]を0始まりのインデックスで誤って計算した場合の値です。i×3+j+1の式を正しく適用すると1+5+9=15です。",
+        "analogy": "マス目の番号の振り方を間違えて、斜めのラインの数字を読み間違えたようなものです。"
+      },
+      {
+        "text": "6",
+        "isCorrect": false,
+        "whyWrong": "6はmatrix[0][0]+matrix[1][1]+matrix[2][2]をインデックス値そのもの(0+1+2=3)と混同するか、別の計算を行った結果です。",
+        "analogy": "マス目の位置番号(0,1,2)と、そこに書かれている数字(1,5,9)を混同しています。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"matrix": "[[1,2,3],[4,5,6],[7,8,9]]"}, "action": "二重ループでmatrixに1〜9を格納"},
+      {"step": 2, "variables": {"sum": 0, "i": 0}, "action": "sum=0で初期化、対角要素の合計ループ開始"},
+      {"step": 3, "variables": {"sum": 1, "i": 0}, "action": "sum += matrix[0][0] → sum = 0+1 = 1"},
+      {"step": 4, "variables": {"sum": 6, "i": 1}, "action": "sum += matrix[1][1] → sum = 1+5 = 6"},
+      {"step": 5, "variables": {"sum": 15, "i": 2}, "action": "sum += matrix[2][2] → sum = 6+9 = 15"},
+      {"step": 6, "variables": {"sum": 15}, "action": "sumの値15を表示"}
+    ],
+    "traceAnalogy": "3×3のマス目（行列）に左上から順番に1〜9の番号を振ります。次に左上から右下への対角線上にある数字（1番、5番、9番）だけをピックアップして足し合わせると、1+5+9=15になります。",
+    "overallExplanation": "二次元配列はmatrix[行][列]でアクセスします。i×3+j+1の式により、matrix[0][0]=1, matrix[0][1]=2, ..., matrix[2][2]=9となります。対角要素は行番号=列番号の要素であり、matrix[i][i]でアクセスできます。"
+  },
+  {
+    "questionId": "q-prog-027",
+    "examType": "科目B",
+    "category": "プログラミング基礎",
+    "subcategory": "プログラミング基礎",
+    "topic": "参照渡しと値渡し",
+    "level": 6,
+    "question": "次のプログラムを実行したとき、表示される値はどれか。",
+    "pseudoCode": "○手続き addTen(参照渡し 整数型: n)\n  n ← n + 10\n\n○手続き addFive(値渡し 整数型: n)\n  n ← n + 5\n\n○整数型: x\nx ← 20\naddTen(x)\naddFive(x)\n表示(x)",
+    "choices": [
+      {
+        "text": "30",
+        "isCorrect": true,
+        "whyCorrect": "addTenは参照渡しなのでxが20→30に変更されます。addFiveは値渡しなのでxのコピーに5を足すだけで元のxは変わりません。最終的にx=30です。",
+        "analogy": "参照渡しは『本物の通帳を渡して預金額を変更してもらう』、値渡しは『通帳のコピーを渡す（コピーに書き込んでも本物は変わらない）』ようなものです。",
+        "deepDive": "参照渡し(pass by reference)は変数そのものを関数に渡すため、関数内の変更が呼び出し元に反映されます。値渡し(pass by value)は変数の値のコピーを渡すため、関数内で変更しても呼び出し元には影響しません。"
+      },
+      {
+        "text": "35",
+        "isCorrect": false,
+        "whyWrong": "35は両方とも参照渡しと考えた場合(20+10+5=35)の結果です。addFiveは値渡しなので元のxには影響しません。",
+        "analogy": "2回とも本物の通帳を渡したと勘違いしています。2回目はコピーを渡しているので、本物は変わりません。"
+      },
+      {
+        "text": "20",
+        "isCorrect": false,
+        "whyWrong": "20は両方とも値渡しと考えた場合の結果です。addTenは参照渡しなのでxの値が実際に変更されます。",
+        "analogy": "2回ともコピーを渡したと勘違いしています。1回目は本物を渡しているので、10が加算されています。"
+      },
+      {
+        "text": "25",
+        "isCorrect": false,
+        "whyWrong": "25はaddFiveだけが参照渡し(20+5=25)と誤って判断した場合の結果です。実際にはaddTenが参照渡し、addFiveが値渡しです。",
+        "analogy": "どちらが本物の通帳でどちらがコピーかを逆に覚えているようなものです。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"x": 20}, "action": "xに20を代入"},
+      {"step": 2, "variables": {"x": 30}, "action": "addTen(x)を呼び出し。参照渡しなのでx自体が20+10=30に変更される"},
+      {"step": 3, "variables": {"x": 30, "n(コピー)": 35}, "action": "addFive(x)を呼び出し。値渡しなのでコピーのnが30+5=35になるが、xは変わらない"},
+      {"step": 4, "variables": {"x": 30}, "action": "xの値30を表示"}
+    ],
+    "traceAnalogy": "銀行口座に20万円あります(x=20)。1回目は銀行員が直接口座に10万円を入金(参照渡し→x=30)。2回目は通帳のコピーに5万円を書き足しますが、実際の口座には反映されません(値渡し→x=30のまま)。",
+    "overallExplanation": "参照渡しは変数の実体を関数に渡し、関数内の変更が呼び出し元に反映されます。値渡しは変数の値のコピーを渡すため、関数内での変更は呼び出し元に影響しません。この違いは関数設計の基本です。"
+  },
+  {
+    "questionId": "q-prog-028",
+    "examType": "科目B",
+    "category": "プログラミング基礎",
+    "subcategory": "プログラミング基礎",
+    "topic": "文字列操作関数",
+    "level": 6,
+    "question": "次のプログラムを実行したとき、表示される文字列はどれか。関数 substring(s, start, len) は文字列sのstart番目からlen文字を返し、関数 length(s) は文字列sの長さを返す。先頭文字の位置は0とする。",
+    "pseudoCode": "○文字列型: s, result\n○整数型: mid\n\ns ← \"FUNDAMENTAL\"\nmid ← length(s) div 2\nresult ← substring(s, mid, 3)\n表示(result)",
+    "choices": [
+      {
+        "text": "MEN",
+        "isCorrect": true,
+        "whyCorrect": "「FUNDAMENTAL」の長さは11で、11 div 2 = 5です。5番目(0始まり)から3文字は「MEN」です。F(0)U(1)N(2)D(3)A(4)M(5)E(6)N(7)T(8)A(9)L(10)。",
+        "analogy": "11文字の看板を真ん中あたりで切り取り、そこから3文字分を読むと「MEN」になるイメージです。",
+        "deepDive": "div演算子は整数除算で小数部を切り捨てます。substring関数は多くの言語に存在し、文字列の一部を切り出す基本操作です。0始まりのインデックスに注意が必要です。"
+      },
+      {
+        "text": "AME",
+        "isCorrect": false,
+        "whyWrong": "AMEは4番目から3文字を取った結果です。length(s) div 2 = 11 div 2 = 5なので、開始位置は5(M)であり、4(A)ではありません。",
+        "analogy": "切り出し位置を1文字分前にずらして読んでしまったようなものです。"
+      },
+      {
+        "text": "ENT",
+        "isCorrect": false,
+        "whyWrong": "ENTは6番目から3文字を取った結果です。mid=5なので開始位置は5番目であり、6番目ではありません。",
+        "analogy": "切り出し位置を1文字分後ろにずらして読んでしまったようなものです。"
+      },
+      {
+        "text": "FUN",
+        "isCorrect": false,
+        "whyWrong": "FUNは先頭から3文字です。midは文字列の中間位置(5)を表しており、先頭(0)からではありません。",
+        "analogy": "看板の真ん中ではなく最初から読んでしまったようなものです。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"s": "FUNDAMENTAL"}, "action": "sに\"FUNDAMENTAL\"を代入"},
+      {"step": 2, "variables": {"s": "FUNDAMENTAL", "mid": 5}, "action": "length(\"FUNDAMENTAL\")=11, 11 div 2 = 5をmidに代入"},
+      {"step": 3, "variables": {"s": "FUNDAMENTAL", "mid": 5, "result": "MEN"}, "action": "substring(s, 5, 3)で5番目のMから3文字\"MEN\"をresultに代入"},
+      {"step": 4, "variables": {"result": "MEN"}, "action": "resultの値\"MEN\"を表示"}
+    ],
+    "traceAnalogy": "11文字の看板「FUNDAMENTAL」を用意し、中央の位置（5番目）を見つけます。5番目のMから3文字読むと「MEN」になります。",
+    "overallExplanation": "文字列操作では、length関数で文字数を取得し、substring関数で部分文字列を切り出します。0始まりのインデックスでは、最初の文字が0番目、2番目の文字が1番目...となることに注意しましょう。"
+  },
+  {
+    "questionId": "q-prog-029",
+    "examType": "科目B",
+    "category": "プログラミング基礎",
+    "subcategory": "プログラミング基礎",
+    "topic": "再帰と繰り返しの変換",
+    "level": 6,
+    "question": "次の再帰関数factRecと繰り返し版factLoopは同じ結果を返す。factLoop内の【 ア 】に入る式はどれか。",
+    "pseudoCode": "○整数型の関数 factRec(整数型: n)\n  もし n ≦ 1 ならば\n    return 1\n  を実行する\n  return n × factRec(n - 1)\n\n○整数型の関数 factLoop(整数型: n)\n  ○整数型: result, i\n  result ← 1\n  i を 2 から n まで 1 ずつ増やしながら繰り返す\n    result ← 【 ア 】\n  を繰り返す\n  return result",
+    "choices": [
+      {
+        "text": "result × i",
+        "isCorrect": true,
+        "whyCorrect": "階乗n!はn×(n-1)×...×2×1です。resultに1から順に掛けていくと同じ結果になります。iが2からnまで増えるので、result×iで累積的に掛け算していきます。",
+        "analogy": "再帰が『ロシアの入れ子人形を一番内側まで分解してから組み立て直す』のに対し、繰り返しは『小さいブロックから順に積み上げていく』のと同じです。",
+        "deepDive": "再帰から繰り返しへの変換は、再帰の基底条件を初期値に、再帰呼び出しをループ本体に対応させます。末尾再帰の場合は特にシンプルに変換できます。"
+      },
+      {
+        "text": "result + i",
+        "isCorrect": false,
+        "whyWrong": "result+iは和を計算してしまいます。階乗は積（掛け算の累積）なので、演算子は+ではなく×です。",
+        "analogy": "ブロックを『積み上げる（足す）』のではなく『組み合わせて大きくする（掛ける）』操作が必要です。"
+      },
+      {
+        "text": "i × (i - 1)",
+        "isCorrect": false,
+        "whyWrong": "i×(i-1)では前回までの累積結果(result)を使っていません。各ステップで2つの連続する数の積しか計算しておらず、階乗にはなりません。",
+        "analogy": "今まで積み上げたブロックを毎回壊して、隣り合う2つだけで作り直しているようなものです。"
+      },
+      {
+        "text": "n × (n - 1)",
+        "isCorrect": false,
+        "whyWrong": "n×(n-1)はループの中で変化しない固定値です。ループ変数iを使っていないため、繰り返しの意味がありません。",
+        "analogy": "ループの中で毎回同じ計算を繰り返すだけでは、積み上げになりません。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"n": 4, "result": 1}, "action": "factLoop(4)を呼び出し、resultを1で初期化"},
+      {"step": 2, "variables": {"i": 2, "result": 2}, "action": "result = 1 × 2 = 2"},
+      {"step": 3, "variables": {"i": 3, "result": 6}, "action": "result = 2 × 3 = 6"},
+      {"step": 4, "variables": {"i": 4, "result": 24}, "action": "result = 6 × 4 = 24"},
+      {"step": 5, "variables": {"result": 24}, "action": "4! = 24を返す（factRec(4)と同じ結果）"}
+    ],
+    "traceAnalogy": "1から始めて、2を掛け(1×2=2)、3を掛け(2×3=6)、4を掛け(6×4=24)と順に大きくしていきます。再帰版は4→3→2→1と分解してから逆に組み立てますが、結果は同じ24です。",
+    "overallExplanation": "再帰と繰り返しは多くの場合で相互に変換できます。再帰版は問題を小さくして解くアプローチ、繰り返し版は小さい単位から積み上げるアプローチです。階乗の場合、再帰は n×(n-1)! 、繰り返しは 1×2×...×n で同じ結果を得ます。"
+  },
+  {
+    "questionId": "q-prog-030",
+    "examType": "科目B",
+    "category": "プログラミング基礎",
+    "subcategory": "プログラミング基礎",
+    "topic": "エラー処理(例外処理の概念)",
+    "level": 6,
+    "question": "次のプログラムを実行し、引数に0を渡したとき、表示される文字列はどれか。",
+    "pseudoCode": "○整数型の関数 safeDivide(整数型: a, 整数型: b)\n  試す\n    もし b = 0 ならば\n      例外を発生(\"ゼロ除算エラー\")\n    を実行する\n    return a ÷ b\n  例外が発生したとき(文字列型: msg)\n    表示(\"エラー: \" + msg)\n    return -1\n  最後に必ず実行する\n    表示(\"処理完了\")\n  を実行する\n\n○整数型: result\nresult ← safeDivide(10, 0)\n表示(result)",
+    "choices": [
+      {
+        "text": "「エラー: ゼロ除算エラー」「処理完了」「-1」の順に表示される",
+        "isCorrect": true,
+        "whyCorrect": "b=0なので例外が発生し、例外処理ブロックで「エラー: ゼロ除算エラー」を表示してreturn -1を設定します。その後「最後に必ず実行する」ブロックで「処理完了」を表示し、最後にresult=-1が表示されます。",
+        "analogy": "料理中に火事（例外）が起きたら、まず消火（エラー表示）し、最後に必ず後片付け（処理完了）をし、結果報告（-1）するようなものです。",
+        "deepDive": "例外処理(try-catch-finally)は、正常系と異常系のコードを分離する仕組みです。finallyブロックは例外の有無に関わらず必ず実行され、リソースの解放などに使われます。"
+      },
+      {
+        "text": "「エラー: ゼロ除算エラー」「-1」の順に表示される",
+        "isCorrect": false,
+        "whyWrong": "「最後に必ず実行する」ブロックが抜けています。このブロックは例外の発生有無に関わらず必ず実行されるため、「処理完了」も表示されます。",
+        "analogy": "消火した後の後片付けを忘れているようなものです。finallyは必ず実行されます。"
+      },
+      {
+        "text": "「処理完了」「-1」の順に表示される",
+        "isCorrect": false,
+        "whyWrong": "例外処理ブロック内の表示文が抜けています。例外が発生するとまず例外処理ブロックが実行され、「エラー: ゼロ除算エラー」が表示されます。",
+        "analogy": "火事が起きたのに消火せず後片付けだけするのは順序が違います。"
+      },
+      {
+        "text": "プログラムがエラーで停止する",
+        "isCorrect": false,
+        "whyWrong": "例外処理(試す〜例外が発生したとき)で例外をキャッチしているため、プログラムは停止せず処理を続行します。",
+        "analogy": "消火器（例外処理）があるので、火事（例外）が起きてもビルは倒壊（プログラム停止）しません。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"a": 10, "b": 0}, "action": "safeDivide(10, 0)を呼び出し"},
+      {"step": 2, "variables": {"b": 0}, "action": "b=0なので例外「ゼロ除算エラー」を発生"},
+      {"step": 3, "variables": {"msg": "ゼロ除算エラー"}, "action": "例外をキャッチし「エラー: ゼロ除算エラー」を表示"},
+      {"step": 4, "variables": {"戻り値": -1}, "action": "return -1を設定"},
+      {"step": 5, "variables": {}, "action": "finallyブロックで「処理完了」を表示"},
+      {"step": 6, "variables": {"result": -1}, "action": "resultに-1を代入し、-1を表示"}
+    ],
+    "traceAnalogy": "工場で製品を作ろうとしたら(試す)、材料が0個で作れない(例外発生)。エラー報告を出し(例外処理)、代わりに-1という報告書を準備し(return -1)、最後に必ず作業場を片付け(最後に必ず実行する)、報告書を提出(-1を表示)します。",
+    "overallExplanation": "例外処理は「試す(try)→例外発生時(catch)→最後に必ず(finally)」の流れで動作します。例外が発生するとcatchブロックに処理が移り、finallyブロックは例外の有無に関わらず必ず実行されます。"
+  },
+  {
+    "questionId": "q-prog-031",
+    "examType": "科目B",
+    "category": "プログラミング基礎",
+    "subcategory": "プログラミング基礎",
+    "topic": "ポインタ/参照の概念",
+    "level": 7,
+    "question": "次のプログラムを実行したとき、表示される値はどれか。ここで、配列変数は参照型であり、代入すると同じ実体を共有する。",
+    "pseudoCode": "○整数型の配列: a ← {10, 20, 30}\n○整数型の配列: b\nb ← a\nb[1] ← 99\n表示(a[1])",
+    "choices": [
+      {
+        "text": "99",
+        "isCorrect": true,
+        "whyCorrect": "配列は参照型なので、b←aはaの参照(アドレス)をbにコピーします。aとbは同じ配列実体を指すため、b[1]を変更するとa[1]も変わります。",
+        "analogy": "aとbは同じ家への地図(参照)を持っています。bの地図を使って家のドアの色を塗り替えると、aの地図で見に行っても同じ色に変わっています。",
+        "deepDive": "参照型の変数は値そのものではなく、メモリ上のデータの場所(アドレス)を保持します。配列やオブジェクトは多くの言語で参照型です。独立したコピーが必要な場合は明示的にコピー操作が必要です。"
+      },
+      {
+        "text": "20",
+        "isCorrect": false,
+        "whyWrong": "20は配列aの元のa[1]の値ですが、bとaは同じ実体を共有しているため、b[1]=99の変更がaにも反映されます。",
+        "analogy": "bが家の別のコピー（独立した家）を持っていると誤解しています。実際は同じ家を共有しています。"
+      },
+      {
+        "text": "10",
+        "isCorrect": false,
+        "whyWrong": "10はa[0]の値です。a[1]を聞かれているので、インデックスを間違えています。",
+        "analogy": "家の1階（インデックス0）と2階（インデックス1）を間違えているようなものです。"
+      },
+      {
+        "text": "30",
+        "isCorrect": false,
+        "whyWrong": "30はa[2]の値です。a[1]を聞かれているので、インデックスを間違えています。",
+        "analogy": "家の3階（インデックス2）の部屋を見ていますが、聞かれているのは2階（インデックス1）です。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"a": "[10,20,30]", "aのアドレス": "0x100"}, "action": "配列aを{10,20,30}で初期化。アドレス0x100に格納"},
+      {"step": 2, "variables": {"b": "→0x100"}, "action": "bにaの参照をコピー。bもアドレス0x100を指す"},
+      {"step": 3, "variables": {"0x100の配列": "[10,99,30]"}, "action": "b[1]に99を代入。aとbが共有する実体が変更される"},
+      {"step": 4, "variables": {"a[1]": 99}, "action": "a[1]を表示 → 同じ実体を参照しているので99"}
+    ],
+    "traceAnalogy": "2人が同じGoogleドキュメント(配列の実体)のURLを持っています。1人(b)が文書を編集すると、もう1人(a)が開いたときも変更が反映されています。",
+    "overallExplanation": "参照型の変数代入は値のコピーではなく、同じデータ実体への参照の共有です。配列やオブジェクトを独立して扱いたい場合は、ディープコピー（全要素を新しい配列にコピーする操作）が必要です。"
+  },
+  {
+    "questionId": "q-prog-032",
+    "examType": "科目B",
+    "category": "プログラミング基礎",
+    "subcategory": "プログラミング基礎",
+    "topic": "構造体/レコード型",
+    "level": 7,
+    "question": "次のプログラムを実行したとき、表示される文字列はどれか。",
+    "pseudoCode": "○構造体 Student\n  文字列型: name\n  整数型: score\n\n○文字列型の関数 getGrade(Student型: s)\n  もし s.score ≧ 80 ならば\n    return \"A\"\n  を実行する\n  もし s.score ≧ 60 ならば\n    return \"B\"\n  を実行する\n  return \"C\"\n\n○Student型: st\nst.name ← \"田中\"\nst.score ← 75\n表示(st.name + \"の成績: \" + getGrade(st))",
+    "choices": [
+      {
+        "text": "田中の成績: B",
+        "isCorrect": true,
+        "whyCorrect": "st.score=75は80未満なので最初の条件は不成立、60以上なので2番目の条件が成立し\"B\"が返されます。st.name=\"田中\"と連結して「田中の成績: B」になります。",
+        "analogy": "テストで75点取った田中さんの成績表を確認する流れです。80点以上のAランクには届かないが、60点以上なのでBランクです。",
+        "deepDive": "構造体(struct/record)は複数の異なる型のデータを1つにまとめたデータ型です。メンバアクセスにはドット演算子(.)を使います。オブジェクト指向のクラスの前身となる概念です。"
+      },
+      {
+        "text": "田中の成績: A",
+        "isCorrect": false,
+        "whyWrong": "Aは80点以上の場合に返されます。st.score=75は80未満なので、Aの条件を満たしません。",
+        "analogy": "75点はAランク（80点以上）の基準に5点足りません。"
+      },
+      {
+        "text": "田中の成績: C",
+        "isCorrect": false,
+        "whyWrong": "Cは60点未満の場合に返されます。st.score=75は60以上なので、Bの条件が先に成立します。",
+        "analogy": "75点は合格ライン（60点）を超えているので、不合格のCにはなりません。"
+      },
+      {
+        "text": "75の成績: B",
+        "isCorrect": false,
+        "whyWrong": "表示するのはst.name(\"田中\")であり、st.score(75)ではありません。構造体のどのメンバを参照するかを正確に読む必要があります。",
+        "analogy": "名前欄と点数欄を間違えて読んでいるようなものです。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"st.name": "田中", "st.score": 75}, "action": "Student型の変数stにname=\"田中\", score=75を代入"},
+      {"step": 2, "variables": {"s.score": 75, "判定": "80未満"}, "action": "getGrade(st)を呼び出し。75≧80はfalse"},
+      {"step": 3, "variables": {"s.score": 75, "判定": "60以上"}, "action": "75≧60はtrue。\"B\"を返す"},
+      {"step": 4, "variables": {}, "action": "\"田中\" + \"の成績: \" + \"B\" = \"田中の成績: B\"を表示"}
+    ],
+    "traceAnalogy": "生徒カード(構造体)に名前「田中」と点数「75」を記入し、成績判定窓口(関数)に提出します。窓口では点数を見てAランク(80以上)かチェックし、該当しないのでBランク(60以上)をチェック、該当するので「B」を返します。",
+    "overallExplanation": "構造体は関連するデータをひとまとめにする仕組みです。この例では生徒の名前と点数をStudent型にまとめ、ドット演算子(.)でメンバにアクセスしています。関数に構造体を渡して処理することで、データと処理を整理できます。"
+  },
+  {
+    "questionId": "q-prog-033",
+    "examType": "科目B",
+    "category": "プログラミング基礎",
+    "subcategory": "プログラミング基礎",
+    "topic": "ファイル入出力の基本",
+    "level": 7,
+    "question": "次のプログラムは、ファイルから数値を読み込み合計を計算する。プログラム実行後に表示される値はどれか。ファイルには「10, 20, 30, -1」の4つの数値が順に格納されている。-1はデータの終端を示す番兵値である。",
+    "pseudoCode": "○整数型: value, total\n○ファイル型: f\n\nf ← ファイルを開く(\"data.txt\", 読込モード)\ntotal ← 0\nvalue ← ファイルから読む(f)\n\nvalue ≠ -1 の間繰り返す\n  total ← total + value\n  value ← ファイルから読む(f)\nを繰り返す\n\nファイルを閉じる(f)\n表示(total)",
+    "choices": [
+      {
+        "text": "60",
+        "isCorrect": true,
+        "whyCorrect": "番兵値-1が現れるまで読み込みます。10+20+30=60で、-1は合計に含めません。番兵値はデータ終端の目印であり、処理対象ではありません。",
+        "analogy": "レジで商品を次々とスキャンしていき、仕切り板（番兵値-1）が来たらスキャンを止めて合計を出すのと同じです。仕切り板自体は商品ではありません。",
+        "deepDive": "番兵値(sentinel value)はデータの終端を示す特別な値です。ファイル入出力ではEOF(End of File)も同様の役割を果たします。番兵値を用いたループは、データ数が事前に分からない場合に有効です。"
+      },
+      {
+        "text": "59",
+        "isCorrect": false,
+        "whyWrong": "59は10+20+30+(-1)=59で、番兵値-1を合計に含めた場合の結果です。-1はデータ終端を示す番兵値であり、合計に加算すべきではありません。",
+        "analogy": "仕切り板（番兵値）自体もスキャンして金額に加えてしまったようなものです。"
+      },
+      {
+        "text": "30",
+        "isCorrect": false,
+        "whyWrong": "30は最後に読んだデータ値ですが、合計ではありません。totalには10+20+30=60が蓄積されています。",
+        "analogy": "最後にスキャンした商品の値段だけを見ており、合計金額を確認していません。"
+      },
+      {
+        "text": "-1",
+        "isCorrect": false,
+        "whyWrong": "-1は番兵値であり、ループの終了条件として使われます。表示されるのはtotal(=60)であり、value(=-1)ではありません。",
+        "analogy": "仕切り板の値段ではなく、それまでの商品の合計金額が問われています。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"total": 0, "value": 10}, "action": "ファイルを開き、最初の値10を読む"},
+      {"step": 2, "variables": {"total": 10, "value": 10}, "action": "10≠-1なのでtotal=0+10=10"},
+      {"step": 3, "variables": {"total": 10, "value": 20}, "action": "次の値20を読む"},
+      {"step": 4, "variables": {"total": 30, "value": 20}, "action": "20≠-1なのでtotal=10+20=30"},
+      {"step": 5, "variables": {"total": 30, "value": 30}, "action": "次の値30を読む"},
+      {"step": 6, "variables": {"total": 60, "value": 30}, "action": "30≠-1なのでtotal=30+30=60"},
+      {"step": 7, "variables": {"total": 60, "value": -1}, "action": "次の値-1を読む。-1=-1なのでループ終了"},
+      {"step": 8, "variables": {"total": 60}, "action": "ファイルを閉じ、total=60を表示"}
+    ],
+    "traceAnalogy": "レジ係が商品を1つずつスキャンします。10円→合計10円、20円→合計30円、30円→合計60円、仕切り板(-1)→「ここまで」。合計60円をレシートに印刷します。",
+    "overallExplanation": "ファイル入出力の基本パターンとして、ファイルを開く→データを読む→処理する→ファイルを閉じるの流れがあります。番兵値を使ったループでは、特定の値が出現するまでデータを読み続けます。"
+  },
+  {
+    "questionId": "q-prog-034",
+    "examType": "科目B",
+    "category": "プログラミング基礎",
+    "subcategory": "プログラミング基礎",
+    "topic": "コールバック関数",
+    "level": 7,
+    "question": "次のプログラムを実行したとき、表示される値はどれか。ここで、関数型の変数に関数を代入し、その変数を通じて関数を呼び出すことができる。",
+    "pseudoCode": "○整数型の関数 doubleIt(整数型: x)\n  return x × 2\n\n○整数型の関数 tripleIt(整数型: x)\n  return x × 3\n\n○整数型の関数 applyFunc(関数型: func, 整数型: value)\n  return func(value)\n\n○関数型: operation\noperation ← doubleIt\n○整数型: r1 ← applyFunc(operation, 5)\n\noperation ← tripleIt\n○整数型: r2 ← applyFunc(operation, 5)\n\n表示(r1 + r2)",
+    "choices": [
+      {
+        "text": "25",
+        "isCorrect": true,
+        "whyCorrect": "最初にoperation=doubleItなのでr1=5×2=10。次にoperation=tripleItなのでr2=5×3=15。r1+r2=10+15=25です。",
+        "analogy": "工場の加工機(applyFunc)に「2倍にする工具(doubleIt)」をセットして素材5を加工→10。工具を「3倍にする工具(tripleIt)」に交換して同じ素材5を加工→15。合計25です。",
+        "deepDive": "コールバック関数は、別の関数に引数として渡される関数です。これにより、処理の一部を外部から差し替え可能にでき、柔軟な設計が実現できます。イベント処理やソートのカスタマイズなどで広く使われます。"
+      },
+      {
+        "text": "30",
+        "isCorrect": false,
+        "whyWrong": "30は両方ともtripleItが適用された場合(5×3+5×3=30)の結果です。r1の計算時はoperationはまだdoubleItです。",
+        "analogy": "工具を交換する前にもう一方の工具が使われていたことを忘れています。"
+      },
+      {
+        "text": "20",
+        "isCorrect": false,
+        "whyWrong": "20は両方ともdoubleItが適用された場合(5×2+5×2=20)の結果です。r2の計算時にはoperationはtripleItに変更されています。",
+        "analogy": "工具を交換したのに、前の工具のまま計算しているようなものです。"
+      },
+      {
+        "text": "15",
+        "isCorrect": false,
+        "whyWrong": "15はr2(=5×3)の値だけです。r1+r2の合計が求められているので、r1(=10)も足す必要があります。",
+        "analogy": "2つの加工結果のうち1つだけを見て、もう1つを忘れています。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"operation": "doubleIt"}, "action": "operationにdoubleIt関数を代入"},
+      {"step": 2, "variables": {"operation": "doubleIt", "func": "doubleIt", "value": 5}, "action": "applyFunc(doubleIt, 5)を呼び出し"},
+      {"step": 3, "variables": {"r1": 10}, "action": "doubleIt(5)=5×2=10がr1に代入"},
+      {"step": 4, "variables": {"operation": "tripleIt"}, "action": "operationにtripleIt関数を代入"},
+      {"step": 5, "variables": {"operation": "tripleIt", "func": "tripleIt", "value": 5}, "action": "applyFunc(tripleIt, 5)を呼び出し"},
+      {"step": 6, "variables": {"r2": 15}, "action": "tripleIt(5)=5×3=15がr2に代入"},
+      {"step": 7, "variables": {"r1": 10, "r2": 15}, "action": "r1+r2=10+15=25を表示"}
+    ],
+    "traceAnalogy": "加工機に工具をセットして製品を作る工場です。最初は「2倍工具」で素材5を加工(→10)、次に「3倍工具」に交換して素材5を加工(→15)。両方の製品を合わせると25個です。",
+    "overallExplanation": "コールバック関数は関数を値として扱い、別の関数に渡す技法です。applyFuncは受け取った関数funcを内部で呼び出しており、どの関数を渡すかで振る舞いが変わります。これは高階関数の基本概念です。"
+  },
+  {
+    "questionId": "q-prog-035",
+    "examType": "科目B",
+    "category": "プログラミング基礎",
+    "subcategory": "プログラミング基礎",
+    "topic": "イテレータパターン",
+    "level": 7,
+    "question": "次のプログラムは、配列の要素を順に返すイテレータを実装したものである。実行後に表示される値はどれか。",
+    "pseudoCode": "○構造体 Iterator\n  整数型の配列: data\n  整数型: pos\n\n○Iterator型の関数 createIterator(整数型の配列: arr)\n  ○Iterator型: it\n  it.data ← arr\n  it.pos ← 0\n  return it\n\n○論理型の関数 hasNext(Iterator型: it)\n  return it.pos < length(it.data)\n\n○整数型の関数 next(参照渡し Iterator型: it)\n  ○整数型: val ← it.data[it.pos]\n  it.pos ← it.pos + 1\n  return val\n\n○整数型の配列: arr ← {3, 7, 2}\n○Iterator型: iter ← createIterator(arr)\n○整数型: sum ← 0\n\nhasNext(iter) の間繰り返す\n  sum ← sum + next(iter)\nを繰り返す\n\n表示(sum)",
+    "choices": [
+      {
+        "text": "12",
+        "isCorrect": true,
+        "whyCorrect": "イテレータが配列{3,7,2}の全要素を順に返します。next()を3回呼び出し、3+7+2=12になります。",
+        "analogy": "トランプのデッキ(配列)からディーラー(イテレータ)が1枚ずつカードを配り、受け取ったカードの数字を合計するイメージです。3+7+2=12。",
+        "deepDive": "イテレータパターンは、コレクション(配列・リストなど)の内部構造を隠蔽しつつ、要素に順次アクセスする仕組みです。GoFデザインパターンの1つで、for-each文の内部実装としても使われています。"
+      },
+      {
+        "text": "7",
+        "isCorrect": false,
+        "whyWrong": "7は配列の2番目の要素です。イテレータは全要素を走査するので、合計は3+7+2=12になります。",
+        "analogy": "デッキの途中のカード1枚だけを見て、合計を忘れているようなものです。"
+      },
+      {
+        "text": "3",
+        "isCorrect": false,
+        "whyWrong": "3は配列の最初の要素です。hasNext()がtrueの間ループが続くため、1回だけでなく3回next()が呼ばれます。",
+        "analogy": "最初のカードだけ配って、残りのカードを配り忘れたようなものです。"
+      },
+      {
+        "text": "10",
+        "isCorrect": false,
+        "whyWrong": "10は3+7=10で最後の要素を数え忘れた場合の値です。配列の長さは3なので、3回ともnext()が呼ばれ、2も合計に含まれます。",
+        "analogy": "デッキの最後の1枚を配り忘れて合計を計算したようなものです。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"iter.data": "[3,7,2]", "iter.pos": 0, "sum": 0}, "action": "イテレータを作成、posは0から開始"},
+      {"step": 2, "variables": {"iter.pos": 0}, "action": "hasNext: 0<3=true → ループに入る"},
+      {"step": 3, "variables": {"val": 3, "iter.pos": 1, "sum": 3}, "action": "next()で3を返しposを1に。sum=0+3=3"},
+      {"step": 4, "variables": {"iter.pos": 1}, "action": "hasNext: 1<3=true → 続行"},
+      {"step": 5, "variables": {"val": 7, "iter.pos": 2, "sum": 10}, "action": "next()で7を返しposを2に。sum=3+7=10"},
+      {"step": 6, "variables": {"iter.pos": 2}, "action": "hasNext: 2<3=true → 続行"},
+      {"step": 7, "variables": {"val": 2, "iter.pos": 3, "sum": 12}, "action": "next()で2を返しposを3に。sum=10+2=12"},
+      {"step": 8, "variables": {"iter.pos": 3}, "action": "hasNext: 3<3=false → ループ終了"},
+      {"step": 9, "variables": {"sum": 12}, "action": "sum=12を表示"}
+    ],
+    "traceAnalogy": "自動販売機(イテレータ)に3つの商品(3,7,2)が詰まっています。ボタン(next)を押すたびに1つずつ出てきて、商品がなくなる(hasNextがfalse)まで繰り返します。出てきた商品の値段合計は12円です。",
+    "overallExplanation": "イテレータは「次の要素を返す(next)」と「まだ要素があるか(hasNext)」の2つの操作を持つ仕組みです。コレクションの走査方法をカプセル化することで、利用者はコレクションの内部構造を意識せずに全要素を処理できます。"
+  },
+  {
+    "questionId": "q-prog-036",
+    "examType": "科目B",
+    "category": "プログラミング基礎",
+    "subcategory": "プログラミング基礎",
+    "topic": "オブジェクト指向(クラスとインスタンス)",
+    "level": 8,
+    "question": "次のプログラムを実行したとき、表示される値はどれか。",
+    "pseudoCode": "○クラス Counter\n  ○整数型: count\n\n  ○コンストラクタ Counter(整数型: init)\n    this.count ← init\n\n  ○手続き increment()\n    this.count ← this.count + 1\n\n  ○整数型の関数 getCount()\n    return this.count\n\n○Counter型: c1 ← new Counter(0)\n○Counter型: c2 ← new Counter(10)\n\nc1.increment()\nc1.increment()\nc1.increment()\nc2.increment()\n\n表示(c1.getCount() + c2.getCount())",
+    "choices": [
+      {
+        "text": "14",
+        "isCorrect": true,
+        "whyCorrect": "c1は0から始まり3回incrementして3。c2は10から始まり1回incrementして11。合計3+11=14です。各インスタンスは独立したcountを持ちます。",
+        "analogy": "2つの万歩計(c1とc2)があり、c1は0歩から3歩進み、c2は10歩から1歩進みます。合計3+11=14歩です。それぞれ独立して歩数を数えます。",
+        "deepDive": "クラスはオブジェクトの設計図であり、インスタンスはその設計図から作られた実体です。各インスタンスは独自のフィールド(メンバ変数)を持ち、互いに干渉しません。thisキーワードは自分自身のインスタンスを指します。"
+      },
+      {
+        "text": "4",
+        "isCorrect": false,
+        "whyWrong": "4はincrement()の呼び出し回数の合計(3+1)です。c2の初期値が10であることを無視しています。",
+        "analogy": "万歩計の初期値を無視して、ボタンを押した回数だけ数えているようなものです。"
+      },
+      {
+        "text": "13",
+        "isCorrect": false,
+        "whyWrong": "13はc1とc2が同じcountを共有していると考えた場合(0+3+10+1=14ではなく、0からの累積を別の方法で計算)の誤りです。各インスタンスは独立しています。",
+        "analogy": "2つの万歩計が1つの歩数表示を共有していると勘違いしているようなものです。"
+      },
+      {
+        "text": "11",
+        "isCorrect": false,
+        "whyWrong": "11はc2.getCount()の値だけです。c1.getCount()の3も足す必要があります。",
+        "analogy": "2つの万歩計のうち1つだけ見て、もう1つを見忘れています。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"c1.count": 0, "c2.count": 10}, "action": "c1を初期値0、c2を初期値10で生成"},
+      {"step": 2, "variables": {"c1.count": 1}, "action": "c1.increment() → c1.count = 0+1 = 1"},
+      {"step": 3, "variables": {"c1.count": 2}, "action": "c1.increment() → c1.count = 1+1 = 2"},
+      {"step": 4, "variables": {"c1.count": 3}, "action": "c1.increment() → c1.count = 2+1 = 3"},
+      {"step": 5, "variables": {"c2.count": 11}, "action": "c2.increment() → c2.count = 10+1 = 11"},
+      {"step": 6, "variables": {"c1.count": 3, "c2.count": 11}, "action": "c1.getCount()=3, c2.getCount()=11, 合計14を表示"}
+    ],
+    "traceAnalogy": "2台のタクシーメーター(インスタンス)を用意します。1台目は0円スタートで3回加算(→3)、2台目は10円スタートで1回加算(→11)。メーターの合計は3+11=14円です。",
+    "overallExplanation": "クラスからnewで生成されるインスタンスは、それぞれ独立したデータ(フィールド)を持ちます。c1とc2は同じCounterクラスから作られていますが、countの値は互いに独立しています。"
+  },
+  {
+    "questionId": "q-prog-037",
+    "examType": "科目B",
+    "category": "プログラミング基礎",
+    "subcategory": "プログラミング基礎",
+    "topic": "継承とポリモーフィズム",
+    "level": 8,
+    "question": "次のプログラムを実行したとき、表示される文字列はどれか。",
+    "pseudoCode": "○クラス Animal\n  ○文字列型の関数 speak()\n    return \"...\"\n\n○クラス Dog は Animal を継承する\n  ○文字列型の関数 speak()\n    return \"ワン\"\n\n○クラス Cat は Animal を継承する\n  ○文字列型の関数 speak()\n    return \"ニャー\"\n\n○手続き makeSound(Animal型: animal)\n  表示(animal.speak())\n\n○Animal型: a ← new Dog()\n○Animal型: b ← new Cat()\nmakeSound(a)\nmakeSound(b)",
+    "choices": [
+      {
+        "text": "「ワン」「ニャー」の順に表示される",
+        "isCorrect": true,
+        "whyCorrect": "aはDogインスタンスなのでspeak()は\"ワン\"を返し、bはCatインスタンスなのでspeak()は\"ニャー\"を返します。変数の型がAnimalでも、実際のインスタンスのメソッドが呼ばれます(ポリモーフィズム)。",
+        "analogy": "動物園の飼育員(makeSound)が檻の前で『鳴いてください』と頼むと、犬は犬の声で、猫は猫の声で鳴きます。同じお願いでも動物によって反応が違うのがポリモーフィズムです。",
+        "deepDive": "ポリモーフィズム(多態性)は、同じメソッド呼び出しに対して、実際のオブジェクトの型に応じて異なる振る舞いをする仕組みです。変数の宣言型(Animal)ではなく、実行時のインスタンスの型(DogやCat)のメソッドが実行されます。"
+      },
+      {
+        "text": "「...」「...」の順に表示される",
+        "isCorrect": false,
+        "whyWrong": "変数の型がAnimalでも、実際のインスタンスはDogとCatです。オーバーライドされたメソッドが呼ばれるため、親クラスの\"...\"ではなく子クラスの実装が実行されます。",
+        "analogy": "動物として扱っても、犬は犬の鳴き方をします。親の「...」は子が独自の鳴き声を定義していなかった場合のデフォルトです。"
+      },
+      {
+        "text": "「ニャー」「ワン」の順に表示される",
+        "isCorrect": false,
+        "whyWrong": "順序が逆です。最初にmakeSound(a)でaはDog(\"ワン\")、次にmakeSound(b)でbはCat(\"ニャー\")が呼ばれます。",
+        "analogy": "飼育員はまず犬の檻(a)を訪問し、次に猫の檻(b)を訪問するので、順序はワン→ニャーです。"
+      },
+      {
+        "text": "コンパイルエラーが発生する",
+        "isCorrect": false,
+        "whyWrong": "DogとCatはAnimalを継承しているため、Animal型の変数にDogやCatのインスタンスを代入できます。これは正当な多態性の使い方です。",
+        "analogy": "犬も猫も動物の一種なので、『動物』という看板の檻に入れることは問題ありません。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"a": "Dogインスタンス", "b": "Catインスタンス"}, "action": "Dog型のインスタンスをaに、Cat型のインスタンスをbに代入"},
+      {"step": 2, "variables": {"animal": "Dogインスタンス"}, "action": "makeSound(a)を呼び出し。animalの実体はDog"},
+      {"step": 3, "variables": {}, "action": "animal.speak()はDogのspeak()が実行され\"ワン\"を表示"},
+      {"step": 4, "variables": {"animal": "Catインスタンス"}, "action": "makeSound(b)を呼び出し。animalの実体はCat"},
+      {"step": 5, "variables": {}, "action": "animal.speak()はCatのspeak()が実行され\"ニャー\"を表示"}
+    ],
+    "traceAnalogy": "動物病院に犬と猫が来ました。獣医(makeSound関数)は同じ診察手順(speak呼び出し)を行いますが、犬は「ワン」と鳴き、猫は「ニャー」と鳴きます。同じ型(Animal)で受け取っても、本来の姿(Dog/Cat)に応じた振る舞いをします。",
+    "overallExplanation": "継承により子クラスは親クラスのメソッドをオーバーライド(上書き)できます。ポリモーフィズムにより、親クラス型の変数で子クラスのインスタンスを扱っても、実行時には子クラスのメソッドが呼ばれます。"
+  },
+  {
+    "questionId": "q-prog-038",
+    "examType": "科目B",
+    "category": "プログラミング基礎",
+    "subcategory": "プログラミング基礎",
+    "topic": "デザインパターン基礎(Strategy)",
+    "level": 8,
+    "question": "次のプログラムを実行したとき、表示される値はどれか。Strategyパターンにより、計算方法を実行時に切り替えている。",
+    "pseudoCode": "○クラス AddStrategy\n  ○整数型の関数 execute(整数型: a, 整数型: b)\n    return a + b\n\n○クラス MultiplyStrategy\n  ○整数型の関数 execute(整数型: a, 整数型: b)\n    return a × b\n\n○クラス Calculator\n  ○Strategy型: strategy\n\n  ○コンストラクタ Calculator(Strategy型: s)\n    this.strategy ← s\n\n  ○手続き setStrategy(Strategy型: s)\n    this.strategy ← s\n\n  ○整数型の関数 calculate(整数型: a, 整数型: b)\n    return this.strategy.execute(a, b)\n\n○Calculator型: calc ← new Calculator(new AddStrategy())\n○整数型: r1 ← calc.calculate(3, 4)\ncalc.setStrategy(new MultiplyStrategy())\n○整数型: r2 ← calc.calculate(3, 4)\n表示(r1 + r2)",
+    "choices": [
+      {
+        "text": "19",
+        "isCorrect": true,
+        "whyCorrect": "最初はAddStrategyなのでr1=3+4=7。setStrategyでMultiplyStrategyに切り替え後、r2=3×4=12。合計7+12=19です。",
+        "analogy": "電卓(Calculator)のモードを切り替えるイメージです。最初は「足し算モード」で3と4を計算して7、次に「掛け算モード」に切り替えて同じ3と4で12。合計19です。",
+        "deepDive": "Strategyパターンは、アルゴリズムをクラスとしてカプセル化し、実行時に切り替え可能にするデザインパターンです。条件分岐(if/switch)の代わりにオブジェクトの差し替えで振る舞いを変更でき、開放閉鎖原則(OCP)に従った設計になります。"
+      },
+      {
+        "text": "24",
+        "isCorrect": false,
+        "whyWrong": "24は両方ともMultiplyStrategy(3×4+3×4=24)の場合の結果です。r1の計算時はまだAddStrategyが設定されています。",
+        "analogy": "最初から掛け算モードだったと勘違いしています。最初は足し算モードです。"
+      },
+      {
+        "text": "14",
+        "isCorrect": false,
+        "whyWrong": "14は両方ともAddStrategy(3+4+3+4=14)の場合の結果です。r2の計算前にsetStrategyでMultiplyStrategyに切り替えています。",
+        "analogy": "モードを切り替えたのに、ずっと足し算モードのまま計算しているようなものです。"
+      },
+      {
+        "text": "12",
+        "isCorrect": false,
+        "whyWrong": "12はr2(=3×4)の値だけです。r1(=7)も足す必要があります。r1+r2=7+12=19です。",
+        "analogy": "2回の計算結果のうち後半だけを答えとしており、前半の結果を忘れています。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"calc.strategy": "AddStrategy"}, "action": "AddStrategyを持つCalculatorを生成"},
+      {"step": 2, "variables": {"r1": 7}, "action": "calc.calculate(3,4) → AddStrategy.execute(3,4) → 3+4=7"},
+      {"step": 3, "variables": {"calc.strategy": "MultiplyStrategy"}, "action": "setStrategy()でMultiplyStrategyに切り替え"},
+      {"step": 4, "variables": {"r2": 12}, "action": "calc.calculate(3,4) → MultiplyStrategy.execute(3,4) → 3×4=12"},
+      {"step": 5, "variables": {"r1": 7, "r2": 12}, "action": "r1+r2=7+12=19を表示"}
+    ],
+    "traceAnalogy": "交換可能なヘッド(Strategy)を持つ電動工具(Calculator)です。最初は「足し算ヘッド」で加工(3+4=7)、ヘッドを「掛け算ヘッド」に交換して加工(3×4=12)。両方の成果物を合わせると19です。",
+    "overallExplanation": "Strategyパターンでは、アルゴリズム(計算方法)をオブジェクトとして分離し、必要に応じて差し替えます。Calculator自体は計算方法を知らず、strategyオブジェクトに委譲しています。新しい計算方法を追加する際もCalculatorを修正する必要がありません。"
+  },
+  {
+    "questionId": "q-prog-039",
+    "examType": "科目B",
+    "category": "プログラミング基礎",
+    "subcategory": "プログラミング基礎",
+    "topic": "ジェネリクス/テンプレート",
+    "level": 8,
+    "question": "次のプログラムを実行したとき、表示される値はどれか。ここで、<T>は任意の型を表す型パラメータである。",
+    "pseudoCode": "○クラス Box<T>\n  ○T型: value\n\n  ○コンストラクタ Box(T型: v)\n    this.value ← v\n\n  ○T型の関数 getValue()\n    return this.value\n\n○T型の関数 larger<T>(Box<T>型: b1, Box<T>型: b2)\n  もし b1.getValue() > b2.getValue() ならば\n    return b1.getValue()\n  を実行する\n  return b2.getValue()\n\n○Box<整数型>型: intBox1 ← new Box<整数型>(15)\n○Box<整数型>型: intBox2 ← new Box<整数型>(28)\n表示(larger(intBox1, intBox2))",
+    "choices": [
+      {
+        "text": "28",
+        "isCorrect": true,
+        "whyCorrect": "larger関数はb1とb2の値を比較し、大きい方を返します。b1.getValue()=15、b2.getValue()=28で、15>28はfalseなのでb2の値28が返されます。",
+        "analogy": "2つの同じ形の箱(Box)にそれぞれ数字(15と28)が入っています。larger関数が両方の箱を開けて比べ、大きい数字28を取り出します。",
+        "deepDive": "ジェネリクス(総称型)により、Box<整数型>、Box<文字列型>など、同じクラス定義で異なる型のデータを型安全に扱えます。コードの再利用性が高まり、型キャストのミスをコンパイル時に検出できます。"
+      },
+      {
+        "text": "15",
+        "isCorrect": false,
+        "whyWrong": "15はb1の値ですが、15>28はfalseなので、larger関数はb2の値28を返します。比較の結果を逆に判断しています。",
+        "analogy": "2つの箱のうち小さい方の数字を選んでしまっています。larger(大きい方)が求められています。"
+      },
+      {
+        "text": "43",
+        "isCorrect": false,
+        "whyWrong": "43は15+28の合計ですが、larger関数は合計ではなく大きい方の値を返す関数です。",
+        "analogy": "2つの箱の中身を合計するのではなく、大きい方を選ぶ関数です。"
+      },
+      {
+        "text": "コンパイルエラーが発生する",
+        "isCorrect": false,
+        "whyWrong": "Box<整数型>として型パラメータTに整数型が指定されているため、型の整合性は保たれており、コンパイルエラーにはなりません。",
+        "analogy": "箱のサイズ(型)を事前に指定しているので、中身が合わないという問題は起きません。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"intBox1.value": 15}, "action": "Box<整数型>(15)を生成。valueに15を格納"},
+      {"step": 2, "variables": {"intBox2.value": 28}, "action": "Box<整数型>(28)を生成。valueに28を格納"},
+      {"step": 3, "variables": {"b1.getValue()": 15, "b2.getValue()": 28}, "action": "larger(intBox1, intBox2)を呼び出し"},
+      {"step": 4, "variables": {"比較": "15>28 → false"}, "action": "b1.getValue()>b2.getValue()は15>28でfalse"},
+      {"step": 5, "variables": {"戻り値": 28}, "action": "条件不成立のためb2.getValue()=28を返す"}
+    ],
+    "traceAnalogy": "同じ規格の箱(ジェネリクス)に整数を入れて封をし、審判(larger関数)が2つの箱を開けて中身を比較します。15と28では28が大きいので、28を結果として発表します。",
+    "overallExplanation": "ジェネリクス(テンプレート)は、型をパラメータ化して汎用的なクラスや関数を定義する仕組みです。Box<T>はTにどの型を指定しても同じ構造で動作します。型安全性を保ちながらコードの重複を避けられます。"
+  },
+  {
+    "questionId": "q-prog-040",
+    "examType": "科目B",
+    "category": "プログラミング基礎",
+    "subcategory": "プログラミング基礎",
+    "topic": "lambda式/無名関数",
+    "level": 8,
+    "question": "次のプログラムを実行したとき、表示される配列はどれか。ここで、transform関数は配列の各要素にfuncを適用した新しい配列を返す。",
+    "pseudoCode": "○整数型の配列の関数 transform(整数型の配列: arr, 関数型: func)\n  ○整数型の配列: result ← 空の配列\n  ○整数型: i\n  i を 0 から length(arr) - 1 まで 1 ずつ増やしながら繰り返す\n    resultの末尾に func(arr[i]) を追加\n  を繰り返す\n  return result\n\n○整数型の配列: nums ← {1, 2, 3, 4}\n○整数型の配列: result\n\nresult ← transform(nums, (x) → x × x)\n表示(result)",
+    "choices": [
+      {
+        "text": "{1, 4, 9, 16}",
+        "isCorrect": true,
+        "whyCorrect": "lambda式(x)→x×xは引数xの二乗を返します。各要素に適用すると1²=1, 2²=4, 3²=9, 4²=16で{1,4,9,16}になります。",
+        "analogy": "工場のベルトコンベアで流れてくる数字に「二乗マシン(lambda式)」を通すと、1→1、2→4、3→9、4→16に変換されて出てきます。",
+        "deepDive": "lambda式(無名関数)は名前を持たない関数で、その場で定義して使い捨てることができます。(x)→x×xは「引数xを受け取りx×xを返す関数」を表します。高階関数と組み合わせることで、簡潔なコードが書けます。"
+      },
+      {
+        "text": "{2, 4, 6, 8}",
+        "isCorrect": false,
+        "whyWrong": "これは各要素を2倍((x)→x×2)にした結果です。lambda式は(x)→x×xで二乗であり、2倍ではありません。",
+        "analogy": "二乗マシンではなく2倍マシンを通したと勘違いしています。"
+      },
+      {
+        "text": "{1, 2, 3, 4}",
+        "isCorrect": false,
+        "whyWrong": "これは元の配列そのままです。transform関数がlambda式を各要素に適用するため、結果は元の配列とは異なります。",
+        "analogy": "マシンを通さず、そのまま出力されたと考えています。"
+      },
+      {
+        "text": "{1, 3, 5, 7}",
+        "isCorrect": false,
+        "whyWrong": "これは各要素を2倍して1引いた((x)→x×2-1)結果です。lambda式は(x)→x×xなので、x×x(二乗)を計算します。",
+        "analogy": "別の計算式を適用してしまっているようなものです。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"nums": "[1,2,3,4]", "func": "(x)→x×x"}, "action": "transform関数にnumsとlambda式を渡す"},
+      {"step": 2, "variables": {"i": 0, "func(1)": 1, "result": "[1]"}, "action": "arr[0]=1に対しfunc(1)=1×1=1をresultに追加"},
+      {"step": 3, "variables": {"i": 1, "func(2)": 4, "result": "[1,4]"}, "action": "arr[1]=2に対しfunc(2)=2×2=4をresultに追加"},
+      {"step": 4, "variables": {"i": 2, "func(3)": 9, "result": "[1,4,9]"}, "action": "arr[2]=3に対しfunc(3)=3×3=9をresultに追加"},
+      {"step": 5, "variables": {"i": 3, "func(4)": 16, "result": "[1,4,9,16]"}, "action": "arr[3]=4に対しfunc(4)=4×4=16をresultに追加"},
+      {"step": 6, "variables": {"result": "[1,4,9,16]"}, "action": "result={1,4,9,16}を返し、表示する"}
+    ],
+    "traceAnalogy": "工場のベルトコンベアに1,2,3,4と書かれた部品が流れてきます。各部品は「自分自身と掛け算する(二乗)」加工機(lambda式)を通り、1,4,9,16に変わって出てきます。",
+    "overallExplanation": "lambda式(無名関数)は関数に名前をつけずにその場で定義する方法です。(x)→x×xのように引数と処理を簡潔に記述でき、transform関数のように関数を引数として受け取る高階関数と組み合わせて使います。"
+  },
+  {
+    "questionId": "q-prog-041",
+    "examType": "科目B",
+    "category": "プログラミング基礎",
+    "subcategory": "プログラミング基礎",
+    "topic": "並行処理(スレッド基礎)",
+    "level": 9,
+    "question": "次のプログラムでは2つのスレッドが共有変数counterを操作する。プログラム実行後、counterの値として考えられないものはどれか。各スレッドのincrement()は「読み取り→加算→書き込み」の3ステップで実行され、スレッド間で割り込みが発生する可能性がある。",
+    "pseudoCode": "○整数型: counter ← 0\n\n○手続き increment()\n  ○整数型: temp\n  temp ← counter\n  temp ← temp + 1\n  counter ← temp\n\n○スレッド1の処理:\n  increment()\n  increment()\n\n○スレッド2の処理:\n  increment()\n  increment()\n\nスレッド1とスレッド2を同時に開始する\n両方のスレッドの完了を待つ\n表示(counter)",
+    "choices": [
+      {
+        "text": "5",
+        "isCorrect": true,
+        "whyCorrect": "合計4回のincrementが実行されるため、counterの取りうる値は2〜4です。排他制御がないため競合で減ることはありますが、4回の加算で5以上になることは不可能です。",
+        "analogy": "4人が1回ずつボタンを押してカウンターを増やす場面で、押し損ね(競合)はあっても、5回以上押されることはありません。",
+        "deepDive": "競合状態(race condition)では、複数スレッドの実行順序によって結果が変わります。最悪の場合、2つのスレッドが同時に同じ値を読み取り、同時に+1して書き込むため、1回分の加算が失われます(lost update)。最小値は2(2回のlost update)、最大値は4(競合なし)です。"
+      },
+      {
+        "text": "4",
+        "isCorrect": false,
+        "whyWrong": "4は全ての加算が正常に行われた場合(競合なし)の結果です。これは十分にあり得る値です。",
+        "analogy": "4人が順番にボタンを押し、全員が正確にカウントされた場合です。"
+      },
+      {
+        "text": "3",
+        "isCorrect": false,
+        "whyWrong": "3はlost updateが1回発生した場合の結果です。2つのスレッドが同時にcounterを読み取り、同じ値に+1して書き込むと1回分の加算が失われます。",
+        "analogy": "4人のうち2人が同時にボタンを押して1回分しかカウントされなかった場合です。"
+      },
+      {
+        "text": "2",
+        "isCorrect": false,
+        "whyWrong": "2はlost updateが2回発生した最悪のケースです。スレッド1とスレッド2の各increment()がそれぞれ競合すると、4回の加算が2回分しか反映されない可能性があります。",
+        "analogy": "4回のボタン押しのうち、2回ずつ同時押しになって2回分しかカウントされなかった場合です。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"counter": 0}, "action": "初期値counter=0"},
+      {"step": 2, "variables": {"counter": 0, "スレッド1_temp": 0, "スレッド2_temp": 0}, "action": "【競合例】両スレッドが同時にcounter=0を読む"},
+      {"step": 3, "variables": {"スレッド1_temp": 1, "スレッド2_temp": 1}, "action": "両方がtemp+1=1を計算"},
+      {"step": 4, "variables": {"counter": 1}, "action": "両方がcounter=1を書き込む（1回分の加算が消失）"},
+      {"step": 5, "variables": {"counter": 1, "スレッド1_temp": 1, "スレッド2_temp": 1}, "action": "2回目も同様に競合すると、最終的にcounter=2になりうる"},
+      {"step": 6, "variables": {"counter": "2〜4"}, "action": "競合の程度により結果は2,3,4のいずれか。5以上は不可能"}
+    ],
+    "traceAnalogy": "2人の店員が同じレジ(counter)で商品を2個ずつカウントします。もし同時にレジを見て同じ数字を読み、それぞれ+1して書き戻すと、1回分のカウントが消えます。最悪2回消えて結果は2、うまくいけば全部カウントされて4です。",
+    "overallExplanation": "排他制御のない共有変数への同時アクセスは競合状態を引き起こします。「読み取り→計算→書き込み」が分割可能な操作の場合、スレッド間で割り込みが発生し、更新が失われる(lost update)可能性があります。"
+  },
+  {
+    "questionId": "q-prog-042",
+    "examType": "科目B",
+    "category": "プログラミング基礎",
+    "subcategory": "プログラミング基礎",
+    "topic": "同期と排他制御(mutex)",
+    "level": 9,
+    "question": "次のプログラムでは、mutexを使って共有変数を保護している。プログラム実行後に表示される値はどれか。",
+    "pseudoCode": "○整数型: counter ← 0\n○Mutex型: m ← new Mutex()\n\n○手続き safeIncrement()\n  m.lock()\n  counter ← counter + 1\n  m.unlock()\n\n○スレッド1の処理:\n  ○整数型: i\n  i を 1 から 100 まで 1 ずつ増やしながら繰り返す\n    safeIncrement()\n  を繰り返す\n\n○スレッド2の処理:\n  ○整数型: i\n  i を 1 から 100 まで 1 ずつ増やしながら繰り返す\n    safeIncrement()\n  を繰り返す\n\nスレッド1とスレッド2を同時に開始する\n両方のスレッドの完了を待つ\n表示(counter)",
+    "choices": [
+      {
+        "text": "200",
+        "isCorrect": true,
+        "whyCorrect": "mutexにより各incrementがアトミック(不可分)に実行されるため、競合状態は発生しません。スレッド1で100回、スレッド2で100回の合計200回が確実にカウントされます。",
+        "analogy": "トイレの鍵(mutex)を使い、1人ずつ入って作業するので、同時に入って混乱することがありません。100人ずつ2グループ、合計200人が確実に作業を完了します。",
+        "deepDive": "mutex(相互排他)はlock()からunlock()までの区間(クリティカルセクション)に同時に1つのスレッドしか入れないようにする仕組みです。これにより共有データへの同時アクセスが防がれ、データの一貫性が保証されます。"
+      },
+      {
+        "text": "100",
+        "isCorrect": false,
+        "whyWrong": "100はスレッド1つ分の回数です。2つのスレッドがそれぞれ100回ずつ実行するため、mutexで保護されていれば合計200回になります。",
+        "analogy": "2グループのうち1グループ分しか数えていません。"
+      },
+      {
+        "text": "100〜200のいずれか",
+        "isCorrect": false,
+        "whyWrong": "mutexがない場合は100〜200の不定値になりますが、mutexで排他制御しているため常に200が保証されます。競合状態は発生しません。",
+        "analogy": "鍵(mutex)があるので同時入室は起きず、全員が確実に作業を完了できます。"
+      },
+      {
+        "text": "デッドロックで停止する",
+        "isCorrect": false,
+        "whyWrong": "このプログラムではmutexが1つだけで、lock()の後に必ずunlock()が呼ばれるためデッドロックは発生しません。デッドロックは複数のロックを異なる順序で取得する場合に起こります。",
+        "analogy": "鍵が1つだけで、使用後は必ず返却するルールなので、誰も永遠に待たされることはありません。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"counter": 0}, "action": "初期値counter=0、mutex mを生成"},
+      {"step": 2, "variables": {"counter": 0}, "action": "スレッド1とスレッド2が同時に開始"},
+      {"step": 3, "variables": {"counter": 1, "ロック": "スレッド1"}, "action": "スレッド1がlock取得、counter=0+1=1、unlock"},
+      {"step": 4, "variables": {"counter": 2, "ロック": "スレッド2"}, "action": "スレッド2がlock取得、counter=1+1=2、unlock"},
+      {"step": 5, "variables": {"counter": "..."}, "action": "以降、交互またはどちらかが連続でlockを取得し、確実に+1される"},
+      {"step": 6, "variables": {"counter": 200}, "action": "合計200回のincrementが完了、counter=200を表示"}
+    ],
+    "traceAnalogy": "2つの行列(スレッド)が1つの窓口(mutex)に並びます。窓口では1人ずつしか対応できないため、各人が確実にカウンターを+1します。各行列100人×2行列=200人全員の処理が確実に反映されます。",
+    "overallExplanation": "mutex(Mutual Exclusion)は排他制御の基本的な仕組みです。lock()で鍵をかけ、unlock()で解除するまでの間は1つのスレッドだけがアクセスできます。これにより共有変数への安全なアクセスが保証されます。"
+  },
+  {
+    "questionId": "q-prog-043",
+    "examType": "科目B",
+    "category": "プログラミング基礎",
+    "subcategory": "プログラミング基礎",
+    "topic": "関数型プログラミング(map/filter/reduce)",
+    "level": 9,
+    "question": "次のプログラムを実行したとき、表示される値はどれか。map, filter, reduceはそれぞれ配列に対する高階関数である。",
+    "pseudoCode": "○整数型の配列: nums ← {1, 2, 3, 4, 5, 6}\n\n○整数型の配列: evens ← filter(nums, (x) → x mod 2 = 0)\n○整数型の配列: doubled ← map(evens, (x) → x × 2)\n○整数型: total ← reduce(doubled, (acc, x) → acc + x, 0)\n\n表示(total)",
+    "choices": [
+      {
+        "text": "24",
+        "isCorrect": true,
+        "whyCorrect": "filter:偶数を抽出→{2,4,6}。map:2倍に変換→{4,8,12}。reduce:合計→4+8+12=24です。",
+        "analogy": "果物(数字)をまずふるい(filter)で偶数だけ選び、拡大機(map)で2倍に大きくし、最後に計量器(reduce)で合計重量を計ります。",
+        "deepDive": "map/filter/reduceは関数型プログラミングの三大高階関数です。filterは条件に合う要素を選別、mapは各要素を変換、reduceは全要素を1つの値に集約します。これらを連鎖させるパイプライン処理により、宣言的で読みやすいコードが書けます。"
+      },
+      {
+        "text": "42",
+        "isCorrect": false,
+        "whyWrong": "42は元の配列全体を2倍して合計した場合((1+2+3+4+5+6)×2=42)の結果です。filterで偶数のみを抽出する処理を見落としています。",
+        "analogy": "ふるいを使わず全ての果物を拡大して合計しています。"
+      },
+      {
+        "text": "12",
+        "isCorrect": false,
+        "whyWrong": "12は偶数の合計(2+4+6=12)で、mapによる2倍の処理が抜けています。doubledの各要素は元の2倍になっています。",
+        "analogy": "ふるいで選んだ果物をそのまま計量しており、拡大する工程を飛ばしています。"
+      },
+      {
+        "text": "20",
+        "isCorrect": false,
+        "whyWrong": "20は奇数を2倍して合計した場合((1+3+5)×2=18)とも異なり、計算ミスの結果です。正しい手順はfilter→map→reduceの順です。",
+        "analogy": "工程の順番や対象の数字を間違えて計算したようなものです。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"nums": "[1,2,3,4,5,6]"}, "action": "元の配列numsを用意"},
+      {"step": 2, "variables": {"evens": "[2,4,6]"}, "action": "filter: 偶数(x mod 2=0)を抽出 → {2,4,6}"},
+      {"step": 3, "variables": {"doubled": "[4,8,12]"}, "action": "map: 各要素を2倍 → {4,8,12}"},
+      {"step": 4, "variables": {"acc": 0}, "action": "reduce開始: 初期値acc=0"},
+      {"step": 5, "variables": {"acc": 4}, "action": "reduce: acc=0+4=4"},
+      {"step": 6, "variables": {"acc": 12}, "action": "reduce: acc=4+8=12"},
+      {"step": 7, "variables": {"acc": 24}, "action": "reduce: acc=12+12=24"},
+      {"step": 8, "variables": {"total": 24}, "action": "total=24を表示"}
+    ],
+    "traceAnalogy": "生産ラインで部品{1,2,3,4,5,6}を流します。第1工程(filter)で偶数番号だけ通過{2,4,6}。第2工程(map)で各部品を2倍に拡大{4,8,12}。第3工程(reduce)で全部品の合計を計算: 4+8+12=24。",
+    "overallExplanation": "filter(選別)→map(変換)→reduce(集約)のパイプライン処理は関数型プログラミングの基本パターンです。各関数が副作用を持たないため、処理の流れが明確で、バグが入りにくいコードになります。"
+  },
+  {
+    "questionId": "q-prog-044",
+    "examType": "科目B",
+    "category": "プログラミング基礎",
+    "subcategory": "プログラミング基礎",
+    "topic": "クロージャ",
+    "level": 9,
+    "question": "次のプログラムを実行したとき、表示される値はどれか。makeCounter関数は内部にcount変数を持つ関数を返す。",
+    "pseudoCode": "○関数型の関数 makeCounter()\n  ○整数型: count ← 0\n  ○整数型の関数 inner()\n    count ← count + 1\n    return count\n  return inner\n\n○関数型: counterA ← makeCounter()\n○関数型: counterB ← makeCounter()\n\ncounterA()\ncounterA()\ncounterA()\ncounterB()\n\n表示(counterA() + counterB())",
+    "choices": [
+      {
+        "text": "6",
+        "isCorrect": true,
+        "whyCorrect": "counterAとcounterBはそれぞれ独立したcount変数を持ちます。counterA()を3回呼ぶとcountA=3、counterB()を1回呼ぶとcountB=1。4回目のcounterA()=4、2回目のcounterB()=2で、4+2=6です。",
+        "analogy": "2台の独立した万歩計(クロージャ)を作ります。Aを3回押し(→3)、Bを1回押し(→1)、最後にAをもう1回(→4)とBをもう1回(→2)押して合計4+2=6です。",
+        "deepDive": "クロージャは関数とその関数が参照する外部の変数(環境)をセットで保持する仕組みです。makeCounter()を呼ぶたびに新しいcount変数が作られ、返されるinner関数はそのcount変数を記憶し続けます。"
+      },
+      {
+        "text": "10",
+        "isCorrect": false,
+        "whyWrong": "10はcounterAとcounterBが同じcount変数を共有すると考えた場合(連続で1,2,3,4→4回目=4、5回目=5で4+5=9でもなく)の誤りです。各クロージャは独立した環境を持ちます。",
+        "analogy": "2台の万歩計が同じ歩数表示を共有していると勘違いしています。"
+      },
+      {
+        "text": "4",
+        "isCorrect": false,
+        "whyWrong": "4はcounterA()の4回目の戻り値だけです。counterB()の2回目の戻り値(=2)も足す必要があります。",
+        "analogy": "万歩計Aの値だけ見て、Bの値を足すのを忘れています。"
+      },
+      {
+        "text": "8",
+        "isCorrect": false,
+        "whyWrong": "8はcounterAとcounterBが独立していても、呼び出し回数のカウントを間違えた場合の結果です。counterAは4回目(→4)、counterBは2回目(→2)で合計6です。",
+        "analogy": "万歩計の押した回数を数え間違えているようなものです。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"counterA_count": 0, "counterB_count": 0}, "action": "2つの独立したカウンターを作成"},
+      {"step": 2, "variables": {"counterA_count": 1}, "action": "counterA() → count=0+1=1を返す"},
+      {"step": 3, "variables": {"counterA_count": 2}, "action": "counterA() → count=1+1=2を返す"},
+      {"step": 4, "variables": {"counterA_count": 3}, "action": "counterA() → count=2+1=3を返す"},
+      {"step": 5, "variables": {"counterB_count": 1}, "action": "counterB() → count=0+1=1を返す"},
+      {"step": 6, "variables": {"counterA_count": 4, "counterB_count": 2}, "action": "counterA()=4, counterB()=2, 合計4+2=6を表示"}
+    ],
+    "traceAnalogy": "2つの独立した貯金箱(クロージャ)を作ります。貯金箱Aに3回硬貨を入れ(→3枚)、貯金箱Bに1回入れ(→1枚)。最後にAにもう1回(→4枚)、Bにもう1回(→2枚)入れて、両方の枚数の合計は4+2=6枚です。",
+    "overallExplanation": "クロージャは「関数」と「その関数が参照する変数の環境」をペアで保持します。makeCounter()を呼ぶたびに新しいcount変数が生まれ、返されるinner関数はそれを独占的に記憶します。これによりプライベートな状態を持つ関数が作れます。"
+  },
+  {
+    "questionId": "q-prog-045",
+    "examType": "科目B",
+    "category": "プログラミング基礎",
+    "subcategory": "プログラミング基礎",
+    "topic": "遅延評価",
+    "level": 9,
+    "question": "次のプログラムを実行したとき、「計算実行」が表示される回数はどれか。ここで、lazy関数は遅延評価オブジェクトを作成し、force関数は初回のみ計算を実行して結果をキャッシュし、2回目以降はキャッシュを返す。",
+    "pseudoCode": "○整数型: callCount ← 0\n\n○整数型の関数 heavyCalc()\n  callCount ← callCount + 1\n  表示(\"計算実行\")\n  return 42\n\n○遅延型: lazyVal ← lazy(heavyCalc)\n\n表示(\"作成完了\")\n○整数型: a ← force(lazyVal)\n○整数型: b ← force(lazyVal)\n○整数型: c ← force(lazyVal)\n\n表示(a + b + c)",
+    "choices": [
+      {
+        "text": "1回",
+        "isCorrect": true,
+        "whyCorrect": "遅延評価ではforceの初回呼び出し時のみheavyCalcが実行され、結果42がキャッシュされます。2回目以降のforceはキャッシュを返すだけなので、「計算実行」は1回だけ表示されます。",
+        "analogy": "難しい数学の問題を最初に一度だけ解いて答え(42)をメモに書き留めます。2回目以降に同じ問題を聞かれたら、もう一度解くのではなくメモを見て答えます。",
+        "deepDive": "遅延評価(lazy evaluation)は「必要になるまで計算しない」＋「一度計算したら結果をキャッシュする(メモ化)」という2つの特性を持ちます。lazyで宣言した時点では計算が実行されず、forceで初めて評価されます。Haskellのような言語ではデフォルトで遅延評価が採用されています。"
+      },
+      {
+        "text": "3回",
+        "isCorrect": false,
+        "whyWrong": "3回はforceを3回呼ぶたびにheavyCalcが実行されると考えた場合です。遅延評価ではキャッシュにより初回のみ実行され、2回目以降はキャッシュされた結果が返されます。",
+        "analogy": "毎回問題を解き直していると考えていますが、メモ(キャッシュ)があるので1回だけです。"
+      },
+      {
+        "text": "0回",
+        "isCorrect": false,
+        "whyWrong": "0回はforceが一度も呼ばれていないか、lazyの作成時に計算が実行されると考えた場合の誤りです。forceが3回呼ばれているため、少なくとも1回は実行されます。",
+        "analogy": "問題を一度も解かずに答えが分かることはありません。最初の1回は必ず解きます。"
+      },
+      {
+        "text": "4回",
+        "isCorrect": false,
+        "whyWrong": "4回はlazy作成時に1回+force3回で4回と考えた場合です。lazyは計算を遅延するだけで作成時には実行されず、forceも2回目以降はキャッシュを使います。",
+        "analogy": "メモの作成時にも解いたと数えていますが、lazy()は「あとで解く」という予約をしただけです。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"callCount": 0, "lazyVal": "未評価"}, "action": "lazy(heavyCalc)で遅延オブジェクト作成。まだ計算は実行されない"},
+      {"step": 2, "variables": {}, "action": "「作成完了」を表示"},
+      {"step": 3, "variables": {"callCount": 1, "a": 42, "lazyVal": "キャッシュ:42"}, "action": "force(lazyVal): 初回なのでheavyCalc()を実行。「計算実行」表示、42をキャッシュ"},
+      {"step": 4, "variables": {"b": 42}, "action": "force(lazyVal): キャッシュから42を返す。heavyCalcは実行されない"},
+      {"step": 5, "variables": {"c": 42}, "action": "force(lazyVal): キャッシュから42を返す。heavyCalcは実行されない"},
+      {"step": 6, "variables": {"a": 42, "b": 42, "c": 42}, "action": "a+b+c=42+42+42=126を表示"}
+    ],
+    "traceAnalogy": "レストランのシェフ(heavyCalc)に「この料理を作って」と注文票(lazy)を出します。最初のウェイター(force)が来たときだけシェフが調理(計算実行)し、料理を保温器(キャッシュ)に入れます。2人目以降のウェイターには保温器から直接提供します。",
+    "overallExplanation": "遅延評価は「必要になるまで計算しない」戦略です。高コストな計算を必要なタイミングまで遅らせ、一度計算した結果はキャッシュして再利用します。これにより不要な計算を省略し、パフォーマンスを向上させることができます。"
+  },
+  {
+    "questionId": "q-prog-046",
+    "examType": "科目B",
+    "category": "プログラミング基礎",
+    "subcategory": "プログラミング基礎",
+    "topic": "メモリ管理(ガベージコレクション)",
+    "level": 10,
+    "question": "次のプログラム実行後、ガベージコレクション(GC)の対象となりうるオブジェクトの個数はどれか。GCはどの変数からも参照されなくなったオブジェクトを回収する。",
+    "pseudoCode": "○クラス Node\n  ○整数型: value\n  ○Node型: next\n\n○Node型: a ← new Node()\na.value ← 1\n○Node型: b ← new Node()\nb.value ← 2\n○Node型: c ← new Node()\nc.value ← 3\n\na.next ← b\nb.next ← c\n\nb ← null\nc ← null\na.next ← null",
+    "choices": [
+      {
+        "text": "2個",
+        "isCorrect": true,
+        "whyCorrect": "bとcをnullにしても、a.nextがbを参照しています。しかしa.next←nullでbへの最後の参照が切れるため、value=2のNodeとvalue=3のNode(bの先にチェーンされていた)がGC対象になります。value=1のNodeはaから参照されているのでGC対象外です。",
+        "analogy": "3つの荷物(Node)が紐(参照)でつながっています。紐を2本目の荷物の手前で切ると(a.next←null)、2番目と3番目の荷物は誰にも持たれず落ちます(GC対象)。1番目はまだ手(a)で持っています。",
+        "deepDive": "ガベージコレクションはルート(スタック上の変数等)から到達不可能なオブジェクトを回収します。参照カウント方式ではカウントが0になったオブジェクトを回収し、マーク&スイープ方式ではルートから辿れないオブジェクトを回収します。循環参照は参照カウント方式では回収できない問題があります。"
+      },
+      {
+        "text": "3個",
+        "isCorrect": false,
+        "whyWrong": "3個はa自身もGC対象と考えた場合ですが、変数aはまだvalue=1のNodeを参照しているため、aのNodeはGC対象外です。",
+        "analogy": "1番目の荷物もまだ手で持っているのに、落ちたと勘違いしています。"
+      },
+      {
+        "text": "1個",
+        "isCorrect": false,
+        "whyWrong": "1個はvalue=3のNodeだけがGC対象と考えた場合です。a.next←nullにより、value=2のNode(旧b)への参照も失われるため、value=2のNodeもGC対象です。",
+        "analogy": "紐を切ったら3番目だけでなく、2番目も一緒に落ちます。2番目を支える紐もなくなっています。"
+      },
+      {
+        "text": "0個",
+        "isCorrect": false,
+        "whyWrong": "0個は全てのオブジェクトがまだ参照されていると考えた場合です。b←null、c←null、a.next←nullにより、value=2とvalue=3のNodeは到達不可能になっています。",
+        "analogy": "紐を切ったのに荷物がまだつながっていると思い込んでいます。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"a": "→Node(1)", "b": "→Node(2)", "c": "→Node(3)"}, "action": "3つのNodeオブジェクトを生成"},
+      {"step": 2, "variables": {"Node(1).next": "→Node(2)", "Node(2).next": "→Node(3)"}, "action": "a→Node(1)→Node(2)→Node(3)のチェーンを作成"},
+      {"step": 3, "variables": {"b": "null"}, "action": "b←null。しかしNode(2)はa.nextからまだ参照されている"},
+      {"step": 4, "variables": {"c": "null"}, "action": "c←null。しかしNode(3)はNode(2).nextからまだ参照されている"},
+      {"step": 5, "variables": {"a.next": "null"}, "action": "a.next←null。Node(2)への最後の参照が切れる→Node(2)とNode(3)がGC対象に"},
+      {"step": 6, "variables": {"GC対象": "Node(2), Node(3)"}, "action": "到達不可能なオブジェクトは2個"}
+    ],
+    "traceAnalogy": "3台の電車(Node)が連結(参照)されて走っています。2号車(b)と3号車(c)の名札を外し(null)、最後に1号車と2号車の連結器を外すと(a.next←null)、2号車と3号車は本線から離れて回送(GC回収)されます。1号車は駅(変数a)につながったまま残ります。",
+    "overallExplanation": "ガベージコレクションは、プログラムのどの変数からも到達できなくなったオブジェクトを自動的に回収するメモリ管理機構です。変数にnullを代入しても、別の参照経路があればオブジェクトは回収されません。全ての参照が切れて初めてGCの対象になります。"
+  },
+  {
+    "questionId": "q-prog-047",
+    "examType": "科目B",
+    "category": "プログラミング基礎",
+    "subcategory": "プログラミング基礎",
+    "topic": "コンパイラの基礎(字句解析)",
+    "level": 10,
+    "question": "次のプログラムは簡易的な字句解析器(レクサー)である。入力文字列 \"x = 42\" を処理したとき、tokens配列に格納されるトークンの個数はどれか。",
+    "pseudoCode": "○文字列型の配列の関数 tokenize(文字列型: input)\n  ○文字列型の配列: tokens ← 空の配列\n  ○整数型: i ← 0\n  ○文字列型: current ← \"\"\n\n  i < length(input) の間繰り返す\n    ○文字型: ch ← input[i]\n    もし ch = ' ' ならば\n      もし current ≠ \"\" ならば\n        tokensの末尾に current を追加\n        current ← \"\"\n      を実行する\n    そうでなくもし ch = '=' ならば\n      もし current ≠ \"\" ならば\n        tokensの末尾に current を追加\n        current ← \"\"\n      を実行する\n      tokensの末尾に \"=\" を追加\n    そうでなければ\n      current ← current + ch\n    を実行する\n    i ← i + 1\n  を繰り返す\n\n  もし current ≠ \"\" ならば\n    tokensの末尾に current を追加\n  を実行する\n\n  return tokens\n\n表示(tokenize(\"x = 42\"))",
+    "choices": [
+      {
+        "text": "3個 (\"x\", \"=\", \"42\")",
+        "isCorrect": true,
+        "whyCorrect": "入力\"x = 42\"を1文字ずつ処理します。'x'→currentに追加、' '→currentの\"x\"をトークンに追加、'='→\"=\"をトークンに追加、' '→何もしない(current空)、'4'→currentに追加、'2'→currentに追加。最後にcurrent=\"42\"をトークンに追加。計3個。",
+        "analogy": "文章を単語に分解する作業です。「x = 42」を空白と記号を区切りにして「x」「=」「42」の3つの単語(トークン)に分けます。",
+        "deepDive": "字句解析(lexical analysis)はコンパイラの最初の段階で、ソースコードの文字列をトークン(意味のある最小単位)に分割します。トークンには識別子(x)、演算子(=)、リテラル(42)などがあります。"
+      },
+      {
+        "text": "5個 (\"x\", \" \", \"=\", \" \", \"42\")",
+        "isCorrect": false,
+        "whyWrong": "空白文字はトークンの区切りとして使われるだけで、トークン自体としては追加されません。空白文字を読んだときはcurrentをフラッシュするだけです。",
+        "analogy": "文章の単語と単語の間のスペースは区切りであり、単語そのものではありません。"
+      },
+      {
+        "text": "4個 (\"x\", \"=\", \"4\", \"2\")",
+        "isCorrect": false,
+        "whyWrong": "数字の4と2は連続して読まれ、currentに蓄積されて\"42\"という1つのトークンになります。1文字ずつ別のトークンにはなりません。",
+        "analogy": "「42」は一つの数字として認識され、「4」と「2」に分けられることはありません。"
+      },
+      {
+        "text": "2個 (\"x\", \"42\")",
+        "isCorrect": false,
+        "whyWrong": "\"=\"は演算子として独立したトークンに追加されます。=を読んだとき、tokensの末尾に\"=\"を追加する処理が明示的に書かれています。",
+        "analogy": "等号(=)も重要な記号なので、見落とさずにトークンとしてカウントする必要があります。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"i": 0, "ch": "x", "current": "x", "tokens": "[]"}, "action": "'x'は通常文字→currentに追加"},
+      {"step": 2, "variables": {"i": 1, "ch": " ", "current": "", "tokens": "[\"x\"]"}, "action": "' '(空白)→currentの\"x\"をtokensに追加、currentを空に"},
+      {"step": 3, "variables": {"i": 2, "ch": "=", "current": "", "tokens": "[\"x\",\"=\"]"}, "action": "'='→\"=\"をtokensに追加"},
+      {"step": 4, "variables": {"i": 3, "ch": " ", "current": "", "tokens": "[\"x\",\"=\"]"}, "action": "' '(空白)→currentが空なので何もしない"},
+      {"step": 5, "variables": {"i": 4, "ch": "4", "current": "4", "tokens": "[\"x\",\"=\"]"}, "action": "'4'は通常文字→currentに追加"},
+      {"step": 6, "variables": {"i": 5, "ch": "2", "current": "42", "tokens": "[\"x\",\"=\"]"}, "action": "'2'は通常文字→currentに追加"},
+      {"step": 7, "variables": {"current": "", "tokens": "[\"x\",\"=\",\"42\"]"}, "action": "ループ終了後、current=\"42\"をtokensに追加。合計3個"}
+    ],
+    "traceAnalogy": "手紙を読む秘書(レクサー)が1文字ずつ読み上げます。文字が来たらメモ(current)に書き足し、空白が来たらメモをファイル(tokens)に入れて新しいメモを用意します。=のような記号は即座にファイルに入れます。最終的にファイルには3枚のメモが入ります。",
+    "overallExplanation": "字句解析器はソースコードを1文字ずつ読み、空白や記号を区切りとしてトークンに分割します。この処理はコンパイラやインタプリタの最初の段階であり、構文解析(パーサー)にトークン列を渡す役割を担います。"
+  },
+  {
+    "questionId": "q-prog-048",
+    "examType": "科目B",
+    "category": "プログラミング基礎",
+    "subcategory": "プログラミング基礎",
+    "topic": "型システム(静的型付け/動的型付け)",
+    "level": 10,
+    "question": "次のプログラムは動的型付けの言語で実行される。実行結果として正しいものはどれか。ここで、変数の型は実行時に決定され、代入により変化しうる。",
+    "pseudoCode": "○関数 typeCheck(任意型: val)\n  ○文字列型: t ← typeof(val)\n  もし t = \"整数\" ならば\n    return val × 2\n  を実行する\n  もし t = \"文字列\" ならば\n    return val + val\n  を実行する\n  もし t = \"配列\" ならば\n    return length(val)\n  を実行する\n  return \"不明\"\n\n○任意型: x\nx ← 5\n表示(typeCheck(x))\n\nx ← \"AB\"\n表示(typeCheck(x))\n\nx ← {10, 20, 30}\n表示(typeCheck(x))",
+    "choices": [
+      {
+        "text": "10、「ABAB」、3 の順に表示される",
+        "isCorrect": true,
+        "whyCorrect": "x=5(整数)→5×2=10。x=\"AB\"(文字列)→\"AB\"+\"AB\"=\"ABAB\"。x={10,20,30}(配列)→length=3。動的型付けにより同じ変数xに異なる型の値を代入でき、typeof()で実行時に型を判定します。",
+        "analogy": "万能容器(変数x)に数字→文字→配列と中身を入れ替えます。判定窓口(typeCheck)は中身の種類を見て、数字なら2倍、文字なら繰り返し、配列なら個数を返します。",
+        "deepDive": "動的型付けでは変数に型がなく、値に型があります。同じ変数に異なる型の値を代入できます。typeof()は実行時に値の型を判定する演算子です。静的型付けでは変数に型を宣言し、コンパイル時に型チェックが行われるため、このような柔軟性はありません。"
+      },
+      {
+        "text": "コンパイルエラーが発生する",
+        "isCorrect": false,
+        "whyWrong": "動的型付けの言語ではコンパイル時の型チェックがないため、同じ変数に異なる型の値を代入してもエラーになりません。型の整合性は実行時にチェックされます。",
+        "analogy": "静的型付け(サイズ固定の箱)の場合はエラーになりますが、動的型付け(伸縮自在の袋)では何でも入ります。"
+      },
+      {
+        "text": "10、10、10 の順に表示される",
+        "isCorrect": false,
+        "whyWrong": "xの値は代入のたびに変わり、typeCheckはtypeofで実行時の型を判定します。文字列\"AB\"に×2はできず、文字列の場合は+で連結されます。",
+        "analogy": "中身を入れ替えたのに、ずっと最初の数字として扱い続けているようなものです。"
+      },
+      {
+        "text": "10、「AB」、{10,20,30} の順に表示される",
+        "isCorrect": false,
+        "whyWrong": "文字列の場合はval+val(連結)で\"ABAB\"になり、配列の場合はlength()で3が返されます。valそのものではなく加工された結果が返されます。",
+        "analogy": "窓口が加工せずにそのまま返していると誤解しています。各型に対応した処理が行われます。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"x": 5, "typeof(x)": "整数"}, "action": "x=5。typeCheck(5)を呼ぶ"},
+      {"step": 2, "variables": {"t": "整数", "val": 5}, "action": "typeof=整数 → 5×2=10を返す。10を表示"},
+      {"step": 3, "variables": {"x": "AB", "typeof(x)": "文字列"}, "action": "x=\"AB\"に変更。typeCheck(\"AB\")を呼ぶ"},
+      {"step": 4, "variables": {"t": "文字列", "val": "AB"}, "action": "typeof=文字列 → \"AB\"+\"AB\"=\"ABAB\"を返す。\"ABAB\"を表示"},
+      {"step": 5, "variables": {"x": "{10,20,30}", "typeof(x)": "配列"}, "action": "x={10,20,30}に変更。typeCheck({10,20,30})を呼ぶ"},
+      {"step": 6, "variables": {"t": "配列", "val": "{10,20,30}"}, "action": "typeof=配列 → length({10,20,30})=3を返す。3を表示"}
+    ],
+    "traceAnalogy": "郵便局(typeCheck)に荷物(val)を持ち込むと、中身の種類に応じて異なるサービスを受けます。数字の場合は2倍にコピー、手紙の場合は同じ手紙を2通に、箱の場合は中身の個数を数えます。同じ窓口(関数)で異なる対応ができるのが動的型付けの特徴です。",
+    "overallExplanation": "動的型付け言語では変数自体に型がなく、実行時に値の型が決まります。typeof()で型を判定し、型に応じた処理を分岐できます。柔軟性が高い反面、型の不一致によるエラーは実行時まで検出できません。"
+  },
+  {
+    "questionId": "q-prog-049",
+    "examType": "科目B",
+    "category": "プログラミング基礎",
+    "subcategory": "プログラミング基礎",
+    "topic": "メタプログラミング",
+    "level": 10,
+    "question": "次のプログラムは、関数にログ出力機能を自動的に追加するデコレータを実装したものである。実行したとき、表示される出力の順番として正しいものはどれか。",
+    "pseudoCode": "○関数型の関数 withLog(関数型: originalFunc, 文字列型: funcName)\n  ○関数 wrapper(整数型: x)\n    表示(funcName + \"を呼び出し: 引数=\" + x)\n    ○整数型: result ← originalFunc(x)\n    表示(funcName + \"の結果: \" + result)\n    return result\n  return wrapper\n\n○整数型の関数 square(整数型: n)\n  return n × n\n\n○関数型: loggedSquare ← withLog(square, \"square\")\n○整数型: ans ← loggedSquare(5)\n表示(\"最終結果: \" + ans)",
+    "choices": [
+      {
+        "text": "「squareを呼び出し: 引数=5」→「squareの結果: 25」→「最終結果: 25」",
+        "isCorrect": true,
+        "whyCorrect": "loggedSquare(5)でwrapperが実行されます。まず呼び出しログを表示し、originalFunc(square)を実行してresult=25を得て結果ログを表示し、最後にansに25が代入されて最終結果を表示します。",
+        "analogy": "受付(wrapper)がまず「来客記録(呼び出しログ)」を取り、担当者(square)に取り次ぎ、結果を「業務記録(結果ログ)」に残してから、来客に結果を渡します。",
+        "deepDive": "デコレータパターンは既存の関数の振る舞いを変更せずに機能(ログ、計測、認証等)を追加する手法です。メタプログラミングの一種で、Pythonの@decoratorやTypeScriptのデコレータとして言語レベルでサポートされています。"
+      },
+      {
+        "text": "「最終結果: 25」→「squareを呼び出し: 引数=5」→「squareの結果: 25」",
+        "isCorrect": false,
+        "whyWrong": "loggedSquare(5)が先に実行され、その中でログが出力されます。「最終結果」の表示はloggedSquare(5)の完了後です。",
+        "analogy": "結果報告が受付よりも先に行われることはありません。受付→取り次ぎ→報告→来客への返答の順です。"
+      },
+      {
+        "text": "「squareの結果: 25」→「squareを呼び出し: 引数=5」→「最終結果: 25」",
+        "isCorrect": false,
+        "whyWrong": "wrapper内では呼び出しログが先に表示され、その後にoriginalFuncの実行と結果ログの表示が行われます。結果ログが先に出ることはありません。",
+        "analogy": "来客記録をつける前に業務記録をつけることはありません。"
+      },
+      {
+        "text": "「squareを呼び出し: 引数=5」→「最終結果: 25」→「squareの結果: 25」",
+        "isCorrect": false,
+        "whyWrong": "loggedSquare(5)の実行中にwrapper内の2つの表示(呼び出しログと結果ログ)が連続で行われます。「最終結果」はwrapperから戻った後に表示されるため、2つのログの間に挟まることはありません。",
+        "analogy": "受付と報告の間に来客への返答が挟まることはありません。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"loggedSquare": "wrapper関数"}, "action": "withLog(square,\"square\")でwrapperを生成、loggedSquareに代入"},
+      {"step": 2, "variables": {"x": 5}, "action": "loggedSquare(5)を呼び出し→wrapper(5)が実行される"},
+      {"step": 3, "variables": {}, "action": "表示: \"squareを呼び出し: 引数=5\""},
+      {"step": 4, "variables": {"result": 25}, "action": "originalFunc(5) → square(5) → 5×5=25"},
+      {"step": 5, "variables": {"result": 25}, "action": "表示: \"squareの結果: 25\""},
+      {"step": 6, "variables": {"ans": 25}, "action": "wrapper()が25を返す→ans=25"},
+      {"step": 7, "variables": {"ans": 25}, "action": "表示: \"最終結果: 25\""}
+    ],
+    "traceAnalogy": "元の関数(square)を額縁(wrapper)で包みます。額縁には「開始」と「終了」の記録機能が付いています。絵(計算)を見る(呼び出す)と、まず額縁が「開始記録」を残し、絵の内容(計算結果)を見せ、「終了記録」を残してから、見た人に結果を返します。",
+    "overallExplanation": "メタプログラミングとは「プログラムを操作するプログラム」を書く技法です。デコレータは元の関数を変更せずに機能を追加する仕組みで、ログ出力・実行時間計測・アクセス制御などに使われます。関数を引数として受け取り、ラッパー関数を返す高階関数として実現されます。"
+  },
+  {
+    "questionId": "q-prog-050",
+    "examType": "科目B",
+    "category": "プログラミング基礎",
+    "subcategory": "プログラミング基礎",
+    "topic": "プログラム検証の基礎",
+    "level": 10,
+    "question": "次のプログラムは二分探索を行う関数である。ループ不変条件(ループの各反復の開始時に常に成立する条件)として正しいものはどれか。",
+    "pseudoCode": "○整数型の関数 binarySearch(整数型の配列: arr, 整数型: target)\n  ○整数型: low ← 0\n  ○整数型: high ← length(arr) - 1\n\n  low ≦ high の間繰り返す\n    ○整数型: mid ← (low + high) div 2\n    もし arr[mid] = target ならば\n      return mid\n    を実行する\n    もし arr[mid] < target ならば\n      low ← mid + 1\n    そうでなければ\n      high ← mid - 1\n    を実行する\n  を繰り返す\n\n  return -1",
+    "choices": [
+      {
+        "text": "targetが配列に存在するならば、arr[low] ≦ target ≦ arr[high] が成立する",
+        "isCorrect": true,
+        "whyCorrect": "二分探索のループ不変条件は「もしtargetが配列に存在するなら、low〜highの範囲内にある」です。arr[mid]<targetならlowをmid+1に、arr[mid]>targetならhighをmid-1にすることで、targetは常にlow〜highの範囲内に保たれます。",
+        "analogy": "辞書で単語を探すとき、「探している単語は今開いているページの範囲内に必ずある」という確信を保ちながら範囲を狭めていくのと同じです。",
+        "deepDive": "ループ不変条件(loop invariant)はプログラムの正当性を証明するための手法です。(1)ループ開始前に成立し、(2)各反復で維持され、(3)ループ終了時に求める結果を導く、という3つの性質を満たす必要があります。形式的検証(formal verification)の基礎概念です。"
+      },
+      {
+        "text": "low + high は常に偶数である",
+        "isCorrect": false,
+        "whyWrong": "low+highが偶数であるとは限りません。例えばarr={1,2,3}でtarget=3の場合、初期状態はlow=0,high=2(合計2:偶数)ですが、low=1,high=2(合計3:奇数)になることがあります。",
+        "analogy": "ページ番号の合計が偶数かどうかは、探索の正しさとは無関係です。"
+      },
+      {
+        "text": "mid は常に配列の中央のインデックスである",
+        "isCorrect": false,
+        "whyWrong": "midは(low+high)div2で計算されるため、配列全体の中央ではなく、現在の探索範囲の中央です。lowやhighが更新されるとmidも変わります。",
+        "analogy": "辞書の中央ページではなく、現在開いている範囲の中央ページを見ているのです。"
+      },
+      {
+        "text": "arr[low] < arr[high] が常に成立する",
+        "isCorrect": false,
+        "whyWrong": "low=highの場合はarr[low]=arr[high]となり、厳密な不等号は成立しません。また、これはターゲットの位置に関する条件ではなく、ループ不変条件として不十分です。",
+        "analogy": "範囲が1要素に絞られたとき、左端と右端が同じ値になるため、この条件は崩れます。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"arr": "[2,5,8,12,16,23,38]", "target": 23, "low": 0, "high": 6}, "action": "初期状態: target=23はarr[0]=2〜arr[6]=38の範囲内"},
+      {"step": 2, "variables": {"mid": 3, "arr[3]": 12}, "action": "mid=3, arr[3]=12<23なのでlow=4。不変条件: 23はarr[4]=16〜arr[6]=38の範囲内"},
+      {"step": 3, "variables": {"low": 4, "high": 6, "mid": 5, "arr[5]": 23}, "action": "mid=5, arr[5]=23=target → 発見! return 5"},
+      {"step": 4, "variables": {}, "action": "各ステップでtargetは常にlow〜highの範囲内にあった(不変条件が維持された)"}
+    ],
+    "traceAnalogy": "1000ページの辞書で「猫」を探します。「猫はこの辞書のどこかにある」という確信(不変条件)を保ちながら、中央を開いて前半か後半かを判定し、範囲を半分に絞ります。「猫は今見ている範囲に必ずいる」という条件が崩れないことが、探索の正しさの保証です。",
+    "overallExplanation": "ループ不変条件はプログラムの正当性を論理的に証明するための概念です。二分探索では「targetが存在するならlow〜highの範囲内にある」という不変条件が、各反復で維持されることにより、アルゴリズムの正しさが保証されます。これはプログラム検証の基礎的な手法です。"
+  }
+]
