@@ -234,6 +234,38 @@ export default function Practice(): React.JSX.Element {
             </div>
           </div>
 
+          {/* ブックマーク・苦手問題ボタン */}
+          <div className="flex gap-2">
+            <button
+              onClick={async () => {
+                await window.api.toggleBookmark({ type: 'questions', id: currentQuestion.questionId })
+                const refreshed = await window.api.getUserData()
+                setUserData(refreshed)
+              }}
+              className={`flex-1 py-2 px-4 rounded-xl text-sm font-medium border transition-colors ${
+                userData?.bookmarks.questions.includes(currentQuestion.questionId)
+                  ? 'bg-yellow-50 border-yellow-300 text-yellow-700'
+                  : 'bg-white border-gray-200 text-gray-600 hover:bg-gray-50'
+              }`}
+            >
+              {userData?.bookmarks.questions.includes(currentQuestion.questionId) ? '★ ブックマーク済み' : '☆ ブックマーク'}
+            </button>
+            <button
+              onClick={async () => {
+                await window.api.toggleWeakQuestion(currentQuestion.questionId)
+                const refreshed = await window.api.getUserData()
+                setUserData(refreshed)
+              }}
+              className={`flex-1 py-2 px-4 rounded-xl text-sm font-medium border transition-colors ${
+                userData?.weakQuestions.includes(currentQuestion.questionId)
+                  ? 'bg-incorrect-light border-incorrect text-incorrect-dark'
+                  : 'bg-white border-gray-200 text-gray-600 hover:bg-gray-50'
+              }`}
+            >
+              {userData?.weakQuestions.includes(currentQuestion.questionId) ? '苦手マーク済み' : '苦手マーク'}
+            </button>
+          </div>
+
           {/* アクションボタン */}
           <div className="flex gap-3">
             <button

@@ -165,6 +165,31 @@ export interface LevelChangeResult {
 // IPC チャンネル名の定数
 // ========================================
 
+// ========================================
+// 模擬試験関連の型定義
+// ========================================
+
+export type MockExamType = 'subjectA' | 'subjectB' | 'miniA' | 'miniB'
+
+export interface MockExamConfig {
+  type: MockExamType
+  questionCount: number
+  timeLimitMinutes: number
+  label: string
+}
+
+export interface MockExamSession {
+  id: string
+  type: MockExamType
+  startedAt: string
+  finishedAt: string | null
+  questions: string[] // questionId[]
+  answers: Record<string, string> // questionId -> choiceId
+  flagged: string[] // questionId[]
+  score: number | null
+  categoryScores: Record<string, { correct: number; total: number }>
+}
+
 export const IPC_CHANNELS = {
   GET_RESUME_LIST: 'get-resume-list',
   GET_RESUME_SECTION: 'get-resume-section',
@@ -173,5 +198,11 @@ export const IPC_CHANNELS = {
   GET_USER_DATA: 'get-user-data',
   SAVE_USER_DATA: 'save-user-data',
   RECORD_ANSWER: 'record-answer',
-  GET_CATEGORIES: 'get-categories'
+  GET_CATEGORIES: 'get-categories',
+  // Phase 3 追加
+  TOGGLE_BOOKMARK: 'toggle-bookmark',
+  TOGGLE_WEAK_QUESTION: 'toggle-weak-question',
+  EXPORT_USER_DATA: 'export-user-data',
+  IMPORT_USER_DATA: 'import-user-data',
+  RESET_USER_DATA: 'reset-user-data'
 } as const

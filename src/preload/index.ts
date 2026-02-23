@@ -30,7 +30,20 @@ const api = {
   }) => ipcRenderer.invoke(IPC_CHANNELS.RECORD_ANSWER, answer),
 
   // メタデータ
-  getCategories: () => ipcRenderer.invoke(IPC_CHANNELS.GET_CATEGORIES)
+  getCategories: () => ipcRenderer.invoke(IPC_CHANNELS.GET_CATEGORIES),
+
+  // Phase 3: ブックマーク
+  toggleBookmark: (payload: { type: 'questions' | 'resumeSections'; id: string }) =>
+    ipcRenderer.invoke(IPC_CHANNELS.TOGGLE_BOOKMARK, payload),
+
+  // Phase 3: 苦手問題
+  toggleWeakQuestion: (questionId: string) =>
+    ipcRenderer.invoke(IPC_CHANNELS.TOGGLE_WEAK_QUESTION, questionId),
+
+  // Phase 3: データエクスポート/インポート/リセット
+  exportUserData: () => ipcRenderer.invoke(IPC_CHANNELS.EXPORT_USER_DATA),
+  importUserData: () => ipcRenderer.invoke(IPC_CHANNELS.IMPORT_USER_DATA),
+  resetUserData: () => ipcRenderer.invoke(IPC_CHANNELS.RESET_USER_DATA)
 }
 
 if (process.contextIsolated) {

@@ -6,6 +6,7 @@ const navItems = [
   { path: '/resume', label: 'レジュメ', icon: 'BookIcon' },
   { path: '/practice', label: '練習問題', icon: 'PenIcon' },
   { path: '/progress', label: '学習進捗', icon: 'ChartIcon' },
+  { path: '/mock-exam', label: '模擬試験', icon: 'ExamIcon' },
   { path: '/bookmarks', label: 'ブックマーク', icon: 'BookmarkIcon' },
   { path: '/settings', label: '設定', icon: 'SettingsIcon' }
 ]
@@ -42,6 +43,12 @@ function NavIcon({ type, className }: { type: string; className?: string }): Rea
       return (
         <svg className={cls} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+        </svg>
+      )
+    case 'ExamIcon':
+      return (
+        <svg className={cls} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
         </svg>
       )
     case 'SettingsIcon':

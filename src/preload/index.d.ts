@@ -4,7 +4,8 @@ import type {
   Question,
   UserData,
   CategoryDefinition,
-  LevelChangeResult
+  LevelChangeResult,
+  BookmarkData
 } from '../shared/types'
 
 export interface FEMasterAPI {
@@ -36,6 +37,20 @@ export interface FEMasterAPI {
 
   // メタデータ
   getCategories: () => Promise<CategoryDefinition[]>
+
+  // Phase 3: ブックマーク
+  toggleBookmark: (payload: {
+    type: 'questions' | 'resumeSections'
+    id: string
+  }) => Promise<{ bookmarks: BookmarkData }>
+
+  // Phase 3: 苦手問題
+  toggleWeakQuestion: (questionId: string) => Promise<{ weakQuestions: string[] }>
+
+  // Phase 3: データ管理
+  exportUserData: () => Promise<{ success: boolean; filePath?: string }>
+  importUserData: () => Promise<{ success: boolean; userData?: UserData; error?: string }>
+  resetUserData: () => Promise<{ success: boolean; userData: UserData }>
 }
 
 declare global {
