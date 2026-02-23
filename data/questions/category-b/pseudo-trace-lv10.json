@@ -1,0 +1,721 @@
+[
+  {
+    "questionId": "q-trace-067",
+    "examType": "科目B",
+    "category": "擬似言語トレース",
+    "subcategory": "擬似言語トレース",
+    "topic": "プリム法による最小全域木",
+    "level": 10,
+    "question": "次の擬似言語プログラムを実行したとき、表示される値は何か。",
+    "pseudoCode": "○整数型の二次元配列: cost = {\n  {0, 2, 4, 0},\n  {2, 0, 1, 3},\n  {4, 1, 0, 5},\n  {0, 3, 5, 0}\n}\n○論理型の配列: inMST = {false, false, false, false}\n○整数型の配列: key = {99, 99, 99, 99}\n○整数型: totalCost, i, u, v, minKey\ntotalCost ← 0\nkey[0] ← 0\n\ni を 0 から 3 まで 1 ずつ増やしながら繰り返す\n  minKey ← 99\n  u ← -1\n  v を 0 から 3 まで 1 ずつ増やしながら繰り返す\n    もし inMST[v] = false かつ key[v] < minKey ならば\n      minKey ← key[v]\n      u ← v\n    を実行する\n  を繰り返す\n  inMST[u] ← true\n  totalCost ← totalCost + key[u]\n  v を 0 から 3 まで 1 ずつ増やしながら繰り返す\n    もし cost[u][v] > 0 かつ inMST[v] = false かつ cost[u][v] < key[v] ならば\n      key[v] ← cost[u][v]\n    を実行する\n  を繰り返す\nを繰り返す\n表示(totalCost)",
+    "choices": [
+      {
+        "text": "6",
+        "isCorrect": true,
+        "whyCorrect": "プリム法で最小全域木を構築します。頂点0から開始→辺0-1(コスト2)→辺1-2(コスト1)→辺1-3(コスト3)を選択。totalCost = 0+2+1+3 = 6 です。",
+        "analogy": "4つの家を電線で全部つなぐとき、最も安い配線方法を見つける問題です。最安の線を1本ずつ選んでいくと総コスト6になります。",
+        "deepDive": "プリム法は貪欲法に基づく最小全域木アルゴリズムです。MSTに含まれる頂点集合から、まだ含まれない頂点への最小コスト辺を選び続けます。"
+      },
+      {
+        "text": "7",
+        "isCorrect": false,
+        "whyWrong": "7は辺0-1(2)+辺0-2(4)+辺1-3(3)の場合ですが、辺1-2(1)の方が辺0-2(4)より安いため、頂点2はコスト1で追加されます。",
+        "analogy": "安い道があるのに、高い道を選んでしまったようなものです。各ステップで最安の辺を選ぶ必要があります。"
+      },
+      {
+        "text": "8",
+        "isCorrect": false,
+        "whyWrong": "8は辺0-1(2)+辺1-2(1)+辺2-3(5)の場合ですが、頂点3への最安辺は辺1-3(3)であり辺2-3(5)ではありません。key配列の更新を正確に追跡してください。",
+        "analogy": "最後の1本の選択で、より安い選択肢を見逃してしまったようなものです。"
+      },
+      {
+        "text": "10",
+        "isCorrect": false,
+        "whyWrong": "10は全辺のコスト合計（2+4+1+3+5=15）ではなく、最小全域木のコストを求めます。最小全域木は最も安い辺のみ使って全頂点をつなぎます。",
+        "analogy": "すべての道を舗装するのではなく、全家をつなぐ最小限の道だけ舗装すればよいのです。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"key": "{0,99,99,99}", "inMST": "{F,F,F,F}", "totalCost": 0}, "action": "初期化、key[0]=0"},
+      {"step": 2, "variables": {"u": 0, "inMST[0]": true, "totalCost": 0}, "action": "i=0: u=0(key=0)を選択、totalCost+=0"},
+      {"step": 3, "variables": {"key": "{0,2,4,99}"}, "action": "頂点0の隣接更新: key[1]=2, key[2]=4"},
+      {"step": 4, "variables": {"u": 1, "inMST[1]": true, "totalCost": 2}, "action": "i=1: u=1(key=2)を選択、totalCost+=2=2"},
+      {"step": 5, "variables": {"key": "{0,2,1,3}"}, "action": "頂点1の隣接更新: key[2]=min(4,1)=1, key[3]=3"},
+      {"step": 6, "variables": {"u": 2, "inMST[2]": true, "totalCost": 3}, "action": "i=2: u=2(key=1)を選択、totalCost+=1=3"},
+      {"step": 7, "variables": {"key": "{0,2,1,3}"}, "action": "頂点2の隣接: key[3]=min(3,5)=3、更新なし"},
+      {"step": 8, "variables": {"u": 3, "inMST[3]": true, "totalCost": 6}, "action": "i=3: u=3(key=3)を選択、totalCost+=3=6"},
+      {"step": 9, "variables": {"totalCost": 6}, "action": "表示(totalCost) → 6"}
+    ],
+    "traceAnalogy": "4つの島を橋でつなぐ計画です。島0から始めて、最も安い橋(コスト2で島1へ)→次に安い橋(コスト1で島2へ)→最後に残った島3への最安橋(コスト3)を架けます。総工費は2+1+3=6です。",
+    "overallExplanation": "プリム法で4頂点グラフの最小全域木を構築するプログラムです。各ステップでMSTに含まれない頂点のうちkey値最小のものを選びます。選択順は0(0)→1(2)→2(1)→3(3)で、totalCost=0+2+1+3=6です。"
+  },
+  {
+    "questionId": "q-trace-068",
+    "examType": "科目B",
+    "category": "擬似言語トレース",
+    "subcategory": "擬似言語トレース",
+    "topic": "動的計画法（コイン問題）",
+    "level": 10,
+    "question": "次の擬似言語プログラムを実行したとき、表示される値は何か。",
+    "pseudoCode": "○整数型の配列: coins = {1, 3, 4}\n○整数型の配列: dp = {0, 99, 99, 99, 99, 99, 99}\n○整数型: i, j\n\ni を 0 から 2 まで 1 ずつ増やしながら繰り返す\n  j を coins[i] から 6 まで 1 ずつ増やしながら繰り返す\n    もし dp[j - coins[i]] + 1 < dp[j] ならば\n      dp[j] ← dp[j - coins[i]] + 1\n    を実行する\n  を繰り返す\nを繰り返す\n表示(dp[6])",
+    "choices": [
+      {
+        "text": "2",
+        "isCorrect": true,
+        "whyCorrect": "6円を最小枚数のコインで作る問題です。coins={1,3,4}を使って、6=3+3で2枚が最小です。dp配列は最終的に {0,1,2,1,1,2,2} となり、dp[6]=2です。",
+        "analogy": "お釣りを最少のコインで渡す問題です。6円のお釣りに3円玉×2枚が最適で、1円玉6枚より効率的です。",
+        "deepDive": "コイン問題（最小枚数問題）は動的計画法の典型問題です。dp[j]は金額jを作るのに必要な最小コイン枚数を表します。各コインについて全金額のdpを更新していきます。"
+      },
+      {
+        "text": "3",
+        "isCorrect": false,
+        "whyWrong": "3枚は例えば4+1+1=6ですが、3+3=6で2枚の方が少ないです。動的計画法はすべての組み合わせを検討し、最小枚数を見つけます。",
+        "analogy": "大きいコインから使う貪欲法だと4+1+1=3枚ですが、最適解は3+3=2枚です。"
+      },
+      {
+        "text": "6",
+        "isCorrect": false,
+        "whyWrong": "6枚は1円玉6枚の場合です。3円玉を使えば3+3=6で2枚で済みます。dp[6]は最小枚数2に更新されます。",
+        "analogy": "1円玉しかないと思い込んで6枚と答えましたが、3円玉があるのでもっと少なくできます。"
+      },
+      {
+        "text": "1",
+        "isCorrect": false,
+        "whyWrong": "6円ぴったりのコインは存在しない（coins={1,3,4}）ため、1枚では作れません。最小は3+3=2枚です。",
+        "analogy": "6円玉があれば1枚ですが、手持ちのコインには6円玉がないので複数枚必要です。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"dp": "{0,99,99,99,99,99,99}"}, "action": "dp初期化、dp[0]=0"},
+      {"step": 2, "variables": {"coins[0]": 1}, "action": "i=0: coin=1 で更新開始"},
+      {"step": 3, "variables": {"dp": "{0,1,2,3,4,5,6}"}, "action": "coin=1: dp[j]=dp[j-1]+1 で全て更新"},
+      {"step": 4, "variables": {"coins[1]": 3}, "action": "i=1: coin=3 で更新開始"},
+      {"step": 5, "variables": {"dp[3]": 1}, "action": "dp[3]=min(3, dp[0]+1)=1"},
+      {"step": 6, "variables": {"dp[4]": 2}, "action": "dp[4]=min(4, dp[1]+1)=2"},
+      {"step": 7, "variables": {"dp[5]": 2, "dp[6]": 2}, "action": "dp[5]=min(5, dp[2]+1)=2, dp[6]=min(6, dp[3]+1)=2"},
+      {"step": 8, "variables": {"coins[2]": 4}, "action": "i=2: coin=4 で更新開始"},
+      {"step": 9, "variables": {"dp[4]": 1}, "action": "dp[4]=min(2, dp[0]+1)=1"},
+      {"step": 10, "variables": {"dp[5]": 2}, "action": "dp[5]=min(2, dp[1]+1)=2（変化なし）"},
+      {"step": 11, "variables": {"dp": "{0,1,2,1,1,2,2}"}, "action": "dp[6]=min(2, dp[2]+1)=2（変化なし）"},
+      {"step": 12, "variables": {"dp[6]": 2}, "action": "表示(dp[6]) → 2"}
+    ],
+    "traceAnalogy": "自動販売機でお釣りを出す機械の設計です。1円・3円・4円の3種類のコインで6円のお釣りを出すとき、最少枚数を計算します。「3円×2枚」が最適解で2枚です。",
+    "overallExplanation": "動的計画法によるコイン問題（最小枚数）です。dp[j]は金額jを作る最小コイン枚数で、各コインについてdp配列を更新します。最終的にdp[6]=2（3円玉×2枚）が最適解です。貪欲法（4+1+1=3枚）では最適解が得られない例でもあります。"
+  },
+  {
+    "questionId": "q-trace-069",
+    "examType": "科目B",
+    "category": "擬似言語トレース",
+    "subcategory": "擬似言語トレース",
+    "topic": "メモ化再帰（フィボナッチ応用）",
+    "level": 10,
+    "question": "次の擬似言語プログラムを実行したとき、表示される値は何か。",
+    "pseudoCode": "○整数型の配列: memo = {-1, -1, -1, -1, -1, -1, -1}\n○整数型: callCount\ncallCount ← 0\n\n○関数 f(整数型: n) : 整数型\n  callCount ← callCount + 1\n  もし n ≦ 1 ならば\n    return n\n  を実行する\n  もし memo[n] ≠ -1 ならば\n    return memo[n]\n  を実行する\n  memo[n] ← f(n - 1) + f(n - 2)\n  return memo[n]\n\nf(6)\n表示(callCount)",
+    "choices": [
+      {
+        "text": "11",
+        "isCorrect": true,
+        "whyCorrect": "メモ化により各nの計算は1回だけ行われます。f(6)→f(5),f(4)。f(5)→f(4),f(3)。f(4)はメモ済みなのですぐ返る。f(3)→f(2),f(1)。f(2)→f(1),f(0)。呼び出し回数はf(6),f(5),f(4),f(3),f(2),f(1),f(0)の新規7回+メモヒット4回=11回です。",
+        "analogy": "一度解いた問題の答えをメモしておけば、同じ問題が出たときに再計算せずにメモを見るだけで済みます。しかし「メモを見る」行為自体もcallCountに含まれます。",
+        "deepDive": "メモ化なしのフィボナッチは指数時間 O(2^n) ですが、メモ化すると O(n) に改善されます。f(6)のメモ化なし呼び出し回数は25回ですが、メモ化ありでは11回に減ります。"
+      },
+      {
+        "text": "7",
+        "isCorrect": false,
+        "whyWrong": "7はn=0~6の各値に対する初回呼び出し回数です。しかしメモにヒットした場合のf()呼び出しも、callCountをインクリメントした後にreturnするため、11回が正解です。",
+        "analogy": "図書館で本を借りた回数だけ数えて、返却時の来館を数え忘れたようなものです。"
+      },
+      {
+        "text": "25",
+        "isCorrect": false,
+        "whyWrong": "25はメモ化なしの場合の呼び出し回数です。メモ化により、一度計算した値は再計算されずメモから取得されるため、大幅に削減されて11回です。",
+        "analogy": "毎回最初から計算し直す非効率な方法の回数です。メモを使えば大幅に減ります。"
+      },
+      {
+        "text": "13",
+        "isCorrect": false,
+        "whyWrong": "再帰の展開を正確にトレースすると11回です。f(6)の呼び出しツリーを描き、メモヒットする呼び出しを含めて数えてください。",
+        "analogy": "呼び出し回数の数え間違いです。1つ1つ丁寧にカウントしましょう。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"callCount": 1}, "action": "f(6) 呼び出し → f(5)を呼ぶ"},
+      {"step": 2, "variables": {"callCount": 2}, "action": "f(5) 呼び出し → f(4)を呼ぶ"},
+      {"step": 3, "variables": {"callCount": 3}, "action": "f(4) 呼び出し → f(3)を呼ぶ"},
+      {"step": 4, "variables": {"callCount": 4}, "action": "f(3) 呼び出し → f(2)を呼ぶ"},
+      {"step": 5, "variables": {"callCount": 5}, "action": "f(2) 呼び出し → f(1)を呼ぶ"},
+      {"step": 6, "variables": {"callCount": 6}, "action": "f(1): n≦1 → return 1"},
+      {"step": 7, "variables": {"callCount": 7}, "action": "f(0): n≦1 → return 0, memo[2]=1"},
+      {"step": 8, "variables": {"callCount": 8, "memo[3]": 2}, "action": "f(1): return 1（再呼出）, memo[3]=1+1=2"},
+      {"step": 9, "variables": {"callCount": 9, "memo[4]": 3}, "action": "f(2): memo[2]=1 → return 1, memo[4]=2+1=3"},
+      {"step": 10, "variables": {"callCount": 10, "memo[5]": 5}, "action": "f(3): memo[3]=2 → return 2, memo[5]=3+2=5"},
+      {"step": 11, "variables": {"callCount": 11, "memo[6]": 8}, "action": "f(4): memo[4]=3 → return 3, memo[6]=5+3=8"},
+      {"step": 12, "variables": {"callCount": 11}, "action": "表示(callCount) → 11"}
+    ],
+    "traceAnalogy": "算数の宿題を解くとき、一度解いた問題番号と答えをメモ用紙に書いておきます。同じ問題が出たらメモを見て即答（でも先生のところに行く回数=callCountには含む）。メモなしなら25回先生に聞くところを11回で済みます。",
+    "overallExplanation": "メモ化再帰でフィボナッチ数列を計算し、関数呼び出し回数を数える問題です。callCountは関数に入るたびにインクリメントされ、メモヒット時も含みます。f(6)のツリーをたどると初回計算7回+メモヒット4回=11回です。"
+  },
+  {
+    "questionId": "q-trace-070",
+    "examType": "科目B",
+    "category": "擬似言語トレース",
+    "subcategory": "擬似言語トレース",
+    "topic": "トポロジカルソート（DFS版）",
+    "level": 10,
+    "question": "次の擬似言語プログラムを実行したとき、表示される値は何か。",
+    "pseudoCode": "○整数型の二次元配列: adj = {\n  {0, 1, 1, 0},\n  {0, 0, 0, 1},\n  {0, 0, 0, 1},\n  {0, 0, 0, 0}\n}\n○論理型の配列: visited = {false, false, false, false}\n○整数型の配列: order = {-1, -1, -1, -1}\n○整数型: idx\nidx ← 3\n\n○手続き dfs(整数型: v)\n  visited[v] ← true\n  ○整数型: u\n  u を 0 から 3 まで 1 ずつ増やしながら繰り返す\n    もし adj[v][u] = 1 かつ visited[u] = false ならば\n      dfs(u)\n    を実行する\n  を繰り返す\n  order[idx] ← v\n  idx ← idx - 1\n\n○整数型: v\nv を 0 から 3 まで 1 ずつ増やしながら繰り返す\n  もし visited[v] = false ならば\n    dfs(v)\n  を実行する\nを繰り返す\n表示(order[0])",
+    "choices": [
+      {
+        "text": "0",
+        "isCorrect": true,
+        "whyCorrect": "DFS版トポロジカルソートでは、再帰の帰りがけにorder配列に後ろから格納します。dfs(0)→dfs(1)→dfs(3)で、帰りがけ順は3,1,2は別経路で後から、0は最後。order = {0, 2, 1, 3} となり、order[0]=0です。",
+        "analogy": "プロジェクトの作業順序を決める問題です。「他の作業に依存しない作業」が先頭に来ます。頂点0は入次数0（何にも依存しない）なので先頭です。",
+        "deepDive": "DFS版トポロジカルソートでは、DFSの帰りがけ順の逆順がトポロジカル順序になります。有向非巡回グラフ（DAG）の依存関係を線形順序に並べます。"
+      },
+      {
+        "text": "3",
+        "isCorrect": false,
+        "whyWrong": "3はorder配列の末尾（order[3]）の値です。頂点3は全頂点から到達される終端ノードなので、トポロジカル順序では最後になります。order[0]は先頭の0です。",
+        "analogy": "作業の最終工程を最初の工程と間違えてしまったようなものです。"
+      },
+      {
+        "text": "1",
+        "isCorrect": false,
+        "whyWrong": "1はorder[1]またはorder[2]の値です。dfs(0)内でdfs(1)が先に呼ばれ、dfs(1)からdfs(3)を呼んで、帰りがけで3→1→(dfs(2)→)2→0の順にorderに格納されます。",
+        "analogy": "トポロジカル順序の2番目か3番目の要素を先頭と勘違いしてしまったようなものです。"
+      },
+      {
+        "text": "2",
+        "isCorrect": false,
+        "whyWrong": "2はorder内でorder[1]に格納される値です。DFSの帰りがけ順で頂点2は0より先に記録されますが、逆順格納なのでorder[0]には最後に記録される0が入ります。",
+        "analogy": "DFSの探索順と格納順の関係を混同してしまったようなものです。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"idx": 3, "visited": "{F,F,F,F}"}, "action": "初期状態"},
+      {"step": 2, "variables": {"visited[0]": true}, "action": "v=0: dfs(0)呼び出し、visited[0]=true"},
+      {"step": 3, "variables": {"visited[1]": true}, "action": "adj[0][1]=1 → dfs(1)呼び出し"},
+      {"step": 4, "variables": {"visited[3]": true}, "action": "adj[1][3]=1 → dfs(3)呼び出し"},
+      {"step": 5, "variables": {"order[3]": 3, "idx": 2}, "action": "dfs(3): 隣接なし、order[3]=3, idx=2"},
+      {"step": 6, "variables": {"order[2]": 1, "idx": 1}, "action": "dfs(1)帰り: order[2]=1, idx=1"},
+      {"step": 7, "variables": {"visited[2]": true}, "action": "dfs(0)に戻り: adj[0][2]=1 → dfs(2)呼び出し"},
+      {"step": 8, "variables": {}, "action": "dfs(2): adj[2][3]=1だがvisited[3]=true → スキップ"},
+      {"step": 9, "variables": {"order[1]": 2, "idx": 0}, "action": "dfs(2)帰り: order[1]=2, idx=0"},
+      {"step": 10, "variables": {"order[0]": 0, "idx": -1}, "action": "dfs(0)帰り: order[0]=0, idx=-1"},
+      {"step": 11, "variables": {"order": "{0,2,1,3}"}, "action": "表示(order[0]) → 0"}
+    ],
+    "traceAnalogy": "4つの工程がある製造ラインで、依存関係に基づいて実行順序を決めます。工程0は最初に実行可能（依存なし）、工程3は最後（全てに依存）。DFSで末端から順に番号を振ると、先頭(order[0])は工程0になります。",
+    "overallExplanation": "DFS版トポロジカルソートのプログラムです。帰りがけ順にorder配列の後ろから格納することで、依存関係を満たす順序が得られます。0→{1,2}→3のDAGでは、order={0,2,1,3}となり、order[0]=0です。"
+  },
+  {
+    "questionId": "q-trace-071",
+    "examType": "科目B",
+    "category": "擬似言語トレース",
+    "subcategory": "擬似言語トレース",
+    "topic": "ダイクストラ法（最短経路）",
+    "level": 10,
+    "question": "次の擬似言語プログラムを実行したとき、表示される値は何か。",
+    "pseudoCode": "○整数型の二次元配列: g = {\n  {0, 4, 2, 0, 0},\n  {0, 0, 1, 5, 0},\n  {0, 0, 0, 0, 3},\n  {0, 0, 0, 0, 1},\n  {0, 0, 0, 0, 0}\n}\n○整数型の配列: dist = {0, 99, 99, 99, 99}\n○論理型の配列: done = {false, false, false, false, false}\n○整数型: i, u, v, minD\n\ni を 0 から 4 まで 1 ずつ増やしながら繰り返す\n  minD ← 99\n  u ← -1\n  v を 0 から 4 まで 1 ずつ増やしながら繰り返す\n    もし done[v] = false かつ dist[v] < minD ならば\n      minD ← dist[v]\n      u ← v\n    を実行する\n  を繰り返す\n  done[u] ← true\n  v を 0 から 4 まで 1 ずつ増やしながら繰り返す\n    もし g[u][v] > 0 かつ dist[u] + g[u][v] < dist[v] ならば\n      dist[v] ← dist[u] + g[u][v]\n    を実行する\n  を繰り返す\nを繰り返す\n表示(dist[4])",
+    "choices": [
+      {
+        "text": "5",
+        "isCorrect": true,
+        "whyCorrect": "頂点0から頂点4への最短経路は 0→2(コスト2)→4(コスト3) で合計5です。ダイクストラ法により dist[4]=5 が求められます。",
+        "analogy": "東京(0)から大阪(4)への最安ルートを探す問題です。直行ルートはないが、名古屋(2)経由で2+3=5が最安です。",
+        "deepDive": "ダイクストラ法は単一始点最短経路アルゴリズムで、未確定頂点のうち距離最小のものを選んで確定していく貪欲法です。負の辺がない場合に正しく動作します。"
+      },
+      {
+        "text": "9",
+        "isCorrect": false,
+        "whyWrong": "9は 0→1(4)→3(5)= 合計9 のルートですが、0→2(2)→4(3)=5 の方が短いです。ダイクストラ法は常に最短距離の頂点から確定するため、この最短経路を見つけます。",
+        "analogy": "遠回りの道を選んでしまったようなものです。より近い道が存在します。"
+      },
+      {
+        "text": "10",
+        "isCorrect": false,
+        "whyWrong": "10は 0→1(4)→3(5)→4(1)=10 のルートですが、0→2→4(5) の方が短いです。",
+        "analogy": "3つの乗り換えを経由する高い切符を買ってしまったが、直通の安い切符がありました。"
+      },
+      {
+        "text": "7",
+        "isCorrect": false,
+        "whyWrong": "7は 0→1(4)→2(1)→4(3)=8 でもなく、正しい最短は 0→2(2)→4(3)=5 です。頂点2への最短距離は直接の辺0→2(2)です。",
+        "analogy": "わざわざ遠回りしてから近道に入っても、最初から近道を行った方が速いのです。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"dist": "{0,99,99,99,99}"}, "action": "初期化、dist[0]=0"},
+      {"step": 2, "variables": {"u": 0, "done[0]": true}, "action": "i=0: u=0を確定"},
+      {"step": 3, "variables": {"dist": "{0,4,2,99,99}"}, "action": "辺0→1(4), 0→2(2) で更新"},
+      {"step": 4, "variables": {"u": 2, "done[2]": true}, "action": "i=1: u=2(dist=2)を確定"},
+      {"step": 5, "variables": {"dist": "{0,4,2,99,5}"}, "action": "辺2→4(3): dist[4]=2+3=5"},
+      {"step": 6, "variables": {"u": 1, "done[1]": true}, "action": "i=2: u=1(dist=4)を確定"},
+      {"step": 7, "variables": {"dist": "{0,4,2,9,5}"}, "action": "辺1→2: dist[2]=2<5(不更新), 辺1→3: dist[3]=min(99,4+5)=9"},
+      {"step": 8, "variables": {"u": 4, "done[4]": true}, "action": "i=3: u=4(dist=5)を確定"},
+      {"step": 9, "variables": {"u": 3, "done[3]": true, "dist[4]": 5}, "action": "i=4: u=3(dist=9)を確定、dist[4]更新なし"},
+      {"step": 10, "variables": {"dist[4]": 5}, "action": "表示(dist[4]) → 5"}
+    ],
+    "traceAnalogy": "カーナビの最短経路検索です。5つの交差点(0-4)があり、0番から4番への最短ルートを探します。距離が近い交差点から順に「確定」していき、0→2(2km)→4(3km)=5kmが最短と判明します。",
+    "overallExplanation": "ダイクストラ法で5頂点の有向グラフの最短経路を求めるプログラムです。頂点0から始めて距離最小の未確定頂点を順に確定していきます。頂点4への最短経路は0→2→4でコスト5です。"
+  },
+  {
+    "questionId": "q-trace-072",
+    "examType": "科目B",
+    "category": "擬似言語トレース",
+    "subcategory": "擬似言語トレース",
+    "topic": "複雑なクラス設計のトレース",
+    "level": 10,
+    "question": "次の擬似言語プログラムを実行したとき、表示される値は何か。",
+    "pseudoCode": "○クラス Node\n  ○整数型: val\n  ○Node: next\n  ○Node(整数型: v)\n    val ← v\n    next ← null\n\n○クラス LinkedList\n  ○Node: head\n  ○LinkedList()\n    head ← null\n  ○手続き addFirst(整数型: v)\n    ○Node: n ← Node(v)\n    n.next ← head\n    head ← n\n  ○関数 sum() : 整数型\n    ○整数型: s ← 0\n    ○Node: cur ← head\n    cur ≠ null の間繰り返す\n      s ← s + cur.val\n      cur ← cur.next\n    を繰り返す\n    return s\n\n○LinkedList: list ← LinkedList()\nlist.addFirst(10)\nlist.addFirst(20)\nlist.addFirst(30)\n表示(list.sum())",
+    "choices": [
+      {
+        "text": "60",
+        "isCorrect": true,
+        "whyCorrect": "addFirstで先頭に追加するため、リストは 30→20→10 の順になります。sum()は全ノードを走査して合計するので 30+20+10=60 です。",
+        "analogy": "3つの荷物を積み上げて（30を一番上に）、全部の重さを量ると合計60kgになります。積む順序は関係なく、全部の合計は同じです。",
+        "deepDive": "連結リストの先頭追加(addFirst)はO(1)操作です。sum()はリスト全体を走査するO(n)操作です。addFirstで追加すると最後に追加した要素がheadになります。"
+      },
+      {
+        "text": "10",
+        "isCorrect": false,
+        "whyWrong": "10は最初に追加した要素（リストの末尾）の値です。sum()は全ノードを走査するため、30+20+10=60が返ります。",
+        "analogy": "列の最後の1人だけ数えて、全員を数え忘れたようなものです。"
+      },
+      {
+        "text": "30",
+        "isCorrect": false,
+        "whyWrong": "30はheadの値（最後に追加された要素）です。sum()はheadからnullまで全ノードを走査するため、30+20+10=60です。",
+        "analogy": "先頭の荷物だけ量って、残りを忘れたようなものです。"
+      },
+      {
+        "text": "20",
+        "isCorrect": false,
+        "whyWrong": "20は2番目のノードの値です。sum()は全ノードの合計を返すため、30+20+10=60です。",
+        "analogy": "真ん中の荷物だけ量ったようなものです。全部の合計を求める必要があります。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"head": "null"}, "action": "LinkedList()作成、head=null"},
+      {"step": 2, "variables": {"head": "Node(10)"}, "action": "addFirst(10): Node(10).next=null, head=Node(10)"},
+      {"step": 3, "variables": {"head": "Node(20)→Node(10)"}, "action": "addFirst(20): Node(20).next=Node(10), head=Node(20)"},
+      {"step": 4, "variables": {"head": "Node(30)→Node(20)→Node(10)"}, "action": "addFirst(30): Node(30).next=Node(20), head=Node(30)"},
+      {"step": 5, "variables": {"cur": "Node(30)", "s": 30}, "action": "sum(): s=0+30=30, cur=Node(20)"},
+      {"step": 6, "variables": {"cur": "Node(20)", "s": 50}, "action": "s=30+20=50, cur=Node(10)"},
+      {"step": 7, "variables": {"cur": "Node(10)", "s": 60}, "action": "s=50+10=60, cur=null"},
+      {"step": 8, "variables": {"s": 60}, "action": "cur=null でループ終了、return 60、表示(60)"}
+    ],
+    "traceAnalogy": "電車の車両を連結する作業です。先頭に10号車→先頭に20号車→先頭に30号車と連結すると、30→20→10の順番になります。全車両の乗客数を合計すると30+20+10=60人です。",
+    "overallExplanation": "連結リストをクラスで実装し、先頭追加と合計計算を行うプログラムです。addFirstで先頭に追加するため、リストは30→20→10の順になりますが、sum()は全ノードの値を合計するため、順序に関係なく60が返ります。"
+  },
+  {
+    "questionId": "q-trace-073",
+    "examType": "科目B",
+    "category": "擬似言語トレース",
+    "subcategory": "擬似言語トレース",
+    "topic": "連結成分数（Union-Find簡易版）",
+    "level": 10,
+    "question": "次の擬似言語プログラムを実行したとき、表示される値は何か。",
+    "pseudoCode": "○整数型の配列: parent = {0, 1, 2, 3, 4}\n\n○関数 find(整数型: x) : 整数型\n  x ≠ parent[x] の間繰り返す\n    x ← parent[x]\n  を繰り返す\n  return x\n\n○手続き unite(整数型: a, 整数型: b)\n  ○整数型: ra ← find(a)\n  ○整数型: rb ← find(b)\n  もし ra ≠ rb ならば\n    parent[ra] ← rb\n  を実行する\n\nunite(0, 1)\nunite(2, 3)\nunite(1, 3)\n\n○整数型: count, i\ncount ← 0\ni を 0 から 4 まで 1 ずつ増やしながら繰り返す\n  もし parent[i] = i ならば\n    count ← count + 1\n  を実行する\nを繰り返す\n表示(count)",
+    "choices": [
+      {
+        "text": "2",
+        "isCorrect": true,
+        "whyCorrect": "unite(0,1)でparent[0]=1、unite(2,3)でparent[2]=3、unite(1,3)でfind(1)=1,find(3)=3→parent[1]=3。最終parent={1,3,3,3,4}。parent[i]=iの要素は i=3 と i=4 の2つなので、連結成分数は2です。",
+        "analogy": "5人の生徒を班分けする作業です。0と1が同じ班、2と3が同じ班、さらに1と3の班を合併→{0,1,2,3}が1つの班。4は1人で1つの班。計2班です。",
+        "deepDive": "Union-Findは素集合を管理するデータ構造で、find(根の探索)とunite(集合の合併)を効率的に行います。parent[i]=iの頂点は根であり、根の数=連結成分数です。"
+      },
+      {
+        "text": "3",
+        "isCorrect": false,
+        "whyWrong": "unite(1,3)を見落とすと{0,1},{2,3},{4}の3グループですが、unite(1,3)により{0,1}と{2,3}が合併して{0,1,2,3}の1グループになるため、計2グループです。",
+        "analogy": "3つ目のunite操作を忘れて、班の合併が行われなかったと思ってしまったようなものです。"
+      },
+      {
+        "text": "1",
+        "isCorrect": false,
+        "whyWrong": "頂点4は他のどの頂点ともuniteされていないため、独立した1つの連結成分です。{0,1,2,3}と{4}で計2です。",
+        "analogy": "全員が1つの班に入ったと思い込みましたが、4番さんは誰とも班を組んでいません。"
+      },
+      {
+        "text": "4",
+        "isCorrect": false,
+        "whyWrong": "parent[i]=iの数は根の数です。3回のuniteにより根は3→2に減少します（parent[0]は1を指し、parent[1]と[2]は3を指す）。根は i=3 と i=4 の2つです。",
+        "analogy": "unite操作を全く行っていないと思い込んで、全員がバラバラだと判断してしまったようなものです。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"parent": "{0,1,2,3,4}"}, "action": "初期化、各要素が自分自身を指す"},
+      {"step": 2, "variables": {"parent": "{1,1,2,3,4}"}, "action": "unite(0,1): find(0)=0, find(1)=1, parent[0]=1"},
+      {"step": 3, "variables": {"parent": "{1,1,3,3,4}"}, "action": "unite(2,3): find(2)=2, find(3)=3, parent[2]=3"},
+      {"step": 4, "variables": {}, "action": "unite(1,3): find(1)=1, find(3)=3"},
+      {"step": 5, "variables": {"parent": "{1,3,3,3,4}"}, "action": "1≠3 → parent[1]=3"},
+      {"step": 6, "variables": {"count": 0}, "action": "連結成分カウント開始"},
+      {"step": 7, "variables": {}, "action": "i=0: parent[0]=1≠0 → スキップ"},
+      {"step": 8, "variables": {}, "action": "i=1: parent[1]=3≠1 → スキップ"},
+      {"step": 9, "variables": {}, "action": "i=2: parent[2]=3≠2 → スキップ"},
+      {"step": 10, "variables": {"count": 1}, "action": "i=3: parent[3]=3=3 → count=1"},
+      {"step": 11, "variables": {"count": 2}, "action": "i=4: parent[4]=4=4 → count=2"},
+      {"step": 12, "variables": {"count": 2}, "action": "表示(count) → 2"}
+    ],
+    "traceAnalogy": "5つの島(0-4)を橋で繋ぐ作業です。島0-1に橋→島2-3に橋→島1-3に橋で{0,1,2,3}が1つの大陸に。島4は独立。大陸の数=2です。",
+    "overallExplanation": "Union-Find（素集合データ構造）を使って連結成分数を求めるプログラムです。3回のunite操作後、parent={1,3,3,3,4}となり、根（parent[i]=i）は3と4の2つ。よって連結成分数は2です。"
+  },
+  {
+    "questionId": "q-trace-074",
+    "examType": "科目B",
+    "category": "擬似言語トレース",
+    "subcategory": "擬似言語トレース",
+    "topic": "安定ソートの検証",
+    "level": 10,
+    "question": "次の擬似言語プログラムを実行したとき、表示される値は何か。",
+    "pseudoCode": "○整数型の配列: key = {2, 1, 2, 1, 3}\n○文字型の配列: label = {'A', 'B', 'C', 'D', 'E'}\n○整数型: i, j\n○整数型: tmpK\n○文字型: tmpL\n\ni を 1 から 4 まで 1 ずつ増やしながら繰り返す\n  tmpK ← key[i]\n  tmpL ← label[i]\n  j ← i - 1\n  j ≧ 0 かつ key[j] > tmpK の間繰り返す\n    key[j + 1] ← key[j]\n    label[j + 1] ← label[j]\n    j ← j - 1\n  を繰り返す\n  key[j + 1] ← tmpK\n  label[j + 1] ← tmpL\nを繰り返す\n\n○整数型: idx\nidx ← 0\ni を 0 から 4 まで 1 ずつ増やしながら繰り返す\n  もし key[i] = 2 かつ idx = 0 ならば\n    idx ← i\n  を実行する\nを繰り返す\n表示(label[idx])",
+    "choices": [
+      {
+        "text": "A",
+        "isCorrect": true,
+        "whyCorrect": "挿入ソートは安定ソートなので、同じキーの要素は元の順序が保たれます。key=2の要素はA(元は位置0)とC(元は位置2)で、ソート後もA,Cの順です。最初のkey=2の要素のlabelはAです。",
+        "analogy": "同じ成績の生徒は出席番号順に並ぶ安定ソートの性質です。",
+        "deepDive": "安定ソートとは、同じキー値の要素の相対順序がソート前後で保たれるソートアルゴリズムのことです。挿入ソートとマージソートは安定、クイックソートは不安定です。"
+      },
+      {
+        "text": "C",
+        "isCorrect": false,
+        "whyWrong": "Cは2番目のkey=2の要素です。idx=0の条件で最初のkey=2を探しているので、先にAが見つかります。",
+        "analogy": "2番目に見つかったものを1番目と間違えてしまったようなものです。"
+      },
+      {
+        "text": "B",
+        "isCorrect": false,
+        "whyWrong": "Bはkey=1の要素で、ソート後はlabel配列の先頭付近（位置0または1）に移動します。key=2ではないので条件に合致しません。",
+        "analogy": "探している値（key=2）とは別の値（key=1）の要素を選んでしまったようなものです。"
+      },
+      {
+        "text": "E",
+        "isCorrect": false,
+        "whyWrong": "Eはkey=3の要素で、ソート後は配列の末尾に移動します。key=2ではないので条件に合致しません。",
+        "analogy": "一番大きいキーの要素を探してしまいましたが、key=2を探す必要があります。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"key": "{2,1,2,1,3}", "label": "{A,B,C,D,E}"}, "action": "初期状態"},
+      {"step": 2, "variables": {"i": 1, "tmpK": 1, "tmpL": "B"}, "action": "i=1: key[1]=1を取り出し"},
+      {"step": 3, "variables": {"key": "{1,2,2,1,3}", "label": "{B,A,C,D,E}"}, "action": "key[0]=2>1 → 右シフト、key[0]=1,label[0]=B"},
+      {"step": 4, "variables": {"i": 2}, "action": "i=2: key[2]=2, key[1]=2>2?→偽、移動なし"},
+      {"step": 5, "variables": {"i": 3, "tmpK": 1, "tmpL": "D"}, "action": "i=3: key[3]=1を取り出し"},
+      {"step": 6, "variables": {"key": "{1,1,2,2,3}", "label": "{B,D,A,C,E}"}, "action": "key[2],key[1]を右シフト、key[1]=1,label[1]=D"},
+      {"step": 7, "variables": {"i": 4}, "action": "i=4: key[4]=3, key[3]=2>3?→偽、移動なし"},
+      {"step": 8, "variables": {"key": "{1,1,2,2,3}", "label": "{B,D,A,C,E}"}, "action": "最終状態"},
+      {"step": 9, "variables": {"idx": 2}, "action": "key[2]=2, idx=0→idx=2"},
+      {"step": 10, "variables": {"label[2]": "A"}, "action": "表示(label[2]) → A"}
+    ],
+    "traceAnalogy": "成績順にクラスを並べ替える作業です。同じ点数の生徒は元の出席番号順を維持します（安定ソート）。点数2のグループではA→Cの順が保たれ、最初に見つかるのはAです。",
+    "overallExplanation": "挿入ソート（安定ソート）でkey配列をソートし、同じキー値の最初の要素のlabelを表示する問題です。ソート後 key={1,1,2,2,3}, label={B,D,A,C,E} となり、最初のkey=2の位置(idx=2)のlabel=Aが表示されます。"
+  },
+  {
+    "questionId": "q-trace-075",
+    "examType": "科目B",
+    "category": "擬似言語トレース",
+    "subcategory": "擬似言語トレース",
+    "topic": "最長回文部分文字列（簡易版）",
+    "level": 10,
+    "question": "次の擬似言語プログラムを実行したとき、表示される値は何か。",
+    "pseudoCode": "○文字型の配列: s = {'a', 'b', 'c', 'b', 'a'}\n○整数型: n ← 5\n○整数型: maxLen, i, j, l\nmaxLen ← 1\n\nl を 2 から n まで 1 ずつ増やしながら繰り返す\n  i を 0 から n - l まで 1 ずつ増やしながら繰り返す\n    j ← i + l - 1\n    ○論理型: isPalin ← true\n    ○整数型: left ← i\n    ○整数型: right ← j\n    left < right の間繰り返す\n      もし s[left] ≠ s[right] ならば\n        isPalin ← false\n      を実行する\n      left ← left + 1\n      right ← right - 1\n    を繰り返す\n    もし isPalin = true かつ l > maxLen ならば\n      maxLen ← l\n    を実行する\n  を繰り返す\nを繰り返す\n表示(maxLen)",
+    "choices": [
+      {
+        "text": "5",
+        "isCorrect": true,
+        "whyCorrect": "文字列 'abcba' 全体が回文です。l=5, i=0, j=4 のとき、s[0]='a'=s[4]='a', s[1]='b'=s[3]='b', 中央s[2]='c' で回文条件を満たし、maxLen=5 に更新されます。",
+        "analogy": "鏡に映しても同じに見える言葉を探す問題です。'abcba'は前から読んでも後ろから読んでも同じなので、全体が回文で長さ5です。",
+        "deepDive": "回文判定は両端から中央に向かって文字を比較します。この総当たり法は O(n³) ですが、動的計画法やManacher法で O(n²) や O(n) に改善できます。"
+      },
+      {
+        "text": "3",
+        "isCorrect": false,
+        "whyWrong": "3は部分文字列 'bcb' の長さですが、全体 'abcba' も回文なので maxLen=5 が正解です。l=5 まで検査するため、より長い回文が見つかります。",
+        "analogy": "短い回文で満足してしまいましたが、全文が回文であることを見落としています。"
+      },
+      {
+        "text": "1",
+        "isCorrect": false,
+        "whyWrong": "1は初期値です。文字列 'abcba' には長さ5の回文（全体）があるため、maxLenは5に更新されます。",
+        "analogy": "1文字も回文であるという初期値のままで、探索結果を反映していないようなものです。"
+      },
+      {
+        "text": "4",
+        "isCorrect": false,
+        "whyWrong": "長さ4の回文は 'abcba' には存在しません（'abcb'も'bcba'も回文でない）。回文は奇数長または偶数長ですが、この文字列では5と3と1が回文長です。",
+        "analogy": "存在しない長さの回文を見つけたと勘違いしたようなものです。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"maxLen": 1}, "action": "初期化"},
+      {"step": 2, "variables": {"l": 2}, "action": "l=2: 長さ2の部分文字列を検査"},
+      {"step": 3, "variables": {}, "action": "ab,bc,cb,ba → 回文なし"},
+      {"step": 4, "variables": {"l": 3}, "action": "l=3: abc→非回文, bcb→回文!"},
+      {"step": 5, "variables": {"maxLen": 3}, "action": "bcb は回文、maxLen=3"},
+      {"step": 6, "variables": {}, "action": "cba→非回文"},
+      {"step": 7, "variables": {"l": 4}, "action": "l=4: abcb→非回文, bcba→非回文"},
+      {"step": 8, "variables": {"l": 5, "i": 0, "j": 4}, "action": "l=5: abcba を検査"},
+      {"step": 9, "variables": {"left": 0, "right": 4}, "action": "s[0]='a'=s[4]='a' → OK"},
+      {"step": 10, "variables": {"left": 1, "right": 3}, "action": "s[1]='b'=s[3]='b' → OK"},
+      {"step": 11, "variables": {"isPalin": true, "maxLen": 5}, "action": "回文! maxLen=5"},
+      {"step": 12, "variables": {"maxLen": 5}, "action": "表示(maxLen) → 5"}
+    ],
+    "traceAnalogy": "文字列を鏡に映す実験です。長さ2→3→4→5と順に試していき、'bcb'(3文字)と'abcba'(5文字)が鏡に映しても同じと判明。最長は5文字の'abcba'です。",
+    "overallExplanation": "最長回文部分文字列の長さを総当たりで求めるプログラムです。全ての部分文字列について両端から比較して回文かを判定します。'abcba'は全体が回文なので、最長回文長は5です。"
+  },
+  {
+    "questionId": "q-trace-076",
+    "examType": "科目B",
+    "category": "擬似言語トレース",
+    "subcategory": "擬似言語トレース",
+    "topic": "相互再帰関数",
+    "level": 10,
+    "question": "次の擬似言語プログラムを実行したとき、表示される値は何か。",
+    "pseudoCode": "○関数 isEven(整数型: n) : 論理型\n  もし n = 0 ならば\n    return true\n  を実行する\n  return isOdd(n - 1)\n\n○関数 isOdd(整数型: n) : 論理型\n  もし n = 0 ならば\n    return false\n  を実行する\n  return isEven(n - 1)\n\n○整数型: count\ncount ← 0\n○整数型: i\ni を 0 から 5 まで 1 ずつ増やしながら繰り返す\n  もし isEven(i) = true ならば\n    count ← count + 1\n  を実行する\nを繰り返す\n表示(count)",
+    "choices": [
+      {
+        "text": "3",
+        "isCorrect": true,
+        "whyCorrect": "isEven/isOddは相互再帰で偶奇を判定します。isEven(0)=true, isEven(1)=isOdd(0)=false, isEven(2)=isOdd(1)=isEven(0)=true, isEven(3)=false, isEven(4)=true, isEven(5)=false。偶数は0,2,4の3個です。",
+        "analogy": "2人がキャッチボールをする遊びで、偶数回投げたら「偶数！」と言うルールです。0,2,4回目が偶数で、計3回です。",
+        "deepDive": "相互再帰は2つの関数が互いを呼び合う構造です。isEven(n)はnから1ずつ減らしてisEvenとisOddを交互に呼び、n=0に到達したときの関数で結果が決まります。"
+      },
+      {
+        "text": "2",
+        "isCorrect": false,
+        "whyWrong": "0も偶数です。isEven(0)=trueなので、偶数は0,2,4の3個です。0を偶数に含めないと2個になってしまいます。",
+        "analogy": "0を偶数から除外してしまいましたが、0は偶数です（isEven(0)=trueが基底条件）。"
+      },
+      {
+        "text": "6",
+        "isCorrect": false,
+        "whyWrong": "6は i=0~5 の全6個の数です。すべてが偶数ではなく、奇数（1,3,5）もあるため、isEven=trueは3個だけです。",
+        "analogy": "全員に当てはまると思い込みましたが、半分は条件を満たしません。"
+      },
+      {
+        "text": "4",
+        "isCorrect": false,
+        "whyWrong": "0~5の偶数は0,2,4の3個で、4個ではありません。相互再帰の展開を1つずつ正確にトレースしてください。",
+        "analogy": "カウントで1つ余分に数えてしまったようなものです。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"count": 0}, "action": "count=0で初期化"},
+      {"step": 2, "variables": {"i": 0}, "action": "isEven(0)→true、count=1"},
+      {"step": 3, "variables": {"i": 1}, "action": "isEven(1)→isOdd(0)→false"},
+      {"step": 4, "variables": {"i": 2, "count": 2}, "action": "isEven(2)→isOdd(1)→isEven(0)→true、count=2"},
+      {"step": 5, "variables": {"i": 3}, "action": "isEven(3)→isOdd(2)→isEven(1)→isOdd(0)→false"},
+      {"step": 6, "variables": {"i": 4, "count": 3}, "action": "isEven(4)→...→isEven(0)→true、count=3"},
+      {"step": 7, "variables": {"i": 5}, "action": "isEven(5)→...→isOdd(0)→false"},
+      {"step": 8, "variables": {"count": 3}, "action": "表示(count) → 3"}
+    ],
+    "traceAnalogy": "2人のジャッジ（偶数判定員と奇数判定員）がボールを投げ合います。数字を1ずつ減らしながら交互にボールを渡し、0に到達したときにボールを持っている人が「はい/いいえ」を答えます。0~5で偶数判定が「はい」と答えたのは0,2,4の3回です。",
+    "overallExplanation": "isEvenとisOddの相互再帰で偶奇を判定し、0~5の偶数の個数を数えるプログラムです。nから1ずつ減らしながら2関数を交互に呼び、n=0での関数名で結果が決まります。偶数は0,2,4の3個です。"
+  },
+  {
+    "questionId": "q-trace-077",
+    "examType": "科目B",
+    "category": "擬似言語トレース",
+    "subcategory": "擬似言語トレース",
+    "topic": "複数関数とデータ構造の総合問題",
+    "level": 10,
+    "question": "次の擬似言語プログラムを実行したとき、表示される値は何か。",
+    "pseudoCode": "○整数型の配列: data = {5, 3, 8, 1, 9, 2, 7}\n○整数型: n ← 7\n\n○関数 partition(整数型の配列: arr, 整数型: lo, 整数型: hi) : 整数型\n  ○整数型: pivot ← arr[hi]\n  ○整数型: i ← lo - 1\n  ○整数型: j, tmp\n  j を lo から hi - 1 まで 1 ずつ増やしながら繰り返す\n    もし arr[j] ≦ pivot ならば\n      i ← i + 1\n      tmp ← arr[i]\n      arr[i] ← arr[j]\n      arr[j] ← tmp\n    を実行する\n  を繰り返す\n  tmp ← arr[i + 1]\n  arr[i + 1] ← arr[hi]\n  arr[hi] ← tmp\n  return i + 1\n\n○整数型: p\np ← partition(data, 0, 6)\n表示(p)",
+    "choices": [
+      {
+        "text": "4",
+        "isCorrect": true,
+        "whyCorrect": "pivot=data[6]=7です。i=-1で始め、j=0:5≦7→i=0, j=1:3≦7→i=1, j=2:8>7→スキップ, j=3:1≦7→i=2(data[2]とdata[3]交換), j=4:9>7→スキップ, j=5:2≦7→i=3(data[3]とdata[5]交換)。最後にdata[i+1]=data[4]とdata[6]交換。return i+1=4。7以下の要素が4個あるので、pivotはインデックス4に配置されます。",
+        "analogy": "数字カードを基準値7で「7以下」と「7より大きい」に分ける作業です。7以下が4枚（5,3,1,2）あるので、7は左から5番目（インデックス4）に置かれます。",
+        "deepDive": "Lomutoのパーティション方式は、右端をpivotにして左からスキャンする方法です。pivot以下の要素数がpivotの最終インデックスになります。"
+      },
+      {
+        "text": "3",
+        "isCorrect": false,
+        "whyWrong": "3はiの最終値ですが、returnはi+1=4です。pivot(7)はインデックス4に配置されます。iとi+1を混同しないよう注意してください。",
+        "analogy": "変数iの値とreturn値(i+1)を混同してしまったようなものです。"
+      },
+      {
+        "text": "6",
+        "isCorrect": false,
+        "whyWrong": "6はpivotの元の位置です。パーティション後、pivotは正しい位置（4）に移動します。7以下の要素が4つあるため、7はインデックス4に配置されます。",
+        "analogy": "pivotの移動前の位置と移動後の位置を混同しています。"
+      },
+      {
+        "text": "5",
+        "isCorrect": false,
+        "whyWrong": "7以下の要素は{5,3,1,2,7}の5個ではなく、pivot自身を除いた{5,3,1,2}の4個です。pivot自身はi+1の位置に配置されるので、return i+1=4です。",
+        "analogy": "pivot自身もカウントに含めてしまい、1つ多く数えてしまったようなものです。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"pivot": 7, "i": -1}, "action": "pivot=data[6]=7, i=-1"},
+      {"step": 2, "variables": {"j": 0, "i": 0}, "action": "j=0: data[0]=5≦7 → i=0, swap(data[0],data[0])→変化なし"},
+      {"step": 3, "variables": {"j": 1, "i": 1}, "action": "j=1: data[1]=3≦7 → i=1, swap(data[1],data[1])→変化なし"},
+      {"step": 4, "variables": {"j": 2}, "action": "j=2: data[2]=8>7 → スキップ"},
+      {"step": 5, "variables": {"j": 3, "i": 2}, "action": "j=3: data[3]=1≦7 → i=2, swap(data[2],data[3])→{5,3,1,8,9,2,7}"},
+      {"step": 6, "variables": {"j": 4}, "action": "j=4: data[4]=9>7 → スキップ"},
+      {"step": 7, "variables": {"j": 5, "i": 3}, "action": "j=5: data[5]=2≦7 → i=3, swap(data[3],data[5])→{5,3,1,2,9,8,7}"},
+      {"step": 8, "variables": {"data": "{5,3,1,2,7,8,9}"}, "action": "swap(data[4],data[6])→{5,3,1,2,7,8,9}"},
+      {"step": 9, "variables": {"p": 4}, "action": "return i+1=4, 表示(4)"}
+    ],
+    "traceAnalogy": "生徒を身長7cm基準で「左グループ（7以下）」と「右グループ（7超）」に分ける整列作業です。基準の7くんは最終的に左から5番目（インデックス4）に立ちます。",
+    "overallExplanation": "クイックソートのpartition関数（Lomuto方式）のトレース問題です。pivot=7に対し、7以下の要素を左に集め、pivotを正しい位置に配置します。7以下の要素は4個(5,3,1,2)あるため、pivotはインデックス4に配置され、return 4です。"
+  },
+  {
+    "questionId": "q-trace-078",
+    "examType": "科目B",
+    "category": "擬似言語トレース",
+    "subcategory": "擬似言語トレース",
+    "topic": "行列の積（二重ループ）",
+    "level": 10,
+    "question": "次の擬似言語プログラムを実行したとき、表示される値は何か。",
+    "pseudoCode": "○整数型の二次元配列: A = {\n  {1, 2},\n  {3, 4}\n}\n○整数型の二次元配列: B = {\n  {5, 6},\n  {7, 8}\n}\n○整数型の二次元配列: C = {\n  {0, 0},\n  {0, 0}\n}\n○整数型: i, j, k\n\ni を 0 から 1 まで 1 ずつ増やしながら繰り返す\n  j を 0 から 1 まで 1 ずつ増やしながら繰り返す\n    k を 0 から 1 まで 1 ずつ増やしながら繰り返す\n      C[i][j] ← C[i][j] + A[i][k] × B[k][j]\n    を繰り返す\n  を繰り返す\nを繰り返す\n表示(C[1][0])",
+    "choices": [
+      {
+        "text": "43",
+        "isCorrect": true,
+        "whyCorrect": "C[1][0] = A[1][0]×B[0][0] + A[1][1]×B[1][0] = 3×5 + 4×7 = 15 + 28 = 43 です。",
+        "analogy": "2つの表を「横×縦」で掛け合わせる計算です。C[1][0]はAの2行目とBの1列目の内積です。",
+        "deepDive": "行列の積 C=A×B では、C[i][j] = Σ(A[i][k]×B[k][j]) です。2×2行列の積は8回の乗算と4回の加算で求められます。"
+      },
+      {
+        "text": "19",
+        "isCorrect": false,
+        "whyWrong": "19 = 1×5 + 2×7 = C[0][0] です。C[1][0]は A の 2行目（3,4）と B の 1列目（5,7）の内積 3×5+4×7=43 です。",
+        "analogy": "1行目と2行目を間違えてしまったようなものです。行番号に注意してください。"
+      },
+      {
+        "text": "22",
+        "isCorrect": false,
+        "whyWrong": "22 = 1×6 + 2×8 = C[0][1] です。C[1][0]ではなくC[0][1]を計算してしまっています。行と列のインデックスを確認してください。",
+        "analogy": "住所の番地を取り違えて、隣の家を訪問してしまったようなものです。"
+      },
+      {
+        "text": "50",
+        "isCorrect": false,
+        "whyWrong": "50 = 3×6 + 4×8 = C[1][1] です。C[1][0]は B の 1列目（5,7）を使うので 3×5+4×7=43 です。列番号は0です。",
+        "analogy": "B行列の2列目を使ってしまいましたが、C[1][0]はBの1列目(0番目)を使います。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"C": "{{0,0},{0,0}}"}, "action": "C行列を0で初期化"},
+      {"step": 2, "variables": {"i": 0, "j": 0}, "action": "C[0][0]: 1×5+2×7=5+14=19"},
+      {"step": 3, "variables": {"C[0][0]": 19}, "action": "C[0][0]=19"},
+      {"step": 4, "variables": {"i": 0, "j": 1}, "action": "C[0][1]: 1×6+2×8=6+16=22"},
+      {"step": 5, "variables": {"C[0][1]": 22}, "action": "C[0][1]=22"},
+      {"step": 6, "variables": {"i": 1, "j": 0, "k": 0}, "action": "C[1][0]: A[1][0]×B[0][0]=3×5=15"},
+      {"step": 7, "variables": {"k": 1}, "action": "C[1][0] += A[1][1]×B[1][0]=4×7=28"},
+      {"step": 8, "variables": {"C[1][0]": 43}, "action": "C[1][0]=15+28=43"},
+      {"step": 9, "variables": {"i": 1, "j": 1}, "action": "C[1][1]: 3×6+4×8=18+32=50"},
+      {"step": 10, "variables": {"C": "{{19,22},{43,50}}"}, "action": "表示(C[1][0]) → 43"}
+    ],
+    "traceAnalogy": "2つの配合表を組み合わせて新しい配合表を作る作業です。C[1][0]はAの2行目の材料(3,4)とBの1列目の材料(5,7)を「掛けて足す」操作で、3×5+4×7=43になります。",
+    "overallExplanation": "2×2行列の積を3重ループで計算するプログラムです。C[i][j]=Σ(A[i][k]×B[k][j])の公式に従い、C[1][0]=A[1][0]×B[0][0]+A[1][1]×B[1][0]=15+28=43です。"
+  },
+  {
+    "questionId": "q-trace-079",
+    "examType": "科目B",
+    "category": "擬似言語トレース",
+    "subcategory": "擬似言語トレース",
+    "topic": "BFS（幅優先探索）",
+    "level": 10,
+    "question": "次の擬似言語プログラムを実行したとき、表示される値は何か。",
+    "pseudoCode": "○整数型の二次元配列: adj = {\n  {0, 1, 1, 0, 0, 0},\n  {1, 0, 0, 1, 1, 0},\n  {1, 0, 0, 0, 0, 1},\n  {0, 1, 0, 0, 0, 0},\n  {0, 1, 0, 0, 0, 0},\n  {0, 0, 1, 0, 0, 0}\n}\n○整数型の配列: dist = {-1, -1, -1, -1, -1, -1}\n○整数型の配列: queue = {0, 0, 0, 0, 0, 0}\n○整数型: head ← 0\n○整数型: tail ← 0\n\ndist[0] ← 0\nqueue[tail] ← 0\ntail ← tail + 1\n\nhead < tail の間繰り返す\n  ○整数型: v ← queue[head]\n  head ← head + 1\n  ○整数型: u\n  u を 0 から 5 まで 1 ずつ増やしながら繰り返す\n    もし adj[v][u] = 1 かつ dist[u] = -1 ならば\n      dist[u] ← dist[v] + 1\n      queue[tail] ← u\n      tail ← tail + 1\n    を実行する\n  を繰り返す\nを繰り返す\n表示(dist[3] + dist[5])",
+    "choices": [
+      {
+        "text": "4",
+        "isCorrect": true,
+        "whyCorrect": "BFSで頂点0からの最短距離を求めます。dist[3]: 0→1→3で距離2。dist[5]: 0→2→5で距離2。合計 2+2=4 です。",
+        "analogy": "駅0から各駅への最少乗り換え回数を数える問題です。駅3へは2回乗り換え(0→1→3)、駅5へも2回(0→2→5)で、合計4回です。",
+        "deepDive": "BFS（幅優先探索）は重みなしグラフでの最短経路を求めるアルゴリズムです。キューを使って始点から近い順に頂点を訪問し、各頂点への最短距離をdist配列に記録します。"
+      },
+      {
+        "text": "3",
+        "isCorrect": false,
+        "whyWrong": "dist[3]=2, dist[5]=2 なので合計は4です。どちらかの距離を1と誤って計算すると3になりますが、0から3も5も直接辺がないため距離は2です。",
+        "analogy": "片方の乗り換え回数を1回と数え間違えたようなものです。"
+      },
+      {
+        "text": "5",
+        "isCorrect": false,
+        "whyWrong": "dist[3]+dist[5]=2+2=4です。5はdist[3]=2, dist[5]=3 と誤った場合ですが、0→2→5の経路で dist[5]=2 です。",
+        "analogy": "遠回りの経路で距離を計算してしまったようなものです。BFSは最短距離を求めます。"
+      },
+      {
+        "text": "2",
+        "isCorrect": false,
+        "whyWrong": "2はdist[3]またはdist[5]単体の値です。問題は dist[3]+dist[5] を求めているので、2+2=4が正解です。",
+        "analogy": "足し算を忘れて、片方の距離だけ答えてしまったようなものです。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"dist[0]": 0, "queue": "[0]"}, "action": "始点0をキューに追加、dist[0]=0"},
+      {"step": 2, "variables": {"v": 0}, "action": "v=0をdequeue"},
+      {"step": 3, "variables": {"dist[1]": 1, "dist[2]": 1}, "action": "隣接: 1,2を発見、dist[1]=1, dist[2]=1, キュー=[1,2]"},
+      {"step": 4, "variables": {"v": 1}, "action": "v=1をdequeue"},
+      {"step": 5, "variables": {"dist[3]": 2, "dist[4]": 2}, "action": "隣接: 0(済), 3,4を発見、dist[3]=2, dist[4]=2, キュー=[2,3,4]"},
+      {"step": 6, "variables": {"v": 2}, "action": "v=2をdequeue"},
+      {"step": 7, "variables": {"dist[5]": 2}, "action": "隣接: 0(済), 5を発見、dist[5]=2, キュー=[3,4,5]"},
+      {"step": 8, "variables": {}, "action": "v=3,4,5を順にdequeue、新規発見なし"},
+      {"step": 9, "variables": {"dist": "{0,1,1,2,2,2}"}, "action": "BFS完了"},
+      {"step": 10, "variables": {}, "action": "表示(dist[3]+dist[5]) = 2+2 = 4"}
+    ],
+    "traceAnalogy": "SNSの友達の距離を測る問題です。自分(0)の直接の友達(1,2)は距離1、友達の友達(3,4,5)は距離2。友人3と友人5への距離を合計すると2+2=4です。",
+    "overallExplanation": "BFSで6頂点グラフの頂点0からの最短距離を求めるプログラムです。キューを使って近い順に探索し、dist配列に距離を記録します。dist[3]=2(0→1→3)、dist[5]=2(0→2→5)で、合計4です。"
+  },
+  {
+    "questionId": "q-trace-080",
+    "examType": "科目B",
+    "category": "擬似言語トレース",
+    "subcategory": "擬似言語トレース",
+    "topic": "セキュリティとアルゴリズムの総合問題",
+    "level": 10,
+    "question": "次の擬似言語プログラムを実行したとき、表示される値は何か。",
+    "pseudoCode": "○整数型の配列: plain = {7, 2, 5, 8, 3}\n○整数型: key ← 3\n○整数型: mod ← 10\n○整数型の配列: cipher = {0, 0, 0, 0, 0}\n○整数型: i\n\ni を 0 から 4 まで 1 ずつ増やしながら繰り返す\n  cipher[i] ← (plain[i] + key) mod mod\nを繰り返す\n\n○整数型の配列: freq = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}\ni を 0 から 4 まで 1 ずつ増やしながら繰り返す\n  freq[cipher[i]] ← freq[cipher[i]] + 1\nを繰り返す\n\n○整数型: maxFreq ← 0\n○整数型: guessedCipher ← 0\ni を 0 から 9 まで 1 ずつ増やしながら繰り返す\n  もし freq[i] > maxFreq ならば\n    maxFreq ← freq[i]\n    guessedCipher ← i\n  を実行する\nを繰り返す\n\n○整数型: guessedKey\nguessedKey ← (guessedCipher - 5 + mod) mod mod\n表示(guessedKey)",
+    "choices": [
+      {
+        "text": "5",
+        "isCorrect": true,
+        "whyCorrect": "暗号化: cipher={(7+3)%10, (2+3)%10, (5+3)%10, (8+3)%10, (3+3)%10} = {0,5,8,1,6}。頻度カウント: すべて1回ずつで同率。maxFreq>0で最初に見つかるのはfreq[0]=1(i=0)でguessedCipher=0。guessedKey=(0-5+10)%10=5 です。",
+        "analogy": "暗号を解読する探偵の作業です。数字を鍵の分だけずらす暗号（シーザー暗号の数字版）で、最頻の暗号文字から鍵を推測します。",
+        "deepDive": "シーザー暗号は平文を一定の鍵だけシフトする暗号方式です。頻度分析により最頻文字から鍵を推測できます。今回は全文字の頻度が同じため最小インデックス0が選ばれ、(0-5+10)%10=5が推定鍵になります。"
+      },
+      {
+        "text": "3",
+        "isCorrect": false,
+        "whyWrong": "3は実際の暗号鍵（key=3）ですが、プログラムが推定する鍵は異なります。guessedCipher=0（最頻の暗号文字）から guessedKey=(0-5+10)%10=5 と計算されます。頻度が全て同率のため正しい推定ができません。",
+        "analogy": "答えを知っている状態で解いてしまいましたが、プログラムの推定結果は別の値になります。"
+      },
+      {
+        "text": "0",
+        "isCorrect": false,
+        "whyWrong": "guessedCipher=0 ですが、guessedKey は (0-5+10)%10=5 で計算されるため0ではありません。cipherの最頻値とkeyは異なる値です。",
+        "analogy": "暗号文の値をそのまま鍵と間違えてしまったようなものです。鍵は別の計算で求めます。"
+      },
+      {
+        "text": "8",
+        "isCorrect": false,
+        "whyWrong": "cipher配列に8が含まれますが（cipher[2]=8）、頻度は全て1で同率です。freq配列を先頭からスキャンするため、freq[0]=1が最初に見つかりguessedCipher=0です。",
+        "analogy": "暗号文の中の目立つ数字を鍵と勘違いしてしまったようなものです。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"plain": "{7,2,5,8,3}", "key": 3}, "action": "平文と鍵を設定"},
+      {"step": 2, "variables": {"cipher[0]": 0}, "action": "(7+3)%10=0"},
+      {"step": 3, "variables": {"cipher[1]": 5}, "action": "(2+3)%10=5"},
+      {"step": 4, "variables": {"cipher[2]": 8}, "action": "(5+3)%10=8"},
+      {"step": 5, "variables": {"cipher[3]": 1}, "action": "(8+3)%10=1"},
+      {"step": 6, "variables": {"cipher[4]": 6}, "action": "(3+3)%10=6"},
+      {"step": 7, "variables": {"cipher": "{0,5,8,1,6}"}, "action": "暗号化完了"},
+      {"step": 8, "variables": {"freq": "{1,1,0,0,0,1,1,0,1,0}"}, "action": "頻度カウント完了"},
+      {"step": 9, "variables": {"guessedCipher": 0, "maxFreq": 1}, "action": "freq[0]=1>0 → guessedCipher=0"},
+      {"step": 10, "variables": {}, "action": "以降freq[i]=1は >1 を満たさず更新なし"},
+      {"step": 11, "variables": {"guessedKey": 5}, "action": "(0-5+10)%10 = 5"},
+      {"step": 12, "variables": {}, "action": "表示(guessedKey) → 5"}
+    ],
+    "traceAnalogy": "暗号解読ゲームです。数字を3ずつずらす暗号で{7,2,5,8,3}→{0,5,8,1,6}にしました。解読者は最も多く出現する暗号数字（全て同頻度なので最小の0）が平文の5に対応すると仮定し、鍵=(0-5+10)%10=5と推定します。",
+    "overallExplanation": "シーザー暗号（加算シフト暗号）の暗号化と頻度分析による鍵推定を組み合わせた総合問題です。平文をkey=3でシフトして暗号文を作り、頻度分析で鍵を推測します。全暗号文字が同頻度のため、最小値0が選ばれ、推定鍵は(0-5+10)%10=5となります。"
+  }
+]

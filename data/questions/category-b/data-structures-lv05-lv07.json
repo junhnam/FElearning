@@ -1,0 +1,812 @@
+[
+  {
+    "questionId": "q-ds-017",
+    "examType": "科目B",
+    "category": "データ構造",
+    "subcategory": "data-structures",
+    "topic": "ハッシュテーブル基本操作",
+    "level": 5,
+    "question": "次の擬似言語プログラムを実行したとき、表示される値はどれか。",
+    "pseudoCode": "○整数型の配列: table[10]\n○整数型: i\ni を 0 から 9 まで 1 ずつ増やしながら繰り返す\n  table[i] ← -1\nを繰り返す\n\n○整数型: key1 ← 23\n○整数型: key2 ← 47\n○整数型: h1 ← key1 mod 10\n○整数型: h2 ← key2 mod 10\ntable[h1] ← key1\ntable[h2] ← key2\n表示(table[3] + table[7])",
+    "choices": [
+      {
+        "id": "a",
+        "text": "70",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "ハッシュ関数 key mod 10 により、key1=23 のハッシュ値は 23 mod 10 = 3、key2=47 のハッシュ値は 47 mod 10 = 7 です。table[3]=23、table[7]=47 となるため、23+47=70 が表示されます。",
+          "analogy": "下駄箱に靴をしまうとき、出席番号の下1桁の場所にしまうルールです。23番の人は3番の下駄箱、47番の人は7番の下駄箱に靴を入れます。3番と7番の下駄箱の中身を合わせると70になります。",
+          "deepDive": "ハッシュテーブルは、キーからハッシュ関数で格納位置（インデックス）を計算し、データの挿入・検索をO(1)で行えるデータ構造です。mod演算は最も基本的なハッシュ関数です。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "-2",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "-2 は table の初期値 -1 が2つのスロットに残っている場合の合計です。しかし table[3] と table[7] にはそれぞれ 23 と 47 が格納されるため、初期値のままではありません。",
+          "analogy": "下駄箱に靴を入れた後なのに、まだ空のままだと勘違いしたようなものです。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "22",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "22 は table[2] + table[3] = -1 + 23 の計算結果です。key2=47 のハッシュ値は 47 mod 10 = 7 であり、添字2ではありません。mod 演算の結果を正確に計算する必要があります。",
+          "analogy": "下駄箱の番号を間違えて、別の場所を見てしまったようなものです。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "46",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "46 は 23+23 の計算結果であり、table[3] を2回参照した場合の値です。問題では table[3] と table[7] の合計を求めており、table[7]=47 です。",
+          "analogy": "2つの異なる下駄箱の中身を確認するはずが、同じ下駄箱を2回見てしまったようなものです。"
+        }
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"table": "{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1}"}, "action": "配列tableを全て-1で初期化"},
+      {"step": 2, "variables": {"key1": "23", "key2": "47"}, "action": "キー値を設定"},
+      {"step": 3, "variables": {"h1": "3"}, "action": "h1 ← 23 mod 10 = 3"},
+      {"step": 4, "variables": {"h2": "7"}, "action": "h2 ← 47 mod 10 = 7"},
+      {"step": 5, "variables": {"table[3]": "23"}, "action": "table[3] ← 23 を格納"},
+      {"step": 6, "variables": {"table[7]": "47"}, "action": "table[7] ← 47 を格納"},
+      {"step": 7, "variables": {"出力": "70"}, "action": "table[3] + table[7] = 23 + 47 = 70 を表示"}
+    ],
+    "traceAnalogy": "10個の下駄箱がある学校で、出席番号の下1桁に対応する下駄箱に靴を入れるルールです。23番の生徒は3番の下駄箱、47番の生徒は7番の下駄箱に靴を入れます。3番と7番の下駄箱の出席番号を合計すると70になります。",
+    "overallExplanation": {
+      "summary": "ハッシュ関数 key mod 10 でキーの格納位置を決定するプログラムです。23は位置3、47は位置7に格納され、合計70が表示されます。",
+      "keyPoint": "ハッシュテーブルではハッシュ関数（ここでは mod 演算）でキーから格納位置を計算する。",
+      "relatedTopics": ["ハッシュ関数", "mod演算", "ハッシュ衝突"],
+      "studyTip": "ハッシュテーブルの基本は「キーからインデックスを計算する」こと。mod演算で下1桁を取り出すのが最も単純なハッシュ関数です。"
+    },
+    "tags": ["ハッシュテーブル", "ハッシュ関数", "mod演算", "配列"]
+  },
+  {
+    "questionId": "q-ds-018",
+    "examType": "科目B",
+    "category": "データ構造",
+    "subcategory": "data-structures",
+    "topic": "配列の集合演算（和集合）",
+    "level": 5,
+    "question": "次の擬似言語プログラムを実行したとき、表示される値はどれか。",
+    "pseudoCode": "○整数型の配列: A = {1, 3, 5, 7}\n○整数型の配列: B = {3, 5, 8, 9}\n○整数型の配列: result[8]\n○整数型: count ← 0\n○整数型: i, j\n○論理型: found\n\n// Aの全要素をresultに追加\ni を 0 から 3 まで 1 ずつ増やしながら繰り返す\n  result[count] ← A[i]\n  count ← count + 1\nを繰り返す\n\n// Bの要素のうちAに含まれないものをresultに追加\ni を 0 から 3 まで 1 ずつ増やしながら繰り返す\n  found ← false\n  j を 0 から 3 まで 1 ずつ増やしながら繰り返す\n    もし B[i] = A[j] ならば\n      found ← true\n    を実行する\n  を繰り返す\n  もし found = false ならば\n    result[count] ← B[i]\n    count ← count + 1\n  を実行する\nを繰り返す\n\n表示(count)",
+    "choices": [
+      {
+        "id": "a",
+        "text": "4",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "4は配列Aの要素数だけの値です。和集合では、Bにしか含まれない要素（8と9）も追加されるため、結果は4より多くなります。",
+          "analogy": "2つのクラスの生徒を合わせるとき、1組の生徒だけ数えて2組を無視したようなものです。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "6",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "和集合の計算です。まずAの全要素{1,3,5,7}の4個を追加します。次にBの各要素を確認し、Aに含まれない8と9の2個を追加します（3と5はAにもあるので追加しない）。合計 4+2=6 個です。",
+          "analogy": "1組と2組のクラスで、全員に1枚ずつ体育帽子を配りたいとき、まず1組の全員に配り、次に2組で1組にいない人だけに配ります。重複を避けて全員に行き渡らせると6人分になります。",
+          "deepDive": "和集合（Union）はA∪Bで表され、AまたはBの少なくとも一方に含まれる要素の集合です。重複を排除するために、Bの各要素がAに含まれるかを線形探索で確認しています。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "8",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "8はAとBの要素数の合計（4+4）ですが、和集合では重複要素（3と5）を1回だけ数えます。重複を除くと6個になります。",
+          "analogy": "2つのクラスの名簿をそのまま合わせると、両方のクラスに所属する生徒が2回数えられてしまうようなものです。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "2",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "2は積集合（共通部分）の要素数です。共通する3と5の2個ですが、この問題は和集合を求めているので、全体の要素数は6です。",
+          "analogy": "2つのクラスの共通メンバーだけを数えてしまい、和集合（全メンバー）の数を聞かれているのに答え間違いしたようなものです。"
+        }
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"A": "{1,3,5,7}", "B": "{3,5,8,9}", "count": "0"}, "action": "配列A, Bを初期化"},
+      {"step": 2, "variables": {"result": "{1,3,5,7,...}", "count": "4"}, "action": "Aの全要素をresultにコピー（count=4）"},
+      {"step": 3, "variables": {"B[0]": "3", "found": "true"}, "action": "B[0]=3はA[1]=3と一致 → 追加しない"},
+      {"step": 4, "variables": {"B[1]": "5", "found": "true"}, "action": "B[1]=5はA[2]=5と一致 → 追加しない"},
+      {"step": 5, "variables": {"B[2]": "8", "found": "false", "count": "5"}, "action": "B[2]=8はAに無い → result[4]=8、count=5"},
+      {"step": 6, "variables": {"B[3]": "9", "found": "false", "count": "6"}, "action": "B[3]=9はAに無い → result[5]=9、count=6"},
+      {"step": 7, "variables": {"出力": "6"}, "action": "count=6を表示"}
+    ],
+    "traceAnalogy": "1組の4人{1番,3番,5番,7番}と2組の4人{3番,5番,8番,9番}で合同チームを作ります。まず1組の4人を全員入れます。次に2組を確認すると、3番と5番は既にいるのでスキップ、8番と9番は新メンバーとして追加。合計6人のチームになります。",
+    "overallExplanation": {
+      "summary": "2つの配列の和集合を求めるプログラムです。Aの全要素を追加後、BからAに含まれない要素だけを追加し、重複のない合計6要素を得ます。",
+      "keyPoint": "和集合は両方の配列から重複を除いた全要素の集まり。|A∪B| = |A| + |B| - |A∩B| = 4+4-2 = 6。",
+      "relatedTopics": ["積集合", "差集合", "集合演算", "線形探索"],
+      "studyTip": "和集合は「どちらか一方にあるもの全部」、積集合は「両方にあるもの」と覚えましょう。コードでは重複チェックのためにfoundフラグを使うパターンが頻出です。"
+    },
+    "tags": ["配列", "集合演算", "和集合", "線形探索"]
+  },
+  {
+    "questionId": "q-ds-019",
+    "examType": "科目B",
+    "category": "データ構造",
+    "subcategory": "data-structures",
+    "topic": "配列の集合演算（積集合）",
+    "level": 5,
+    "question": "次の擬似言語プログラムを実行したとき、表示される値はどれか。",
+    "pseudoCode": "○整数型の配列: X = {2, 4, 6, 8, 10}\n○整数型の配列: Y = {3, 6, 9, 8, 12}\n○整数型の配列: common[5]\n○整数型: count ← 0\n○整数型: i, j\n\ni を 0 から 4 まで 1 ずつ増やしながら繰り返す\n  j を 0 から 4 まで 1 ずつ増やしながら繰り返す\n    もし X[i] = Y[j] ならば\n      common[count] ← X[i]\n      count ← count + 1\n    を実行する\n  を繰り返す\nを繰り返す\n\n○整数型: total ← 0\ni を 0 から count - 1 まで 1 ずつ増やしながら繰り返す\n  total ← total + common[i]\nを繰り返す\n表示(total)",
+    "choices": [
+      {
+        "id": "a",
+        "text": "6",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "6はcommon配列の最初の要素の値です。共通要素は6と8の2つあり、その合計 6+8=14 が正解です。",
+          "analogy": "複数の共通科目があるのに、1つ目の科目だけ見て残りを確認し忘れたようなものです。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "8",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "8はcommon配列の2番目の要素の値です。共通要素は6と8の2つあり、その合計を求める必要があります。",
+          "analogy": "共通の持ち物が2つあるのに、片方だけ数えてしまったようなものです。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "14",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "XとYの積集合（共通要素）を求めています。X={2,4,6,8,10}とY={3,6,9,8,12}で共通する要素は6と8です。common={6,8}、count=2となり、total=6+8=14が表示されます。",
+          "analogy": "AさんとBさんの持ち物リストを比べて、両方が持っているものを見つけます。Aさんは{ペン,ノート,消しゴム,定規,はさみ}、Bさんは{テープ,消しゴム,のり,定規,色鉛筆}で、共通は消しゴムと定規。その値段を合計すると14円です。",
+          "deepDive": "積集合（Intersection）はA∩Bで表され、AとBの両方に含まれる要素の集合です。この二重ループによる実装の計算量はO(n*m)です。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "2",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "2は共通要素の個数（count）であり、共通要素の合計値（total）ではありません。問題ではtotalを表示しているので14が正解です。",
+          "analogy": "共通の持ち物の「数」を答えたのに、「値段の合計」を聞かれていたようなものです。"
+        }
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"X": "{2,4,6,8,10}", "Y": "{3,6,9,8,12}", "count": "0"}, "action": "配列X, Yを初期化"},
+      {"step": 2, "variables": {"i": "0", "X[0]": "2"}, "action": "X[0]=2はYのどの要素とも一致しない"},
+      {"step": 3, "variables": {"i": "1", "X[1]": "4"}, "action": "X[1]=4はYのどの要素とも一致しない"},
+      {"step": 4, "variables": {"i": "2", "X[2]": "6", "j": "1", "count": "1"}, "action": "X[2]=6がY[1]=6と一致 → common[0]=6、count=1"},
+      {"step": 5, "variables": {"i": "3", "X[3]": "8", "j": "3", "count": "2"}, "action": "X[3]=8がY[3]=8と一致 → common[1]=8、count=2"},
+      {"step": 6, "variables": {"i": "4", "X[4]": "10"}, "action": "X[4]=10はYのどの要素とも一致しない"},
+      {"step": 7, "variables": {"total": "14"}, "action": "total = common[0]+common[1] = 6+8 = 14"},
+      {"step": 8, "variables": {"出力": "14"}, "action": "total=14を表示"}
+    ],
+    "traceAnalogy": "2つの班の出席番号リストを照合します。1班は{2,4,6,8,10番}、2班は{3,6,9,8,12番}。両方の班に所属しているのは6番と8番。この2人の出席番号を合計すると14です。",
+    "overallExplanation": {
+      "summary": "2つの配列の積集合（共通要素）を求め、その合計を計算するプログラムです。共通要素は6と8で合計14になります。",
+      "keyPoint": "積集合は二重ループで全組み合わせを比較して求める。共通要素の個数と値の合計を混同しないこと。",
+      "relatedTopics": ["和集合", "差集合", "二重ループ", "集合演算"],
+      "studyTip": "countは個数、totalは合計値です。「何を表示するか」を問題文と照らし合わせて慎重に確認しましょう。"
+    },
+    "tags": ["配列", "集合演算", "積集合", "二重ループ"]
+  },
+  {
+    "questionId": "q-ds-020",
+    "examType": "科目B",
+    "category": "データ構造",
+    "subcategory": "data-structures",
+    "topic": "ハッシュ関数の計算",
+    "level": 5,
+    "question": "次の擬似言語プログラムを実行したとき、表示される値はどれか。",
+    "pseudoCode": "○整数型の配列: table[7]\n○整数型: i\ni を 0 から 6 まで 1 ずつ増やしながら繰り返す\n  table[i] ← 0\nを繰り返す\n\n○整数型の配列: keys = {14, 3, 21, 5, 9}\n○整数型: h\ni を 0 から 4 まで 1 ずつ増やしながら繰り返す\n  h ← keys[i] mod 7\n  table[h] ← table[h] + 1\nを繰り返す\n\n○整数型: maxVal ← 0\ni を 0 から 6 まで 1 ずつ増やしながら繰り返す\n  もし table[i] > maxVal ならば\n    maxVal ← table[i]\n  を実行する\nを繰り返す\n表示(maxVal)",
+    "choices": [
+      {
+        "id": "a",
+        "text": "1",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "1は各スロットに最大1つしかキーが入らない場合の値です。しかし14 mod 7=0 と 21 mod 7=0 が同じスロット0に入るため、table[0]=2 となります。全てのキーが異なるスロットに入るわけではありません。",
+          "analogy": "7つの部屋にお客さんを振り分けたとき、全員バラバラの部屋に入ったと思い込みましたが、実は同じ部屋に2人入ったケースがあります。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "2",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "各キーのハッシュ値は、14 mod 7=0、3 mod 7=3、21 mod 7=0、5 mod 7=5、9 mod 7=2 です。table={2,0,1,1,0,1,0}となり、スロット0に2つのキー（14と21）が入ります。どのスロットも最大2個なので、maxVal=2です。",
+          "analogy": "7つの部屋にお客さんを振り分けたとき、同じ部屋に最大2人入った部屋が一番混んでいるということです。",
+          "deepDive": "ハッシュテーブルでは、異なるキーが同じスロットに割り当てられる「衝突」が起こり得ます。衝突の頻度が多いほど検索性能が低下するため、良いハッシュ関数はキーを均等に分散させます。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "3",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "3は衝突が3回起きたスロットがある場合の値ですが、実際にはどのスロットも最大2つのキーしか格納していません。mod計算を慎重に行いましょう。",
+          "analogy": "部屋の混雑状況を確認したとき、実際より多くのお客さんがいると数え間違えたようなものです。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "5",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "5はキーの総数です。問題は「最も多くのキーが入ったスロットの個数」を聞いており、全キー数ではありません。",
+          "analogy": "全お客さんの人数を答えたのに、一番混んでいる部屋の人数を聞かれていたようなものです。"
+        }
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"table": "{0,0,0,0,0,0,0}"}, "action": "配列tableを全て0で初期化"},
+      {"step": 2, "variables": {"keys[0]": "14", "h": "0", "table[0]": "1"}, "action": "14 mod 7 = 0 → table[0]を1増加"},
+      {"step": 3, "variables": {"keys[1]": "3", "h": "3", "table[3]": "1"}, "action": "3 mod 7 = 3 → table[3]を1増加"},
+      {"step": 4, "variables": {"keys[2]": "21", "h": "0", "table[0]": "2"}, "action": "21 mod 7 = 0 → table[0]を1増加"},
+      {"step": 5, "variables": {"keys[3]": "5", "h": "5", "table[5]": "1"}, "action": "5 mod 7 = 5 → table[5]を1増加"},
+      {"step": 6, "variables": {"keys[4]": "9", "h": "2", "table[2]": "1"}, "action": "9 mod 7 = 2 → table[2]を1増加"},
+      {"step": 7, "variables": {"table": "{2,0,1,1,0,1,0}"}, "action": "最終的なtable状態"},
+      {"step": 8, "variables": {"maxVal": "2"}, "action": "table配列の最大値を探索 → maxVal=2"},
+      {"step": 9, "variables": {"出力": "2"}, "action": "maxVal=2を表示"}
+    ],
+    "traceAnalogy": "7つの部屋がある建物で、受付番号を7で割った余りの部屋に案内されます。14番→0号室、3番→3号室、21番→0号室、5番→5号室、9番→2号室。0号室に2人入り、他の部屋は1人以下。一番混んでいるのは0号室の2人です。",
+    "overallExplanation": {
+      "summary": "5つのキーをハッシュ関数 mod 7 でスロットに振り分け、最も多くのキーが入ったスロットの個数を求めるプログラムです。",
+      "keyPoint": "ハッシュ関数の性質により、異なるキーが同じスロットに入る「衝突」が発生する。衝突の多さがハッシュテーブルの性能を左右する。",
+      "relatedTopics": ["ハッシュ衝突", "チェイン法", "オープンアドレス法"],
+      "studyTip": "mod演算のハッシュ関数では、テーブルサイズに素数を選ぶと衝突が起きにくくなります。各キーのmod計算は必ず手で検算しましょう。"
+    },
+    "tags": ["ハッシュテーブル", "ハッシュ関数", "衝突", "mod演算"]
+  },
+  {
+    "questionId": "q-ds-021",
+    "examType": "科目B",
+    "category": "データ構造",
+    "subcategory": "data-structures",
+    "topic": "ハッシュ衝突のチェイン法",
+    "level": 6,
+    "question": "次の擬似言語プログラムを実行したとき、表示される値はどれか。",
+    "pseudoCode": "// チェイン法によるハッシュテーブル\n// 各スロットは連結リストの先頭ノードへの参照を持つ\n○整数型の配列: bucketCount[5]  // 各バケットの要素数\n○整数型: i\ni を 0 から 4 まで 1 ずつ増やしながら繰り返す\n  bucketCount[i] ← 0\nを繰り返す\n\n○整数型の配列: keys = {11, 4, 23, 9, 16, 14, 7}\n○整数型: h\ni を 0 から 6 まで 1 ずつ増やしながら繰り返す\n  h ← keys[i] mod 5\n  bucketCount[h] ← bucketCount[h] + 1\nを繰り返す\n\n// 最も長いチェインの長さを求める\n○整数型: maxChain ← 0\ni を 0 から 4 まで 1 ずつ増やしながら繰り返す\n  もし bucketCount[i] > maxChain ならば\n    maxChain ← bucketCount[i]\n  を実行する\nを繰り返す\n表示(maxChain)",
+    "choices": [
+      {
+        "id": "a",
+        "text": "1",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "1は全キーが均等に分散した場合の値ですが、7つのキーを5つのバケットに入れるので、少なくとも1つのバケットには2つ以上入ります。実際にmod計算すると3つ入るバケットがあります。",
+          "analogy": "7人を5部屋に振り分ければ、必ずどこかの部屋に2人以上入るのと同じ原理（鳩の巣原理）です。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "2",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "2は最大チェインが2の場合ですが、実際にはバケット4に3つのキー（4, 9, 14）が入るため、最大チェインは3です。",
+          "analogy": "5つの列に並んだレジで、最長の列を数え間違えて、実際より短く見積もってしまったようなものです。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "3",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "各キーのハッシュ値を計算します。11 mod 5=1、4 mod 5=4、23 mod 5=3、9 mod 5=4、16 mod 5=1、14 mod 5=4、7 mod 5=2。bucketCount={0,2,1,1,3}となり、バケット4に3つのキー(4,9,14)が入ります。maxChain=3です。",
+          "analogy": "5列あるレジに7人のお客さんが並びます。レジ4の列には3人が並んでしまい、それが最長の列です。この最長の列の人数が答えです。",
+          "deepDive": "チェイン法は、同じハッシュ値を持つ要素を連結リストでつなぐ衝突解決法です。最長チェインが短いほど検索効率が良くなります。最悪ケースではO(n)、平均ケースではO(1+n/m)（n=要素数、m=バケット数）です。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "7",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "7はキーの総数です。最長チェインはキーの総数ではなく、1つのバケットに入った最大の要素数を求めています。",
+          "analogy": "全お客さんの人数を答えたのに、一番長い列に並んでいる人数を聞かれていたようなものです。"
+        }
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"bucketCount": "{0,0,0,0,0}"}, "action": "バケットカウントを初期化"},
+      {"step": 2, "variables": {"keys[0]": "11", "h": "1", "bucketCount[1]": "1"}, "action": "11 mod 5 = 1 → バケット1に1個目"},
+      {"step": 3, "variables": {"keys[1]": "4", "h": "4", "bucketCount[4]": "1"}, "action": "4 mod 5 = 4 → バケット4に1個目"},
+      {"step": 4, "variables": {"keys[2]": "23", "h": "3", "bucketCount[3]": "1"}, "action": "23 mod 5 = 3 → バケット3に1個目"},
+      {"step": 5, "variables": {"keys[3]": "9", "h": "4", "bucketCount[4]": "2"}, "action": "9 mod 5 = 4 → バケット4に2個目"},
+      {"step": 6, "variables": {"keys[4]": "16", "h": "1", "bucketCount[1]": "2"}, "action": "16 mod 5 = 1 → バケット1に2個目"},
+      {"step": 7, "variables": {"keys[5]": "14", "h": "4", "bucketCount[4]": "3"}, "action": "14 mod 5 = 4 → バケット4に3個目"},
+      {"step": 8, "variables": {"keys[6]": "7", "h": "2", "bucketCount[2]": "1"}, "action": "7 mod 5 = 2 → バケット2に1個目"},
+      {"step": 9, "variables": {"bucketCount": "{0,2,1,1,3}"}, "action": "最終的なバケット状態"},
+      {"step": 10, "variables": {"maxChain": "3"}, "action": "最大チェイン長を探索 → maxChain=3"},
+      {"step": 11, "variables": {"出力": "3"}, "action": "maxChain=3を表示"}
+    ],
+    "traceAnalogy": "5つのポストがあり、手紙の番号を5で割った余りのポストに入れます。11番→1番ポスト、4番→4番ポスト、23番→3番ポスト、9番→4番ポスト、16番→1番ポスト、14番→4番ポスト、7番→2番ポスト。4番ポストに3通入り、これが最多です。",
+    "overallExplanation": {
+      "summary": "チェイン法のハッシュテーブルで、7つのキーを5つのバケットに振り分け、最も長いチェイン（最も多くの要素が入ったバケット）の長さを求めるプログラムです。バケット4に3つ入り、maxChain=3です。",
+      "keyPoint": "チェイン法では同じハッシュ値のキーが連結リストでつながれる。最長チェインが検索の最悪計算量を決める。",
+      "relatedTopics": ["ハッシュ衝突", "オープンアドレス法", "連結リスト", "負荷率"],
+      "studyTip": "チェイン法ではバケット数を増やすか、より良いハッシュ関数を使うことでチェイン長を短くできます。負荷率（要素数/バケット数）が小さいほど効率的です。"
+    },
+    "tags": ["ハッシュテーブル", "チェイン法", "衝突解決", "連結リスト"]
+  },
+  {
+    "questionId": "q-ds-022",
+    "examType": "科目B",
+    "category": "データ構造",
+    "subcategory": "data-structures",
+    "topic": "オープンアドレス法",
+    "level": 6,
+    "question": "次の擬似言語プログラムを実行したとき、表示される値はどれか。",
+    "pseudoCode": "// オープンアドレス法（線形探索法）によるハッシュテーブル\n○整数型の配列: table[7]\n○整数型: i\ni を 0 から 6 まで 1 ずつ増やしながら繰り返す\n  table[i] ← -1  // -1は空を表す\nを繰り返す\n\n○整数型の配列: keys = {10, 17, 24}\n○整数型: h, pos\n\ni を 0 から 2 まで 1 ずつ増やしながら繰り返す\n  h ← keys[i] mod 7\n  pos ← h\n  // 空きスロットが見つかるまで次のスロットを探す\n  pos が 7 未満 かつ table[pos] ≠ -1 の間繰り返す\n    pos ← pos + 1\n  を繰り返す\n  table[pos] ← keys[i]\nを繰り返す\n\n表示(table[4])",
+    "choices": [
+      {
+        "id": "a",
+        "text": "-1",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "-1は空きスロットを表す初期値です。しかしスロット4には衝突により移動してきたキー17が格納されます。10 mod 7=3→table[3]=10、17 mod 7=3→スロット3は使用中なのでtable[4]=17。",
+          "analogy": "駐車場で3番スペースが満車だったので4番に停めた車があるのに、4番が空いていると思い込んだようなものです。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "10",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "10はtable[3]に格納されます。10 mod 7=3 なのでスロット3に直接入ります。スロット4には17が入ります。",
+          "analogy": "3番の駐車スペースに停まっている車を見て、4番の車と間違えたようなものです。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "17",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "キーの格納過程を追跡します。10 mod 7=3→table[3]=10。17 mod 7=3→スロット3は使用中なので次のスロット4を探す→table[4]=17。24 mod 7=3→スロット3,4は使用中なので次のスロット5を探す→table[5]=24。よってtable[4]=17です。",
+          "analogy": "駐車場の3番スペースが既に埋まっていたので、17番の車は次の空きスペースである4番に停めました。その4番を確認すると17番の車が停まっています。",
+          "deepDive": "オープンアドレス法の線形探索法は、衝突時に次のスロットを順に探す方式です。クラスタリング（連続する使用済みスロット）が起きやすく、性能低下の原因になります。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "24",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "24はtable[5]に格納されます。24 mod 7=3→スロット3は10、スロット4は17が使用中→スロット5に格納。table[4]は17です。",
+          "analogy": "5番の駐車スペースの車を見て、4番の車と勘違いしたようなものです。"
+        }
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"table": "{-1,-1,-1,-1,-1,-1,-1}"}, "action": "全スロットを-1（空）で初期化"},
+      {"step": 2, "variables": {"keys[0]": "10", "h": "3", "pos": "3"}, "action": "10 mod 7=3、table[3]は空"},
+      {"step": 3, "variables": {"table[3]": "10"}, "action": "table[3] ← 10"},
+      {"step": 4, "variables": {"keys[1]": "17", "h": "3", "pos": "3"}, "action": "17 mod 7=3、table[3]は使用中"},
+      {"step": 5, "variables": {"pos": "4"}, "action": "pos ← 4、table[4]は空"},
+      {"step": 6, "variables": {"table[4]": "17"}, "action": "table[4] ← 17"},
+      {"step": 7, "variables": {"keys[2]": "24", "h": "3", "pos": "3"}, "action": "24 mod 7=3、table[3]は使用中"},
+      {"step": 8, "variables": {"pos": "4"}, "action": "pos ← 4、table[4]は使用中"},
+      {"step": 9, "variables": {"pos": "5"}, "action": "pos ← 5、table[5]は空"},
+      {"step": 10, "variables": {"table[5]": "24"}, "action": "table[5] ← 24"},
+      {"step": 11, "variables": {"出力": "17"}, "action": "table[4]=17を表示"}
+    ],
+    "traceAnalogy": "7台分の駐車場で、車のナンバーを7で割った余りのスペースに停めるルールです。10号車→3番に停車。17号車→3番は満車なので4番に停車。24号車→3番、4番は満車なので5番に停車。4番を見ると17号車が停まっています。",
+    "overallExplanation": {
+      "summary": "オープンアドレス法（線形探索法）で衝突を解決するプログラムです。10, 17, 24は全てmod 7=3ですが、順にスロット3, 4, 5に格納され、table[4]=17となります。",
+      "keyPoint": "オープンアドレス法の線形探索法は、衝突時にpos+1の位置を順に探す。同じハッシュ値を持つキーは連続したスロットに格納される。",
+      "relatedTopics": ["チェイン法", "二次探索法", "ダブルハッシュ法", "クラスタリング"],
+      "studyTip": "オープンアドレス法は「席が埋まっていたら次の空席を探す」イメージです。線形探索法は簡単ですが、クラスタリングが起きやすいという欠点があります。"
+    },
+    "tags": ["ハッシュテーブル", "オープンアドレス法", "線形探索法", "衝突解決"]
+  },
+  {
+    "questionId": "q-ds-023",
+    "examType": "科目B",
+    "category": "データ構造",
+    "subcategory": "data-structures",
+    "topic": "グラフの隣接リスト表現",
+    "level": 6,
+    "question": "次の擬似言語プログラムを実行したとき、表示される値はどれか。",
+    "pseudoCode": "// 隣接リストでグラフを表現する\n// adj[i]は頂点iに隣接する頂点の配列\n○整数型の配列の配列: adj[5]\nadj[0] ← {1, 3}\nadj[1] ← {0, 2, 4}\nadj[2] ← {1, 4}\nadj[3] ← {0}\nadj[4] ← {1, 2}\n\n// 各頂点の次数（隣接する頂点の数）を計算\n○整数型: maxDeg ← 0\n○整数型: maxNode ← 0\n○整数型: i\n○整数型: deg\n\ni を 0 から 4 まで 1 ずつ増やしながら繰り返す\n  deg ← adj[i]の要素数\n  もし deg > maxDeg ならば\n    maxDeg ← deg\n    maxNode ← i\n  を実行する\nを繰り返す\n\n表示(maxNode)",
+    "choices": [
+      {
+        "id": "a",
+        "text": "0",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "頂点0の次数は2（隣接頂点は1と3）です。頂点1の次数は3（隣接頂点は0, 2, 4）なので、頂点0は最大次数の頂点ではありません。",
+          "analogy": "友達が2人いる人と3人いる人がいたら、3人いる人のほうが「最も友達が多い人」です。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "1",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "各頂点の次数を計算すると、頂点0:2、頂点1:3、頂点2:2、頂点3:1、頂点4:2です。最大次数は3で、その頂点番号は1です。よってmaxNode=1が表示されます。",
+          "analogy": "5人のグループで、一番友達（直接つながり）が多い人を探します。0さんは2人、1さんは3人、2さんは2人、3さんは1人、4さんは2人の友達がいます。一番多い1さんの番号が答えです。",
+          "deepDive": "グラフの次数（degree）は頂点に接続する辺の数です。隣接リスト表現では、各頂点の配列の要素数がそのまま次数になります。ソーシャルネットワーク分析で「ハブ」を見つける際にも次数が使われます。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "3",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "3は最大次数の値（maxDeg）です。問題ではmaxNode（最大次数を持つ頂点の番号）を表示しており、その番号は1です。",
+          "analogy": "「一番友達が多い人は誰？」と聞かれて、友達の人数（3人）を答えてしまい、その人の名前（1番さん）を答え忘れたようなものです。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "4",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "頂点4の次数は2（隣接頂点は1と2）です。最大次数3を持つ頂点1には及びません。",
+          "analogy": "友達が2人の人を、3人の人より友達が多いと勘違いしたようなものです。"
+        }
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"adj[0]": "{1,3}", "adj[1]": "{0,2,4}", "adj[2]": "{1,4}", "adj[3]": "{0}", "adj[4]": "{1,2}"}, "action": "隣接リストを初期化"},
+      {"step": 2, "variables": {"i": "0", "deg": "2", "maxDeg": "2", "maxNode": "0"}, "action": "頂点0の次数=2 > 0 → maxDeg=2, maxNode=0"},
+      {"step": 3, "variables": {"i": "1", "deg": "3", "maxDeg": "3", "maxNode": "1"}, "action": "頂点1の次数=3 > 2 → maxDeg=3, maxNode=1"},
+      {"step": 4, "variables": {"i": "2", "deg": "2"}, "action": "頂点2の次数=2、3以下なので更新なし"},
+      {"step": 5, "variables": {"i": "3", "deg": "1"}, "action": "頂点3の次数=1、3以下なので更新なし"},
+      {"step": 6, "variables": {"i": "4", "deg": "2"}, "action": "頂点4の次数=2、3以下なので更新なし"},
+      {"step": 7, "variables": {"出力": "1"}, "action": "maxNode=1を表示"}
+    ],
+    "traceAnalogy": "5人のSNSユーザーのフォロー関係から、最もフォロワーの多い人を探します。0さんは2人とつながり、1さんは3人、2さんは2人、3さんは1人、4さんは2人。最も多い1さんがインフルエンサーです。",
+    "overallExplanation": {
+      "summary": "隣接リストで表現されたグラフから、最も多くの辺を持つ頂点（最大次数の頂点）を求めるプログラムです。頂点1が次数3で最大です。",
+      "keyPoint": "隣接リストでは各頂点の配列の要素数がその頂点の次数を表す。最大次数の頂点番号と次数の値を混同しないこと。",
+      "relatedTopics": ["隣接行列", "グラフの走査", "次数", "無向グラフ"],
+      "studyTip": "隣接リストは「各頂点が自分の友達リストを持つ」イメージです。次数は友達の人数。maxDeg（値）とmaxNode（番号）を取り違えないよう注意しましょう。"
+    },
+    "tags": ["グラフ", "隣接リスト", "次数", "最大値探索"]
+  },
+  {
+    "questionId": "q-ds-024",
+    "examType": "科目B",
+    "category": "データ構造",
+    "subcategory": "data-structures",
+    "topic": "隣接行列の操作",
+    "level": 6,
+    "question": "次の擬似言語プログラムを実行したとき、表示される値はどれか。",
+    "pseudoCode": "// 隣接行列でグラフを表現する\n// matrix[i][j]=1 は頂点iと頂点jの間に辺があることを示す\n○整数型の二次元配列: matrix[4][4]\nmatrix ← {\n  {0, 1, 1, 0},\n  {1, 0, 1, 1},\n  {1, 1, 0, 0},\n  {0, 1, 0, 0}\n}\n\n// 頂点1と頂点2の共通の隣接頂点を数える\n○整数型: commonCount ← 0\n○整数型: k\nk を 0 から 3 まで 1 ずつ増やしながら繰り返す\n  もし matrix[1][k] = 1 かつ matrix[2][k] = 1 ならば\n    commonCount ← commonCount + 1\n  を実行する\nを繰り返す\n\n表示(commonCount)",
+    "choices": [
+      {
+        "id": "a",
+        "text": "0",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "0は共通の隣接頂点が1つもない場合の値です。しかし頂点0は頂点1とも頂点2とも隣接しているため、少なくとも1つの共通隣接頂点があります。",
+          "analogy": "2人の共通の友人がいないと思い込みましたが、実は共通の友人がいるケースです。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "1",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "頂点1の隣接頂点は{0, 2, 3}（matrix[1]で1が立つ列:0,2,3）、頂点2の隣接頂点は{0, 1}（matrix[2]で1が立つ列:0,1）です。k=0: matrix[1][0]=1かつmatrix[2][0]=1→条件成立。k=1: matrix[1][1]=0→不成立。k=2: matrix[2][2]=0→不成立。k=3: matrix[2][3]=0→不成立。共通するのは頂点0だけで、commonCount=1です。",
+          "analogy": "1さんと2さんの共通の友人を探します。1さんの友人は{0さん,2さん,3さん}、2さんの友人は{0さん,1さん}。共通の友人は0さんだけなので答えは1人です。",
+          "deepDive": "隣接行列で2頂点の共通隣接頂点を求める操作は、SNSの「共通の友達」機能に相当します。行列演算では、2つの行ベクトルのAND演算と見なせます。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "2",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "2は頂点1と頂点2が互いに隣接していることを別途数えてしまった場合の値かもしれません。しかしk=1のときmatrix[1][1]=0（自分自身への辺はない）、k=2のときmatrix[2][2]=0なので、条件を満たすのはk=0の1回だけです。",
+          "analogy": "共通の友人を数えるとき、お互いを友人として二重に数えてしまったようなものです。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "3",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "3は頂点1の隣接頂点の数（次数）です。問題では頂点1と頂点2の「共通の」隣接頂点の数を聞いており、1が正解です。",
+          "analogy": "1さんの友人の数と、1さんと2さんの共通の友人の数を混同したようなものです。"
+        }
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"matrix": "{{0,1,1,0},{1,0,1,1},{1,1,0,0},{0,1,0,0}}"}, "action": "隣接行列を初期化"},
+      {"step": 2, "variables": {"k": "0", "matrix[1][0]": "1", "matrix[2][0]": "1", "commonCount": "1"}, "action": "k=0: 両方1 → commonCount=1"},
+      {"step": 3, "variables": {"k": "1", "matrix[1][1]": "0", "matrix[2][1]": "1"}, "action": "k=1: matrix[1][1]=0 → 条件不成立"},
+      {"step": 4, "variables": {"k": "2", "matrix[1][2]": "1", "matrix[2][2]": "0"}, "action": "k=2: matrix[2][2]=0 → 条件不成立"},
+      {"step": 5, "variables": {"k": "3", "matrix[1][3]": "1", "matrix[2][3]": "0"}, "action": "k=3: matrix[2][3]=0 → 条件不成立"},
+      {"step": 6, "variables": {"出力": "1"}, "action": "commonCount=1を表示"}
+    ],
+    "traceAnalogy": "4人の友人関係図（行列）から、1さんと2さんの共通の友人を探します。各人について「1さんの友人か？」と「2さんの友人か？」の両方がYesの人を数えます。0さんだけが両方Yesなので、共通の友人は1人です。",
+    "overallExplanation": {
+      "summary": "隣接行列で表現されたグラフにおいて、頂点1と頂点2の共通隣接頂点の数を求めるプログラムです。共通するのは頂点0のみで、答えは1です。",
+      "keyPoint": "隣接行列ではmatrix[i][k]=1かつmatrix[j][k]=1となるkが頂点iとjの共通隣接頂点。対角成分matrix[i][i]は通常0（自己ループなし）。",
+      "relatedTopics": ["隣接リスト", "グラフの次数", "共通友人問題", "行列演算"],
+      "studyTip": "隣接行列の対角成分（matrix[i][i]）は自己ループがなければ0です。共通隣接頂点を求めるときは、行列の2行分を見比べて両方1の列を数えます。"
+    },
+    "tags": ["グラフ", "隣接行列", "共通隣接頂点", "二次元配列"]
+  },
+  {
+    "questionId": "q-ds-025",
+    "examType": "科目B",
+    "category": "データ構造",
+    "subcategory": "data-structures",
+    "topic": "幅優先探索（BFS）",
+    "level": 7,
+    "question": "次の擬似言語プログラムを実行したとき、表示される値はどれか。",
+    "pseudoCode": "// 幅優先探索（BFS）で開始頂点からの距離を求める\n○整数型の配列の配列: adj[5]\nadj[0] ← {1, 2}\nadj[1] ← {0, 3, 4}\nadj[2] ← {0, 3}\nadj[3] ← {1, 2, 4}\nadj[4] ← {1, 3}\n\n○整数型の配列: dist[5]\n○整数型: i\ni を 0 から 4 まで 1 ずつ増やしながら繰り返す\n  dist[i] ← -1  // 未訪問\nを繰り返す\n\n// キュー（先入れ先出し）\n○整数型の配列: queue[5]\n○整数型: front ← 0\n○整数型: rear ← 0\n\n// 開始頂点0からBFS\ndist[0] ← 0\nqueue[rear] ← 0\nrear ← rear + 1\n\n○整数型: curr, next, j\nfront < rear の間繰り返す\n  curr ← queue[front]\n  front ← front + 1\n  j を 0 から adj[curr]の要素数 - 1 まで 1 ずつ増やしながら繰り返す\n    next ← adj[curr][j]\n    もし dist[next] = -1 ならば\n      dist[next] ← dist[curr] + 1\n      queue[rear] ← next\n      rear ← rear + 1\n    を実行する\n  を繰り返す\nを繰り返す\n\n表示(dist[4])",
+    "choices": [
+      {
+        "id": "a",
+        "text": "1",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "距離1は頂点0から直接辺でつながった頂点（1と2）の距離です。頂点4は頂点0と直接つながっていないため、距離1ではありません。",
+          "analogy": "自宅から目的地に直行便があると思ったが、実際は1回乗り換えが必要だったようなものです。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "2",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "BFSで頂点0からの最短距離を求めます。dist[0]=0。頂点0の隣接頂点1,2にdist=1を設定。頂点1の隣接頂点のうち未訪問の3,4にdist=2を設定。よってdist[4]=2です。経路は0→1→4（距離2）です。",
+          "analogy": "駅の路線図で、0番駅から4番駅まで行くのに最少で2回電車に乗る必要があります。0番駅→1番駅→4番駅というルートが最短です。",
+          "deepDive": "BFS（幅優先探索）はキューを使って、始点から近い頂点から順に探索するアルゴリズムです。重みなしグラフでの最短経路を求めるのに使われます。計算量はO(V+E)です。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "3",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "距離3は正しくありません。頂点4は頂点1を経由して距離2で到達できます。BFSは最短距離を求めるため、より遠い経路ではなく最短経路の距離が記録されます。",
+          "analogy": "遠回りのルートの距離を答えてしまいましたが、最短ルートはもっと近いです。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "4",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "4は目的の頂点番号であり、距離ではありません。BFSでの最短距離は頂点番号とは関係なく、経路上の辺の数で決まります。",
+          "analogy": "目的地の名前と、そこまでの距離を混同したようなものです。"
+        }
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"dist": "{0,-1,-1,-1,-1}", "queue": "{0}", "front": "0", "rear": "1"}, "action": "頂点0を訪問済み(dist=0)にしてキューに追加"},
+      {"step": 2, "variables": {"curr": "0", "front": "1"}, "action": "キューから頂点0を取り出す"},
+      {"step": 3, "variables": {"dist[1]": "1", "dist[2]": "1", "queue": "{0,1,2}", "rear": "3"}, "action": "頂点0の隣接頂点1,2をdist=1でキューに追加"},
+      {"step": 4, "variables": {"curr": "1", "front": "2"}, "action": "キューから頂点1を取り出す"},
+      {"step": 5, "variables": {"dist[3]": "2", "dist[4]": "2", "queue": "{0,1,2,3,4}", "rear": "5"}, "action": "頂点1の隣接頂点3,4をdist=2でキューに追加（0は訪問済み）"},
+      {"step": 6, "variables": {"curr": "2", "front": "3"}, "action": "キューから頂点2を取り出す"},
+      {"step": 7, "variables": {}, "action": "頂点2の隣接頂点0,3は全て訪問済み → 追加なし"},
+      {"step": 8, "variables": {"curr": "3", "front": "4"}, "action": "キューから頂点3を取り出す、隣接頂点は全て訪問済み"},
+      {"step": 9, "variables": {"curr": "4", "front": "5"}, "action": "キューから頂点4を取り出す、隣接頂点は全て訪問済み"},
+      {"step": 10, "variables": {"出力": "2"}, "action": "dist[4]=2を表示"}
+    ],
+    "traceAnalogy": "地下鉄の路線図で、0番駅から4番駅までの最少乗車回数を調べます。まず0番駅から直接行ける1番駅と2番駅を確認（1回乗車）。次に1番駅から行ける3番駅と4番駅を確認（2回乗車）。4番駅に最少2回の乗車で到着できます。",
+    "overallExplanation": {
+      "summary": "BFS（幅優先探索）で頂点0から各頂点への最短距離を求めるプログラムです。頂点4への最短距離は2（0→1→4）です。",
+      "keyPoint": "BFSはキュー（先入れ先出し）を使い、開始頂点から近い順に探索する。重みなしグラフの最短距離を求めるのに適している。",
+      "relatedTopics": ["深さ優先探索", "最短経路問題", "キュー", "グラフ探索"],
+      "studyTip": "BFSは「波紋が広がるように」探索するイメージです。キューに入れた順に処理するため、距離が近い頂点から順に探索されます。"
+    },
+    "tags": ["グラフ", "BFS", "幅優先探索", "キュー", "最短距離"]
+  },
+  {
+    "questionId": "q-ds-026",
+    "examType": "科目B",
+    "category": "データ構造",
+    "subcategory": "data-structures",
+    "topic": "深さ優先探索（DFS）",
+    "level": 7,
+    "question": "次の擬似言語プログラムを実行したとき、表示される値はどれか。",
+    "pseudoCode": "// 深さ優先探索（DFS）でスタックを使い訪問順を記録する\n○整数型の配列の配列: adj[5]\nadj[0] ← {1, 3}\nadj[1] ← {0, 2}\nadj[2] ← {1, 4}\nadj[3] ← {0, 4}\nadj[4] ← {2, 3}\n\n○論理型の配列: visited[5]\n○整数型: i\ni を 0 から 4 まで 1 ずつ増やしながら繰り返す\n  visited[i] ← false\nを繰り返す\n\n// スタック（後入れ先出し）\n○整数型の配列: stack[10]\n○整数型: top ← -1\n\n// 訪問順を記録する配列\n○整数型の配列: order[5]\n○整数型: orderIdx ← 0\n\n// 頂点0からDFS開始\ntop ← top + 1\nstack[top] ← 0\n\n○整数型: curr, j, next\ntop >= 0 の間繰り返す\n  curr ← stack[top]\n  top ← top - 1\n  もし visited[curr] = false ならば\n    visited[curr] ← true\n    order[orderIdx] ← curr\n    orderIdx ← orderIdx + 1\n    // 隣接頂点を逆順でスタックに積む（番号の小さい方を先に訪問するため）\n    j を adj[curr]の要素数 - 1 から 0 まで 1 ずつ減らしながら繰り返す\n      next ← adj[curr][j]\n      もし visited[next] = false ならば\n        top ← top + 1\n        stack[top] ← next\n      を実行する\n    を繰り返す\n  を実行する\nを繰り返す\n\n表示(order[3])",
+    "choices": [
+      {
+        "id": "a",
+        "text": "2",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "頂点2は3番目（order[2]）に訪問されます。order[3]は4番目に訪問された頂点であり、DFSの訪問順序を正確にトレースする必要があります。",
+          "analogy": "迷路を進む順番を1つずつ間違えて数えたようなものです。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "3",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "頂点3はorder[4]（最後）に訪問されます。DFSでは0→1→2→4→3の順に訪問され、order[3]=4です。",
+          "analogy": "迷路の分かれ道でどちらに進んだか記憶違いしたようなものです。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "4",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "DFSの訪問順を追跡します。stack={0}。0をポップし訪問→adj[0]={1,3}を逆順(3,1)で積む→stack={3,1}。1をポップし訪問→adj[1]={0,2}を逆順(2,0)、0は訪問済みなので2だけ積む→stack={3,2}。2をポップし訪問→adj[2]={1,4}を逆順(4,1)、1は訪問済みなので4だけ積む→stack={3,4}。4をポップし訪問→adj[4]={2,3}、2は訪問済み、3を積む→stack={3,3}。訪問順は0,1,2,4,3。order[3]=4です。",
+          "analogy": "洞窟探検で入口(0)から出発し、常に番号の小さい通路から先に進みます。0→1→2→4→3の順に探検し、4番目(order[3])に訪れた部屋は4番です。",
+          "deepDive": "DFS（深さ優先探索）はスタックを使って、一つの経路を行き止まりまで進み、その後バックトラックして別の経路を探索します。迷路探索や連結成分の検出などに使われます。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "1",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "頂点1はorder[1]（2番目）に訪問されます。DFSでは頂点0の隣接頂点のうち番号の小さい1が最初に訪問されます。order[3]は4番目の訪問で、頂点4です。",
+          "analogy": "迷路の探索順序を頭の中で整理しきれず、実際とは違う順番だと思い込んだようなものです。"
+        }
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"stack": "{0}", "top": "0"}, "action": "頂点0をスタックに積む"},
+      {"step": 2, "variables": {"curr": "0", "visited[0]": "true", "order[0]": "0"}, "action": "0をポップし訪問。adj[0]={1,3}を逆順で積む→stack={3,1}"},
+      {"step": 3, "variables": {"stack": "{3,1}", "top": "1"}, "action": "スタック: 底[3, 1]上"},
+      {"step": 4, "variables": {"curr": "1", "visited[1]": "true", "order[1]": "1"}, "action": "1をポップし訪問。adj[1]={0,2}逆順→0は訪問済、2を積む→stack={3,2}"},
+      {"step": 5, "variables": {"stack": "{3,2}", "top": "1"}, "action": "スタック: 底[3, 2]上"},
+      {"step": 6, "variables": {"curr": "2", "visited[2]": "true", "order[2]": "2"}, "action": "2をポップし訪問。adj[2]={1,4}逆順→1は訪問済、4を積む→stack={3,4}"},
+      {"step": 7, "variables": {"stack": "{3,4}", "top": "1"}, "action": "スタック: 底[3, 4]上"},
+      {"step": 8, "variables": {"curr": "4", "visited[4]": "true", "order[3]": "4"}, "action": "4をポップし訪問。adj[4]={2,3}逆順→2は訪問済、3を積む→stack={3,3}"},
+      {"step": 9, "variables": {"curr": "3", "visited[3]": "true", "order[4]": "3"}, "action": "3をポップし訪問。adj[3]={0,4}→全て訪問済み"},
+      {"step": 10, "variables": {"出力": "4"}, "action": "order[3]=4を表示"}
+    ],
+    "traceAnalogy": "洞窟探検で入口(0)から出発し、スタック方式で隣接頂点を逆順に積むことで番号の小さい通路から先に進みます。0→1→2→4→3の順に洞窟を探検し、4番目(order[3])に訪れた部屋は4番の部屋です。",
+    "overallExplanation": {
+      "summary": "DFS（深さ優先探索）でスタックを用いて頂点0からグラフを探索するプログラムです。訪問順はorder={0,1,2,4,3}で、order[3]=4が表示されます。",
+      "keyPoint": "DFSはスタック（後入れ先出し）を使う。隣接頂点を逆順にスタックに積むことで、番号の小さい頂点から先に訪問できる。",
+      "relatedTopics": ["幅優先探索", "スタック", "再帰", "バックトラック"],
+      "studyTip": "DFSのスタック操作は丁寧に追跡しましょう。「逆順に積む」理由は、スタックの後入れ先出し特性により、先に積んだものが後に出てくるからです。"
+    },
+    "tags": ["グラフ", "DFS", "深さ優先探索", "スタック", "訪問順序"]
+  },
+  {
+    "questionId": "q-ds-027",
+    "examType": "科目B",
+    "category": "データ構造",
+    "subcategory": "data-structures",
+    "topic": "優先度付きキュー（ヒープ）",
+    "level": 7,
+    "question": "次の擬似言語プログラムを実行したとき、表示される値はどれか。",
+    "pseudoCode": "// 最小ヒープ（配列で実装）\n// 親のインデックス: (i-1) ÷ 2 の商\n// 左の子: 2*i+1、右の子: 2*i+2\n○整数型の配列: heap[10]\n○整数型: size ← 0\n\n// ヒープに要素を挿入する関数\n○関数: insert(○整数型: val)\n  heap[size] ← val\n  ○整数型: idx ← size\n  size ← size + 1\n  // 上方向に修正（親より小さければ交換）\n  ○整数型: parent\n  idx > 0 の間繰り返す\n    parent ← (idx - 1) ÷ 2 の商\n    もし heap[idx] < heap[parent] ならば\n      // 交換\n      ○整数型: tmp ← heap[idx]\n      heap[idx] ← heap[parent]\n      heap[parent] ← tmp\n      idx ← parent\n    そうでなければ\n      idx ← 0  // ループを抜ける\n    を実行する\n  を繰り返す\nを関数の終わり\n\ninsert(8)\ninsert(5)\ninsert(3)\ninsert(7)\ninsert(1)\n\n表示(heap[0])",
+    "choices": [
+      {
+        "id": "a",
+        "text": "8",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "8は最初に挿入された値ですが、最小ヒープでは最小値が根（heap[0]）に来ます。その後5, 3, 1が挿入され、8は根から押し出されます。",
+          "analogy": "最初に来た人がずっと先頭にいると思ったら、自分より優先度の高い人に先を譲ったようなものです。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "3",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "3はinsert(3)の時点では根になりますが、その後insert(1)が実行され、1が新たな根になります。最終的にheap[0]=1です。",
+          "analogy": "一時的に先頭だった人が、さらに優先度の高い人に追い越されたようなものです。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "1",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "最小ヒープでは常に最小値が根（heap[0]）に来ます。insert操作のたびに上方向修正（親より小さければ交換）が行われます。5つの値{8,5,3,7,1}を順に挿入した結果、最小値の1がheap[0]に配置されます。",
+          "analogy": "病院の待合室で、重症度の高い患者が常に一番先に診察される「トリアージ」のようなものです。数値が小さいほど優先度が高く、最も優先度の高い1が先頭に来ます。",
+          "deepDive": "最小ヒープは完全二分木で、任意のノードの値がその子ノードの値以下である性質を持ちます。挿入時は末尾に追加してから上方向に修正（sift-up / bubble-up）します。根には常に最小値が来るため、最小値の取得はO(1)です。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "5",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "5はinsert(5)の時点で根になりますが、insert(3)やinsert(1)により根の位置から移動します。最終的にheap[0]=1です。",
+          "analogy": "待合室で2番目に来た人が、後から来たもっと急患に先を譲られたようなものです。"
+        }
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"heap": "{8}", "size": "1"}, "action": "insert(8): heap[0]=8、根なので交換不要"},
+      {"step": 2, "variables": {"heap": "{5,8}", "size": "2"}, "action": "insert(5): heap[1]=5、親heap[0]=8より小→交換→heap={5,8}"},
+      {"step": 3, "variables": {"heap": "{3,8,5}", "size": "3"}, "action": "insert(3): heap[2]=3、親heap[0]=5より小→交換→heap={3,8,5}"},
+      {"step": 4, "variables": {"heap": "{3,7,5,8}", "size": "4"}, "action": "insert(7): heap[3]=7、親heap[1]=8より小→交換→heap={3,7,5,8}"},
+      {"step": 5, "variables": {"heap": "{1,3,5,8,7}", "size": "5"}, "action": "insert(1): heap[4]=1、親heap[1]=7より小→交換→heap[1]=1,heap[4]=7。次に親heap[0]=3より小→交換→heap={1,3,5,8,7}"},
+      {"step": 6, "variables": {"出力": "1"}, "action": "heap[0]=1を表示"}
+    ],
+    "traceAnalogy": "救急病院のトリアージです。最初に重症度8の患者が来て先頭に。次に重症度5の患者→8より重症なので先頭に。重症度3→さらに先頭に。重症度7→3の後ろ。最後に重症度1→最も重症なので先頭に。先頭の患者（重症度1）が表示されます。",
+    "overallExplanation": {
+      "summary": "最小ヒープに5つの値を挿入し、根の値を表示するプログラムです。最小ヒープの根には常に最小値が来るため、heap[0]=1が表示されます。",
+      "keyPoint": "最小ヒープの根（heap[0]）には常に全要素の最小値が来る。挿入時は末尾に追加して親と比較しながら上に移動する。",
+      "relatedTopics": ["最大ヒープ", "ヒープソート", "優先度付きキュー", "完全二分木"],
+      "studyTip": "ヒープの親子関係は配列インデックスで計算できます。親=(i-1)/2、左子=2i+1、右子=2i+2。挿入はO(log n)、最小値取得はO(1)です。"
+    },
+    "tags": ["ヒープ", "優先度付きキュー", "最小ヒープ", "完全二分木"]
+  },
+  {
+    "questionId": "q-ds-028",
+    "examType": "科目B",
+    "category": "データ構造",
+    "subcategory": "data-structures",
+    "topic": "ダブルエンドキュー",
+    "level": 7,
+    "question": "次の擬似言語プログラムを実行したとき、表示される値はどれか。",
+    "pseudoCode": "// ダブルエンドキュー（Deque）の操作\n// 配列で実装し、前後両端から追加・削除可能\n○整数型の配列: deque[10]\n○整数型: front ← 5  // 中央から開始\n○整数型: rear ← 5\n\n// 末尾に追加\n○関数: pushBack(○整数型: val)\n  deque[rear] ← val\n  rear ← rear + 1\nを関数の終わり\n\n// 先頭に追加\n○関数: pushFront(○整数型: val)\n  front ← front - 1\n  deque[front] ← val\nを関数の終わり\n\n// 末尾から削除して返す\n○関数: popBack() 戻り値: 整数型\n  rear ← rear - 1\n  戻り値 ← deque[rear]\nを関数の終わり\n\n// 先頭から削除して返す\n○関数: popFront() 戻り値: 整数型\n  戻り値 ← deque[front]\n  front ← front + 1\nを関数の終わり\n\npushBack(10)\npushBack(20)\npushFront(30)\npushBack(40)\npushFront(50)\n\n○整数型: a ← popFront()\n○整数型: b ← popBack()\n○整数型: c ← popFront()\n\n表示(a + b + c)",
+    "choices": [
+      {
+        "id": "a",
+        "text": "60",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "60は10+20+30の合計ですが、popの順序を考慮していません。popFront()は先頭から、popBack()は末尾から取り出すため、挿入順ではなく位置関係で決まります。",
+          "analogy": "電車の先頭車両と最後尾車両からの乗り降りを無視して、乗車順だけで考えてしまったようなものです。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "100",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "100は50+40+10の計算ですが、3回目のpopFront()で取り出されるのは10ではなく30です。デキューの中身の順序を正確に追跡する必要があります。",
+          "analogy": "電車の座席の並び順を間違えて、違う人が降りてしまったようなものです。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "110",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "110は50+30+30のような計算ですが、実際の操作結果とは異なります。pushFrontとpushBackの位置関係を正確に追跡しましょう。",
+          "analogy": "同じ人を2回数えてしまったようなものです。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "120",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "操作後のデキュー内容を追跡します。pushBack(10)→{10}、pushBack(20)→{10,20}、pushFront(30)→{30,10,20}、pushBack(40)→{30,10,20,40}、pushFront(50)→{50,30,10,20,40}。popFront()→a=50（先頭）、popBack()→b=40（末尾）、popFront()→c=30（新しい先頭）。a+b+c=50+40+30=120。",
+          "analogy": "両端から乗り降りできる電車です。後ろから10番,20番が乗車、前から30番が乗車、後ろから40番が乗車、前から50番が乗車。電車内は前から[50,30,10,20,40]。前から50番下車、後ろから40番下車、前から30番下車。下車した3人の番号合計は120です。",
+          "deepDive": "ダブルエンドキュー（Deque）は先頭と末尾の両端から要素の追加・削除ができるデータ構造です。スタック（LIFO）とキュー（FIFO）の両方の機能を併せ持ちます。スライディングウィンドウの最大値問題など、様々なアルゴリズムで活用されます。"
+        }
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"front": "5", "rear": "5"}, "action": "デキューを初期化（空の状態）"},
+      {"step": 2, "variables": {"deque[5]": "10", "rear": "6"}, "action": "pushBack(10): 末尾に10を追加"},
+      {"step": 3, "variables": {"deque[6]": "20", "rear": "7"}, "action": "pushBack(20): 末尾に20を追加"},
+      {"step": 4, "variables": {"front": "4", "deque[4]": "30"}, "action": "pushFront(30): 先頭に30を追加"},
+      {"step": 5, "variables": {"deque[7]": "40", "rear": "8"}, "action": "pushBack(40): 末尾に40を追加"},
+      {"step": 6, "variables": {"front": "3", "deque[3]": "50"}, "action": "pushFront(50): 先頭に50を追加"},
+      {"step": 7, "variables": {"a": "50", "front": "4"}, "action": "popFront(): 先頭の50を取り出し、a=50"},
+      {"step": 8, "variables": {"b": "40", "rear": "7"}, "action": "popBack(): 末尾の40を取り出し、b=40"},
+      {"step": 9, "variables": {"c": "30", "front": "5"}, "action": "popFront(): 先頭の30を取り出し、c=30"},
+      {"step": 10, "variables": {"出力": "120"}, "action": "a+b+c = 50+40+30 = 120を表示"}
+    ],
+    "traceAnalogy": "両端から出入りできるトンネルです。右口から10番車、20番車が入場。左口から30番車が入場。右口から40番車が入場。左口から50番車が入場。トンネル内は左から[50,30,10,20,40]。左口から50番車が退場(a=50)、右口から40番車が退場(b=40)、左口から30番車が退場(c=30)。退場した3台の番号合計は120。",
+    "overallExplanation": {
+      "summary": "ダブルエンドキュー（Deque）で先頭・末尾から要素の追加と取り出しを行うプログラムです。デキュー内容{50,30,10,20,40}から先頭2回・末尾1回取り出し、50+40+30=120を表示します。",
+      "keyPoint": "Dequeは両端操作可能。pushFrontは先頭追加、pushBackは末尾追加、popFrontは先頭取出、popBackは末尾取出。各操作後の要素の並びを正確に追跡すること。",
+      "relatedTopics": ["キュー", "スタック", "循環バッファ", "スライディングウィンドウ"],
+      "studyTip": "Dequeの操作は「両端から入れ出しできるトンネル」をイメージしましょう。紙に要素の並びを書きながら、front/rearの動きを1操作ずつ追跡するのが確実です。"
+    },
+    "tags": ["デキュー", "ダブルエンドキュー", "両端キュー", "スタック", "キュー"]
+  }
+]

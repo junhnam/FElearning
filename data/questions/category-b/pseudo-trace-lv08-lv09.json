@@ -1,0 +1,720 @@
+[
+  {
+    "questionId": "q-trace-053",
+    "examType": "科目B",
+    "category": "擬似言語トレース",
+    "subcategory": "擬似言語トレース",
+    "topic": "ハノイの塔（再帰）",
+    "level": 8,
+    "question": "次の擬似言語プログラムを実行したとき、表示される値は何か。",
+    "pseudoCode": "○整数型: count\ncount ← 0\n\n○手続き hanoi(整数型: n, 文字型: from, 文字型: to, 文字型: via)\n  もし n = 0 ならば\n    return\n  を実行する\n  hanoi(n - 1, from, via, to)\n  count ← count + 1\n  hanoi(n - 1, via, to, from)\n\nhanoi(3, \"A\", \"C\", \"B\")\n表示(count)",
+    "choices": [
+      {
+        "text": "7",
+        "isCorrect": true,
+        "whyCorrect": "ハノイの塔でn枚の円盤を移動するには 2^n - 1 回の移動が必要です。n=3 なので 2^3 - 1 = 7 回です。再帰的に hanoi(3)→hanoi(2)を2回＋1回→hanoi(1)を4回＋2回＋1回 = 7回のcountインクリメントが行われます。",
+        "analogy": "3段の箱を積み替える作業です。1段なら1回、2段なら3回、3段なら7回と、段数が増えるたびに「前の回数×2＋1」になります。",
+        "deepDive": "ハノイの塔は再帰の典型例で、移動回数は T(n) = 2T(n-1) + 1 の漸化式で表されます。これを解くと T(n) = 2^n - 1 です。"
+      },
+      {
+        "text": "8",
+        "isCorrect": false,
+        "whyWrong": "8 = 2^3 です。正しくは 2^3 - 1 = 7 です。countのインクリメントは各再帰の「間」で行われるため、2^n ではなく 2^n - 1 回です。",
+        "analogy": "引っ越しの箱の数を、実際の移動回数ではなく箱の数×2で計算してしまったようなものです。"
+      },
+      {
+        "text": "6",
+        "isCorrect": false,
+        "whyWrong": "6回は n=3 のハノイの塔の正しい移動回数ではありません。再帰の展開を正確にトレースすると、hanoi(1)が4回、hanoi(2)の中央で2回、hanoi(3)の中央で1回の計7回です。",
+        "analogy": "引っ越し作業で1回分の移動をカウントし忘れたようなものです。"
+      },
+      {
+        "text": "9",
+        "isCorrect": false,
+        "whyWrong": "9 = 3^2 ですが、ハノイの塔の移動回数は 2^n - 1 で計算されます。3の2乗ではなく、2の3乗から1を引いた値が正解です。",
+        "analogy": "段数の2乗と勘違いしてしまうケースです。実際は2を段数回かけて1を引きます。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"count": 0}, "action": "count を 0 で初期化"},
+      {"step": 2, "variables": {"count": 0, "呼出": "hanoi(3,A,C,B)"}, "action": "hanoi(3,A,C,B) を呼び出し"},
+      {"step": 3, "variables": {"count": 0, "呼出": "hanoi(2,A,B,C)"}, "action": "hanoi(2,A,B,C) を呼び出し"},
+      {"step": 4, "variables": {"count": 0, "呼出": "hanoi(1,A,C,B)"}, "action": "hanoi(1,A,C,B) を呼び出し"},
+      {"step": 5, "variables": {"count": 1}, "action": "hanoi(1)中央: count←1, hanoi(0)は即return"},
+      {"step": 6, "variables": {"count": 2}, "action": "hanoi(2)中央: count←2"},
+      {"step": 7, "variables": {"count": 3}, "action": "hanoi(1,C,B,A)中央: count←3"},
+      {"step": 8, "variables": {"count": 4}, "action": "hanoi(3)中央: count←4"},
+      {"step": 9, "variables": {"count": 5}, "action": "hanoi(2,B,C,A)→hanoi(1,B,A,C)中央: count←5"},
+      {"step": 10, "variables": {"count": 6}, "action": "hanoi(2,B,C,A)中央: count←6"},
+      {"step": 11, "variables": {"count": 7}, "action": "hanoi(1,A,C,B)中央: count←7"},
+      {"step": 12, "variables": {"count": 7}, "action": "表示(count) → 7"}
+    ],
+    "traceAnalogy": "3枚のお皿を棒Aから棒Cに移す作業です。1枚ずつしか移動できず、大きなお皿の上に小さなお皿しか置けません。全部移すのに7回の移動が必要で、countがその回数を数えています。",
+    "overallExplanation": "ハノイの塔は再帰の代表的な問題です。n枚の場合、上のn-1枚を退避→1枚移動→n-1枚を戻すという3段階の処理を再帰的に行います。移動回数は 2^n - 1 で、n=3 なら 7 です。"
+  },
+  {
+    "questionId": "q-trace-054",
+    "examType": "科目B",
+    "category": "擬似言語トレース",
+    "subcategory": "擬似言語トレース",
+    "topic": "二分木の中順走査（再帰）",
+    "level": 8,
+    "question": "次の擬似言語プログラムを実行したとき、表示される値は何か。",
+    "pseudoCode": "○整数型の配列: left = {1, 3, -1, -1, -1, -1, -1}\n○整数型の配列: right = {2, 4, -1, -1, -1, -1, -1}\n○整数型の配列: value = {50, 30, 70, 20, 40, 0, 0}\n○整数型: result\nresult ← 0\n\n○手続き inorder(整数型: node)\n  もし node = -1 ならば\n    return\n  を実行する\n  inorder(left[node])\n  result ← result + value[node]\n  inorder(right[node])\n\ninorder(0)\n表示(result)",
+    "choices": [
+      {
+        "text": "210",
+        "isCorrect": true,
+        "whyCorrect": "中順走査はすべてのノードを訪問します。訪問順は node3(20)→node1(30)→node4(40)→node0(50)→node2(70) で、合計 20+30+40+50+70 = 210 です。",
+        "analogy": "家系図の全メンバーを左から順に訪問し、全員のお年玉を集めるようなものです。全員分を合計するので、訪問順に関係なく全ノードの値の合計になります。",
+        "deepDive": "中順走査（左→根→右）で二分探索木を走査すると、値が昇順に並びます。ただし今回は全ノードの合計を求めるので、走査順序に関わらず結果は同じです。"
+      },
+      {
+        "text": "150",
+        "isCorrect": false,
+        "whyWrong": "150はルートとその左右の子の合計（50+30+70=150）です。再帰的に全ノードを走査するため、孫ノード（20と40）も含めた合計210が正解です。",
+        "analogy": "3世代の家族で、親と子だけ数えて孫を忘れてしまったようなものです。"
+      },
+      {
+        "text": "120",
+        "isCorrect": false,
+        "whyWrong": "120 = 20+30+70 で、node0(50)とnode4(40)を含めていない計算です。中順走査はすべてのノードを漏れなく訪問します。",
+        "analogy": "出席を取るとき何人か飛ばしてしまったようなものです。全員分をカウントする必要があります。"
+      },
+      {
+        "text": "50",
+        "isCorrect": false,
+        "whyWrong": "50はルートノードの値のみです。再帰処理により左右の部分木もすべて走査されるため、全ノードの合計 210 が正解です。",
+        "analogy": "木の根っこだけ見て、枝葉を見なかったようなものです。再帰は末端まで探索します。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"result": 0}, "action": "result を 0 で初期化"},
+      {"step": 2, "variables": {"node": 0}, "action": "inorder(0) を呼び出し（ルート、値50）"},
+      {"step": 3, "variables": {"node": 1}, "action": "inorder(1) を呼び出し（左の子、値30）"},
+      {"step": 4, "variables": {"node": 3}, "action": "inorder(3) を呼び出し（左の孫、値20）"},
+      {"step": 5, "variables": {"node": -1}, "action": "inorder(-1) → return（左なし）"},
+      {"step": 6, "variables": {"result": 20}, "action": "result ← 0 + 20 = 20（node3の値を加算）"},
+      {"step": 7, "variables": {"node": -1}, "action": "inorder(-1) → return（右なし）"},
+      {"step": 8, "variables": {"result": 50}, "action": "result ← 20 + 30 = 50（node1の値を加算）"},
+      {"step": 9, "variables": {"node": 4}, "action": "inorder(4) を呼び出し（右の孫、値40）"},
+      {"step": 10, "variables": {"result": 90}, "action": "result ← 50 + 40 = 90（node4の値を加算）"},
+      {"step": 11, "variables": {"result": 140}, "action": "result ← 90 + 50 = 140（node0の値を加算）"},
+      {"step": 12, "variables": {"node": 2}, "action": "inorder(2) を呼び出し（右の子、値70）"},
+      {"step": 13, "variables": {"result": 210}, "action": "result ← 140 + 70 = 210（node2の値を加算）"},
+      {"step": 14, "variables": {"result": 210}, "action": "表示(result) → 210"}
+    ],
+    "traceAnalogy": "図書館の本棚を左から順に整理する作業です。棚の中の棚（子ノード）があれば先にそちらを処理し、すべての本の値段を合計していきます。20+30+40+50+70 = 210円です。",
+    "overallExplanation": "二分木を配列で表現し、中順走査（左→根→右）で全ノードの値を合計するプログラムです。再帰呼び出しにより左部分木→現在ノード→右部分木の順で処理され、全ノードの合計210が得られます。"
+  },
+  {
+    "questionId": "q-trace-055",
+    "examType": "科目B",
+    "category": "擬似言語トレース",
+    "subcategory": "擬似言語トレース",
+    "topic": "動的計画法（最長増加部分列の長さ）",
+    "level": 8,
+    "question": "次の擬似言語プログラムを実行したとき、表示される値は何か。",
+    "pseudoCode": "○整数型の配列: a = {3, 1, 4, 1, 5}\n○整数型の配列: dp = {1, 1, 1, 1, 1}\n○整数型: i, j, maxLen\n\ni を 1 から 4 まで 1 ずつ増やしながら繰り返す\n  j を 0 から i - 1 まで 1 ずつ増やしながら繰り返す\n    もし a[j] < a[i] かつ dp[j] + 1 > dp[i] ならば\n      dp[i] ← dp[j] + 1\n    を実行する\n  を繰り返す\nを繰り返す\n\nmaxLen ← 0\ni を 0 から 4 まで 1 ずつ増やしながら繰り返す\n  もし dp[i] > maxLen ならば\n    maxLen ← dp[i]\n  を実行する\nを繰り返す\n表示(maxLen)",
+    "choices": [
+      {
+        "text": "3",
+        "isCorrect": true,
+        "whyCorrect": "最長増加部分列は {1, 4, 5} または {3, 4, 5} で長さ3です。dp配列は最終的に {1, 1, 2, 1, 3} となり、最大値は 3 です。",
+        "analogy": "階段を登るとき、必ず前より高い段にしか足を置けないルールで、最も多くの段を踏める経路を探すようなものです。",
+        "deepDive": "最長増加部分列（LIS）は動的計画法の代表問題です。dp[i]は a[0]~a[i] の中で a[i] を末尾とする最長増加部分列の長さを表します。計算量は O(n²) です。"
+      },
+      {
+        "text": "2",
+        "isCorrect": false,
+        "whyWrong": "2は部分列 {1, 4} や {1, 5} の長さです。しかし {1, 4, 5} で長さ3の増加部分列が存在するため、最長は3です。",
+        "analogy": "階段で2段しか見つけられなかったのは、もう1段先にある段を見落としたからです。"
+      },
+      {
+        "text": "4",
+        "isCorrect": false,
+        "whyWrong": "配列 {3, 1, 4, 1, 5} には長さ4の増加部分列は存在しません。1が2回出現し、増加列に組み込めないため最長は3です。",
+        "analogy": "同じ高さの段があると、増加列にカウントできません。「厳密に増加」する必要があります。"
+      },
+      {
+        "text": "5",
+        "isCorrect": false,
+        "whyWrong": "5は配列の要素数です。全要素が増加列になるのは配列全体が昇順の場合のみで、{3,1,4,1,5}は昇順ではないため最長は3です。",
+        "analogy": "全員が背の順に並んでいると思い込んだが、実際には何人かが順番通りでなかったようなものです。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"a": "{3,1,4,1,5}", "dp": "{1,1,1,1,1}"}, "action": "配列を初期化"},
+      {"step": 2, "variables": {"i": 1, "j": 0}, "action": "a[0]=3 < a[1]=1? → 偽、スキップ"},
+      {"step": 3, "variables": {"dp": "{1,1,1,1,1}"}, "action": "dp[1]は変化なし（1のまま）"},
+      {"step": 4, "variables": {"i": 2, "j": 0}, "action": "a[0]=3 < a[2]=4? → 真、dp[0]+1=2 > dp[2]=1 → dp[2]←2"},
+      {"step": 5, "variables": {"i": 2, "j": 1, "dp": "{1,1,2,1,1}"}, "action": "a[1]=1 < a[2]=4? → 真、dp[1]+1=2 > dp[2]=2? → 偽、スキップ"},
+      {"step": 6, "variables": {"i": 3, "j": "0,1"}, "action": "a[0]=3 < a[3]=1? → 偽、a[1]=1 < a[3]=1? → 偽"},
+      {"step": 7, "variables": {"dp": "{1,1,2,1,1}"}, "action": "dp[3]は変化なし（1のまま）"},
+      {"step": 8, "variables": {"i": 4, "j": 0}, "action": "a[0]=3 < a[4]=5? → 真、dp[0]+1=2 > dp[4]=1 → dp[4]←2"},
+      {"step": 9, "variables": {"i": 4, "j": 2, "dp": "{1,1,2,1,2}"}, "action": "a[2]=4 < a[4]=5? → 真、dp[2]+1=3 > dp[4]=2 → dp[4]←3"},
+      {"step": 10, "variables": {"dp": "{1,1,2,1,3}"}, "action": "dp最終状態、最大値探索へ"},
+      {"step": 11, "variables": {"maxLen": 3}, "action": "dp配列の最大値 = 3"},
+      {"step": 12, "variables": {"maxLen": 3}, "action": "表示(maxLen) → 3"}
+    ],
+    "traceAnalogy": "クラスの生徒を身長順に並べるとき、全員でなくても「左から見て順に背が高くなる最長の列」を見つける問題です。{3,1,4,1,5}の中から厳密に増加する最長列は {1,4,5} で長さ3です。",
+    "overallExplanation": "最長増加部分列（LIS）を動的計画法で求めるプログラムです。dp[i]はa[i]を末尾とするLISの長さを保持し、二重ループで更新します。最終的なdp配列 {1,1,2,1,3} の最大値3が答えです。"
+  },
+  {
+    "questionId": "q-trace-056",
+    "examType": "科目B",
+    "category": "擬似言語トレース",
+    "subcategory": "擬似言語トレース",
+    "topic": "ハッシュテーブルのチェイン法",
+    "level": 8,
+    "question": "次の擬似言語プログラムを実行したとき、表示される値は何か。",
+    "pseudoCode": "○整数型の配列: table = {-1, -1, -1, -1, -1}\n○整数型の配列: next = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1}\n○整数型の配列: data = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}\n○整数型: nextFree\nnextFree ← 0\n\n○手続き insert(整数型: key)\n  ○整数型: h\n  h ← key mod 5\n  data[nextFree] ← key\n  next[nextFree] ← table[h]\n  table[h] ← nextFree\n  nextFree ← nextFree + 1\n\n○関数 search(整数型: key) : 整数型\n  ○整数型: h, idx\n  h ← key mod 5\n  idx ← table[h]\n  idx が -1 でない の間繰り返す\n    もし data[idx] = key ならば\n      return idx\n    を実行する\n    idx ← next[idx]\n  を繰り返す\n  return -1\n\ninsert(12)\ninsert(7)\ninsert(22)\ninsert(3)\n表示(search(22))",
+    "choices": [
+      {
+        "text": "2",
+        "isCorrect": true,
+        "whyCorrect": "22は3番目にinsertされたので data[2]=22 です。search(22)は h=22mod5=2 でtable[2]を見ます。table[2]はチェイン法で最後に挿入された22のインデックス2を指しており、data[2]=22で一致するため2を返します。",
+        "analogy": "図書館の書架番号で本を探すとき、書架2に最後に入れた本が手前にあり、すぐ見つかるようなものです。",
+        "deepDive": "チェイン法では同じハッシュ値の要素を連結リストで管理します。新しい要素はリストの先頭に追加されるため、最後に挿入した要素が最初に見つかります。"
+      },
+      {
+        "text": "0",
+        "isCorrect": false,
+        "whyWrong": "data[0]=12 です。12は最初にinsertされた要素で、22ではありません。22はnextFree=2のときに挿入されたためインデックス2です。",
+        "analogy": "最初に棚に入れた本と、3番目に入れた本を混同してしまったようなものです。"
+      },
+      {
+        "text": "3",
+        "isCorrect": false,
+        "whyWrong": "data[3]=3 です。3は4番目にinsertされた要素です。search(22)では h=22mod5=2 のチェインを辿り、data[2]=22 で一致するためインデックス2を返します。",
+        "analogy": "隣の棚の本と間違えてしまったようなものです。ハッシュ値が異なるため別のチェインを辿ります。"
+      },
+      {
+        "text": "-1",
+        "isCorrect": false,
+        "whyWrong": "-1は「見つからなかった」を意味します。22は確かに挿入されているため、search(22)はインデックス2を返し、-1にはなりません。",
+        "analogy": "確かに棚に入れた本を「ない」と判断してしまったようなものです。正しいハッシュ値のチェインを辿れば見つかります。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"nextFree": 0, "table": "{-1,-1,-1,-1,-1}"}, "action": "初期化"},
+      {"step": 2, "variables": {"key": 12, "h": 2}, "action": "insert(12): h=12mod5=2, data[0]=12, next[0]=-1, table[2]=0, nextFree=1"},
+      {"step": 3, "variables": {"key": 7, "h": 2}, "action": "insert(7): h=7mod5=2, data[1]=7, next[1]=0, table[2]=1, nextFree=2"},
+      {"step": 4, "variables": {"key": 22, "h": 2}, "action": "insert(22): h=22mod5=2, data[2]=22, next[2]=1, table[2]=2, nextFree=3"},
+      {"step": 5, "variables": {"key": 3, "h": 3}, "action": "insert(3): h=3mod5=3, data[3]=3, next[3]=-1, table[3]=3, nextFree=4"},
+      {"step": 6, "variables": {"table": "{-1,-1,2,-1,3}"}, "action": "table最終状態（※table[3]=3に修正）"},
+      {"step": 7, "variables": {"key": 22, "h": 2, "idx": 2}, "action": "search(22): h=22mod5=2, idx=table[2]=2"},
+      {"step": 8, "variables": {"idx": 2}, "action": "data[2]=22 = key=22 → 一致、return 2"},
+      {"step": 9, "variables": {"返り値": 2}, "action": "表示(2)"}
+    ],
+    "traceAnalogy": "5つの郵便受け（ハッシュテーブル）に手紙を入れる作業です。手紙12,7,22はすべて「2番の郵便受け」に入り、チェーンで繋がれます。22を探すとき、2番の郵便受けの一番手前（最後に入れた22）がすぐ見つかります。",
+    "overallExplanation": "チェイン法によるハッシュテーブルの挿入・探索を追跡する問題です。12,7,22はすべてmod5=2で衝突しますが、連結リスト（next配列）でチェイン管理されます。22は最後にチェインに追加されたため先頭にあり、即座に発見されます。"
+  },
+  {
+    "questionId": "q-trace-057",
+    "examType": "科目B",
+    "category": "擬似言語トレース",
+    "subcategory": "擬似言語トレース",
+    "topic": "二分探索木の探索",
+    "level": 8,
+    "question": "次の擬似言語プログラムを実行したとき、表示される値は何か。",
+    "pseudoCode": "○整数型の配列: val = {50, 30, 70, 20, 40, 60, 80}\n○整数型の配列: left = {1, 3, 5, -1, -1, -1, -1}\n○整数型の配列: right = {2, 4, 6, -1, -1, -1, -1}\n○整数型: comparisons\ncomparisons ← 0\n\n○関数 bstSearch(整数型: node, 整数型: target) : 整数型\n  もし node = -1 ならば\n    return -1\n  を実行する\n  comparisons ← comparisons + 1\n  もし target = val[node] ならば\n    return node\n  そうでなくもし target < val[node] ならば\n    return bstSearch(left[node], target)\n  そうでなければ\n    return bstSearch(right[node], target)\n  を実行する\n\nbstSearch(0, 40)\n表示(comparisons)",
+    "choices": [
+      {
+        "text": "3",
+        "isCorrect": true,
+        "whyCorrect": "探索パスは node0(50)→40<50なので左→node1(30)→40>30なので右→node4(40)→一致。比較回数は3回です。",
+        "analogy": "組織の階層を辿って特定の社員を探すようなものです。社長(50)→左の部長(30)→右の課長(40)と3回の比較で見つかります。",
+        "deepDive": "二分探索木の探索は、各ノードで左右どちらに進むかを1回の比較で決定します。平衡木なら探索回数は O(log n) です。7ノードの完全二分木では最大3回で到達できます。"
+      },
+      {
+        "text": "2",
+        "isCorrect": false,
+        "whyWrong": "ルートから40に到達するには3回の比較が必要です。50との比較（1回目）、30との比較（2回目）、40との比較（3回目、一致）の計3回です。一致判定も比較に含みます。",
+        "analogy": "3つの階を通過するのに2つしか数えなかったようなものです。一致確認も1回の比較です。"
+      },
+      {
+        "text": "4",
+        "isCorrect": false,
+        "whyWrong": "40はnode4（深さ2）にあり、ルートからの経路長は2です。比較回数は経路上のノード数と同じ3回で、4回にはなりません。",
+        "analogy": "実際に通った部屋より1つ多く数えてしまったようなものです。"
+      },
+      {
+        "text": "1",
+        "isCorrect": false,
+        "whyWrong": "1回の比較で見つかるのはルートノードの値（50）だけです。40はルートの左の子のさらに右の子にあるため、3回の比較が必要です。",
+        "analogy": "玄関を開けただけで奥の部屋の人を見つけたと思ってしまったようなものです。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"comparisons": 0}, "action": "comparisons を 0 で初期化"},
+      {"step": 2, "variables": {"node": 0, "target": 40, "comparisons": 1}, "action": "bstSearch(0,40): val[0]=50, comparisons=1, 40<50→左へ"},
+      {"step": 3, "variables": {"node": 1, "target": 40, "comparisons": 2}, "action": "bstSearch(1,40): val[1]=30, comparisons=2, 40>30→右へ"},
+      {"step": 4, "variables": {"node": 4, "target": 40, "comparisons": 3}, "action": "bstSearch(4,40): val[4]=40, comparisons=3, 40=40→一致"},
+      {"step": 5, "variables": {"返り値": 4, "comparisons": 3}, "action": "return 4, 表示(comparisons) → 3"}
+    ],
+    "traceAnalogy": "辞書で「40」という単語を探す作業です。まず真ん中（50）を開く→40は前半なので前を開く（30）→40は後半なので後ろを開く（40）→見つかった！全部で3回ページをめくりました。",
+    "overallExplanation": "二分探索木での探索パスを追跡し、比較回数を数える問題です。target=40を探すとき、50→30→40の順に3ノードを訪問し、3回の比較で到達します。二分探索木の効率性を実感できる問題です。"
+  },
+  {
+    "questionId": "q-trace-058",
+    "examType": "科目B",
+    "category": "擬似言語トレース",
+    "subcategory": "擬似言語トレース",
+    "topic": "クラスとメソッドのトレース",
+    "level": 8,
+    "question": "次の擬似言語プログラムを実行したとき、表示される値は何か。",
+    "pseudoCode": "○クラス Counter\n  ○整数型: value\n  ○Counter(整数型: init)\n    value ← init\n  ○手続き add(整数型: n)\n    value ← value + n\n  ○関数 getValue() : 整数型\n    return value\n\n○Counter: c1 ← Counter(10)\n○Counter: c2 ← Counter(20)\nc1.add(5)\nc2.add(c1.getValue())\nc1.add(c2.getValue())\n表示(c1.getValue())",
+    "choices": [
+      {
+        "text": "50",
+        "isCorrect": true,
+        "whyCorrect": "c1は初期値10、add(5)で15に。c2は初期値20、add(c1.getValue()=15)で35に。c1.add(c2.getValue()=35)で c1 = 15+35 = 50。最終的にc1.getValue()は50です。",
+        "analogy": "2つの貯金箱を使い回す作業です。貯金箱1(10円)に5円足して15円。貯金箱2(20円)に貯金箱1の15円を足して35円。貯金箱1に貯金箱2の35円を足して50円。",
+        "deepDive": "オブジェクト指向プログラミングでは、各インスタンスが独立した状態（value）を持ちます。メソッド呼び出しはそのインスタンスの状態のみを変更します。"
+      },
+      {
+        "text": "35",
+        "isCorrect": false,
+        "whyWrong": "35はc2の最終値です。最後のc1.add(35)を忘れると、c1は15のままになりますが、実際にはaddで35を足して50になります。",
+        "analogy": "2つの貯金箱を混同して、相手の貯金箱の残高を答えてしまったようなものです。"
+      },
+      {
+        "text": "15",
+        "isCorrect": false,
+        "whyWrong": "15はc1.add(5)の直後の値です。その後 c1.add(c2.getValue()) = c1.add(35) が実行され、c1は 15+35=50 になります。",
+        "analogy": "作業の途中経過を最終結果と勘違いしてしまったようなものです。最後の操作まで追跡しましょう。"
+      },
+      {
+        "text": "45",
+        "isCorrect": false,
+        "whyWrong": "c2.add時のc1.getValueが15であることを正しく追跡すれば、c2=35、c1=15+35=50です。計算途中で値を取り違えると45になることがあります。",
+        "analogy": "途中の計算で数字を1つ間違えると、最終結果もずれてしまいます。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"c1.value": 10}, "action": "c1 ← Counter(10)"},
+      {"step": 2, "variables": {"c2.value": 20}, "action": "c2 ← Counter(20)"},
+      {"step": 3, "variables": {"c1.value": 15}, "action": "c1.add(5): c1.value = 10+5 = 15"},
+      {"step": 4, "variables": {"c1.getValue()": 15}, "action": "c1.getValue() を評価 → 15"},
+      {"step": 5, "variables": {"c2.value": 35}, "action": "c2.add(15): c2.value = 20+15 = 35"},
+      {"step": 6, "variables": {"c2.getValue()": 35}, "action": "c2.getValue() を評価 → 35"},
+      {"step": 7, "variables": {"c1.value": 50}, "action": "c1.add(35): c1.value = 15+35 = 50"},
+      {"step": 8, "variables": {"返り値": 50}, "action": "表示(c1.getValue()) → 50"}
+    ],
+    "traceAnalogy": "2つのレジスター（c1とc2）を使った計算です。レジスター1に10を入れて5を足し（15）、レジスター2に20を入れてレジスター1の値15を足し（35）、レジスター1にレジスター2の値35を足して（50）、結果を表示します。",
+    "overallExplanation": "クラスのインスタンスが独立した状態を持つことを理解し、メソッド呼び出しの順序と各オブジェクトの値の変化を追跡する問題です。c1とc2が互いのgetValue()を使うため、呼び出し時点での値を正確に把握することが重要です。"
+  },
+  {
+    "questionId": "q-trace-059",
+    "examType": "科目B",
+    "category": "擬似言語トレース",
+    "subcategory": "擬似言語トレース",
+    "topic": "頻度カウント（複数配列）",
+    "level": 8,
+    "question": "次の擬似言語プログラムを実行したとき、表示される値は何か。",
+    "pseudoCode": "○整数型の配列: scores = {3, 1, 4, 1, 5, 3, 2}\n○整数型の配列: freq = {0, 0, 0, 0, 0, 0}\n○整数型: i, maxFreq, maxVal\n\ni を 0 から 6 まで 1 ずつ増やしながら繰り返す\n  freq[scores[i]] ← freq[scores[i]] + 1\nを繰り返す\n\nmaxFreq ← 0\nmaxVal ← 0\ni を 0 から 5 まで 1 ずつ増やしながら繰り返す\n  もし freq[i] > maxFreq ならば\n    maxFreq ← freq[i]\n    maxVal ← i\n  を実行する\nを繰り返す\n表示(maxVal)",
+    "choices": [
+      {
+        "text": "1",
+        "isCorrect": true,
+        "whyCorrect": "1は2回出現（freq[1]=2）で、3も2回出現（freq[3]=2）で同率です。ただしfreq[i] > maxFreq は「より大きい」なので、先に見つかった同率の値は後のもので上書きされません。freq[1]=2が先にmaxFreqに設定され、freq[3]=2は > ではなく = なので上書きされません。よってmaxVal=1です。",
+        "analogy": "じゃんけん大会で同率1位が2人いた場合、先にエントリーした人が優勝するルールです。",
+        "deepDive": "「>（より大きい）」と「≧（以上）」の違いが重要です。>の場合、同率では先に見つかった方が残ります。≧なら後から見つかった方に更新されます。"
+      },
+      {
+        "text": "3",
+        "isCorrect": false,
+        "whyWrong": "3の出現回数はfreq[3]=2で、1と同率です。しかし条件が「>」（厳密な大なり）のため、freq[1]=2で先にmaxFreq=2が設定された後、freq[3]=2は上書きされません。maxValは1のままです。",
+        "analogy": "先に受付した人と後から来た人が同じ点数なら、先に受付した人が優先されるルールです。"
+      },
+      {
+        "text": "5",
+        "isCorrect": false,
+        "whyWrong": "5は1回しか出現しません（freq[5]=1）。最頻値は出現回数2回の1または3で、条件「>」により先に見つかる1がmaxValになります。",
+        "analogy": "数字の大きさと出現回数を混同してしまったようなものです。最頻値は最も多く出現した値です。"
+      },
+      {
+        "text": "4",
+        "isCorrect": false,
+        "whyWrong": "4は1回しか出現しません（freq[4]=1）。最頻値は2回出現する1がmaxValとなります。",
+        "analogy": "1回しか来ていないお客さんを常連と勘違いしたようなものです。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"freq": "{0,0,0,0,0,0}"}, "action": "freq配列を0で初期化"},
+      {"step": 2, "variables": {"freq[3]": 1}, "action": "scores[0]=3 → freq[3]=1"},
+      {"step": 3, "variables": {"freq[1]": 1}, "action": "scores[1]=1 → freq[1]=1"},
+      {"step": 4, "variables": {"freq[4]": 1}, "action": "scores[2]=4 → freq[4]=1"},
+      {"step": 5, "variables": {"freq[1]": 2}, "action": "scores[3]=1 → freq[1]=2"},
+      {"step": 6, "variables": {"freq[5]": 1}, "action": "scores[4]=5 → freq[5]=1"},
+      {"step": 7, "variables": {"freq[3]": 2}, "action": "scores[5]=3 → freq[3]=2"},
+      {"step": 8, "variables": {"freq[2]": 1}, "action": "scores[6]=2 → freq[2]=1"},
+      {"step": 9, "variables": {"freq": "{0,2,1,2,1,1}"}, "action": "freq最終状態"},
+      {"step": 10, "variables": {"maxFreq": 2, "maxVal": 1}, "action": "i=1: freq[1]=2>0 → maxFreq=2, maxVal=1"},
+      {"step": 11, "variables": {"maxFreq": 2, "maxVal": 1}, "action": "i=3: freq[3]=2>2? → 偽、更新なし"},
+      {"step": 12, "variables": {"maxVal": 1}, "action": "表示(maxVal) → 1"}
+    ],
+    "traceAnalogy": "クラスのテストで各点数が何人いるかを数える作業です。点数1が2人、点数3が2人で同率最多ですが、小さい番号から探すので先に見つかる1が「最頻値」として選ばれます。",
+    "overallExplanation": "頻度カウント配列を使って最頻値を求めるプログラムです。scores配列の各値の出現回数をfreq配列に集計し、最大頻度の値を探します。同率の場合は条件「>」により先にインデックスが小さい方が選ばれる点がポイントです。"
+  },
+  {
+    "questionId": "q-trace-060",
+    "examType": "科目B",
+    "category": "擬似言語トレース",
+    "subcategory": "擬似言語トレース",
+    "topic": "ワーシャルフロイド法（最短経路）",
+    "level": 9,
+    "question": "次の擬似言語プログラムを実行したとき、表示される値は何か。",
+    "pseudoCode": "○整数型の二次元配列: dist = {\n  {0, 3, 99},\n  {3, 0, 1},\n  {99, 1, 0}\n}\n○整数型: k, i, j\n\nk を 0 から 2 まで 1 ずつ増やしながら繰り返す\n  i を 0 から 2 まで 1 ずつ増やしながら繰り返す\n    j を 0 から 2 まで 1 ずつ増やしながら繰り返す\n      もし dist[i][k] + dist[k][j] < dist[i][j] ならば\n        dist[i][j] ← dist[i][k] + dist[k][j]\n      を実行する\n    を繰り返す\n  を繰り返す\nを繰り返す\n表示(dist[0][2])",
+    "choices": [
+      {
+        "text": "4",
+        "isCorrect": true,
+        "whyCorrect": "頂点0→頂点2の直接距離は99ですが、0→1（コスト3）→2（コスト1）の経路で合計4となります。ワーシャルフロイド法により k=1 のとき dist[0][2] = min(99, dist[0][1]+dist[1][2]) = min(99, 3+1) = 4 に更新されます。",
+        "analogy": "東京から大阪に直行便がなくても、名古屋経由なら安く行ける、というルート検索と同じです。",
+        "deepDive": "ワーシャルフロイド法は全頂点間の最短経路を O(n³) で求めるアルゴリズムです。中継頂点 k を1つずつ追加しながら、すべての頂点対(i,j)の距離を更新していきます。"
+      },
+      {
+        "text": "99",
+        "isCorrect": false,
+        "whyWrong": "99は初期値（直接経路なし）です。ワーシャルフロイド法は中継頂点を通る経路を考慮し、0→1→2（コスト3+1=4）という短い経路を発見します。",
+        "analogy": "直行便がないからと諦めてしまいましたが、乗り継ぎ便を使えば行けるのです。"
+      },
+      {
+        "text": "3",
+        "isCorrect": false,
+        "whyWrong": "3はdist[0][1]の値（頂点0から頂点1への距離）です。頂点0から頂点2への最短経路は0→1→2で、コスト3+1=4です。",
+        "analogy": "途中駅までの料金だけ計算して、終点までの料金を忘れてしまったようなものです。"
+      },
+      {
+        "text": "1",
+        "isCorrect": false,
+        "whyWrong": "1はdist[1][2]の値（頂点1から頂点2への距離）です。頂点0からスタートするため、0→1のコスト3も加算して合計4です。",
+        "analogy": "後半区間の料金だけ見て、前半区間を含めていないようなものです。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"dist[0][2]": 99}, "action": "初期状態: 0→2の直接距離は99"},
+      {"step": 2, "variables": {"k": 0}, "action": "k=0: 頂点0を中継点として検討"},
+      {"step": 3, "variables": {"dist[0][2]": 99}, "action": "dist[1][0]+dist[0][2]=3+99=102 > dist[1][2]=1 → 更新なし等"},
+      {"step": 4, "variables": {"k": 1}, "action": "k=1: 頂点1を中継点として検討"},
+      {"step": 5, "variables": {"dist[0][2]": 4}, "action": "dist[0][1]+dist[1][2]=3+1=4 < dist[0][2]=99 → dist[0][2]=4"},
+      {"step": 6, "variables": {"dist[2][0]": 4}, "action": "dist[2][1]+dist[1][0]=1+3=4 < dist[2][0]=99 → dist[2][0]=4"},
+      {"step": 7, "variables": {"k": 2}, "action": "k=2: 頂点2を中継点として検討"},
+      {"step": 8, "variables": {"dist[0][2]": 4}, "action": "k=2での更新なし（既に最短）"},
+      {"step": 9, "variables": {"dist[0][2]": 4}, "action": "表示(dist[0][2]) → 4"}
+    ],
+    "traceAnalogy": "3つの駅（0,1,2）があり、直通で行けない区間も乗り換えれば行けます。駅0→駅2は直通99円ですが、駅0→駅1（3円）→駅2（1円）で4円です。ワーシャルフロイド法はすべての乗り換えパターンを試して最安値を見つけます。",
+    "overallExplanation": "ワーシャルフロイド法の3頂点版です。3重ループで中継頂点kを変えながら全頂点対の最短距離を更新します。dist[0][2]は直接99でしたが、頂点1を経由すると3+1=4となり更新されます。"
+  },
+  {
+    "questionId": "q-trace-061",
+    "examType": "科目B",
+    "category": "擬似言語トレース",
+    "subcategory": "擬似言語トレース",
+    "topic": "ヒープ操作（最小ヒープ）",
+    "level": 9,
+    "question": "次の擬似言語プログラムを実行したとき、表示される値は何か。",
+    "pseudoCode": "○整数型の配列: heap = {0, 0, 0, 0, 0, 0}\n○整数型: size\nsize ← 0\n\n○手続き insert(整数型: val)\n  heap[size] ← val\n  ○整数型: idx\n  idx ← size\n  size ← size + 1\n  idx > 0 の間繰り返す\n    ○整数型: parent\n    parent ← (idx - 1) ÷ 2\n    もし heap[idx] < heap[parent] ならば\n      ○整数型: tmp\n      tmp ← heap[idx]\n      heap[idx] ← heap[parent]\n      heap[parent] ← tmp\n      idx ← parent\n    そうでなければ\n      idx ← 0\n    を実行する\n  を繰り返す\n\ninsert(5)\ninsert(3)\ninsert(8)\ninsert(1)\n表示(heap[0])",
+    "choices": [
+      {
+        "text": "1",
+        "isCorrect": true,
+        "whyCorrect": "最小ヒープでは根が最小値です。insert(5)→{5}, insert(3)→3<5で交換→{3,5}, insert(8)→8>3で交換なし→{3,5,8}, insert(1)→1<5で交換→1<3で交換→{1,5,8,3}。heap[0]=1です。",
+        "analogy": "会社の組織図で「最も若い人が社長になる」ルールです。新入社員(1)が入ると、先輩(3)より若いので社長に昇格します。",
+        "deepDive": "最小ヒープの挿入では、新要素を末尾に追加してから親と比較し、親より小さければ交換を繰り返します（上方ヒープ化）。計算量は O(log n) です。"
+      },
+      {
+        "text": "3",
+        "isCorrect": false,
+        "whyWrong": "3はinsert(1)の前のheap[0]です。insert(1)で1が末尾に追加され、親5→親3と交換して根に到達するため、heap[0]は1に更新されます。",
+        "analogy": "最後に入社した新人の方が若かったのに、昇格処理を忘れてしまったようなものです。"
+      },
+      {
+        "text": "5",
+        "isCorrect": false,
+        "whyWrong": "5は最初に挿入された値ですが、insert(3)の時点でheap[0]は3に、insert(1)の時点で1に更新されます。ヒープは常に最小値を根に維持します。",
+        "analogy": "最初に社長になった人がずっと社長だと思い込んでいますが、より適任者が来たら交代します。"
+      },
+      {
+        "text": "8",
+        "isCorrect": false,
+        "whyWrong": "8は3番目に挿入された値で、根になることはありません。8>3なので挿入時に交換されず、そのまま子の位置に留まります。",
+        "analogy": "一番経験が浅い人が社長になるルールで、最も年長の人は最下層に留まります。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"heap": "{}", "size": 0}, "action": "初期状態"},
+      {"step": 2, "variables": {"heap": "{5}", "size": 1}, "action": "insert(5): heap[0]=5"},
+      {"step": 3, "variables": {"heap": "{5,3}", "size": 2}, "action": "insert(3): heap[1]=3, parent=(1-1)/2=0"},
+      {"step": 4, "variables": {"heap": "{3,5}", "size": 2}, "action": "3<5 → 交換、heap={3,5}"},
+      {"step": 5, "variables": {"heap": "{3,5,8}", "size": 3}, "action": "insert(8): heap[2]=8, parent=0, 8>3 → 交換なし"},
+      {"step": 6, "variables": {"heap": "{3,5,8,1}", "size": 4}, "action": "insert(1): heap[3]=1, parent=(3-1)/2=1"},
+      {"step": 7, "variables": {"heap": "{3,1,8,5}"}, "action": "1<5 → 交換、idx=1"},
+      {"step": 8, "variables": {"heap": "{1,3,8,5}"}, "action": "parent=(1-1)/2=0, 1<3 → 交換、idx=0"},
+      {"step": 9, "variables": {"heap[0]": 1}, "action": "idx=0でループ終了、表示(heap[0]) → 1"}
+    ],
+    "traceAnalogy": "「最も軽い荷物を一番上に置く」ルールの荷物積みです。5kg→3kg（3kgが上に）→8kg（下に）→1kg（一番上まで浮上）。最終的に1kgが一番上になります。",
+    "overallExplanation": "最小ヒープへの挿入操作を追跡する問題です。各insert後に上方ヒープ化（親との比較・交換）が行われ、常に根が最小値を保ちます。insert(1)で1が末尾から根まで浮上し、heap[0]=1となります。"
+  },
+  {
+    "questionId": "q-trace-062",
+    "examType": "科目B",
+    "category": "擬似言語トレース",
+    "subcategory": "擬似言語トレース",
+    "topic": "文字列照合（力まかせ法）",
+    "level": 9,
+    "question": "次の擬似言語プログラムを実行したとき、表示される値は何か。",
+    "pseudoCode": "○文字型の配列: text = {'A','B','C','A','B','D','A','B','C'}\n○文字型の配列: pattern = {'A','B','C'}\n○整数型: i, j, count\ncount ← 0\n\ni を 0 から 6 まで 1 ずつ増やしながら繰り返す\n  j ← 0\n  j < 3 かつ text[i + j] = pattern[j] の間繰り返す\n    j ← j + 1\n  を繰り返す\n  もし j = 3 ならば\n    count ← count + 1\n  を実行する\nを繰り返す\n表示(count)",
+    "choices": [
+      {
+        "text": "2",
+        "isCorrect": true,
+        "whyCorrect": "textの中で pattern 'ABC' が出現する位置は i=0（text[0..2]='ABC'）と i=6（text[6..8]='ABC'）の2箇所です。よってcount=2です。",
+        "analogy": "長い文章の中で特定の単語が何回出てくるか数える作業です。'ABCABDABC'の中で'ABC'は先頭と末尾の2回出現します。",
+        "deepDive": "力まかせ法（ブルートフォース法）は最も単純な文字列照合アルゴリズムです。テキストの各位置からパターンとの一致を試みます。計算量は最悪 O(n×m) です。"
+      },
+      {
+        "text": "1",
+        "isCorrect": false,
+        "whyWrong": "ABCは位置0と位置6の2箇所で一致します。位置6のtext[6..8]='ABC'も一致するため、countは2です。",
+        "analogy": "本の中で単語を探すとき、最初に見つけた1箇所で満足して残りを読まなかったようなものです。"
+      },
+      {
+        "text": "3",
+        "isCorrect": false,
+        "whyWrong": "ABCの出現は2回のみです。位置3からはtext[3..5]='ABD'で、3文字目が不一致なのでカウントされません。",
+        "analogy": "似て非なるもの（ABD）を間違えてカウントしてしまったようなものです。3文字すべて一致する必要があります。"
+      },
+      {
+        "text": "0",
+        "isCorrect": false,
+        "whyWrong": "ABCはtextの中に2回出現します。ループの範囲 i=0~6 で text[0..2] と text[6..8] が pattern と完全一致します。",
+        "analogy": "検索条件が厳しすぎて何も見つからないと思い込んでしまったようなものです。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"count": 0}, "action": "count を 0 で初期化"},
+      {"step": 2, "variables": {"i": 0, "j": 0}, "action": "i=0: text[0]='A'=pattern[0] → j=1"},
+      {"step": 3, "variables": {"j": 3}, "action": "text[1]='B'=pattern[1]→j=2, text[2]='C'=pattern[2]→j=3"},
+      {"step": 4, "variables": {"count": 1}, "action": "j=3 → 一致、count=1"},
+      {"step": 5, "variables": {"i": 1}, "action": "i=1: text[1]='B'≠pattern[0]='A' → j=0で終了"},
+      {"step": 6, "variables": {"i": 3}, "action": "i=3: text[3]='A'=pattern[0]→j=1, text[4]='B'=pattern[1]→j=2"},
+      {"step": 7, "variables": {"i": 3, "j": 2}, "action": "text[5]='D'≠pattern[2]='C' → j=2で終了、不一致"},
+      {"step": 8, "variables": {"i": 6, "j": 0}, "action": "i=6: text[6]='A'=pattern[0]→j=1"},
+      {"step": 9, "variables": {"j": 3}, "action": "text[7]='B'=pattern[1]→j=2, text[8]='C'=pattern[2]→j=3"},
+      {"step": 10, "variables": {"count": 2}, "action": "j=3 → 一致、count=2"},
+      {"step": 11, "variables": {"count": 2}, "action": "表示(count) → 2"}
+    ],
+    "traceAnalogy": "ジグソーパズルのピースを1マスずつずらしながらはめ込む作業です。位置0と位置6でピッタリはまり、位置3では最後のピースが合いませんでした。合計2回はまりました。",
+    "overallExplanation": "力まかせ法による文字列照合で、パターン'ABC'がテキスト中に何回出現するかを数えるプログラムです。位置0と位置6で完全一致し、count=2が表示されます。位置3ではABまで一致しますが3文字目Dで不一致となります。"
+  },
+  {
+    "questionId": "q-trace-063",
+    "examType": "科目B",
+    "category": "擬似言語トレース",
+    "subcategory": "擬似言語トレース",
+    "topic": "クラス継承のトレース",
+    "level": 9,
+    "question": "次の擬似言語プログラムを実行したとき、表示される値は何か。",
+    "pseudoCode": "○クラス Animal\n  ○整数型: legs\n  ○Animal(整数型: n)\n    legs ← n\n  ○関数 sound() : 整数型\n    return legs\n  ○関数 total() : 整数型\n    return sound() × 2\n\n○クラス Dog は Animal を継承\n  ○Dog()\n    Animal(4)\n  ○関数 sound() : 整数型\n    return legs + 10\n\n○Animal: a ← Dog()\n表示(a.total())",
+    "choices": [
+      {
+        "text": "28",
+        "isCorrect": true,
+        "whyCorrect": "DogはAnimalを継承し、sound()をオーバーライドしています。a.total()はAnimalのtotal()を呼びますが、その中のsound()はDogのsound()が呼ばれます（動的束縛）。Dog.sound() = legs+10 = 4+10 = 14、total() = 14×2 = 28 です。",
+        "analogy": "レストランの基本メニュー(Animal)に特別トッピング(Dog)を追加した注文です。基本の調理法(total)は同じですが、材料(sound)が特別版に置き換わり、結果が変わります。",
+        "deepDive": "ポリモーフィズム（多態性）により、変数の型がAnimalでも実体がDogなら、オーバーライドされたDogのsound()が呼ばれます。これを動的束縛（動的ディスパッチ）と言います。"
+      },
+      {
+        "text": "8",
+        "isCorrect": false,
+        "whyWrong": "8 = 4×2 は、Animalのsound()（legs=4を返す）が呼ばれた場合の結果です。しかし実体はDogなので、オーバーライドされたDogのsound()（legs+10=14）が呼ばれ、14×2=28です。",
+        "analogy": "特別注文なのに通常メニューで計算してしまったようなものです。Dog版のsound()が使われます。"
+      },
+      {
+        "text": "14",
+        "isCorrect": false,
+        "whyWrong": "14はDogのsound()の戻り値（4+10）ですが、total()はsound()の結果を2倍するので 14×2=28 が正解です。",
+        "analogy": "材料費だけ計算して、調理費（×2）を加えるのを忘れたようなものです。"
+      },
+      {
+        "text": "20",
+        "isCorrect": false,
+        "whyWrong": "20 = 10×2 は、sound()が10を返す場合ですが、Dog.sound()は legs+10 = 4+10 = 14 を返します。legsの初期値4を含めていない計算です。",
+        "analogy": "基本料金(legs=4)を忘れてオプション料金(10)だけで計算してしまったようなものです。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {}, "action": "Dog()コンストラクタ呼び出し"},
+      {"step": 2, "variables": {"legs": 4}, "action": "Animal(4)コンストラクタ: legs←4"},
+      {"step": 3, "variables": {}, "action": "a.total() を呼び出し（Animalのtotal()）"},
+      {"step": 4, "variables": {}, "action": "total()内でsound()を呼び出し"},
+      {"step": 5, "variables": {}, "action": "動的束縛によりDogのsound()が実行される"},
+      {"step": 6, "variables": {"sound()戻り値": 14}, "action": "Dog.sound(): return legs+10 = 4+10 = 14"},
+      {"step": 7, "variables": {"total()戻り値": 28}, "action": "total(): return 14×2 = 28"},
+      {"step": 8, "variables": {}, "action": "表示(28)"}
+    ],
+    "traceAnalogy": "料理長(Animal)のレシピ「材料を2倍にする(total)」を弟子(Dog)が使います。弟子は材料の作り方(sound)を改良しているので、改良版材料(14)を2倍して28を作ります。レシピ自体(total)は料理長のものですが、材料(sound)は弟子版が使われます。",
+    "overallExplanation": "クラス継承とメソッドオーバーライドの動作を追跡する問題です。DogはAnimalのsound()をオーバーライドしています。total()はAnimalに定義されていますが、内部で呼ぶsound()は実体のDogのものが使われる（ポリモーフィズム）ため、(4+10)×2=28が結果になります。"
+  },
+  {
+    "questionId": "q-trace-064",
+    "examType": "科目B",
+    "category": "擬似言語トレース",
+    "subcategory": "擬似言語トレース",
+    "topic": "スタックとキューの連携",
+    "level": 9,
+    "question": "次の擬似言語プログラムを実行したとき、表示される値は何か。",
+    "pseudoCode": "○整数型の配列: stack = {0, 0, 0, 0, 0}\n○整数型: sTop\nsTop ← -1\n○整数型の配列: queue = {0, 0, 0, 0, 0}\n○整数型: qHead, qTail\nqHead ← 0\nqTail ← 0\n\n○手続き sPush(整数型: v)\n  sTop ← sTop + 1\n  stack[sTop] ← v\n○関数 sPop() : 整数型\n  ○整数型: v\n  v ← stack[sTop]\n  sTop ← sTop - 1\n  return v\n○手続き qEnqueue(整数型: v)\n  queue[qTail] ← v\n  qTail ← qTail + 1\n○関数 qDequeue() : 整数型\n  ○整数型: v\n  v ← queue[qHead]\n  qHead ← qHead + 1\n  return v\n\nsPush(1)\nsPush(2)\nsPush(3)\nqEnqueue(sPop())\nqEnqueue(sPop())\nsPush(qDequeue())\nsPush(qDequeue())\n表示(sPop())",
+    "choices": [
+      {
+        "text": "2",
+        "isCorrect": true,
+        "whyCorrect": "sPush(1,2,3)後、sPop()→3をqEnqueue、sPop()→2をqEnqueue。キューは{3,2}。qDequeue()→3をsPush、qDequeue()→2をsPush。スタックは{1,3,2}。sPop()→2です。",
+        "analogy": "本を3冊積んで(1,2,3)、上2冊(3,2)を行列に並べ直し、行列の先頭(3,2)から順に取って積み直すと、一番上は2になります。",
+        "deepDive": "スタック（LIFO）からキュー（FIFO）に移すと順序が反転し、キューからスタックに戻すと元の順序に戻ります。このように2つのデータ構造を組み合わせると順序操作ができます。"
+      },
+      {
+        "text": "3",
+        "isCorrect": false,
+        "whyWrong": "キューから取り出す順序はFIFO（先入れ先出し）です。キューには3→2の順に入ったので、qDequeue()は3→2の順で取り出されます。sPush(3), sPush(2)の後のsPop()は2です。",
+        "analogy": "キューを「後入れ先出し」と勘違いしてしまったようなものです。キューは列の先頭から取り出します。"
+      },
+      {
+        "text": "1",
+        "isCorrect": false,
+        "whyWrong": "1はスタックの底にあり、最後にpopされる値です。sPush(3),sPush(2)で1の上に3と2が積まれるため、sPop()は一番上の2を返します。",
+        "analogy": "一番下の本を取ろうとしましたが、上に2冊積まれているので一番上の本が先に取れます。"
+      },
+      {
+        "text": "0",
+        "isCorrect": false,
+        "whyWrong": "0は配列の初期値であり、データとしてpush/enqueueされた値ではありません。すべての操作を追跡すると、sPop()は2を返します。",
+        "analogy": "空の棚の番号を答えてしまったようなものです。棚に入っている商品を答える必要があります。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"stack": "[1]", "sTop": 0}, "action": "sPush(1)"},
+      {"step": 2, "variables": {"stack": "[1,2]", "sTop": 1}, "action": "sPush(2)"},
+      {"step": 3, "variables": {"stack": "[1,2,3]", "sTop": 2}, "action": "sPush(3)"},
+      {"step": 4, "variables": {"sPop": 3, "sTop": 1}, "action": "sPop()→3"},
+      {"step": 5, "variables": {"queue": "[3]", "qTail": 1}, "action": "qEnqueue(3)"},
+      {"step": 6, "variables": {"sPop": 2, "sTop": 0}, "action": "sPop()→2"},
+      {"step": 7, "variables": {"queue": "[3,2]", "qTail": 2}, "action": "qEnqueue(2)"},
+      {"step": 8, "variables": {"qDequeue": 3, "qHead": 1}, "action": "qDequeue()→3"},
+      {"step": 9, "variables": {"stack": "[1,3]", "sTop": 1}, "action": "sPush(3)"},
+      {"step": 10, "variables": {"qDequeue": 2, "qHead": 2}, "action": "qDequeue()→2"},
+      {"step": 11, "variables": {"stack": "[1,3,2]", "sTop": 2}, "action": "sPush(2)"},
+      {"step": 12, "variables": {"sPop": 2}, "action": "sPop()→2、表示(2)"}
+    ],
+    "traceAnalogy": "皿洗いの作業です。皿を3枚積み(1,2,3)、上2枚をベルトコンベア(キュー)に載せ(3→2の順)、コンベアから戻ってきた皿を積み直すと、最初に流した3が先に戻り、次に2が戻ります。一番上は2です。",
+    "overallExplanation": "スタック(LIFO)とキュー(FIFO)を組み合わせたデータの流れを追跡する問題です。スタックから2つpop(3,2)してキューにenqueue、キューからdequeue(3,2)してスタックにpush。最終スタックは[1,3,2]で、topは2です。"
+  },
+  {
+    "questionId": "q-trace-065",
+    "examType": "科目B",
+    "category": "擬似言語トレース",
+    "subcategory": "擬似言語トレース",
+    "topic": "グラフのDFS（再帰版）",
+    "level": 9,
+    "question": "次の擬似言語プログラムを実行したとき、表示される値は何か。",
+    "pseudoCode": "○整数型の二次元配列: adj = {\n  {0, 1, 1, 0},\n  {1, 0, 0, 1},\n  {1, 0, 0, 1},\n  {0, 1, 1, 0}\n}\n○論理型の配列: visited = {false, false, false, false}\n○整数型: edgeCount\nedgeCount ← 0\n\n○手続き dfs(整数型: v)\n  visited[v] ← true\n  ○整数型: u\n  u を 0 から 3 まで 1 ずつ増やしながら繰り返す\n    もし adj[v][u] = 1 かつ visited[u] = false ならば\n      edgeCount ← edgeCount + 1\n      dfs(u)\n    を実行する\n  を繰り返す\n\ndfs(0)\n表示(edgeCount)",
+    "choices": [
+      {
+        "text": "3",
+        "isCorrect": true,
+        "whyCorrect": "DFSの探索木の辺数は頂点数-1です。4頂点すべて訪問されるので辺数は3です。dfs(0)→dfs(1)で+1→dfs(3)で+1→dfs(2)で+1、計3回のedgeCountインクリメントです。",
+        "analogy": "4つの部屋を新しいドアを開けて探検する冒険です。4つの部屋を訪れるのに3つのドアを開けました。",
+        "deepDive": "DFS探索木の辺数は常に（訪問した頂点数-1）です。すべての頂点が連結なら n-1 本の辺を使います。これは木の性質（n頂点の木は n-1 辺）と同じです。"
+      },
+      {
+        "text": "4",
+        "isCorrect": false,
+        "whyWrong": "グラフの辺数は4本（0-1, 0-2, 1-3, 2-3）ですが、DFSで使う辺は3本です。既に訪問済みの頂点への辺はカウントされません。例えばdfs(2)からadj[2][3]=1ですが、3は訪問済みなのでスキップされます。",
+        "analogy": "4つの道があっても、訪問済みの場所への道は使わないので、実際に通る道は3本です。"
+      },
+      {
+        "text": "2",
+        "isCorrect": false,
+        "whyWrong": "4頂点すべてが連結グラフで到達可能なので、3回の辺の通過で全頂点を訪問できます。2回では3頂点しか訪問できません。",
+        "analogy": "3つしかドアを開けていないのに全部屋を回れると思ったが、実はもう1つ開ける必要がありました。"
+      },
+      {
+        "text": "5",
+        "isCorrect": false,
+        "whyWrong": "隣接行列には1が8個ありますが、無向グラフなので辺は4本、DFS探索木の辺は3本です。edgeCountは訪問済みでない頂点への遷移だけカウントするので3です。",
+        "analogy": "往復の道を別々にカウントしてしまったようなものです。DFSは片道で数えます。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"edgeCount": 0, "visited": "{F,F,F,F}"}, "action": "初期状態"},
+      {"step": 2, "variables": {"visited[0]": true}, "action": "dfs(0): visited[0]=true"},
+      {"step": 3, "variables": {"edgeCount": 1}, "action": "adj[0][1]=1, visited[1]=false → edgeCount=1, dfs(1)"},
+      {"step": 4, "variables": {"visited[1]": true}, "action": "dfs(1): visited[1]=true"},
+      {"step": 5, "variables": {}, "action": "adj[1][0]=1, visited[0]=true → スキップ"},
+      {"step": 6, "variables": {"edgeCount": 2}, "action": "adj[1][3]=1, visited[3]=false → edgeCount=2, dfs(3)"},
+      {"step": 7, "variables": {"visited[3]": true}, "action": "dfs(3): visited[3]=true"},
+      {"step": 8, "variables": {}, "action": "adj[3][1]=1, visited[1]=true → スキップ"},
+      {"step": 9, "variables": {"edgeCount": 3}, "action": "adj[3][2]=1, visited[2]=false → edgeCount=3, dfs(2)"},
+      {"step": 10, "variables": {"visited[2]": true}, "action": "dfs(2): visited[2]=true, 隣接頂点すべて訪問済み"},
+      {"step": 11, "variables": {"edgeCount": 3}, "action": "再帰戻り、表示(edgeCount) → 3"}
+    ],
+    "traceAnalogy": "4つの島を橋で渡り歩く探検です。島0から出発し、橋を渡って島1→島3→島2と探検します。3本の橋を渡って全島を訪問しました。島2から島0への橋は、もう島0に行ったことがあるので渡りません。",
+    "overallExplanation": "隣接行列で表されたグラフのDFS（深さ優先探索）を再帰で実装し、探索に使った辺数を数える問題です。4頂点の連結グラフでは、DFS探索木は3辺を持ちます。訪問済み判定により同じ頂点を2度訪問しないことがポイントです。"
+  },
+  {
+    "questionId": "q-trace-066",
+    "examType": "科目B",
+    "category": "擬似言語トレース",
+    "subcategory": "擬似言語トレース",
+    "topic": "バックトラッキング（N-Queen簡易版）",
+    "level": 9,
+    "question": "次の擬似言語プログラムを実行したとき、表示される値は何か。",
+    "pseudoCode": "○整数型の配列: col = {-1, -1, -1, -1}\n○整数型: solutions\nsolutions ← 0\n\n○関数 safe(整数型: row, 整数型: c) : 論理型\n  ○整数型: r\n  r を 0 から row - 1 まで 1 ずつ増やしながら繰り返す\n    もし col[r] = c ならば\n      return false\n    を実行する\n    もし col[r] - c = r - row または col[r] - c = row - r ならば\n      return false\n    を実行する\n  を繰り返す\n  return true\n\n○手続き solve(整数型: row)\n  もし row = 4 ならば\n    solutions ← solutions + 1\n    return\n  を実行する\n  ○整数型: c\n  c を 0 から 3 まで 1 ずつ増やしながら繰り返す\n    もし safe(row, c) = true ならば\n      col[row] ← c\n      solve(row + 1)\n      col[row] ← -1\n    を実行する\n  を繰り返す\n\nsolve(0)\n表示(solutions)",
+    "choices": [
+      {
+        "text": "2",
+        "isCorrect": true,
+        "whyCorrect": "4-Queen問題の解は2つです。解1: col={1,3,0,2}（2列目,4列目,1列目,3列目）、解2: col={2,0,3,1}（3列目,1列目,4列目,2列目）。バックトラッキングにより全配置を試し、互いに攻撃しない配置は2つだけです。",
+        "analogy": "4×4のチェス盤に4つのクイーンを、互いに攻撃し合わないように置く方法は2通りしかありません。たくさん試して、成功したパターンだけ数えます。",
+        "deepDive": "N-Queen問題はバックトラッキングの代表例です。N=4では2解、N=8では92解あります。safe関数は同じ列・同じ対角線にクイーンがないかをチェックします。"
+      },
+      {
+        "text": "1",
+        "isCorrect": false,
+        "whyWrong": "4-Queen問題には2つの解があります。1つ目の解 {1,3,0,2} を見つけた後もバックトラッキングを続け、2つ目の解 {2,0,3,1} も見つけます。",
+        "analogy": "最初の正解を見つけて探索を止めてしまいましたが、もう1つの正解がまだ残っていました。"
+      },
+      {
+        "text": "0",
+        "isCorrect": false,
+        "whyWrong": "4×4盤には解が2つ存在します。すべてのクイーンが互いに攻撃しない配置は確かに見つかります。",
+        "analogy": "パズルに解がないと諦めてしまいましたが、実は2つの解法がありました。"
+      },
+      {
+        "text": "4",
+        "isCorrect": false,
+        "whyWrong": "4-Queenの解は2つだけです。4は盤のサイズであり解の数ではありません。safe関数の対角線チェックにより、多くの配置が除外されます。",
+        "analogy": "盤のサイズと解の数を混同してしまったようなものです。制約条件が厳しいため、有効な配置は2つだけです。"
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"solutions": 0}, "action": "solve(0)開始"},
+      {"step": 2, "variables": {"col[0]": 0}, "action": "row=0, c=0: safe→true, col[0]=0, solve(1)"},
+      {"step": 3, "variables": {}, "action": "row=1: c=0不可(同列), c=1不可(対角), c=2: safe→true"},
+      {"step": 4, "variables": {"col[1]": 2}, "action": "col[1]=2, solve(2)"},
+      {"step": 5, "variables": {}, "action": "row=2: 全てのcで不可 → バックトラック"},
+      {"step": 6, "variables": {"col[1]": 3}, "action": "row=1, c=3: safe→true, col[1]=3, solve(2)"},
+      {"step": 7, "variables": {"col[2]": 1}, "action": "row=2, c=1: safe→true, col[2]=1, solve(3)"},
+      {"step": 8, "variables": {}, "action": "row=3: 全てのcで不可 → バックトラック"},
+      {"step": 9, "variables": {"col[0]": 1}, "action": "col[0]=0の探索終了、col[0]=1で再試行"},
+      {"step": 10, "variables": {"col": "{1,3,0,2}", "solutions": 1}, "action": "解1発見: {1,3,0,2}, solutions=1"},
+      {"step": 11, "variables": {"col": "{2,0,3,1}", "solutions": 2}, "action": "解2発見: {2,0,3,1}, solutions=2"},
+      {"step": 12, "variables": {"solutions": 2}, "action": "表示(solutions) → 2"}
+    ],
+    "traceAnalogy": "4×4の部屋に4人の先生を配置する問題です。同じ行・列・斜めに2人以上いてはいけません。全パターンを試して、ダメなら1手戻って(バックトラック)別の手を試します。成功するパターンは2つだけ見つかります。",
+    "overallExplanation": "4-Queen問題をバックトラッキングで解くプログラムです。solve関数は各行にクイーンを配置し、safe関数で同列・対角線の衝突をチェックします。配置が不可能ならバックトラックして別の列を試みます。4×4では2つの解が見つかり、solutions=2が表示されます。"
+  }
+]

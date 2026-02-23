@@ -1,0 +1,786 @@
+[
+  {
+    "questionId": "q-ds-029",
+    "examType": "科目B",
+    "category": "データ構造",
+    "subcategory": "data-structures",
+    "topic": "二分探索木への挿入操作",
+    "level": 8,
+    "question": "次の擬似言語プログラムは、二分探索木にノードを挿入する処理である。insert(root, 25) を実行した後、ノード25の親ノードの値はどれか。なお、初期状態の木には値 30, 15, 45, 10, 20, 35, 50 がこの順に挿入済みである。",
+    "pseudoCode": "○整数型: Node.value\n○Node型: Node.left, Node.right\n\n○手続き: insert(Node型: current, 整数型: key)\n  もし current が null ならば\n    current ← 新しいNode(value ← key, left ← null, right ← null)\n    返却\n  を実行する\n  もし key < current.value ならば\n    もし current.left が null ならば\n      current.left ← 新しいNode(value ← key, left ← null, right ← null)\n    そうでなければ\n      insert(current.left, key)\n    を実行する\n  そうでなければ\n    もし current.right が null ならば\n      current.right ← 新しいNode(value ← key, left ← null, right ← null)\n    そうでなければ\n      insert(current.right, key)\n    を実行する\n  を実行する",
+    "choices": [
+      {
+        "id": "a",
+        "text": "15",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "15は根30の左の子です。25は15より大きいため、15の右の子である20へ進みます。15は25の親ではありません。",
+          "analogy": "図書館の棚で「さ行」のコーナーに来たけど、さらに細かく分類されている棚の先に進む必要があるのと同じです。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "20",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "根30から開始→25<30なので左(15)へ→25>15なので右(20)へ→25>20なので20の右に挿入。よって親は20です。二分探索木では常に左の子<親<右の子の関係を維持します。",
+          "analogy": "本棚に新しい本を差し込むとき、番号順に並んでいる棚を左右に辿っていき、20番の本の右隣が空いていたのでそこに25番の本を置くイメージです。",
+          "deepDive": "二分探索木の挿入は必ず葉ノードとして追加されます。探索と同じ経路を辿り、nullに到達した位置に新ノードを配置します。平均計算量はO(log n)ですが、偏った木ではO(n)になります。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "30",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "30は根ノードです。25<30なので左部分木へ進みますが、30の直下には既に15があるため、30は25の親にはなりません。",
+          "analogy": "ビルの1階（30）に来ましたが、目的のフロアはさらに下の階にあるので、エレベーターで降りる必要があるようなものです。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "35",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "35は根30の右部分木（45の左の子）にあります。25<30なので右部分木には進まず、左部分木へ進みます。35とは無関係な経路です。",
+          "analogy": "目的地が西側にあるのに、東側の道を進んでしまったようなものです。最初の分岐で方向を間違えています。"
+        }
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"current": "Node(30)", "key": "25"}, "action": "根ノード30と比較: 25 < 30 → 左の子へ"},
+      {"step": 2, "variables": {"current": "Node(15)", "key": "25"}, "action": "ノード15と比較: 25 > 15 → 右の子へ"},
+      {"step": 3, "variables": {"current": "Node(20)", "key": "25"}, "action": "ノード20と比較: 25 > 20 → 右の子へ"},
+      {"step": 4, "variables": {"current.right": "null"}, "action": "20の右の子がnull → ここに25を挿入"},
+      {"step": 5, "variables": {"Node(20).right": "Node(25)"}, "action": "ノード25を20の右の子として作成。親は20"}
+    ],
+    "traceAnalogy": "新入社員（25番）の席を決めるために、部署の階層を辿ります。まず部長（30）→25番は30より小さいので左の課へ。課長（15）→25は15より大きいので右の班へ。班長（20）→25は20より大きいので右の席が空いている！そこに座ります。つまり班長20の隣に着席です。",
+    "overallExplanation": {
+      "summary": "二分探索木への挿入は、根から出発して各ノードと比較しながら左右に進み、nullの位置に新ノードを追加します。25は30→15→20と辿り、20の右の子として挿入されます。",
+      "keyPoint": "挿入位置は常に葉ノード。探索と同じ経路を辿り、nullに到達した位置が挿入先。",
+      "relatedTopics": ["二分探索木の探索", "二分探索木の削除", "木の高さとバランス"],
+      "studyTip": "二分探索木の挿入は「探索して見つからなかった場所に置く」と考えると分かりやすいです。各ステップで左右どちらに進むかを紙に書いて追跡しましょう。"
+    },
+    "tags": ["二分探索木", "挿入", "再帰", "木構造", "Lv8"]
+  },
+  {
+    "questionId": "q-ds-030",
+    "examType": "科目B",
+    "category": "データ構造",
+    "subcategory": "data-structures",
+    "topic": "二分探索木からの削除",
+    "level": 8,
+    "question": "次の擬似言語プログラムは、二分探索木からノードを削除する処理である。値 30, 15, 45, 10, 20, 35, 50 がこの順に挿入された二分探索木からdelete(root, 30)を実行したとき、新しい根ノードの値はどれか。",
+    "pseudoCode": "○関数: delete(Node型: current, 整数型: key) → Node型\n  もし current が null ならば\n    null を返却する\n  を実行する\n  もし key < current.value ならば\n    current.left ← delete(current.left, key)\n  そうでなく key > current.value ならば\n    current.right ← delete(current.right, key)\n  そうでなければ\n    // 削除対象を発見\n    もし current.left が null ならば\n      current.right を返却する\n    そうでなく current.right が null ならば\n      current.left を返却する\n    を実行する\n    // 子が2つある場合: 右部分木の最小値で置換\n    ○Node型: successor ← current.right\n    successor.left が null でない間繰り返す\n      successor ← successor.left\n    を繰り返す\n    current.value ← successor.value\n    current.right ← delete(current.right, successor.value)\n  を実行する\n  current を返却する",
+    "choices": [
+      {
+        "id": "a",
+        "text": "15",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "15は左部分木の根ですが、このアルゴリズムでは右部分木の最小値（中順後続）で置換します。左部分木の根で置換する方法もありますが、この擬似コードでは右部分木の最小値を使用しています。",
+          "analogy": "会社の社長が退任するとき、左の部署の部長ではなく、右の部署で一番若手の人が後任に選ばれるルールです。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "20",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "20は左部分木にある値です。右部分木の最小値を後継として使うため、20ではなく35が正解です。",
+          "analogy": "後任候補のリストで、右側の部署から一番番号の小さい人を選ぶルールなのに、左側の部署の人を選んでしまったようなものです。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "35",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "根30を削除する際、子が2つあるため右部分木の最小値（中順後続）で置換します。右部分木は45が根で、その左の子が35です。35が右部分木の最小値なので、30を35に置換します。新しい根は35になります。",
+          "analogy": "社長（30）が退任するとき、右の部署（45部門）の中で一番若い社員（35）が昇格して社長の席に座ります。元の35の席は空くので、45部門は45と50だけになります。",
+          "deepDive": "子が2つあるノードの削除では「中順後続」（右部分木の最小値）または「中順先行」（左部分木の最大値）で値を置換してから、その後続/先行ノードを削除します。これにより二分探索木の性質が維持されます。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "45",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "45は右部分木の根ですが、最小値ではありません。右部分木の最小値を求めるために左の子を辿ると、35に到達します。45ではなく35が正しい後継者です。",
+          "analogy": "右の部署の部長（45）をそのまま昇格させるのではなく、その部署内で一番若手（35）を選ぶルールに従う必要があります。"
+        }
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"current": "Node(30)", "key": "30"}, "action": "根30 = key 30 → 削除対象を発見"},
+      {"step": 2, "variables": {"current.left": "Node(15)", "current.right": "Node(45)"}, "action": "左右の子が両方存在 → 右部分木の最小値を探す"},
+      {"step": 3, "variables": {"successor": "Node(45)"}, "action": "右の子45から開始、左の子を辿る"},
+      {"step": 4, "variables": {"successor": "Node(35)"}, "action": "45の左の子35に移動。35の左の子はnull → 35が最小値"},
+      {"step": 5, "variables": {"current.value": "35"}, "action": "根の値を30から35に置換"},
+      {"step": 6, "variables": {"current.right": "delete(Node(45), 35)"}, "action": "右部分木から元の35を削除（35は葉なので単純削除）"},
+      {"step": 7, "variables": {"root.value": "35"}, "action": "新しい根は35。木の構造: 35(左:15, 右:45(左:null, 右:50))"}
+    ],
+    "traceAnalogy": "会社の組織図で社長（30）が退任します。後任を決めるルールは「右の部署で一番番号が小さい人」。右部署は部長45と課長35と主任50。一番小さいのは35なので、35が社長に昇格。元の35の席は空きますが、45部門は45と50の2人で問題なく回ります。",
+    "overallExplanation": {
+      "summary": "子が2つあるノードの削除では、右部分木の最小値（中順後続）で値を置換し、元の後続ノードを削除します。30の右部分木の最小値は35なので、根は35に置換されます。",
+      "keyPoint": "子2つのノード削除 → 右部分木の最小値で置換 → その最小値ノードを再帰的に削除。",
+      "relatedTopics": ["二分探索木の挿入", "中間順走査", "AVL木のバランス調整"],
+      "studyTip": "削除は3パターンを覚えましょう: (1)葉→単純削除 (2)子1つ→子で置換 (3)子2つ→中順後続で置換して再帰削除。"
+    },
+    "tags": ["二分探索木", "削除", "中順後続", "再帰", "Lv8"]
+  },
+  {
+    "questionId": "q-ds-031",
+    "examType": "科目B",
+    "category": "データ構造",
+    "subcategory": "data-structures",
+    "topic": "AVL木の回転操作",
+    "level": 8,
+    "question": "次の擬似言語プログラムは、AVL木の右回転処理である。ノードA(値40, 左の子B(値20, 左の子C(値10)))に対してrotateRight(A)を実行したとき、返却されるノードの値と、そのノードの右の子の値の組合せはどれか。",
+    "pseudoCode": "○関数: height(Node型: node) → 整数型\n  もし node が null ならば\n    -1 を返却する\n  を実行する\n  node.height を返却する\n\n○関数: rotateRight(Node型: nodeA) → Node型\n  ○Node型: nodeB ← nodeA.left\n  ○Node型: temp ← nodeB.right\n  // 回転実行\n  nodeB.right ← nodeA\n  nodeA.left ← temp\n  // 高さ更新\n  nodeA.height ← max(height(nodeA.left), height(nodeA.right)) + 1\n  nodeB.height ← max(height(nodeB.left), height(nodeB.right)) + 1\n  nodeB を返却する\n\n// 初期状態: A(40) → 左の子 B(20) → 左の子 C(10)\n// B.right は null\n○Node型: result ← rotateRight(A)\n表示(result.value)\n表示(result.right.value)",
+    "choices": [
+      {
+        "id": "a",
+        "text": "返却ノード: 40, 右の子: 20",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "右回転では元の根（40）は回転後に右の子になります。返却されるのは元の左の子（20）です。回転の方向を逆に考えてしまっています。",
+          "analogy": "シーソーの左側が重いとき、支点を移動して左を上げますが、左にあった人（20）が新しい中心になり、元の中心（40）は右に移動します。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "返却ノード: 20, 右の子: 40",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "右回転ではnodeBがnodeAの位置に上がり、nodeAはnodeBの右の子になります。B(20)が新しい根となり、A(40)がBの右の子になります。C(10)はBの左の子のまま。tempはnull（Bの右の子がなかった）なのでAの左の子はnullです。",
+          "analogy": "3人が一列に並んでいます: 左にC(10)、真ん中にB(20)、右にA(40)。B(20)を支点にして右に回すと、B(20)が頂点に立ち、左にC(10)、右にA(40)がぶら下がります。バランスの取れた形になります。",
+          "deepDive": "AVL木の回転は、バランス係数（左右の部分木の高さの差）が2以上になったときに実行されます。右回転はLL不均衡（左の左に偏り）の修正に使います。回転後も二分探索木の性質は維持されます。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "返却ノード: 10, 右の子: 20",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "10は最も左のノード（C）です。右回転で頂点に来るのは元の左の子（B=20）であり、左の左の子（C=10）ではありません。回転は1段階だけ上がる操作です。",
+          "analogy": "階段を1段だけ上がる操作で、2段上がってしまったようなものです。回転は直接の親子関係を入れ替えます。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "返却ノード: 20, 右の子: 10",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "回転後、10はBの左の子のまま変わりません。Bの右の子になるのはA(40)です。二分探索木の性質上、20の右には20より大きい値（40）が来なければなりません。",
+          "analogy": "数字の順番で本棚を整理するとき、20番の右隣に10番を置くと順番が崩れます。右には20より大きい40が来るのが正しい並びです。"
+        }
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"nodeA": "Node(40)", "nodeA.left": "Node(20)", "nodeA.left.left": "Node(10)"}, "action": "初期状態: 40→左20→左10 (左に偏った木)"},
+      {"step": 2, "variables": {"nodeB": "Node(20)", "temp": "null"}, "action": "nodeB ← nodeA.left(=20)、temp ← nodeB.right(=null)"},
+      {"step": 3, "variables": {"nodeB.right": "Node(40)"}, "action": "nodeB.right ← nodeA → 20の右の子を40に設定"},
+      {"step": 4, "variables": {"nodeA.left": "null"}, "action": "nodeA.left ← temp(=null) → 40の左の子をnullに設定"},
+      {"step": 5, "variables": {"nodeA.height": "0", "nodeB.height": "1"}, "action": "高さを再計算: A(40)は葉→高さ0、B(20)はmax(1,0)+1=1"},
+      {"step": 6, "variables": {"result": "Node(20)", "result.right": "Node(40)"}, "action": "nodeBを返却 → 新しい根は20、右の子は40"}
+    ],
+    "traceAnalogy": "3階建てのビルで、1階がA(40)の部屋、地下1階がB(20)、地下2階がC(10)で、左側に深く潜りすぎています。右回転は地下1階のB(20)を地上に持ち上げて1階にし、元の1階のA(40)は右隣の棟に移す工事です。C(10)はBの下のまま。結果、B(20)を中心に左にC(10)、右にA(40)のバランスの良い構造になります。",
+    "overallExplanation": {
+      "summary": "AVL木の右回転では、左の子Bが新しい根に上がり、元の根AがBの右の子になります。Bの元の右の子はAの左の子に移されます。",
+      "keyPoint": "右回転: 左の子が上に、元の根が右に下がる。B.rightの付け替え先はA.left。",
+      "relatedTopics": ["AVL木の左回転", "二重回転（LR, RL）", "バランス係数"],
+      "studyTip": "回転操作は図を描いて追跡するのが最も効果的です。3つのノードと付け替えるポインタ（temp）の動きを矢印で描きましょう。"
+    },
+    "tags": ["AVL木", "右回転", "平衡二分探索木", "バランス", "Lv8"]
+  },
+  {
+    "questionId": "q-ds-032",
+    "examType": "科目B",
+    "category": "データ構造",
+    "subcategory": "data-structures",
+    "topic": "ヒープソートのステップ",
+    "level": 8,
+    "question": "次の擬似言語プログラムは、最大ヒープを用いたヒープソートの一部（ヒープ再構築処理）である。配列 {16, 14, 10, 8, 7, 9, 3} に対して、先頭要素16を末尾と交換した後の配列 {3, 14, 10, 8, 7, 9, 16} にheapify(array, 6, 0) を実行した後の配列の先頭3要素はどれか。ただし、array[6]の16はソート済みとして処理対象外とする。",
+    "pseudoCode": "○手続き: heapify(整数型の配列: arr, 整数型: size, 整数型: i)\n  ○整数型: largest ← i\n  ○整数型: left ← 2 × i + 1\n  ○整数型: right ← 2 × i + 2\n\n  もし left < size かつ arr[left] > arr[largest] ならば\n    largest ← left\n  を実行する\n  もし right < size かつ arr[right] > arr[largest] ならば\n    largest ← right\n  を実行する\n\n  もし largest ≠ i ならば\n    // arr[i] と arr[largest] を交換\n    ○整数型: temp ← arr[i]\n    arr[i] ← arr[largest]\n    arr[largest] ← temp\n    heapify(arr, size, largest)\n  を実行する",
+    "choices": [
+      {
+        "id": "a",
+        "text": "14, 3, 10",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "14が根になるのは正しいですが、3は位置1に移動した後、その子(8, 7)と比較されてさらに下に沈みます。3は位置1にとどまらず、8と交換されて位置3に移動します。",
+          "analogy": "トーナメント戦で1回戦に負けた選手（3）がそのまま2位の席に座ることはありません。2回戦で8と対戦してさらに下がります。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "14, 8, 10",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "heapify(arr,6,0)の実行: (1) i=0, left=1(14), right=2(10)。14>3なのでlargest=1。(2) arr[0]とarr[1]を交換→{14,3,10,8,7,9,16}。(3) 再帰heapify(arr,6,1): i=1, left=3(8), right=4(7)。8>3なのでlargest=3。(4) arr[1]とarr[3]を交換→{14,8,10,3,7,9,16}。(5) 再帰heapify(arr,6,3): left=7>=6なので終了。先頭3要素は14, 8, 10。",
+          "analogy": "会社で社長（16）が退職し、末端社員（3）が仮に社長席に座りました。まず副社長（14）と比較して交代。次に3は部長席で部長（8）と比較して交代。最終的に3は平社員の位置に落ち着きます。先頭3役職は14(社長), 8(副社長), 10(専務)です。",
+          "deepDive": "heapifyは「沈み込み（sift-down）」操作とも呼ばれ、最大ヒープ性を回復します。各ステップで親と2つの子の中で最大のものを選び、親でなければ交換して再帰的に処理を続けます。計算量はO(log n)です。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "14, 10, 9",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "14が根になるのは正しいですが、heapifyの交換は位置0→位置1の方向に進みます。3は位置1に移動し、位置2の10はそのまま動きません。位置1では3と子(8,7)の比較で8と交換されるため、先頭3要素は14,8,10です。9は位置5にとどまります。",
+          "analogy": "社員の席替えで、右の部署（10の部門）は影響を受けず、左の部署（14の部門）の中だけで交代が起きます。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "14, 8, 9",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "heapifyでは位置0と位置1の交換後、位置2の値(10)は変更されません。位置2の子(位置5=9)との比較は、位置2に対するheapifyが呼ばれたときのみ行われますが、今回の処理では位置0→位置1→位置3の経路のみ処理されます。",
+          "analogy": "嵐が左の道を通って去ったので、右の道にある建物（10）は無傷です。9が3番目に来ることはありません。"
+        }
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"arr": "{3,14,10,8,7,9,16}", "size": "6", "i": "0"}, "action": "heapify開始: i=0, left=1, right=2"},
+      {"step": 2, "variables": {"largest": "0", "arr[0]": "3", "arr[1]": "14", "arr[2]": "10"}, "action": "14>3 → largest=1、10<14 → largestは1のまま"},
+      {"step": 3, "variables": {"arr": "{14,3,10,8,7,9,16}"}, "action": "arr[0]とarr[1]を交換: 3↔14"},
+      {"step": 4, "variables": {"i": "1", "left": "3", "right": "4"}, "action": "heapify(arr,6,1): i=1の子はarr[3]=8, arr[4]=7"},
+      {"step": 5, "variables": {"largest": "3", "arr[1]": "3", "arr[3]": "8"}, "action": "8>3 → largest=3、7<8 → largestは3のまま"},
+      {"step": 6, "variables": {"arr": "{14,8,10,3,7,9,16}"}, "action": "arr[1]とarr[3]を交換: 3↔8"},
+      {"step": 7, "variables": {"i": "3", "left": "7"}, "action": "heapify(arr,6,3): left=7 ≥ size=6 → 終了"}
+    ],
+    "traceAnalogy": "会社で社長（16）が退職し、一番下っ端の3が仮に社長席に座りました。まず副社長候補の14(左)と10(右)を比較し、14が一番大きいので3と14が交代。次に3は部長席で8(左)と7(右)と比較され、8が大きいので交代。3は平社員の席に落ち着きます。",
+    "overallExplanation": {
+      "summary": "heapify処理では、根の3を子と比較して大きい方と交換し、交換先でさらに再帰的に同様の処理を行います。3→14と交換、3→8と交換で、先頭3要素は14, 8, 10になります。",
+      "keyPoint": "heapifyは「沈み込み」操作。小さい値が子と比較されながら適切な位置まで下がっていく。",
+      "relatedTopics": ["ヒープの構築", "優先度付きキュー", "ヒープソートの計算量"],
+      "studyTip": "ヒープの配列表現では、位置iの左の子は2i+1、右の子は2i+2です。親は(i-1)/2（切り捨て）。この関係を暗記しましょう。"
+    },
+    "tags": ["ヒープソート", "最大ヒープ", "heapify", "配列", "Lv8"]
+  },
+  {
+    "questionId": "q-ds-033",
+    "examType": "科目B",
+    "category": "データ構造",
+    "subcategory": "data-structures",
+    "topic": "ダイクストラ法（最短経路）",
+    "level": 9,
+    "question": "次の擬似言語プログラムは、ダイクストラ法で頂点0から各頂点への最短距離を求める処理である。頂点数5、辺の情報が (0→1:4), (0→2:1), (1→3:1), (2→1:2), (2→3:5), (3→4:3) のとき、dist[4]の最終的な値はどれか。",
+    "pseudoCode": "○整数型の配列: dist[5]\n○論理型の配列: visited[5]\n○整数型: INF ← 99999\n○整数型: i, u, v, w\n\ni を 0 から 4 まで 1 ずつ増やしながら繰り返す\n  dist[i] ← INF\n  visited[i] ← false\nを繰り返す\ndist[0] ← 0\n\ni を 0 から 4 まで 1 ずつ増やしながら繰り返す\n  // 未訪問で最小距離の頂点を選択\n  ○整数型: minDist ← INF\n  u ← -1\n  v を 0 から 4 まで 1 ずつ増やしながら繰り返す\n    もし visited[v] が false かつ dist[v] < minDist ならば\n      minDist ← dist[v]\n      u ← v\n    を実行する\n  を繰り返す\n  もし u が -1 ならば\n    繰り返しを抜ける\n  を実行する\n  visited[u] ← true\n  // uの各隣接頂点の距離を更新\n  uから辺(u, w, weight)が出ている各wについて繰り返す\n    もし visited[w] が false かつ dist[u] + weight < dist[w] ならば\n      dist[w] ← dist[u] + weight\n    を実行する\n  を繰り返す\nを繰り返す\n表示(dist[4])",
+    "choices": [
+      {
+        "id": "a",
+        "text": "5",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "5は頂点0から頂点4へ直接到達できる距離ではありません。このグラフには0→4への直接辺は存在せず、必ず中間頂点を経由する必要があります。最短経路0→2→1→3→4の距離は7です。",
+          "analogy": "東京から福岡に直行便がないのに、直行の距離を計算しようとしたようなものです。必ずどこかを経由する必要があります。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "8",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "8は0→1→3→4の経路（4+1+3=8）の距離ですが、0→2→1→3→4（1+2+1+3=7）というより短い経路が存在します。ダイクストラ法はすべての経路を考慮するため、8は最短ではありません。",
+          "analogy": "駅から目的地まで直通電車で行けますが、乗り換えありのルートの方が実は速い場合があるのと同じです。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "9",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "9は0→2→3→4の経路（1+5+3=9）の距離です。しかし0→2→1→3→4（1+2+1+3=7）の方が短いです。頂点2から直接頂点3に行くより、頂点1を経由した方が短い場合があります。",
+          "analogy": "高速道路で直通するより、一般道を経由した方が距離が短い場合があるのと似ています。遠回りに見えても実は近道です。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "7",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "ダイクストラ法を実行すると: (1) 頂点0確定(dist=0)→dist[1]=4, dist[2]=1に更新 (2) 頂点2確定(dist=1)→dist[1]=min(4, 1+2)=3, dist[3]=min(INF, 1+5)=6 (3) 頂点1確定(dist=3)→dist[3]=min(6, 3+1)=4 (4) 頂点3確定(dist=4)→dist[4]=min(INF, 4+3)=7。最短経路は0→2→1→3→4で距離7。",
+          "analogy": "旅行の計画で、各都市間の移動コストを調べながら最安ルートを見つけます。東京(0)→大阪(2):1万円→名古屋(1):+2万円→京都(3):+1万円→福岡(4):+3万円、合計7万円が最安です。直通の東京→名古屋:4万円より、大阪経由:3万円の方が安いのがポイントです。",
+          "deepDive": "ダイクストラ法は貪欲法に基づき、未確定頂点の中から最小距離のものを順に確定していきます。負の辺がないことが前提です。優先度付きキューを使うとO((V+E)log V)、配列を使う単純版はO(V^2)です。"
+        }
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"dist": "[0, INF, INF, INF, INF]", "visited": "[F,F,F,F,F]"}, "action": "初期化: 始点0の距離を0に設定"},
+      {"step": 2, "variables": {"u": "0", "dist": "[0, 4, 1, INF, INF]", "visited": "[T,F,F,F,F]"}, "action": "頂点0確定。隣接: 0→1(4), 0→2(1)を更新"},
+      {"step": 3, "variables": {"u": "2", "dist": "[0, 3, 1, 6, INF]", "visited": "[T,F,T,F,F]"}, "action": "頂点2確定(dist=1)。隣接: 2→1(1+2=3<4更新), 2→3(1+5=6)"},
+      {"step": 4, "variables": {"u": "1", "dist": "[0, 3, 1, 4, INF]", "visited": "[T,T,T,F,F]"}, "action": "頂点1確定(dist=3)。隣接: 1→3(3+1=4<6更新)"},
+      {"step": 5, "variables": {"u": "3", "dist": "[0, 3, 1, 4, 7]", "visited": "[T,T,T,T,F]"}, "action": "頂点3確定(dist=4)。隣接: 3→4(4+3=7)"},
+      {"step": 6, "variables": {"u": "4", "dist": "[0, 3, 1, 4, 7]", "visited": "[T,T,T,T,T]"}, "action": "頂点4確定(dist=7)。最短経路: 0→2→1→3→4 = 7"}
+    ],
+    "traceAnalogy": "5つの町を結ぶ道路網で、町0から町4への最安ルートを探します。まず町0から出発し、直接行ける町1(コスト4)と町2(コスト1)をメモ。一番安い町2(1)を確定し、そこから町1(1+2=3、以前の4より安い！)と町3(1+5=6)を更新。次に安い町1(3)を確定し、町3(3+1=4、以前の6より安い！)を更新。町3(4)を確定し、町4(4+3=7)を計算。最終的に町4への最安コストは7です。",
+    "overallExplanation": {
+      "summary": "ダイクストラ法により、頂点0→2→1→3→4の経路が最短で距離7と求まります。重要なのは頂点2経由で頂点1への距離が4から3に更新される点です。",
+      "keyPoint": "ダイクストラ法は「確定した頂点に隣接する頂点の距離を更新」を繰り返す。直通より経由の方が短い場合がある。",
+      "relatedTopics": ["ベルマンフォード法", "優先度付きキュー", "グラフの隣接リスト表現"],
+      "studyTip": "ダイクストラ法は表を作って各ステップのdist配列を書き出すと理解しやすいです。「確定→更新」のサイクルを丁寧に追いましょう。"
+    },
+    "tags": ["ダイクストラ法", "最短経路", "グラフ", "貪欲法", "Lv9"]
+  },
+  {
+    "questionId": "q-ds-034",
+    "examType": "科目B",
+    "category": "データ構造",
+    "subcategory": "data-structures",
+    "topic": "トポロジカルソート",
+    "level": 9,
+    "question": "次の擬似言語プログラムは、有向非巡回グラフ(DAG)のトポロジカルソートを入次数法(カーンのアルゴリズム)で行う処理である。頂点0~5、辺が (0→2), (0→3), (1→3), (1→4), (2→5), (3→5), (4→5) のとき、resultに格納される配列の3番目の要素（result[2]）として正しいものはどれか。ただし、入次数が同じ頂点は番号の小さい順にキューに追加する。",
+    "pseudoCode": "○整数型の配列: inDegree[6] ← {0, 0, 0, 0, 0, 0}\n○整数型の配列: result ← 空の配列\n○キュー: queue ← 空のキュー\n○整数型: u, v\n\n// 入次数を計算\n各辺(u, v)について繰り返す\n  inDegree[v] ← inDegree[v] + 1\nを繰り返す\n\n// 入次数0の頂点をキューに追加（番号順）\nv を 0 から 5 まで 1 ずつ増やしながら繰り返す\n  もし inDegree[v] が 0 ならば\n    queue にvを追加\n  を実行する\nを繰り返す\n\nqueue が空でない間繰り返す\n  u ← queue から取り出し\n  result にuを追加\n  uから辺(u, v)が出ている各vについて繰り返す\n    inDegree[v] ← inDegree[v] - 1\n    もし inDegree[v] が 0 ならば\n      queue にvを追加\n    を実行する\n  を繰り返す\nを繰り返す\n表示(result[2])",
+    "choices": [
+      {
+        "id": "a",
+        "text": "2",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "入次数の初期値: 0→0, 1→0, 2→1, 3→2, 4→1, 5→3。入次数0は頂点0,1→キューに追加。(1) 頂点0を取出しresult=[0]、辺0→2,0→3で入次数更新: 2→0, 3→1→頂点2をキューに。(2) 頂点1を取出しresult=[0,1]、辺1→3,1→4で入次数更新: 3→0, 4→0→頂点3,4をキューに。(3) 頂点2を取出しresult=[0,1,2]。よってresult[2]=2。",
+          "analogy": "大学の履修で、前提科目のない科目0と科目1をまず受講。科目0を終えると科目2が受講可能に。科目1を終えると科目3,4が可能に。2番目の次に受講するのは、最初に受講可能になった科目2です。",
+          "deepDive": "トポロジカルソートはDAG（有向非巡回グラフ）の頂点を依存関係の順に並べます。入次数法は入次数0の頂点を順に処理し、処理済み頂点からの辺を除去して新たに入次数0になった頂点を処理します。計算量はO(V+E)です。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "3",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "頂点3の入次数は2（0→3と1→3）です。頂点0と頂点1の両方が処理されるまで入次数が0にならず、キューには頂点2より後に追加されます。result[2]は2であり、3ではありません。",
+          "analogy": "2つの前提科目がある科目は、両方の前提を終えないと受講できません。科目3は科目0と1の両方が必要なので、先に受講可能になった科目2より後です。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "4",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "頂点4の入次数は1（1→4）です。頂点1が処理された後に入次数が0になります。頂点1は2番目に処理されるため、頂点4がキューに入るのは頂点2の後です（頂点2は頂点0処理時に入次数0になる）。",
+          "analogy": "科目4は科目1のみが前提ですが、科目2は科目0のみが前提で、科目0が先に処理されるため科目2が先にキューに入ります。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "5",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "頂点5の入次数は3（2→5, 3→5, 4→5）で、すべての前提が処理されるまで入次数が0にならず、最後に処理される頂点です。result[2]にはなりえません。",
+          "analogy": "最終試験は全科目を受講した後でないと受けられません。3番目の処理対象としてはあまりにも早すぎます。"
+        }
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"inDegree": "[0,0,1,2,1,3]"}, "action": "入次数計算: 2←(0), 3←(0,1), 4←(1), 5←(2,3,4)"},
+      {"step": 2, "variables": {"queue": "[0,1]", "result": "[]"}, "action": "入次数0の頂点0,1をキューに追加"},
+      {"step": 3, "variables": {"u": "0", "result": "[0]", "inDegree": "[0,0,0,1,1,3]"}, "action": "頂点0を取出し。辺0→2: 入次数2→0(キューへ)、辺0→3: 入次数3→1"},
+      {"step": 4, "variables": {"queue": "[1,2]", "u": "1", "result": "[0,1]", "inDegree": "[0,0,0,0,0,3]"}, "action": "頂点1を取出し。辺1→3: 入次数3→0(キューへ)、辺1→4: 入次数4→0(キューへ)"},
+      {"step": 5, "variables": {"queue": "[2,3,4]", "u": "2", "result": "[0,1,2]"}, "action": "頂点2を取出し。result[2] = 2"},
+      {"step": 6, "variables": {"inDegree[5]": "2"}, "action": "辺2→5: 入次数5→2。まだ0ではない"},
+      {"step": 7, "variables": {"result": "[0,1,2,3,4,5]"}, "action": "残りの頂点3,4,5を順に処理して完了"}
+    ],
+    "traceAnalogy": "料理のレシピで、各工程には前の工程が必要です。工程0(米を研ぐ)と工程1(野菜を切る)は前提なしで開始可能。工程0が終わると工程2(米を炊く)が開始可能に。工程1が終わると工程3(野菜を炒める)と工程4(肉を焼く)が開始可能に。キューはFIFOなので、先に入った工程2が3番目（result[2]）に処理されます。",
+    "overallExplanation": {
+      "summary": "トポロジカルソートの入次数法で、入次数0の頂点を順に処理します。頂点0→1→2の順に処理され、result[2]=2となります。",
+      "keyPoint": "入次数法: 入次数0の頂点から処理し、辺を除去して新たに入次数0になった頂点を処理。FIFOキューの順序に注意。",
+      "relatedTopics": ["DAG（有向非巡回グラフ）", "深さ優先探索によるトポロジカルソート", "依存関係の解決"],
+      "studyTip": "トポロジカルソートは入次数の変化を表で追跡するのが確実です。各ステップでキューの中身と入次数配列を書き出しましょう。"
+    },
+    "tags": ["トポロジカルソート", "DAG", "入次数", "キュー", "Lv9"]
+  },
+  {
+    "questionId": "q-ds-035",
+    "examType": "科目B",
+    "category": "データ構造",
+    "subcategory": "data-structures",
+    "topic": "B木の挿入操作",
+    "level": 9,
+    "question": "次の擬似言語プログラムは、次数2のB木（2-3-4木：各ノードに最大3キー、最小1キー）への挿入で、ノード分割が発生する場合の処理を示している。キー {10, 20, 30} が入っている葉ノードにキー25を挿入するとき、分割後に親ノードに昇格するキーの値と、分割で生成される2つのノードのキーの組合せはどれか。",
+    "pseudoCode": "○整数型の配列: Node.keys  // 昇順に格納\n○整数型: Node.keyCount\n○Node型の配列: Node.children\n\n○手続き: splitChild(Node型: parent, 整数型: index, Node型: child)\n  // childは満杯（キー3つ）と仮定\n  // 新しいノードを作成\n  ○Node型: newNode ← 新しいNode()\n  ○整数型: midIndex ← 1  // 中央のキー位置\n\n  // 中央より右のキーを新ノードへ移動\n  ○整数型: j ← 0\n  ○整数型: i ← midIndex + 1\n  i が child.keyCount より小さい間繰り返す\n    newNode.keys[j] ← child.keys[i]\n    j ← j + 1\n    i ← i + 1\n  を繰り返す\n  newNode.keyCount ← j\n\n  // 中央のキーを親に昇格\n  ○整数型: medianKey ← child.keys[midIndex]\n  child.keyCount ← midIndex  // 左側のキーのみ残す\n\n  // 親に挿入\n  parent.keys を適切な位置にmedianKeyを挿入\n  parent.children を適切な位置にnewNodeを挿入\n\n// 挿入前: child.keys = {10, 20, 30}, keyCount = 3\n// 25を挿入 → ソート後 {10, 20, 25, 30} → 分割発生\n表示(medianKey)\n表示(child.keys)    // 左ノード\n表示(newNode.keys)  // 右ノード",
+    "choices": [
+      {
+        "id": "a",
+        "text": "昇格キー: 25, 左: {10, 20}, 右: {30}",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "25を昇格させると左に2キー、右に1キーとなりますが、擬似コードのmidIndex=1に従うと、ソート後の配列{10,20,25,30}の位置1の要素(=20)が昇格します。midIndex=2ではなく1なので、25ではなく20が正しい昇格キーです。",
+          "analogy": "本を棚に入れてから整理するとき、位置1（2番目）の本を取り出すルールなのに、位置2（3番目）の本を取り出してしまったようなものです。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "昇格キー: 10, 左: {}, 右: {20, 25, 30}",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "10はソート後の配列の位置0の要素です。midIndex=1なので昇格するのは位置1の20です。最小値を昇格させるとバランスが崩れ、左ノードが空になってしまいB木の性質に反します。",
+          "analogy": "4人をチーム分けするとき、一番端の人をリーダーに選んでしまうと、片方のチームが空になってしまいます。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "昇格キー: 20, 左: {10}, 右: {30}",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "この選択肢では25が消えてしまっています。挿入した25はどこかのノードに含まれなければなりません。分割後の左右いずれかに25が存在する必要があります。",
+          "analogy": "引っ越しの荷造りで、4つの荷物を2つの箱に分けたのに、1つの荷物が行方不明になったようなものです。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "昇格キー: 20, 左: {10}, 右: {25, 30}",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "B木の分割手順: (1) 25を挿入してソート→{10,20,25,30} (2) midIndex=1なので中央キー=keys[1]=20を親へ昇格 (3) 左ノード: midIndexより前の{10}(keyCount=1) (4) 右ノード: midIndex+1以降の{25,30}。結果、親に20が上がり、左{10}と右{25,30}に分割されます。",
+          "analogy": "4人の生徒(10,20,25,30)を2つのクラスに分けます。真ん中の20番が学級委員(親)に昇格し、20より小さい10番が左クラス、20より大きい25番と30番が右クラスになります。",
+          "deepDive": "B木の分割はノードが満杯になったときに発生します。中央値を親に昇格させ、左右に分割することで木の高さを均等に保ちます。親も満杯の場合は再帰的に分割が伝播し、根が分割されると木の高さが1増えます。"
+        }
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"child.keys": "{10,20,30}", "keyCount": "3"}, "action": "挿入前のノード（満杯状態）"},
+      {"step": 2, "variables": {"挿入キー": "25"}, "action": "25を挿入してソート → {10,20,25,30}（4キーで溢れ）"},
+      {"step": 3, "variables": {"midIndex": "1", "medianKey": "20"}, "action": "中央キー keys[1]=20 を親に昇格"},
+      {"step": 4, "variables": {"child.keys": "{10}", "child.keyCount": "1"}, "action": "左ノード: midIndexより前のキーのみ残す"},
+      {"step": 5, "variables": {"newNode.keys": "{25,30}", "newNode.keyCount": "2"}, "action": "右ノード: midIndex+1以降のキーを移動"},
+      {"step": 6, "variables": {"parent": "20追加済み"}, "action": "親にmedianKey=20を挿入、新ノードを子として登録"}
+    ],
+    "traceAnalogy": "本棚の1段に3冊まで入りますが、4冊目を入れようとして溢れました。真ん中の本(20)を上の段に移し、残りを左(10)と右(25,30)の2つの小さな棚に分けます。上の段の本が増えすぎたら、上の段でも同じ分割を繰り返します。",
+    "overallExplanation": {
+      "summary": "B木の分割では、溢れたノードの中央キーを親に昇格させ、左右に分割します。{10,20,25,30}の中央(20)が昇格し、左{10}と右{25,30}になります。",
+      "keyPoint": "B木の分割: 中央キーを親に昇格、左右に分割。全キーがいずれかに含まれることを確認。",
+      "relatedTopics": ["B+木", "B木の削除", "データベースのインデックス"],
+      "studyTip": "B木の分割は「真ん中を上に上げて左右に割る」と覚えましょう。キーの総数が分割前後で保存されることを確認するのがコツです。"
+    },
+    "tags": ["B木", "ノード分割", "挿入", "バランス木", "Lv9"]
+  },
+  {
+    "questionId": "q-ds-036",
+    "examType": "科目B",
+    "category": "データ構造",
+    "subcategory": "data-structures",
+    "topic": "赤黒木の基本性質",
+    "level": 9,
+    "question": "次の擬似言語プログラムは、赤黒木にノードを挿入した後の修正処理の一部（おじノードが赤の場合の色変え操作）である。ノード z (値25, 赤) の親が赤で、おじノードも赤のとき、fixup処理を実行した後、z.parent の色と z.parent.parent の色の組合せはどれか。",
+    "pseudoCode": "○列挙型: Color = {RED, BLACK}\n○Color型: Node.color\n○Node型: Node.left, Node.right, Node.parent\n○整数型: Node.value\n\n○手続き: fixup(Node型: tree, Node型: z)\n  z.parent が null でなく かつ z.parent.color が RED の間繰り返す\n    もし z.parent が z.parent.parent.left ならば\n      ○Node型: uncle ← z.parent.parent.right\n      もし uncle が null でなく かつ uncle.color が RED ならば\n        // ケース1: おじが赤 → 色変え\n        z.parent.color ← BLACK\n        uncle.color ← BLACK\n        z.parent.parent.color ← RED\n        z ← z.parent.parent  // 祖父へ移動して再チェック\n      そうでなければ\n        // ケース2,3: 回転が必要（省略）\n      を実行する\n    そうでなければ\n      // 対称ケース（省略）\n    を実行する\n  を繰り返す\n  tree.root.color ← BLACK  // 根は常に黒\n\n// 初期状態:\n// 祖父G(値30, BLACK) → 左の子P(値20, RED) → 右の子z(値25, RED)\n// G → 右の子U(値40, RED) ← おじノード\nfixup(tree, z)",
+    "choices": [
+      {
+        "id": "a",
+        "text": "親: RED, 祖父: BLACK",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "fixup処理のケース1では、親の色をBLACKに、祖父の色をREDに変更します。親がREDのままということは色変えが行われていないことになり、擬似コードの処理と矛盾します。",
+          "analogy": "信号機の色を変える作業で、変えるべき信号を変え忘れたようなものです。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "親: BLACK, 祖父: RED",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "ケース1（おじが赤）の色変え処理: (1) z.parent(P:20)の色をBLACKに変更 (2) uncle(U:40)の色をBLACKに変更 (3) z.parent.parent(G:30)の色をREDに変更。この操作により、赤の連続（P-z）を解消しつつ、黒ノード数のバランスを維持します。",
+          "analogy": "3世代の家族で、子(赤い服)と親(赤い服)が隣り合うのはNGというルールがあります。親と叔父を黒い服に着替えさせ、祖父を赤い服に着替えさせることで、ルール違反を上の世代に「先送り」します。祖父より上でまた問題があれば、同じ操作を繰り返します。",
+          "deepDive": "赤黒木の色変えは、赤の連続違反を上方に伝播させる操作です。祖父を赤にすることで曽祖父との間で新たな違反が生じる可能性がありますが、ループにより再帰的に修正されます。最終的に根に到達したら根を黒にして終了します。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "親: BLACK, 祖父: BLACK",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "親と祖父の両方をBLACKにすると、祖父を通る経路の黒ノード数が増えてしまい、赤黒木の「全経路で黒ノード数が同じ」という性質が壊れます。祖父はREDにする必要があります。",
+          "analogy": "チームのバランスを保つために、1人を黒チームに移したら、代わりに1人を赤チームに移す必要があります。両方黒にすると人数が偏ります。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "親: RED, 祖父: RED",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "両方REDにすると赤の連続が解消されないどころか、さらに悪化します。fixup処理の目的は赤の連続を解消することなので、これは処理が行われていない状態です。",
+          "analogy": "問題を解決するどころか、さらに問題を増やしてしまったようなものです。"
+        }
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"z": "Node(25,RED)", "z.parent": "P(20,RED)", "uncle": "U(40,RED)"}, "action": "z.parentが赤 → ループ条件成立。PはGの左の子。uncleが赤 → ケース1"},
+      {"step": 2, "variables": {"P.color": "BLACK"}, "action": "z.parent.color ← BLACK (親Pを黒に)"},
+      {"step": 3, "variables": {"U.color": "BLACK"}, "action": "uncle.color ← BLACK (おじUを黒に)"},
+      {"step": 4, "variables": {"G.color": "RED"}, "action": "z.parent.parent.color ← RED (祖父Gを赤に)"},
+      {"step": 5, "variables": {"z": "G(30,RED)"}, "action": "z ← z.parent.parent (zを祖父に移動して再チェック)"},
+      {"step": 6, "variables": {"結果": "P:BLACK, G:RED"}, "action": "色変え完了。Gの親が赤なら再度ループ、なければ終了"}
+    ],
+    "traceAnalogy": "赤い帽子と黒い帽子のルールがある学校で、親子が連続で赤い帽子をかぶってはいけません。子(25)と親(20)が赤い帽子で違反しているので、親(20)とおじ(40)を黒い帽子に替え、祖父(30)を赤い帽子に替えます。これで親子の赤連続は解消。祖父が赤くなったので、曽祖父との関係を次にチェックします。",
+    "overallExplanation": {
+      "summary": "赤黒木のケース1（おじが赤）では、親とおじを黒に、祖父を赤に色変えし、問題を上方に伝播させます。fixup後、親はBLACK、祖父はREDになります。",
+      "keyPoint": "おじが赤の場合: 親=黒、おじ=黒、祖父=赤に色変え。問題を上に先送りしてループで対処。",
+      "relatedTopics": ["赤黒木の回転操作", "AVL木との比較", "2-3-4木との対応"],
+      "studyTip": "赤黒木のfixupは3ケースを覚えましょう: (1)おじが赤→色変え (2)zが内側の子→回転+ケース3 (3)zが外側の子→色変え+回転。"
+    },
+    "tags": ["赤黒木", "色変え", "平衡二分探索木", "挿入修正", "Lv9"]
+  },
+  {
+    "questionId": "q-ds-037",
+    "examType": "科目B",
+    "category": "データ構造",
+    "subcategory": "data-structures",
+    "topic": "複合データ構造（グラフ+優先度付きキュー）",
+    "level": 10,
+    "question": "次の擬似言語プログラムは、優先度付きキュー（最小ヒープ）を用いたプリム法で最小全域木の総コストを求める処理である。頂点0~4、辺が (0-1:2), (0-3:6), (1-2:3), (1-3:8), (1-4:5), (2-4:7), (3-4:9) の無向グラフに対して実行したとき、totalCostの値はどれか。",
+    "pseudoCode": "○整数型: totalCost ← 0\n○論理型の配列: inMST[5] ← {false, false, false, false, false}\n○優先度付きキュー: pq ← 空  // (コスト, 頂点) の最小ヒープ\npq に (0, 0) を追加  // 頂点0からコスト0で開始\n\npq が空でない間繰り返す\n  ○整数型: cost, u\n  (cost, u) ← pq から最小コストの要素を取り出し\n  もし inMST[u] が true ならば\n    繰り返しの先頭に戻る  // 既に処理済みならスキップ\n  を実行する\n  inMST[u] ← true\n  totalCost ← totalCost + cost\n\n  uに隣接する各頂点vと辺の重みwについて繰り返す\n    もし inMST[v] が false ならば\n      pq に (w, v) を追加\n    を実行する\n  を繰り返す\nを繰り返す\n表示(totalCost)",
+    "choices": [
+      {
+        "id": "a",
+        "text": "14",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "14はいくつかの辺を選択した結果ですが、最小全域木の正しいコストではありません。最小全域木は全頂点を接続する辺の集合のうち、合計コストが最小のものです。",
+          "analogy": "5つの島を橋で繋ぐとき、最も安い4本の橋を選ぶ必要があります。14万円では安い橋を見逃している可能性があります。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "16",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "プリム法の実行: (1) 頂点0(cost=0)確定→隣接: (2,1),(6,3)をpqへ (2) 頂点1(cost=2)確定→隣接: (3,2),(8,3),(5,4)をpqへ (3) 頂点2(cost=3)確定→隣接: (7,4)をpqへ (4) 頂点4(cost=5)確定→隣接: (9,3)をpqへ (5) 頂点3(cost=6)確定。totalCost=0+2+3+5+6=16。選ばれた辺: 0-1(2), 1-2(3), 1-4(5), 0-3(6)。",
+          "analogy": "5つの村に電線を引いて全村を繋ぎたい。最安の工事から順に実施: 村0-村1(2万円)→村1-村2(3万円)→村1-村4(5万円)→村0-村3(6万円)。合計16万円で全村が接続されます。既に繋がった村への工事は不要なのでスキップ。",
+          "deepDive": "プリム法は最小全域木を求める貪欲アルゴリズムです。既にMSTに含まれる頂点集合から出ている辺の中で最小コストのものを選び、新しい頂点を追加します。優先度付きキューを使うとO(E log V)で動作します。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "18",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "18は0-1(2)+1-2(3)+1-3(8)+1-4(5)=18の計算結果かもしれませんが、1-3の辺(コスト8)を使うより0-3(コスト6)を使う方が安くなります。プリム法は常に最小コストの辺を選びます。",
+          "analogy": "電線を引くとき、高い工事費の直通ルートを選んでしまい、安い迂回ルートを見逃したようなものです。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "20",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "20は辺の選択が最適でない場合の値です。最小全域木はn-1本の辺（4本）で全頂点を結び、合計が最小になるものを選びます。20は余計な辺が含まれているか、最小でない辺を選んでいます。",
+          "analogy": "工事の見積もりで、不要な作業や割高なルートが含まれていて予算オーバーになっているようなものです。"
+        }
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"pq": "[(0,0)]", "totalCost": "0", "inMST": "[F,F,F,F,F]"}, "action": "初期化: 頂点0をコスト0でpqに追加"},
+      {"step": 2, "variables": {"u": "0", "cost": "0", "totalCost": "0", "inMST": "[T,F,F,F,F]"}, "action": "頂点0確定。pqに(2,1),(6,3)を追加"},
+      {"step": 3, "variables": {"u": "1", "cost": "2", "totalCost": "2", "inMST": "[T,T,F,F,F]"}, "action": "頂点1確定(辺0-1:2)。pqに(3,2),(8,3),(5,4)を追加"},
+      {"step": 4, "variables": {"u": "2", "cost": "3", "totalCost": "5", "inMST": "[T,T,T,F,F]"}, "action": "頂点2確定(辺1-2:3)。pqに(7,4)を追加"},
+      {"step": 5, "variables": {"u": "4", "cost": "5", "totalCost": "10", "inMST": "[T,T,T,F,T]"}, "action": "頂点4確定(辺1-4:5)。pqに(9,3)を追加"},
+      {"step": 6, "variables": {"u": "3", "cost": "6", "totalCost": "16", "inMST": "[T,T,T,T,T]"}, "action": "頂点3確定(辺0-3:6)。pqの(8,3)と(9,3)はスキップ"},
+      {"step": 7, "variables": {"totalCost": "16"}, "action": "全頂点確定。最小全域木のコスト = 16"}
+    ],
+    "traceAnalogy": "5つの離島を海底ケーブルで繋ぐ工事です。まず島0から始めて、一番安い工事から順に実施します。島0→島1(2億円)、島1→島2(3億円)、島1→島4(5億円)、島0→島3(6億円)。各工事で新しい島が接続されるかチェックし、もう繋がっている島への工事はスキップ。合計16億円で全島が接続されました。",
+    "overallExplanation": {
+      "summary": "プリム法で最小全域木を構築すると、辺0-1(2), 1-2(3), 1-4(5), 0-3(6)が選ばれ、総コストは16です。優先度付きキューにより常に最小コストの辺が効率的に選択されます。",
+      "keyPoint": "プリム法: MSTの頂点集合から最小コスト辺で新頂点を追加。n頂点ならn-1本の辺を選ぶ。",
+      "relatedTopics": ["クラスカル法", "ダイクストラ法との違い", "Union-Find"],
+      "studyTip": "プリム法とダイクストラ法は構造が似ています。ダイクストラは「始点からの累計距離」、プリムは「辺の重みそのもの」で選択する点が違います。"
+    },
+    "tags": ["プリム法", "最小全域木", "優先度付きキュー", "グラフ", "Lv10"]
+  },
+  {
+    "questionId": "q-ds-038",
+    "examType": "科目B",
+    "category": "データ構造",
+    "subcategory": "data-structures",
+    "topic": "ハッシュテーブル+リストの連携",
+    "level": 10,
+    "question": "次の擬似言語プログラムは、チェイン法によるハッシュテーブルを使ってテキスト内の単語出現頻度を数える処理である。テーブルサイズが5、ハッシュ関数 h(key) = (各文字のASCII値の合計) mod 5 とする。単語列 [\"cat\", \"dog\", \"act\", \"god\", \"tac\"] を順に処理したとき、h(\"cat\")のバケットに連結されているノード数はどれか。ただし c=99, a=97, t=116, d=100, o=111, g=103 とする。",
+    "pseudoCode": "○整数型: TABLE_SIZE ← 5\n○連結リスト型の配列: table[TABLE_SIZE]  // 各バケットは連結リスト\n\n○構造体: Entry\n  ○文字列型: key\n  ○整数型: count\n\n○関数: hash(文字列型: key) → 整数型\n  ○整数型: sum ← 0\n  ○整数型: i\n  i を 0 から key.length - 1 まで 1 ずつ増やしながら繰り返す\n    sum ← sum + key[i] のASCII値\n  を繰り返す\n  sum mod TABLE_SIZE を返却する\n\n○手続き: addWord(文字列型: word)\n  ○整数型: idx ← hash(word)\n  ○Entry型: entry ← table[idx] で word を key として検索\n  もし entry が見つかった ならば\n    entry.count ← entry.count + 1\n  そうでなければ\n    table[idx] の先頭に 新しいEntry(key←word, count←1) を挿入\n  を実行する\n\n// 処理実行\naddWord(\"cat\")\naddWord(\"dog\")\naddWord(\"act\")\naddWord(\"god\")\naddWord(\"tac\")\n\n表示(table[hash(\"cat\")] のノード数)",
+    "choices": [
+      {
+        "id": "a",
+        "text": "1",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "1は衝突が一切起きなかった場合のノード数です。しかし\"cat\"、\"act\"、\"tac\"は同じ文字で構成されているため、各文字のASCII値の合計が同じになりハッシュ値も同じになります。3つの異なる単語が同じバケットに格納されます。",
+          "analogy": "郵便番号が同じ3軒の家があるのに、1軒しかないと思い込んだようなものです。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "2",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "\"cat\"、\"act\"、\"tac\"はすべて同じ文字(c,a,t)で構成されているため、ASCII値の合計は全て99+97+116=312で同一です。キーとしては異なる文字列なので、3つの別エントリが同じバケットに入ります。",
+          "analogy": "アナグラム（文字の並び替え）は同じ文字を使うので、文字の合計値は同じです。3つのアナグラム全てが同じ引き出しに入ります。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "3",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "h(\"cat\") = (99+97+116) mod 5 = 312 mod 5 = 2。h(\"act\") = (97+99+116) mod 5 = 312 mod 5 = 2。h(\"tac\") = (116+97+99) mod 5 = 312 mod 5 = 2。3つとも同じバケット2に入ります。\"cat\"≠\"act\"≠\"tac\"なので、それぞれ別のEntryとして連結リストに追加されます。よってノード数は3。なお、h(\"dog\")=(100+111+103)mod5=314mod5=4、h(\"god\")=(103+111+100)mod5=314mod5=4で、こちらも衝突しますがバケット4です。",
+          "analogy": "荷物の仕分けで「中身の合計重量で棚を決める」ルールだと、同じ材料で作られた3つの違う商品（cat, act, tac）は同じ重さ（312g）なので同じ棚に並びます。棚の中では商品名で区別して、3つの別々の箱に入れます。",
+          "deepDive": "このハッシュ関数は文字の順序を考慮しないため、アナグラム同士は必ず衝突します。実用的なハッシュ関数では位置に応じた重み付け（例: hash = Σ(char[i] × 31^i)）を使い、アナグラムの衝突を回避します。チェイン法は衝突時に連結リストで管理するため、最悪O(n)の探索になりますが、実装が簡単で削除も容易です。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "5",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "5つ全ての単語が同じバケットに入ることはありません。\"dog\"と\"god\"のハッシュ値は(100+111+103)mod5=314mod5=4で、\"cat\"のバケット(2)とは異なります。",
+          "analogy": "5つの荷物のうち、同じ重さのグループが2つに分かれるのに、全部同じ棚に入ると勘違いしたようなものです。"
+        }
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"word": "cat", "hash": "(99+97+116)mod5=312mod5=2"}, "action": "バケット2に Entry(cat,1) を追加"},
+      {"step": 2, "variables": {"word": "dog", "hash": "(100+111+103)mod5=314mod5=4"}, "action": "バケット4に Entry(dog,1) を追加"},
+      {"step": 3, "variables": {"word": "act", "hash": "(97+99+116)mod5=312mod5=2"}, "action": "バケット2で\"act\"を検索→未発見→Entry(act,1)を追加。バケット2: [act→cat]"},
+      {"step": 4, "variables": {"word": "god", "hash": "(103+111+100)mod5=314mod5=4"}, "action": "バケット4で\"god\"を検索→未発見→Entry(god,1)を追加。バケット4: [god→dog]"},
+      {"step": 5, "variables": {"word": "tac", "hash": "(116+97+99)mod5=312mod5=2"}, "action": "バケット2で\"tac\"を検索→未発見→Entry(tac,1)を追加。バケット2: [tac→act→cat]"},
+      {"step": 6, "variables": {"table[2]のノード数": "3"}, "action": "バケット2には3つのノード(tac, act, cat)が連結"}
+    ],
+    "traceAnalogy": "5つのレストラン(cat, dog, act, god, tac)を料理のカロリー合計でグループ分けします。cat(312kcal), act(312kcal), tac(312kcal)は同じカロリーなので同じグループ。dog(314kcal), god(314kcal)も同じグループ。カロリーが同じでも店名が違えば別の店として登録するので、312kcalのグループには3店舗が並びます。",
+    "overallExplanation": {
+      "summary": "ASCII値の合計によるハッシュ関数では、アナグラム(cat, act, tac)は同じハッシュ値を持ちます。3つとも同じバケットに連結され、ノード数は3です。",
+      "keyPoint": "文字の合計値ベースのハッシュはアナグラムで衝突する。チェイン法では衝突したエントリを連結リストで管理。",
+      "relatedTopics": ["オープンアドレス法", "ハッシュ関数の設計", "負荷率とリハッシュ"],
+      "studyTip": "ハッシュテーブルの問題では、まずハッシュ値を計算して衝突を確認しましょう。衝突パターンを見抜くことが解答のカギです。"
+    },
+    "tags": ["ハッシュテーブル", "チェイン法", "連結リスト", "衝突", "Lv10"]
+  },
+  {
+    "questionId": "q-ds-039",
+    "examType": "科目B",
+    "category": "データ構造",
+    "subcategory": "data-structures",
+    "topic": "動的配列のリサイズ戦略",
+    "level": 10,
+    "question": "次の擬似言語プログラムは、動的配列（容量が不足したら倍に拡張する方式）への追加操作を実装したものである。初期容量2の空の配列にadd操作を8回実行したとき、copyCount（要素コピーの累計回数）の値はどれか。",
+    "pseudoCode": "○整数型の配列: data\n○整数型: size ← 0       // 現在の要素数\n○整数型: capacity ← 2   // 現在の容量\n○整数型: copyCount ← 0  // コピー回数の累計\n\n○手続き: add(整数型: value)\n  もし size が capacity と等しいならば\n    // 容量を倍に拡張\n    ○整数型: newCapacity ← capacity × 2\n    ○整数型型の配列: newData ← 新しい配列(サイズ: newCapacity)\n    ○整数型: i\n    i を 0 から size - 1 まで 1 ずつ増やしながら繰り返す\n      newData[i] ← data[i]\n      copyCount ← copyCount + 1\n    を繰り返す\n    data ← newData\n    capacity ← newCapacity\n  を実行する\n  data[size] ← value\n  size ← size + 1\n\n// 8回のadd操作を実行\nadd(10)  // 1回目\nadd(20)  // 2回目\nadd(30)  // 3回目\nadd(40)  // 4回目\nadd(50)  // 5回目\nadd(60)  // 6回目\nadd(70)  // 7回目\nadd(80)  // 8回目\n表示(copyCount)",
+    "choices": [
+      {
+        "id": "a",
+        "text": "4",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "4は1回のリサイズ（容量4→8のとき4要素コピー）だけを数えた場合の値です。容量2→4のリサイズ時にも2要素のコピーが発生しており、合計は2+4=6です。",
+          "analogy": "2回の引っ越しのうち、大きい方の引っ越しの荷物だけ数えて、最初の引っ越しの荷物を忘れたようなものです。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "6",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "リサイズの発生タイミングを追跡: add(10)→size0<cap2、add(20)→size1<cap2。add(30)→size2=cap2→リサイズ! 2要素コピー(copyCount=2)、cap=4。add(40)→size3<cap4。add(50)→size4=cap4→リサイズ! 4要素コピー(copyCount=6)、cap=8。add(60)~add(80)→size5,6,7<cap8。合計copyCount=2+4=6。",
+          "analogy": "2人部屋に住んでいて、3人目が来ると4人部屋に引っ越し（荷物2個運ぶ）。5人目が来ると8人部屋に引っ越し（荷物4個運ぶ）。8人目までは部屋に余裕があるので引っ越し不要。合計で運んだ荷物は2+4=6個です。",
+          "deepDive": "倍増戦略（ダブリング）では、n回の追加操作でリサイズによるコピー総数は高々2n未満です。これを「ならし計算量（amortized complexity）」と呼び、各追加操作のならし計算量はO(1)です。JavaのArrayListやPythonのlistもこの戦略を使用しています。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "8",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "8は全要素を1回ずつコピーした場合の値ですが、リサイズは2回しか発生せず、各リサイズ時のsize分(2個と4個)しかコピーされません。8回目の追加時にはsize(7)<capacity(8)なのでリサイズは起きません。",
+          "analogy": "8人全員が引っ越しに参加したと思い込んでいますが、後から入居した人は引っ越しを経験していません。5~8人目は最初から8人部屋に入居したので引っ越し不要です。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "14",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "14は2+4+8を計算した場合の値ですが、3回目のリサイズ(容量8→16)は発生しません。8回目の追加時にsize=7<capacity=8なのでリサイズは不要です。リサイズは容量2→4と4→8の2回のみで、コピー数は2+4=6です。",
+          "analogy": "8人部屋に8人目が入っても、まだ空きが1つあるので引っ越しは不要です。9人目が来たときに初めて16人部屋への引っ越しが必要になります。"
+        }
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"size": "0", "capacity": "2", "copyCount": "0"}, "action": "add(10): size(0)<capacity(2) → data[0]=10, size=1"},
+      {"step": 2, "variables": {"size": "1", "capacity": "2", "copyCount": "0"}, "action": "add(20): size(1)<capacity(2) → data[1]=20, size=2"},
+      {"step": 3, "variables": {"size": "2", "capacity": "2→4", "copyCount": "0→2"}, "action": "add(30): size(2)=capacity(2) → リサイズ! 2要素コピー → data[2]=30, size=3"},
+      {"step": 4, "variables": {"size": "3", "capacity": "4", "copyCount": "2"}, "action": "add(40): size(3)<capacity(4) → data[3]=40, size=4"},
+      {"step": 5, "variables": {"size": "4", "capacity": "4→8", "copyCount": "2→6"}, "action": "add(50): size(4)=capacity(4) → リサイズ! 4要素コピー → data[4]=50, size=5"},
+      {"step": 6, "variables": {"size": "5", "capacity": "8", "copyCount": "6"}, "action": "add(60): size(5)<capacity(8) → data[5]=60, size=6"},
+      {"step": 7, "variables": {"size": "6→7", "capacity": "8", "copyCount": "6"}, "action": "add(70): data[6]=70, size=7。add(80): data[7]=80, size=8"},
+      {"step": 8, "variables": {"copyCount": "6"}, "action": "最終結果: リサイズ2回(2+4=6回コピー)"}
+    ],
+    "traceAnalogy": "最初に2人用のアパートに住んでいます。3人目が入居しようとすると満室なので、4人用の部屋に引っ越し（2人分の荷物を運ぶ）。5人目が来ると再び満室なので、8人用の部屋に引っ越し（4人分の荷物を運ぶ）。6~8人目は8人用の部屋に余裕があるのでそのまま入居。合計で運んだ荷物は2+4=6個分です。",
+    "overallExplanation": {
+      "summary": "初期容量2の動的配列に8回追加すると、3回目(容量2→4、2要素コピー)と5回目(容量4→8、4要素コピー)でリサイズが発生します。コピー回数の累計は2+4=6回です。倍増戦略によりならし計算量はO(1)が保証されます。",
+      "keyPoint": "リサイズ発生条件: size = capacity のとき。各リサイズでsize個コピー。倍増なのでリサイズ回数は少ない。",
+      "relatedTopics": ["ならし計算量", "ArrayList/Vector の実装", "メモリ管理"],
+      "studyTip": "動的配列のリサイズ問題は、各add操作でsize=capacityかどうかを1つずつ追跡するのが確実です。リサイズ時のコピー数=その時点のsizeを足し上げましょう。"
+    },
+    "tags": ["動的配列", "リサイズ", "ならし計算量", "コピー回数", "Lv10"]
+  },
+  {
+    "questionId": "q-ds-040",
+    "examType": "科目B",
+    "category": "データ構造",
+    "subcategory": "data-structures",
+    "topic": "総合問題（複数構造の組み合わせ）",
+    "level": 10,
+    "question": "次の擬似言語プログラムは、LRUキャッシュ（Least Recently Used: 最も使われていないものを削除するキャッシュ）をハッシュマップと双方向連結リストで実装したものである。容量3のキャッシュに対してget/put操作を順に実行したとき、最後のget(2)の返却値はどれか。",
+    "pseudoCode": "○整数型: CAPACITY ← 3\n○ハッシュマップ: map  // key → Node のマッピング\n○双方向連結リスト: list  // 先頭が最近使用、末尾が最古\n○構造体: Node(key, value, prev, next)\n\n○手続き: moveToHead(Node型: node)\n  // nodeをリストから外して先頭に移動\n  node.prev.next ← node.next\n  node.next.prev ← node.prev\n  node.next ← list.head.next\n  node.prev ← list.head\n  list.head.next.prev ← node\n  list.head.next ← node\n\n○関数: get(整数型: key) → 整数型\n  もし map に key が存在するならば\n    ○Node型: node ← map.get(key)\n    moveToHead(node)\n    node.value を返却する\n  を実行する\n  -1 を返却する  // キャッシュミス\n\n○手続き: put(整数型: key, 整数型: value)\n  もし map に key が存在するならば\n    ○Node型: node ← map.get(key)\n    node.value ← value\n    moveToHead(node)\n  そうでなければ\n    ○Node型: newNode ← 新しいNode(key, value)\n    map に (key, newNode) を追加\n    リストの先頭にnewNodeを挿入\n    もし map.size > CAPACITY ならば\n      ○Node型: tail ← list.tail.prev  // 末尾ノード\n      リストからtailを削除\n      map から tail.key を削除\n    を実行する\n  を実行する\n\n// 操作実行\nput(1, 10)\nput(2, 20)\nput(3, 30)\nput(4, 40)\n表示(get(2))",
+    "choices": [
+      {
+        "id": "a",
+        "text": "-1",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "put(1,10)→put(2,20)→put(3,30)→put(4,40)の順で、リストの先頭から[4,3,2]の状態です。容量超過で削除されるのは末尾の1であり、2ではありません。キー2はキャッシュに残っているため、get(2)はキャッシュヒットし-1にはなりません。",
+          "analogy": "捨てられたのは一番古い本（1番）であり、2番の本はまだ机の上にあります。2番を探して見つからないと諦めるのは早計です。"
+        }
+      },
+      {
+        "id": "b",
+        "text": "40",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "40はキー4の値です。get(2)はキー2の値を返すので、キー4の値40とは関係ありません。get操作は引数で指定されたキーの値のみを返します。",
+          "analogy": "本棚で2番の本を探しているのに、4番の本の内容を読んでしまったようなものです。番号をよく確認しましょう。"
+        }
+      },
+      {
+        "id": "c",
+        "text": "10",
+        "isCorrect": false,
+        "explanation": {
+          "whyWrong": "10はキー1の値です。キー1はput(4,40)のときに容量超過により削除されているため、キャッシュに存在しません。get(2)はキー2の値(20)を返します。",
+          "analogy": "聞かれたのは2番の本の内容ですが、1番の本の内容を答えてしまったようなものです。しかも1番の本はもう棚にありません。"
+        }
+      },
+      {
+        "id": "d",
+        "text": "20",
+        "isCorrect": true,
+        "explanation": {
+          "whyCorrect": "操作を追跡: put(1,10)→リスト[1]。put(2,20)→リスト[2,1]。put(3,30)→リスト[3,2,1]（容量3で満杯）。put(4,40)→新ノード追加→リスト[4,3,2,1]→容量超過→末尾の1を削除→リスト[4,3,2]、mapから1を削除。get(2)→mapに2が存在→node.value=20を返却、2を先頭へ→リスト[2,4,3]。返却値は20。",
+          "analogy": "机の上に本が3冊(3番,2番,1番)置いてあります。4番の本を上に載せたら、一番下の1番が落ちます。机は[4番,3番,2番]。次に2番の本を読むと、2番を一番上に移動→[2番,4番,3番]。2番の中身(20)を読めます。",
+          "deepDive": "LRUキャッシュはO(1)でget/putを実現するため、ハッシュマップ（O(1)探索）と双方向連結リスト（O(1)の移動・削除）を組み合わせます。Webブラウザのキャッシュ、OSのページ置換、DBのバッファプールなど、実システムで広く使われています。"
+        }
+      }
+    ],
+    "traceTable": [
+      {"step": 1, "variables": {"操作": "put(1,10)", "リスト": "[1(10)]", "map": "{1:Node}"}, "action": "キー1を追加。リスト先頭に配置"},
+      {"step": 2, "variables": {"操作": "put(2,20)", "リスト": "[2(20),1(10)]", "map": "{1,2}"}, "action": "キー2を追加。リスト先頭に配置"},
+      {"step": 3, "variables": {"操作": "put(3,30)", "リスト": "[3(30),2(20),1(10)]", "map": "{1,2,3}"}, "action": "キー3を追加。容量3で満杯"},
+      {"step": 4, "variables": {"操作": "put(4,40)", "リスト": "[4(40),3(30),2(20)]", "map": "{2,3,4}"}, "action": "キー4を追加→容量超過→末尾の1を削除"},
+      {"step": 5, "variables": {"操作": "get(2)", "リスト": "[2(20),4(40),3(30)]", "返却値": "20"}, "action": "キー2がmapに存在→value=20を返却、2を先頭へ移動"}
+    ],
+    "traceAnalogy": "レストランのテーブルが3席しかありません。客1が来店→席1に案内。客2が来店→席の先頭に。客3も先頭に。[客3,客2,客1]。客4が来ると席が足りないので、一番長く座っている客1に退席してもらいます。[客4,客3,客2]。次に客2が「すみません、注文追加」と呼ばれたので先頭（優先席）に移動→[客2,客4,客3]。客2は席にいるので対応可能(値20を返却)です。",
+    "overallExplanation": {
+      "summary": "LRUキャッシュ(容量3)にput操作4回で最古のキー1が削除され、キー2は残ります。get(2)はキャッシュヒットし、値20を返します。",
+      "keyPoint": "LRUキャッシュ = ハッシュマップ + 双方向連結リスト。使用するたびに先頭へ移動、容量超過時は末尾を削除。",
+      "relatedTopics": ["LFUキャッシュ", "ページ置換アルゴリズム", "ハッシュマップの実装"],
+      "studyTip": "LRUキャッシュの問題は、リストの順序変化を丁寧に追跡するのがコツです。各操作後のリスト状態を書き出しましょう。先頭=最近使用、末尾=最古使用です。"
+    },
+    "tags": ["LRUキャッシュ", "ハッシュマップ", "双方向連結リスト", "複合データ構造", "Lv10"]
+  }
+]
