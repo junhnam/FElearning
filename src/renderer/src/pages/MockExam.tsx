@@ -1,15 +1,20 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import type { Question, MockExamConfig, MockExamType, UserData } from '@shared/types'
+import type { Question, MockExamConfig, MockExamType } from '@shared/types'
+
+/** 正解の解説かどうかを判定 */
+function isCorrectExplanation(exp: { whyCorrect?: string }): boolean {
+  return 'whyCorrect' in exp
+}
 
 const EXAM_CONFIGS: Record<MockExamType, MockExamConfig> = {
   subjectA: { type: 'subjectA', questionCount: 60, timeLimitMinutes: 90, label: '科目A 本番形式（60問/90分）' },
   subjectB: { type: 'subjectB', questionCount: 20, timeLimitMinutes: 100, label: '科目B 本番形式（20問/100分）' },
-  miniA: { type: 'miniA', questionCount: 20, timeLimitMinutes: 30, label: '科目A ミニ模試（20問/30分）' },
-  miniB: { type: 'miniB', questionCount: 5, timeLimitMinutes: 25, label: '科目B ミニ模試（5問/25分）' }
+  miniA: { type: 'miniA', questionCount: 10, timeLimitMinutes: 15, label: '科目A ミニテスト（10問/15分）' },
+  miniB: { type: 'miniB', questionCount: 5, timeLimitMinutes: 25, label: '科目B ミニテスト（5問/25分）' }
 }
 
-type Phase = 'select' | 'exam' | 'confirm' | 'result'
+type Phase = 'select' | 'exam' | 'confirm' | 'result' | 'review'
 
 export default function MockExam(): React.JSX.Element {
   const [phase, setPhase] = useState<Phase>('select')
@@ -20,6 +25,7 @@ export default function MockExam(): React.JSX.Element {
   const [flagged, setFlagged] = useState<Set<string>>(new Set())
   const [remainingSeconds, setRemainingSeconds] = useState(0)
   const [loading, setLoading] = useState(false)
+  const [reviewIndex, setReviewIndex] = useState(0)
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
   // タイマー
@@ -82,7 +88,7 @@ export default function MockExam(): React.JSX.Element {
     })
   }, [questions, currentIndex])
 
-  // 試験終了（結果表示前の確認）
+  // 試験終了（確認）
   const confirmFinish = useCallback(() => {
     setPhase('confirm')
   }, [])
@@ -90,7 +96,6 @@ export default function MockExam(): React.JSX.Element {
   // 結果確定
   const finishExam = useCallback(async () => {
     if (timerRef.current) clearInterval(timerRef.current)
-    // 回答を記録
     for (const q of questions) {
       const selectedChoice = answers[q.questionId]
       if (selectedChoice) {
@@ -106,7 +111,7 @@ export default function MockExam(): React.JSX.Element {
             subcategory: q.subcategory
           })
         } catch {
-          // 個別の記録失敗は無視して続行
+          // ignore
         }
       }
     }
@@ -119,7 +124,6 @@ export default function MockExam(): React.JSX.Element {
       <div className="max-w-3xl mx-auto">
         <h2 className="text-2xl font-bold text-gray-800 mb-6">模擬試験</h2>
         <p className="text-gray-600 mb-6">試験形式を選んでください。制限時間内にすべての問題に回答しましょう。</p>
-
         <div className="space-y-4">
           {Object.values(EXAM_CONFIGS).map((cfg) => (
             <button
@@ -135,7 +139,6 @@ export default function MockExam(): React.JSX.Element {
             </button>
           ))}
         </div>
-
         <div className="mt-6">
           <Link to="/" className="text-sm text-gray-500 hover:text-gray-700">← ダッシュボードに戻る</Link>
         </div>
@@ -151,13 +154,9 @@ export default function MockExam(): React.JSX.Element {
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 text-center">
           <h3 className="text-xl font-bold text-gray-800 mb-4">試験を終了しますか？</h3>
           {unansweredCount > 0 && (
-            <p className="text-incorrect mb-4">
-              未回答の問題が {unansweredCount} 問あります。
-            </p>
+            <p className="text-incorrect mb-4">未回答の問題が {unansweredCount} 問あります。</p>
           )}
-          <p className="text-sm text-gray-500 mb-6">
-            終了すると回答が記録され、結果が表示されます。
-          </p>
+          <p className="text-sm text-gray-500 mb-6">終了すると回答が記録され、結果が表示されます。</p>
           <div className="flex gap-3 justify-center">
             <button
               onClick={() => setPhase('exam')}
@@ -177,9 +176,111 @@ export default function MockExam(): React.JSX.Element {
     )
   }
 
+  // 解説モード
+  if (phase === 'review') {
+    const q = questions[reviewIndex]
+    const selectedId = answers[q.questionId]
+    const selectedChoice = q.choices.find((c) => c.id === selectedId)
+    const isCorrect = selectedChoice?.isCorrect ?? false
+
+    return (
+      <div className="max-w-3xl mx-auto">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-2xl font-bold text-gray-800">解説モード</h2>
+          <span className="text-sm text-gray-500">問題 {reviewIndex + 1} / {questions.length}</span>
+        </div>
+
+        {/* 正誤表示 */}
+        <div className={`mb-4 p-3 rounded-lg text-sm font-medium ${
+          !selectedId ? 'bg-gray-100 text-gray-600' : isCorrect ? 'bg-correct-light text-correct-dark' : 'bg-incorrect-light text-incorrect-dark'
+        }`}>
+          {!selectedId ? '未回答' : isCorrect ? '正解' : '不正解'}
+          {selectedId && ` — あなたの回答: ${selectedId.toUpperCase()}`}
+        </div>
+
+        {/* 擬似コード */}
+        {q.pseudoCode && (
+          <div className="bg-gray-900 text-green-400 rounded-xl p-4 mb-4 overflow-x-auto">
+            <pre className="text-sm font-mono whitespace-pre-wrap">{q.pseudoCode}</pre>
+          </div>
+        )}
+
+        {/* 問題文 */}
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-4">
+          <p className="text-gray-800 leading-relaxed">{q.question}</p>
+        </div>
+
+        {/* 選択肢（正誤表示付き） */}
+        <div className="space-y-2 mb-4">
+          {q.choices.map((choice) => {
+            const isSelected = selectedId === choice.id
+            let border = 'border-gray-200'
+            let bg = 'bg-white'
+            if (choice.isCorrect) { border = 'border-correct'; bg = 'bg-correct-light' }
+            else if (isSelected) { border = 'border-incorrect'; bg = 'bg-incorrect-light' }
+
+            return (
+              <div key={choice.id} className={`p-3 rounded-xl border-2 ${border} ${bg}`}>
+                <div className="flex items-start gap-2">
+                  <span className="font-semibold text-sm">{choice.id.toUpperCase()}.</span>
+                  <span className="text-sm text-gray-700">{choice.text}</span>
+                  {choice.isCorrect && <span className="ml-auto text-correct font-bold text-xs shrink-0">正解</span>}
+                  {isSelected && !choice.isCorrect && <span className="ml-auto text-incorrect font-bold text-xs shrink-0">選択</span>}
+                </div>
+                <div className="ml-5 mt-2 text-xs text-gray-600">
+                  {isCorrectExplanation(choice.explanation)
+                    ? (choice.explanation as { whyCorrect: string }).whyCorrect
+                    : (choice.explanation as { whyWrong: string }).whyWrong
+                  }
+                </div>
+              </div>
+            )
+          })}
+        </div>
+
+        {/* 全体解説 */}
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-6">
+          <p className="text-sm text-gray-700">{q.overallExplanation.summary}</p>
+          <p className="text-sm text-primary-700 mt-2 font-medium">📌 {q.overallExplanation.keyPoint}</p>
+        </div>
+
+        {/* ナビゲーション */}
+        <div className="flex justify-between">
+          <button
+            onClick={() => setReviewIndex((i) => Math.max(0, i - 1))}
+            disabled={reviewIndex === 0}
+            className="px-4 py-2 text-sm bg-white border border-gray-200 text-gray-700 rounded-xl font-medium hover:bg-gray-50 transition-colors disabled:opacity-40"
+          >
+            ← 前の問題
+          </button>
+          <button
+            onClick={() => { setPhase('result'); setReviewIndex(0) }}
+            className="px-4 py-2 text-sm bg-gray-100 text-gray-600 rounded-xl font-medium hover:bg-gray-200 transition-colors"
+          >
+            結果に戻る
+          </button>
+          <button
+            onClick={() => setReviewIndex((i) => Math.min(questions.length - 1, i + 1))}
+            disabled={reviewIndex === questions.length - 1}
+            className="px-4 py-2 text-sm bg-white border border-gray-200 text-gray-700 rounded-xl font-medium hover:bg-gray-50 transition-colors disabled:opacity-40"
+          >
+            次の問題 →
+          </button>
+        </div>
+      </div>
+    )
+  }
+
   // 結果画面
   if (phase === 'result') {
-    return <ExamResult questions={questions} answers={answers} config={config!} />
+    return (
+      <ExamResult
+        questions={questions}
+        answers={answers}
+        config={config!}
+        onReview={() => { setReviewIndex(0); setPhase('review') }}
+      />
+    )
   }
 
   // 試験画面
@@ -193,17 +294,14 @@ export default function MockExam(): React.JSX.Element {
 
   return (
     <div className="max-w-5xl mx-auto flex gap-4">
-      {/* 問題ナビゲーション（左サイド） */}
+      {/* 左サイド: ナビゲーション */}
       <div className="w-48 shrink-0">
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-3 sticky top-6">
-          {/* タイマー */}
           <div className={`text-center mb-3 p-2 rounded-lg font-mono text-lg font-bold ${
             remainingSeconds < 300 ? 'bg-incorrect-light text-incorrect-dark' : 'bg-gray-50 text-gray-800'
           }`}>
             {String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
           </div>
-
-          {/* 問題番号グリッド */}
           <div className="grid grid-cols-5 gap-1 mb-3">
             {questions.map((q, i) => {
               const isAnswered = !!answers[q.questionId]
@@ -214,11 +312,9 @@ export default function MockExam(): React.JSX.Element {
                   key={q.questionId}
                   onClick={() => setCurrentIndex(i)}
                   className={`w-8 h-8 text-xs rounded flex items-center justify-center font-medium transition-colors ${
-                    isCurrent
-                      ? 'bg-primary-600 text-white'
-                      : isAnswered
-                        ? 'bg-primary-100 text-primary-700'
-                        : 'bg-gray-100 text-gray-500'
+                    isCurrent ? 'bg-primary-600 text-white'
+                      : isAnswered ? 'bg-primary-100 text-primary-700'
+                      : 'bg-gray-100 text-gray-500'
                   } ${isFl ? 'ring-2 ring-incorrect' : ''}`}
                   title={`問${i + 1}${isFl ? ' (フラグ)' : ''}`}
                 >
@@ -227,18 +323,10 @@ export default function MockExam(): React.JSX.Element {
               )
             })}
           </div>
-
-          {/* 凡例 */}
           <div className="text-xs text-gray-400 space-y-1">
-            <div className="flex items-center gap-1">
-              <div className="w-3 h-3 bg-primary-100 rounded" /> 回答済み
-            </div>
-            <div className="flex items-center gap-1">
-              <div className="w-3 h-3 bg-gray-100 rounded ring-1 ring-incorrect" /> フラグ
-            </div>
+            <div className="flex items-center gap-1"><div className="w-3 h-3 bg-primary-100 rounded" /> 回答済み</div>
+            <div className="flex items-center gap-1"><div className="w-3 h-3 bg-gray-100 rounded ring-1 ring-incorrect" /> フラグ</div>
           </div>
-
-          {/* 終了ボタン */}
           <button
             onClick={confirmFinish}
             className="w-full mt-3 py-2 text-sm bg-incorrect-light text-incorrect-dark rounded-lg font-medium hover:bg-incorrect/20 transition-colors"
@@ -248,52 +336,37 @@ export default function MockExam(): React.JSX.Element {
         </div>
       </div>
 
-      {/* 問題エリア（右メイン） */}
+      {/* 右メイン: 問題 */}
       <div className="flex-1 min-w-0">
-        {/* ヘッダー */}
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
-            <span className="text-sm font-medium text-gray-500">
-              問題 {currentIndex + 1} / {questions.length}
-            </span>
-            <span className="text-xs px-2 py-0.5 bg-gray-100 text-gray-500 rounded">
-              {currentQ.subcategory}
-            </span>
+            <span className="text-sm font-medium text-gray-500">問題 {currentIndex + 1} / {questions.length}</span>
+            <span className="text-xs px-2 py-0.5 bg-gray-100 text-gray-500 rounded">{currentQ.subcategory}</span>
           </div>
           <button
             onClick={toggleFlag}
             className={`text-sm px-3 py-1 rounded-lg border transition-colors ${
-              isFlagged
-                ? 'bg-incorrect-light border-incorrect text-incorrect-dark'
-                : 'bg-white border-gray-200 text-gray-500 hover:bg-gray-50'
+              isFlagged ? 'bg-incorrect-light border-incorrect text-incorrect-dark' : 'bg-white border-gray-200 text-gray-500 hover:bg-gray-50'
             }`}
           >
             {isFlagged ? '🚩 フラグ済み' : '🏳️ フラグ'}
           </button>
         </div>
-
-        {/* 擬似コード（科目Bの場合） */}
         {currentQ.pseudoCode && (
           <div className="bg-gray-900 text-green-400 rounded-xl p-4 mb-4 overflow-x-auto">
             <pre className="text-sm font-mono whitespace-pre-wrap">{currentQ.pseudoCode}</pre>
           </div>
         )}
-
-        {/* 問題文 */}
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-4">
           <p className="text-gray-800 leading-relaxed text-lg">{currentQ.question}</p>
         </div>
-
-        {/* 選択肢 */}
         <div className="space-y-3 mb-4">
           {currentQ.choices.map((choice) => (
             <button
               key={choice.id}
               onClick={() => selectAnswer(choice.id)}
               className={`w-full text-left p-4 rounded-xl border-2 transition-colors ${
-                currentAnswer === choice.id
-                  ? 'border-primary-500 bg-primary-50'
-                  : 'border-gray-200 bg-white hover:border-primary-300'
+                currentAnswer === choice.id ? 'border-primary-500 bg-primary-50' : 'border-gray-200 bg-white hover:border-primary-300'
               }`}
             >
               <div className="flex items-start gap-3">
@@ -305,8 +378,6 @@ export default function MockExam(): React.JSX.Element {
             </button>
           ))}
         </div>
-
-        {/* ナビゲーションボタン */}
         <div className="flex justify-between">
           <button
             onClick={() => setCurrentIndex((i) => Math.max(0, i - 1))}
@@ -330,54 +401,45 @@ export default function MockExam(): React.JSX.Element {
 
 /** 結果表示コンポーネント */
 function ExamResult({
-  questions,
-  answers,
-  config
+  questions, answers, config, onReview
 }: {
   questions: Question[]
   answers: Record<string, string>
   config: MockExamConfig
+  onReview: () => void
 }): React.JSX.Element {
-  // スコア計算
   let correctCount = 0
   const categoryScores = new Map<string, { correct: number; total: number }>()
-
   for (const q of questions) {
     const selectedId = answers[q.questionId]
-    const isCorrect = selectedId
-      ? q.choices.find((c) => c.id === selectedId)?.isCorrect ?? false
-      : false
-
+    const isCorrect = selectedId ? q.choices.find((c) => c.id === selectedId)?.isCorrect ?? false : false
     if (isCorrect) correctCount++
-
     const existing = categoryScores.get(q.subcategory) ?? { correct: 0, total: 0 }
     existing.total++
     if (isCorrect) existing.correct++
     categoryScores.set(q.subcategory, existing)
   }
 
-  const scoreRate = Math.round((correctCount / questions.length) * 100)
-  const passed = scoreRate >= 60
+  // 1000点満点スコア
+  const score = Math.round((correctCount / questions.length) * 1000)
+  const passed = score >= 600
 
   return (
     <div className="max-w-3xl mx-auto">
       <h2 className="text-2xl font-bold text-gray-800 mb-6">模擬試験結果</h2>
-
       {/* スコアカード */}
       <div className={`rounded-xl shadow-sm border-2 p-8 mb-6 text-center ${
         passed ? 'bg-correct-light border-correct' : 'bg-incorrect-light border-incorrect'
       }`}>
         <p className="text-lg font-medium text-gray-700 mb-2">{config.label}</p>
-        <p className={`text-5xl font-bold mb-2 ${passed ? 'text-correct-dark' : 'text-incorrect-dark'}`}>
-          {scoreRate}%
+        <p className={`text-5xl font-bold mb-1 ${passed ? 'text-correct-dark' : 'text-incorrect-dark'}`}>
+          {score}<span className="text-2xl">点</span>
         </p>
-        <p className="text-gray-600">
-          {correctCount} / {questions.length} 問正解
-        </p>
-        <p className={`text-lg font-bold mt-4 ${passed ? 'text-correct-dark' : 'text-incorrect-dark'}`}>
+        <p className="text-gray-600 mb-1">{correctCount} / {questions.length} 問正解</p>
+        <p className={`text-lg font-bold mt-3 ${passed ? 'text-correct-dark' : 'text-incorrect-dark'}`}>
           {passed ? '合格ライン到達！' : '不合格ライン'}
         </p>
-        <p className="text-sm text-gray-500 mt-1">（合格ライン: 60%）</p>
+        <p className="text-sm text-gray-500 mt-1">（合格ライン: 600点/1000点）</p>
       </div>
 
       {/* カテゴリ別結果 */}
@@ -386,9 +448,9 @@ function ExamResult({
         <div className="space-y-3">
           {Array.from(categoryScores.entries())
             .sort((a, b) => {
-              const rateA = a[1].total > 0 ? a[1].correct / a[1].total : 0
-              const rateB = b[1].total > 0 ? b[1].correct / b[1].total : 0
-              return rateA - rateB
+              const rA = a[1].total > 0 ? a[1].correct / a[1].total : 0
+              const rB = b[1].total > 0 ? b[1].correct / b[1].total : 0
+              return rA - rB
             })
             .map(([name, stat]) => {
               const rate = Math.round((stat.correct / stat.total) * 100)
@@ -421,19 +483,12 @@ function ExamResult({
         <div className="space-y-2 max-h-96 overflow-y-auto">
           {questions.map((q, i) => {
             const selectedId = answers[q.questionId]
-            const isCorrect = selectedId
-              ? q.choices.find((c) => c.id === selectedId)?.isCorrect ?? false
-              : false
+            const isCorrect = selectedId ? q.choices.find((c) => c.id === selectedId)?.isCorrect ?? false : false
             const unanswered = !selectedId
-
             return (
               <div key={q.questionId} className="flex items-center gap-3 py-2 border-b border-gray-100 last:border-0">
                 <span className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0 ${
-                  unanswered
-                    ? 'bg-gray-200 text-gray-500'
-                    : isCorrect
-                      ? 'bg-correct text-white'
-                      : 'bg-incorrect text-white'
+                  unanswered ? 'bg-gray-200 text-gray-500' : isCorrect ? 'bg-correct text-white' : 'bg-incorrect text-white'
                 }`}>
                   {unanswered ? '−' : isCorrect ? '○' : '×'}
                 </span>
@@ -447,14 +502,16 @@ function ExamResult({
 
       {/* アクションボタン */}
       <div className="flex gap-3">
+        <button
+          onClick={onReview}
+          className="flex-1 py-3 px-6 bg-primary-600 text-white rounded-xl font-medium hover:bg-primary-700 transition-colors"
+        >
+          解説を見る
+        </button>
         <Link
           to="/mock-exam"
-          onClick={(e) => {
-            e.preventDefault()
-            window.location.hash = '#/mock-exam'
-            window.location.reload()
-          }}
-          className="flex-1 py-3 px-6 bg-primary-600 text-white rounded-xl font-medium hover:bg-primary-700 transition-colors text-center"
+          onClick={(e) => { e.preventDefault(); window.location.hash = '#/mock-exam'; window.location.reload() }}
+          className="py-3 px-6 bg-white border border-gray-200 text-gray-700 rounded-xl font-medium hover:bg-gray-50 transition-colors text-center"
         >
           もう一度挑戦
         </Link>

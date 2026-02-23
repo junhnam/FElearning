@@ -158,7 +158,7 @@ export default function Practice(): React.JSX.Element {
       {/* レベル変動通知 */}
       {levelChange && (
         <div
-          className={`mb-4 p-4 rounded-xl border-2 ${
+          className={`mb-4 p-4 rounded-xl border-2 animate-levelUp ${
             levelChange.direction === 'up'
               ? 'bg-correct-light border-correct text-correct-dark'
               : 'bg-incorrect-light border-incorrect text-incorrect-dark'
@@ -324,7 +324,7 @@ function ChoiceButton({
       disabled={showResult}
       className={`w-full text-left p-4 rounded-xl border-2 transition-colors ${borderColor} ${bgColor} ${
         showResult ? 'cursor-default' : 'cursor-pointer'
-      }`}
+      } ${showResult && choice.isCorrect ? 'animate-correct' : ''} ${showResult && selected && !choice.isCorrect ? 'animate-incorrect' : ''}`}
     >
       <div className="flex items-start gap-3">
         <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-gray-100 text-gray-600 text-sm font-semibold shrink-0">
